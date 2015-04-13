@@ -1,0 +1,49 @@
+{
+    "name": "AndressonDev/skeletonSocialUser",
+    "description": "Skeleton Application for ZF2 and login functionality with different options",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "framework",
+        "zf2",
+        "zfc-user",
+        "BjyAuthorize",
+        "bitweb/id-services",
+        "bitweb/zf2-error-reporting-module"
+    ],
+    "homepage": "http://framework.zend.com/",
+    "authors": [
+        {
+            "name": "Kristjan Andresson",
+            "email": "kristjan.andresson@bitweb.ee",
+            "homepage": "https://github.com/AndressonDev"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zendframework": "2.3.*",
+        "doctrine/doctrine-orm-module": "0.*",
+        "zf-commons/zfc-user": "1.*",
+        "zf-commons/zfc-user-doctrine-orm": "1.*",
+        "hybridauth/hybridauth": "2.2.*",
+        "bjyoungblood/bjy-authorize": "1.2.*",
+        "bitweb/zf2-error-reporting-module": "dev-master",
+        "socalnick/scn-social-auth": "1.*",
+        "socalnick/scn-social-auth-doctrine-orm": "1.*",
+        "bitweb/id-services": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "Hybrid": "vendor/hybridauth/hybridauth/hybridauth/"
+        },
+        "classmap": [
+            "./vendor/hybridauth/hybridauth/hybridauth/Hybrid",
+            "./vendor/hybridauth/hybridauth/additional-providers/hybridauth-github/Providers",
+            "./vendor/hybridauth/hybridauth/additional-providers/hybridauth-tumblr/Providers",
+            "./vendor/hybridauth/hybridauth/additional-providers/hybridauth-instagram/Providers",
+            "./vendor/hybridauth/hybridauth/additional-providers/hybridauth-mailru/Providers",
+            "./vendor/hybridauth/hybridauth/additional-providers/hybridauth-odnoklassniki/Providers",
+            "./vendor/hybridauth/hybridauth/additional-providers/hybridauth-vkontakte/Providers",
+            "./vendor/hybridauth/hybridauth/additional-providers/hybridauth-yandex/Providers"
+       ]
+    }
+}

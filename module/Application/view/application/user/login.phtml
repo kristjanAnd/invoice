@@ -1,0 +1,106 @@
+<?php
+$form = $this->loginForm;
+$form->prepare();
+$form->setAttribute('action', $this->url('zfcuser/login'), [], true);
+$form->setAttribute('id', 'loginForm');
+$form->setAttribute('method', 'post');
+$form->setAttribute('class', 'form-horizontal');
+$email = $form->get('identity');
+$email->setAttribute('id', 'identity');
+$email->setAttributes(array('placeholder', $this->translate('loginForm.email.placeholder'), 'class' => 'form-control'));
+$email->setLabel($this->translate('loginForm.email.label'));
+$email->setLabelAttributes(array('class' => 'col-sm-3 control-label'));
+$password = $form->get('credential');
+$password->setAttribute('id', 'credential');
+$password->setAttributes(array('placeholder', $this->translate('loginForm.password.placeholder'), 'class' => 'form-control'));
+$password->setLabel($this->translate('loginForm.password.label'));
+$password->setLabelAttributes(array('class' => 'col-sm-3 control-label'));
+?>
+
+<div class="container">
+    <div class="row">
+        <?php if(count($this->providers) > 0):?>
+            <div class="col-md-6 col-md-offset-3">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="text-center">
+                            <?php
+                                foreach($this->providers as $provider){
+                                    echo $this->socialLogin($provider, $this->redirect);
+                                }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endif;?>
+        <div class="col-md-6 col-md-offset-3">
+            <div class="login-panel panel panel-default">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tabs-1" data-toggle="tab"><?php echo $this->translate('Login.tab.simpleLogin')?></a></li>
+                    <?php if($this->idLogin):?>
+                        <li><a href="#tabs-2" data-toggle="tab"><?php echo $this->translate('Login.tab.IDLogin')?></a></li>
+                    <?php endif;?>
+                    <?php if($this->mobileIdLogin):?>
+                        <li><a href="#tabs-3" data-toggle="tab"><?php echo $this->translate('Login.tab.MobileIDLogin')?></a></li>
+                    <?php endif;?>
+                </ul>
+                <div class="panel-body">
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="tabs-1">
+                            <?php echo $this->partial('application/user/partial/normal-login', array('form' => $form, 'email' => $email, 'password' => $password))?>
+                        </div>
+                        <?php if($this->idLogin):?>
+                            <div class="tab-pane fade" id="tabs-2">
+                                <?php echo $this->partial('application/user/partial/id-login')?>
+                            </div>
+                        <?php endif;?>
+                        <?php if($this->mobileIdLogin):?>
+                            <div class="tab-pane fade" id="tabs-3">
+                                <?php echo $this->partial('application/user/partial/mobile-id-login')?>
+                            </div>
+                        <?php endif;?>
+                    </div>
+                    <div class="row mid-info hidden">
+                        <div class="col-md-12">
+                            <p class="mid-text"></p>
+                            <p class="mid-check"></p>
+                            <p class="mid-warning hidden"><?php echo $this->translate('Login.MobileLogin.confirmationMessage')?></p>
+                            <input type="submit" value="<?php echo $this->translate('Login.MobileLogin.CancelLoginButton')?>" class="btn btn-danger btn-sm cancel" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-md-offset-3">
+            <?php if ($this->enableRegistration) : ?>
+                <?php echo $this->translate('Login.NotRegistered.question'); ?> <a href="<?php echo $this->url('zfcuser/register', [], true) . ($this->redirect ? '?redirect='.$this->redirect : '') ?>"><?php echo $this->translate('login.NotRegistered.registerLink'); ?></a>
+            <?php endif; ?>
+            <p class="omb_forgotPwd">
+                <a href="<?php echo $this->url('zfcuser/forgot-password', [], true)?>"><?php echo $this->translate('Login.forgotPasswordLink')?></a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    Validator.initLogin();
+    IdLogin.statuses.NOT_VALID = '<?php echo $this->translate('IdLogin.Status.NOT_VALID')?>';
+    IdLogin.statuses.EXPIRED_TRANSACTION = '<?php echo $this->translate('IdLogin.Status.EXPIRED_TRANSACTION')?>';
+    IdLogin.statuses.USER_CANCEL = '<?php echo $this->translate('IdLogin.Status.USER_CANCEL')?>';
+    IdLogin.statuses.MID_NOT_READY = '<?php echo $this->translate('IdLogin.Status.MID_NOT_READY')?>';
+    IdLogin.statuses.PHONE_ABSENT = '<?php echo $this->translate('IdLogin.Status.PHONE_ABSENT')?>';
+    IdLogin.statuses.SENDING_ERROR = '<?php echo $this->translate('IdLogin.Status.SENDING_ERROR')?>';
+    IdLogin.statuses.SIM_ERROR = '<?php echo $this->translate('IdLogin.Status.SIM_ERROR')?>';
+    IdLogin.statuses.INTERNAL_ERROR = '<?php echo $this->translate('IdLogin.Status.INTERNAL_ERROR')?>';
+
+    IdLogin.messages.CHECKING_CONTRACT = '<?php echo $this->translate('IdLogin.Message.CHECKING_CONTRACT')?>';
+    IdLogin.messages.REQUEST_SENT = '<?php echo $this->translate('IdLogin.Message.REQUEST_SENT')?>';
+    IdLogin.messages.SERVER_FAULT = '<?php echo $this->translate('IdLogin.Message.SERVER_FAULT')?>';
+    IdLogin.messages.RESPONSE_RECEIVED = '<?php echo $this->translate('IdLogin.Message.RESPONSE_RECEIVED')?>';
+
+    IdLogin.authUrl = "<?php echo $this->url('zfcuser/mobile-id-authenticate', [], true) ?>";
+    IdLogin.pollUrl = "<?php echo $this->url('zfcuser/mobile-id-authenticate-status', [], true) ?>";
+    IdLogin.IdRedirectUrl = "/id-card/?redirectUrl=<?php echo $this->url('zfcuser/id-card-login', [], true)?>";
+    IdLogin.init();
+</script>

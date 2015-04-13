@@ -1,0 +1,35 @@
+<?php
+$currentLanguageId = $this->language;
+$id= $this->id;
+$page = $this->page;
+$hash = $this->hash;
+$code = $this->code;
+$provider = $this->provider;
+
+$select = array(
+    'et' => $this->translate('language.select.et'),
+    'us' => $this->translate('language.select.us'),
+    'ru' => $this->translate('language.select.ru'),
+);
+
+?>
+<li role="presentation" class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+        <?php if(array_key_exists($currentLanguageId, $select)): ?>
+            <?php echo $select[$currentLanguageId] ?> <span class="caret"></span>
+        <?php endif;?>
+    </a>
+    <ul class="dropdown-menu" role="menu">
+        <?php foreach($select as $k => $v):?>
+            <?php if($k == $currentLanguageId) continue;
+            $params = array('language' => $k);
+            if($id > 0) {$params['id'] = $id; }
+            if($page > 0) {$params['page'] = $page; }
+            if(strlen($hash) > 0) {$params['hash'] = $hash; }
+            if(strlen($code) > 0) {$params['code'] = $code; }
+            if(strlen($provider) > 0) {$params['provider'] = $provider; }
+            ?>
+            <li><a href="<?php echo $this->url($this->currentRoute(), $params)?>"><?php echo $v?></a></li>
+        <?php endforeach;?>
+    </ul>
+</li>

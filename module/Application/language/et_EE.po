@@ -1,0 +1,1169 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: skeletonSocialUser\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-03-11 10:30+0300\n"
+"PO-Revision-Date: 2015-03-11 10:33+0300\n"
+"Last-Translator: \n"
+"Language-Team: Andresson Developments OÜ\n"
+"Language: et_EE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: translate;noop\n"
+"X-Poedit-Basepath: /var/www/skeletonSocialUser/module\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SearchPath-0: Application\n"
+
+#: Application/src/Application/Form/RegisterForm.php:85
+msgid "register.firstName.placeholder"
+msgstr "Eesnimi"
+
+#: Application/src/Application/Form/RegisterForm.php:87
+msgid "register.firstName.label"
+msgstr "Eesnimi:"
+
+#: Application/src/Application/Form/RegisterForm.php:97
+msgid "register.lastName.placeholder"
+msgstr "Perekonnanimi"
+
+#: Application/src/Application/Form/RegisterForm.php:99
+msgid "register.lastName.label"
+msgstr "Perekonnanimi:"
+
+#: Application/src/Application/Form/RegisterForm.php:109
+#, fuzzy
+msgid "register.phone.placeholder"
+msgstr "E-mail (kasutajanimi)"
+
+#: Application/src/Application/Form/RegisterForm.php:111
+#, fuzzy
+msgid "register.phone.label"
+msgstr "E-mail (kasutajanimi):"
+
+#: Application/src/Application/Form/RegisterForm.php:121
+#, fuzzy
+msgid "register.personalCode.placeholder"
+msgstr "E-mail (kasutajanimi)"
+
+#: Application/src/Application/Form/RegisterForm.php:123
+#, fuzzy
+msgid "register.personalCode.label"
+msgstr "E-mail (kasutajanimi):"
+
+#: Application/src/Application/Form/RegisterForm.php:132
+msgid "register.email.placeholder"
+msgstr "E-mail (kasutajanimi)"
+
+#: Application/src/Application/Form/RegisterForm.php:134
+msgid "register.email.label"
+msgstr "E-mail (kasutajanimi):"
+
+#: Application/src/Application/Form/RegisterForm.php:140
+msgid "register.password.placeholder"
+msgstr "Parool"
+
+#: Application/src/Application/Form/RegisterForm.php:142
+msgid "register.password.label"
+msgstr "Parool:"
+
+#: Application/src/Application/Form/RegisterForm.php:148
+msgid "register.passwordRepeat.placeholder"
+msgstr "Parooli kordus"
+
+#: Application/src/Application/Form/RegisterForm.php:150
+msgid "register.passwordRepeat.label"
+msgstr "Parooli kordus:"
+
+#: Application/src/Application/Form/RegisterForm.php:156
+msgid "register.submit.value"
+msgstr "Registreeru"
+
+#: Application/src/Application/Form/RegisterForm.php:203
+#, fuzzy
+msgid "register.personalCode.notDigits"
+msgstr "Selline e-post on juba olemas!"
+
+#: Application/src/Application/Form/RegisterForm.php:207
+#, fuzzy
+msgid "register.personalCode.incorrectLength.Toolong"
+msgstr "Parool on liiga pikk"
+
+#: Application/src/Application/Form/RegisterForm.php:208
+#, fuzzy
+msgid "register.personalCode.incorrectLength.TooShort"
+msgstr "Parool on liiga lühike"
+
+#: Application/src/Application/Form/RegisterForm.php:230
+msgid "register.message.emailExists"
+msgstr "Selline e-post on juba olemas!"
+
+#: Application/src/Application/Form/RegisterForm.php:232
+msgid "register.message.emailInvalidFormat"
+msgstr "E-posti formaat ei ole õige!"
+
+#: Application/src/Application/Form/RegisterForm.php:244
+msgid "register.password.incorrectLength.long"
+msgstr "Parool on liiga pikk"
+
+#: Application/src/Application/Form/RegisterForm.php:245
+msgid "register.password.incorrectLength.short"
+msgstr "Parool on liiga lühike"
+
+#: Application/src/Application/Form/ForgotPassword.php:46
+msgid "forgotPassword.email.placeholder"
+msgstr "E-mail (kasutajanimi)"
+
+#: Application/src/Application/Form/ForgotPassword.php:51
+msgid "forgotPassword.submit.value"
+msgstr "Saada e-mail"
+
+#: Application/src/Application/Form/ForgotPassword.php:70
+msgid "forgotPassword.email.notExists"
+msgstr "Sellist e-maili pole"
+
+#: Application/src/Application/Form/ForgotPassword.php:72
+msgid "forgotPassword.email.invalidFormat"
+msgstr "E-posti formaat ei ole õige!"
+
+#: Application/src/Application/Form/NewPassword.php:37
+msgid "newPassword.new.placeholder"
+msgstr "Uus parool"
+
+#: Application/src/Application/Form/NewPassword.php:39
+msgid "newPassword.new.label"
+msgstr "Uus parool:"
+
+#: Application/src/Application/Form/NewPassword.php:47
+msgid "newPassword.repeat.placeholder"
+msgstr "Uue parooli kordus"
+
+#: Application/src/Application/Form/NewPassword.php:49
+msgid "newPassword.repeat.label"
+msgstr "Uue parooli kordus:"
+
+#: Application/src/Application/Form/NewPassword.php:55
+msgid "newPassword.submit.value"
+msgstr "Muuda parooli"
+
+#: Application/src/Application/Form/NewPassword.php:72
+msgid "newPassword.password.incorrectLength.long"
+msgstr "Parool on liiga pikk"
+
+#: Application/src/Application/Form/NewPassword.php:73
+msgid "newPassword.password.incorrectLength.short"
+msgstr "Parool on liiga lühike"
+
+#: Application/src/Application/Service/UserService.php:157
+msgid "mail.forgotPassword.subject"
+msgstr "Parooli uuendamine"
+
+#: Application/src/Application/Service/UserService.php:159
+msgid "mail.forgotPassword.bodyMessageBeforeLink"
+msgstr "Te saate määrata endale uue parooli, vajutades järgnevale lingile: "
+
+#: Application/src/Application/Service/UserService.php:292
+msgid "IdAuth.errorMessage.USER_WITH_EMAIL_NOT_FOUND"
+msgstr ""
+
+#: Application/src/Application/Service/UserService.php:302
+msgid "IdAuth.errorMessage.NO_ID_CARD_USER_FOUND"
+msgstr ""
+
+#: Application/src/Application/Service/UserService.php:306
+msgid "IdAuth.errorMessage.NO_ID_CARD_USER_NOT_MATCH"
+msgstr ""
+
+#: Application/src/Application/Controller/UserController.php:206
+msgid "Application.user.message.passwordLinkSent"
+msgstr "Parooli uuendamise link saadeti e-mailile"
+
+#: Application/src/Application/Controller/UserController.php:247
+msgid "Application.user.message.passwordChanged"
+msgstr "Parool on muudetud"
+
+#: Application/src/Application/Controller/UserController.php:332
+#: Application/src/Application/Controller/UserController.php:357
+msgid "IdAuth.errorMessage.SESSION_DATA_NOT_VALID"
+msgstr ""
+
+#: Application/view/layout/layout.phtml:6
+msgid "Skeleton Application"
+msgstr ""
+
+#: Application/view/layout/layout.phtml:54
+msgid "Home"
+msgstr ""
+
+#: Application/view/layout/layout.phtml:56
+#, fuzzy
+msgid "layout.head.logInButton"
+msgstr "Sisene"
+
+#: Application/view/layout/layout.phtml:58
+msgid "layout.head.logOutButton"
+msgstr "Logi välja"
+
+#: Application/view/layout/layout.phtml:68
+msgid "All rights reserved."
+msgstr ""
+
+#: Application/view/layout/layout.phtml:72
+msgid "layout.modal.forgotPassword.titleAttribute"
+msgstr "Unustasin parooli"
+
+#: Application/view/layout/layout.phtml:75
+msgid "layout.modal.forgotPassword.contentMessage"
+msgstr "Parooli meeldetuletuseks sisesta e-posti aadress"
+
+#: Application/view/layout/layout.phtml:77
+msgid "layout.modal.forgotPassword.email.placeholder"
+msgstr "E-post"
+
+#: Application/view/layout/layout.phtml:78
+msgid "layout.head.loginForm.error.email"
+msgstr "E-mail pole korrektne"
+
+#: Application/view/layout/layout.phtml:79
+msgid "layout.head.loginForm.error.emailNotExists"
+msgstr "Sellist e-maili pole"
+
+#: Application/view/layout/layout.phtml:81
+msgid "layout.modal.forgotPassword.submitButton"
+msgstr "Saada"
+
+#: Application/view/layout/layout.phtml:86
+msgid "layout.password.forgotPasswordSuccessMessage"
+msgstr "Parooli saadeti e-mailile."
+
+#: Application/view/layout/layout.phtml:87
+msgid "layout.password.forgotPasswordErrorMessage"
+msgstr "Midagi läks valesti!"
+
+#: Application/view/layout/partial/language-select.phtml:10
+msgid "language.select.et"
+msgstr "Eesti"
+
+#: Application/view/layout/partial/language-select.phtml:11
+msgid "language.select.us"
+msgstr "Inglise"
+
+#: Application/view/layout/partial/language-select.phtml:12
+msgid "language.select.ru"
+msgstr "Vene"
+
+#: Application/view/application/index/index.phtml:2
+#, php-format
+msgid "Welcome to %sZend Framework 2%s"
+msgstr ""
+
+#: Application/view/application/index/index.phtml:3
+#, php-format
+msgid ""
+"Congratulations! You have successfully installed the %sZF2 Skeleton "
+"Application%s. You are currently running Zend Framework version %s. This "
+"skeleton can serve as a simple starting point for you to begin building your "
+"application on ZF2."
+msgstr ""
+
+#: Application/view/application/index/index.phtml:4
+msgid "Fork Zend Framework 2 on GitHub"
+msgstr ""
+
+#: Application/view/application/index/index.phtml:12
+msgid "Follow Development"
+msgstr ""
+
+#: Application/view/application/index/index.phtml:15
+#, php-format
+msgid ""
+"Zend Framework 2 is under active development. If you are interested in "
+"following the development of ZF2, there is a special ZF2 portal on the "
+"official Zend Framework website which provides links to the ZF2 %swiki%s, "
+"%sdev blog%s, %sissue tracker%s, and much more. This is a great resource for "
+"staying up to date with the latest developments!"
+msgstr ""
+
+#: Application/view/application/index/index.phtml:16
+msgid "ZF2 Development Portal"
+msgstr ""
+
+#: Application/view/application/index/index.phtml:24
+msgid "Discover Modules"
+msgstr ""
+
+#: Application/view/application/index/index.phtml:27
+#, php-format
+msgid ""
+"The community is working on developing a community site to serve as a "
+"repository and gallery for ZF2 modules. The project is available %son GitHub"
+"%s. The site is currently live and currently contains a list of some of the "
+"modules already available for ZF2."
+msgstr ""
+
+#: Application/view/application/index/index.phtml:28
+msgid "Explore ZF2 Modules"
+msgstr ""
+
+#: Application/view/application/index/index.phtml:36
+msgid "Help &amp; Support"
+msgstr ""
+
+#: Application/view/application/index/index.phtml:39
+#, php-format
+msgid ""
+"If you need any help or support while developing with ZF2, you may reach us "
+"via IRC: %s#zftalk on Freenode%s. We'd love to hear any questions or "
+"feedback you may have regarding the beta releases. Alternatively, you may "
+"subscribe and post questions to the %smailing lists%s."
+msgstr ""
+
+#: Application/view/application/index/index.phtml:40
+msgid "Ping us on IRC"
+msgstr ""
+
+#: Application/view/application/user/register.phtml:3
+msgid "application.user.register.registerIsDisabled"
+msgstr "R¤egistreerimine ei ole avatud!"
+
+#: Application/view/application/user/register.phtml:8
+msgid "application.user.register.firstName.help-block"
+msgstr "Eesnimi ei ole korrektne!"
+
+#: Application/view/application/user/register.phtml:9
+msgid "application.user.register.lastName.help-block"
+msgstr "Perekonnanimi ei ole korrektne!"
+
+#: Application/view/application/user/register.phtml:10
+#, fuzzy
+msgid "application.user.register.phone.help-block"
+msgstr "E-mail ei ole korrektne!"
+
+#: Application/view/application/user/register.phtml:11
+#, fuzzy
+msgid "application.user.register.personalCode.help-block"
+msgstr "E-mail ei ole korrektne!"
+
+#: Application/view/application/user/register.phtml:12
+msgid "application.user.register.email.help-block"
+msgstr "E-mail ei ole korrektne!"
+
+#: Application/view/application/user/register.phtml:13
+#: Application/view/application/user/register.phtml:14
+msgid "application.user.register.password.help-block"
+msgstr "Parool ei ole korrektne! (6 - 20 märki)"
+
+#: Application/view/application/user/register.phtml:24
+msgid "application.user.register.heading"
+msgstr "Registreeru"
+
+#: Application/view/application/user/id-login.phtml:8
+#: Application/view/application/user/login.phtml:8
+#: Application/view/application/user/forgot-password.phtml:4
+msgid "loginForm.email.placeholder"
+msgstr "E-mail (kasutajanimi)"
+
+#: Application/view/application/user/id-login.phtml:9
+#: Application/view/application/user/login.phtml:9
+#: Application/view/application/user/forgot-password.phtml:5
+msgid "loginForm.email.label"
+msgstr "E-mail (kasutajanimi):"
+
+#: Application/view/application/user/id-login.phtml:12
+#: Application/view/application/user/login.phtml:12
+msgid "loginForm.password.placeholder"
+msgstr "Parool"
+
+#: Application/view/application/user/id-login.phtml:13
+#: Application/view/application/user/login.phtml:13
+msgid "loginForm.password.label"
+msgstr "Parool:"
+
+#: Application/view/application/user/id-login.phtml:19
+msgid "Login.tab.simpleLogin"
+msgstr ""
+
+#: Application/view/application/user/id-login.phtml:21
+msgid "Login.tab.IDLogin"
+msgstr ""
+
+#: Application/view/application/user/id-login.phtml:24
+msgid "Login.tab.MobileIDLogin"
+msgstr ""
+
+#: Application/view/application/user/id-login.phtml:43
+#, fuzzy
+msgid "Login.NotRegistered.question"
+msgstr "Pole registreerunud? "
+
+#: Application/view/application/user/id-login.phtml:43
+#: Application/view/application/user/login.phtml:24
+msgid "login.NotRegistered.registerLink"
+msgstr "registreeru"
+
+#: Application/view/application/user/id-login.phtml:46
+#, fuzzy
+msgid "Login.forgotPasswordLink"
+msgstr "Unustasin parooli"
+
+#: Application/view/application/user/id-login.phtml:53
+msgid "Login.MobileLogin.confirmationMessage"
+msgstr ""
+
+#: Application/view/application/user/id-login.phtml:54
+msgid "Login.MobileLogin.CancelLoginButton"
+msgstr ""
+
+#: Application/view/application/user/id-login.phtml:63
+msgid "IdLogin.Status.NOT_VALID"
+msgstr ""
+
+#: Application/view/application/user/id-login.phtml:64
+msgid "IdLogin.Status.EXPIRED_TRANSACTION"
+msgstr ""
+
+#: Application/view/application/user/id-login.phtml:65
+msgid "IdLogin.Status.USER_CANCEL"
+msgstr ""
+
+#: Application/view/application/user/id-login.phtml:66
+msgid "IdLogin.Status.MID_NOT_READY"
+msgstr ""
+
+#: Application/view/application/user/id-login.phtml:67
+msgid "IdLogin.Status.PHONE_ABSENT"
+msgstr ""
+
+#: Application/view/application/user/id-login.phtml:68
+msgid "IdLogin.Status.SENDING_ERROR"
+msgstr ""
+
+#: Application/view/application/user/id-login.phtml:69
+msgid "IdLogin.Status.SIM_ERROR"
+msgstr ""
+
+#: Application/view/application/user/id-login.phtml:70
+msgid "IdLogin.Status.INTERNAL_ERROR"
+msgstr ""
+
+#: Application/view/application/user/id-login.phtml:72
+msgid "IdLogin.Message.CHECKING_CONTRACT"
+msgstr ""
+
+#: Application/view/application/user/id-login.phtml:73
+msgid "IdLogin.Message.REQUEST_SENT"
+msgstr ""
+
+#: Application/view/application/user/id-login.phtml:74
+msgid "IdLogin.Message.SERVER_FAULT"
+msgstr ""
+
+#: Application/view/application/user/id-login.phtml:75
+msgid "IdLogin.Message.RESPONSE_RECEIVED"
+msgstr ""
+
+#: Application/view/application/user/login.phtml:19
+msgid "login.heading"
+msgstr "Logi sisse"
+
+#: Application/view/application/user/login.phtml:24
+msgid "login.NotRegistered.question"
+msgstr "Pole registreerunud? "
+
+#: Application/view/application/user/login.phtml:27
+msgid "login.forgotPasswordLink"
+msgstr "Unustasin parooli"
+
+#: Application/view/application/user/forgot-password.phtml:9
+msgid "forgotPassword.heading"
+msgstr "Parooli meeldetuletus"
+
+#: Application/view/application/user/forgot-password.phtml:22
+msgid "forgotPassword.submitButton.submitButton"
+msgstr "Saada e-mail"
+
+#: Application/view/application/user/new-password.phtml:9
+msgid "newPassword.heading"
+msgstr "Uue parooli määramine"
+
+#: Application/view/application/user/new-password.phtml:15
+msgid "application.user.new-password.password.help-block"
+msgstr "Parool ei ole korrektne! (6 - 20 märki)"
+
+#: Application/view/application/user/new-password.phtml:22
+msgid "application.user.new-password.passwordRepeat.help-block"
+msgstr "Parooli kordus ei ole korrektne!"
+
+#: Application/view/application/user/partial/id-login.phtml:3
+#: Application/view/application/user/partial/mobile-id-login.phtml:3
+#, fuzzy
+msgid "Login.email.label"
+msgstr "E-mail (kasutajanimi):"
+
+#: Application/view/application/user/partial/id-login.phtml:6
+#, fuzzy
+msgid "Login.email.help-block"
+msgstr "E-mail (kasutajanimi):"
+
+#: Application/view/application/user/partial/id-login.phtml:11
+#: Application/view/application/user/partial/mobile-id-login.phtml:18
+#, fuzzy
+msgid "Login.submitButton.label"
+msgstr "Logi sisse"
+
+#: Application/view/application/user/partial/mobile-id-login.phtml:6
+#, fuzzy
+msgid "Login.emailMob.help-block"
+msgstr "E-mail (kasutajanimi):"
+
+#: Application/view/application/user/partial/mobile-id-login.phtml:10
+#, fuzzy
+msgid "Login.phone.label"
+msgstr "Parool:"
+
+#: Application/view/application/user/partial/mobile-id-login.phtml:12
+#, fuzzy
+msgid "Login.phone.placeholder"
+msgstr "E-mail (kasutajanimi)"
+
+#: Application/view/application/user/partial/mobile-id-login.phtml:13
+msgid "Login.phone.help-block"
+msgstr ""
+
+#: Application/view/application/user/partial/normal-login.phtml:21
+msgid "login.submitButton"
+msgstr "Logi sisse"
+
+#: Application/view/error/404.phtml:1
+msgid "A 404 error occurred"
+msgstr ""
+
+#: Application/view/error/404.phtml:10
+msgid "The requested controller was unable to dispatch the request."
+msgstr ""
+
+#: Application/view/error/404.phtml:13
+msgid ""
+"The requested controller could not be mapped to an existing controller class."
+msgstr ""
+
+#: Application/view/error/404.phtml:16
+msgid "The requested controller was not dispatchable."
+msgstr ""
+
+#: Application/view/error/404.phtml:19
+msgid "The requested URL could not be matched by routing."
+msgstr ""
+
+#: Application/view/error/404.phtml:22
+msgid "We cannot determine at this time why a 404 was generated."
+msgstr ""
+
+#: Application/view/error/404.phtml:34
+msgid "Controller"
+msgstr ""
+
+#: Application/view/error/404.phtml:41
+#, php-format
+msgid "resolves to %s"
+msgstr ""
+
+#: Application/view/error/404.phtml:53 Application/view/error/index.phtml:8
+msgid "Additional information"
+msgstr ""
+
+#: Application/view/error/404.phtml:56 Application/view/error/404.phtml:80
+#: Application/view/error/index.phtml:11 Application/view/error/index.phtml:35
+msgid "File"
+msgstr ""
+
+#: Application/view/error/404.phtml:60 Application/view/error/404.phtml:84
+#: Application/view/error/index.phtml:15 Application/view/error/index.phtml:39
+msgid "Message"
+msgstr ""
+
+#: Application/view/error/404.phtml:64 Application/view/error/404.phtml:88
+#: Application/view/error/index.phtml:19 Application/view/error/index.phtml:43
+msgid "Stack trace"
+msgstr ""
+
+#: Application/view/error/404.phtml:74 Application/view/error/index.phtml:29
+msgid "Previous exceptions"
+msgstr ""
+
+#: Application/view/error/404.phtml:103 Application/view/error/index.phtml:58
+msgid "No Exception available"
+msgstr ""
+
+#: Application/view/error/index.phtml:1
+msgid "An error occurred"
+msgstr ""
+
+#~ msgid "Validator.message.notEmpty"
+#~ msgstr "%1$s ei tohi tühi olla!"
+
+#~ msgid "register.message.firstNameInput"
+#~ msgstr "Eesnimi "
+
+#~ msgid "register.message.lastNameInput"
+#~ msgstr "Perekonnanimi"
+
+#~ msgid "register.message.emailInput"
+#~ msgstr "E-post "
+
+#~ msgid "filterForm.value.lastInserted"
+#~ msgstr "Viimati lisatud"
+
+#~ msgid "filterForm.value.firstInserted"
+#~ msgstr "Esimesena lisatud"
+
+#~ msgid "filterForm.value.mostPopular"
+#~ msgstr "Enim vaadatud"
+
+#~ msgid "filterForm.value.titleOrdered"
+#~ msgstr "A - Z"
+
+#~ msgid "application.partial.message-form.subject.placeholder"
+#~ msgstr "Sõnumi pealkiri"
+
+#~ msgid "application.partial.message-form.subject.heading"
+#~ msgstr "Sõnumi pealkiri"
+
+#~ msgid "application.partial.message-form.message.placeholder"
+#~ msgstr "Sõnumi sisu"
+
+#~ msgid "application.partial.message-form.message.heading"
+#~ msgstr "Sõnum"
+
+#~ msgid "PageForm.metaKeywords.placeholder"
+#~ msgstr "Märksõnad"
+
+#~ msgid "PageForm.metaKeywords.label"
+#~ msgstr "Märksõnad:"
+
+#~ msgid "PageForm.metaDescription.placeholder"
+#~ msgstr "Kirjeldus"
+
+#~ msgid "PageForm.metaDescription.label"
+#~ msgstr "Kirjeldus:"
+
+#~ msgid "PageForm.title.placeholder"
+#~ msgstr "Pealkiri"
+
+#~ msgid "PageForm.title.label"
+#~ msgstr "Pealkiri:"
+
+#~ msgid "PageForm.content.label"
+#~ msgstr "Sisu:"
+
+#~ msgid "BannerForm.description.placeholder"
+#~ msgstr "Kirjeldus"
+
+#~ msgid "BannerForm.description.label"
+#~ msgstr "Kirjeldus:"
+
+#~ msgid "BannerForm.name.placeholder"
+#~ msgstr "Banneri nimetus"
+
+#~ msgid "BannerForm.name.label"
+#~ msgstr "Banneri nimetus:"
+
+#~ msgid "BannerForm.positions.label"
+#~ msgstr "Asukohad:"
+
+#~ msgid "BannerForm.file.label"
+#~ msgstr "Fail:"
+
+#~ msgid "BannerForm.url.placeholder"
+#~ msgstr "Link"
+
+#~ msgid "BannerForm.url.label"
+#~ msgstr "Link:"
+
+#~ msgid "BannerForm.status.label"
+#~ msgstr "Staatus: "
+
+#~ msgid "Validator.message.fileMessage"
+#~ msgstr "%1$s on tühi või valede andmetega!"
+
+#~ msgid "bannerForm.message.fileInput"
+#~ msgstr "Bänner "
+
+#~ msgid "bannerPosition.select.value.index-1"
+#~ msgstr "Avaleht 1. banner (728x90)"
+
+#~ msgid "bannerPosition.select.value.index-2"
+#~ msgstr "Avaleht 2. banner (728x90)"
+
+#~ msgid "bannerPosition.select.value.detail-1"
+#~ msgstr "Video detail 1. banner (728x90)"
+
+#~ msgid "bannerPosition.select.value.menu-1"
+#~ msgstr "Parem äär 1. banner (250x250)"
+
+#~ msgid "bannerPosition.select.value.memu-2"
+#~ msgstr "Parem äär 2. banner (250x250)"
+
+#~ msgid "bannerPosition.listView.index-1"
+#~ msgstr "Avaleht-1"
+
+#~ msgid "bannerPosition.listView.index-2"
+#~ msgstr "Avaleht-2"
+
+#~ msgid "bannerPosition.listView.detail-1"
+#~ msgstr "Video detail 1"
+
+#~ msgid "bannerPosition.listView.menu-1"
+#~ msgstr "Parem-1"
+
+#~ msgid "bannerPosition.listView.memu-2"
+#~ msgstr "Parem-2"
+
+#~ msgid "mail.favoriteMail.subject"
+#~ msgstr "Viipekeelse TV video"
+
+#~ msgid "Application.index.message.favoriteMailSent"
+#~ msgstr "E-mail on saadetud!"
+
+#~ msgid "Application.index.message.messageMailSent"
+#~ msgstr "Teade on saadetud!"
+
+#~ msgid "Application.index.message.messageMailNotSent"
+#~ msgstr "Teadet ei saadetud!"
+
+#~ msgid "Application.admin.delete-banner.banner-deleted"
+#~ msgstr "Bänner kustutati."
+
+#~ msgid "Application.admin.delete-page.page-deleted"
+#~ msgstr "Leht kustutati."
+
+#~ msgid "Application.admin.add-banner.banner-added"
+#~ msgstr "Lisati uus bänner"
+
+#~ msgid "Application.admin.edit-banner.banner-edited"
+#~ msgstr "Bänner on salvestatud."
+
+#~ msgid "Application.admin.edit-page.page-saved"
+#~ msgstr "Lehekülg on salvestatud."
+
+#~ msgid "Application.user.message.profileChanged"
+#~ msgstr "Profiil on muudetud"
+
+#~ msgid "layout.head.title"
+#~ msgstr "Viipekeelne TV"
+
+#~ msgid "layout.footer.nav.category"
+#~ msgstr "Kategooriad"
+
+#~ msgid "layout.footer.nav.channel"
+#~ msgstr "Kanalid"
+
+#~ msgid "layout.modal.twitterLogin.titleAttribute"
+#~ msgstr "Twitteriga sisse logimine"
+
+#~ msgid "layout.modal.twitterLogin.contentMessage"
+#~ msgstr "Sisestage twitteri kasutajanimi ning enda email."
+
+#~ msgid "layout.modal.twitterLogin.name.placeholder"
+#~ msgstr "Twitteri kasutajanimi"
+
+#~ msgid "layout.modal.twitterLogin.email.placeholder"
+#~ msgstr "E-post"
+
+#~ msgid "layout.modal.twitterLogin.submitButton"
+#~ msgstr "Logi sisse"
+
+#~ msgid "layout.head.registerButton"
+#~ msgstr "Registreeru"
+
+#~ msgid "layout.head.loginLink"
+#~ msgstr "Logi sisse"
+
+#~ msgid "layout.head.loginForm.email.placeholder"
+#~ msgstr "E-post"
+
+#~ msgid "layout.head.loginForm.error.wrongPassword"
+#~ msgstr "Parool pole korrektne"
+
+#~ msgid "layout.head.loginForm.password.placeholder"
+#~ msgstr "Parool"
+
+#~ msgid "layout.head.loginForm.error.password"
+#~ msgstr "Parool pole korrektne"
+
+#~ msgid "layout.head.forgotPasswordLink"
+#~ msgstr "Unustasin parooli"
+
+#~ msgid "layout.head.login.facebook"
+#~ msgstr "Login sisse Facebookiga"
+
+#~ msgid "layout.head.login.gmail"
+#~ msgstr "Login sisse Gmailiga"
+
+#~ msgid "layout.head.login.twitter"
+#~ msgstr "Login sisse Twitteriga"
+
+#~ msgid "layout.head.nav.home"
+#~ msgstr "Avaleht"
+
+#~ msgid "layout.head.nav.category"
+#~ msgstr "Kategooriad"
+
+#~ msgid "layout.head.nav.channel"
+#~ msgstr "Kanalid"
+
+#~ msgid "layout.head.nav.management"
+#~ msgstr "Haldus"
+
+#~ msgid "layout.head.searchForm.findVideoPlaceholder"
+#~ msgstr "Otsi video"
+
+#~ msgid "application.index.videos.heading"
+#~ msgstr "Kõik videod"
+
+#~ msgid "application.index.channels.heading"
+#~ msgstr "Kanalid"
+
+#~ msgid "application.index.videoDetail.viewCount"
+#~ msgstr "%1$s vaatamist"
+
+#~ msgid "application.index.videoDetail.commentCount"
+#~ msgstr "%1$s kommentaari"
+
+#~ msgid "application.index.videoDetail.addedDate"
+#~ msgstr "lisatud %1$s"
+
+#~ msgid "index.lastVideo.categories.label"
+#~ msgstr "Kategooriad"
+
+#~ msgid "application.index.categories.heading"
+#~ msgstr "Kategooriad"
+
+#~ msgid "application.index.search-result.heading"
+#~ msgstr "Otsingu tulemused"
+
+#~ msgid "application.index.search-result.NoVideosMatchMessage"
+#~ msgstr "Ei leitud ühtegi videot."
+
+#~ msgid "layout.modal.twitterLoginError.titleAttribute"
+#~ msgstr "Viga!"
+
+#~ msgid "layout.modal.twitterLogin.errorMessage"
+#~ msgstr ""
+#~ "Sisestatud kasutajanimi ja Twitteri poolt tagastatud kasutajanimi ei ühti!"
+
+#~ msgid "layout.modal.twitterLogin.closeButton"
+#~ msgstr "Sulge"
+
+#~ msgid "application.index.favorites.heading"
+#~ msgstr "LEMMIKUD"
+
+#~ msgid "application.user.register.email.emailExists"
+#~ msgstr "Sellise e-mailiga kasutaja on juba olemas!"
+
+#~ msgid "application.user.register.passwordRepeat.help-block"
+#~ msgstr "Parooli kordus ei ole korrektne!"
+
+#~ msgid "application.user.after-social-register.heading"
+#~ msgstr "Palun täitke oma profiili andmed."
+
+#~ msgid "BannerForm.status.visibleText"
+#~ msgstr "Nähtav"
+
+#~ msgid "application.admin.add-bannere.addFileButton"
+#~ msgstr "Lisa fail"
+
+#~ msgid "application.admin.add-banner.action.save"
+#~ msgstr "Salvesta"
+
+#~ msgid "application.admin.add-banner.action.cancel"
+#~ msgstr "Katkesta"
+
+#~ msgid "application.admin.add-banner.action.delete"
+#~ msgstr "Kustuta"
+
+#~ msgid "application.admin.add-bannere.action.back"
+#~ msgstr "Tagasi"
+
+#~ msgid "application.admin.edit-page.heading"
+#~ msgstr "Lehe lisamine"
+
+#~ msgid "application.admin.edit-page.titleExistsError"
+#~ msgstr ""
+#~ "Selline pealkiri on juba olemas. Palun muutke eestikeelset pealkirja!"
+
+#~ msgid "application.admin.edit-page.url.label"
+#~ msgstr "URL:"
+
+#~ msgid "application.admin.edit-page.status.label"
+#~ msgstr "Staatus"
+
+#~ msgid "application.admin.edit-page.status.visible"
+#~ msgstr "Nähtav"
+
+#~ msgid "application.admin.edit-page.showInMenu.label"
+#~ msgstr "Nähtav menüüs:"
+
+#~ msgid "application.admin.edit-page.showInHeader.label"
+#~ msgstr "Päises"
+
+#~ msgid "application.admin.edit-page.showInFooter.label"
+#~ msgstr "Jaluses"
+
+#~ msgid "application.admin.edit-page.action.save"
+#~ msgstr "Salvesta"
+
+#~ msgid "application.admin.edit-page.action.cancel"
+#~ msgstr "Katkesta"
+
+#~ msgid "application.admin.edit-page.action.delete"
+#~ msgstr "Kustuta"
+
+#~ msgid "application.admin.edit-page.action.back"
+#~ msgstr "Tagasi"
+
+#~ msgid "application.admin.partial.sub-mamagement-menu.pageManagement"
+#~ msgstr "Lehekülgede haldus"
+
+#~ msgid "application.admin.partial.sub-mamagement-menu.menuManagement"
+#~ msgstr "Menüüde haldus"
+
+#~ msgid "application.admin.partial.sub-mamagement-menu.bannerManagement"
+#~ msgstr "Bannerid"
+
+#~ msgid "application.admin.partial.banners.heading"
+#~ msgstr "Bannerid"
+
+#~ msgid "application.admin.partial.banners.addNewBanner"
+#~ msgstr "Lisa uus banner"
+
+#~ msgid "application.admin.partial.banners.th.positions"
+#~ msgstr "Asukohad"
+
+#~ msgid "application.admin.partial.banners.th.creator"
+#~ msgstr "Lisaja"
+
+#~ msgid "application.admin.partial.banners.th.dateChanged"
+#~ msgstr "Muutmise kuupäev"
+
+#~ msgid "application.admin.partial.banners.actions.hide"
+#~ msgstr "Peida"
+
+#~ msgid "application.admin.partial.banners.actions.show"
+#~ msgstr "Näita"
+
+#~ msgid "application.admin.partial.header-nav-sequence.heading"
+#~ msgstr "Menüü järjekord (PÄISES)"
+
+#~ msgid "application.admin.partial.management-menu.heading"
+#~ msgstr "Haldus"
+
+#~ msgid "application.admin.partial.footer-nav-sequence.heading"
+#~ msgstr "Menüü järjekord (JALUSES)"
+
+#~ msgid "application.admin.partial.pages.heading"
+#~ msgstr "Staatilised lehed"
+
+#~ msgid "application.admin.partial.pages.addNewPage"
+#~ msgstr "Lisa uus leht"
+
+#~ msgid "application.admin.partial.pages.th.title"
+#~ msgstr "Pealkiri"
+
+#~ msgid "application.admin.partial.pages.th.creator"
+#~ msgstr "Lisaja"
+
+#~ msgid "application.admin.partial.pages.th.dateChanged"
+#~ msgstr "Muutmise kuupäev"
+
+#~ msgid "application.admin.partial.pages.actions.hide"
+#~ msgstr "Peida"
+
+#~ msgid "application.admin.partial.pages.actions.show"
+#~ msgstr "Näita"
+
+#~ msgid "application.partial.message-form.heading"
+#~ msgstr "Saada teade"
+
+#~ msgid "application.partial.message-form.userError"
+#~ msgstr "Saaja(d) peavad olema lisatud"
+
+#~ msgid "application.partial.message-form.note"
+#~ msgstr "Tüki kasutaja nimi või e-post"
+
+#~ msgid "application.partial.message-form.cancelButton"
+#~ msgstr "Loobu"
+
+#~ msgid "application.partial.message-form.submitButton"
+#~ msgstr "Saada"
+
+#~ msgid "application.partial.mostPopular.heading"
+#~ msgstr "Populaarsed"
+
+#~ msgid "application.partial.mostPopular.lookAllLink"
+#~ msgstr "Vaata kõiki"
+
+#~ msgid "application.partial.followed-channels.heading"
+#~ msgstr "Mina jälgin"
+
+#~ msgid "application.partial.followed-channels.th.channel"
+#~ msgstr "Kanal"
+
+#~ msgid "application.partial.followed-channels.th.notifications"
+#~ msgstr "Teavitused"
+
+#~ msgid "application.partial.followed-channels.th.notifications.tooltip"
+#~ msgstr "Soovin saada teavitusi uue video lisamisest"
+
+#~ msgid "application.partial.followed-channels.removeChannelLink"
+#~ msgstr "Eemalda kanal"
+
+#~ msgid "application.partial.followed-channels.NoFollowedChannelsMessage"
+#~ msgstr "Teil puuduvad jälgitavad kanalid."
+
+#~ msgid "application.partial.my-account.heading"
+#~ msgstr "Minu konto"
+
+#~ msgid "application.partial.channels.heading"
+#~ msgstr "Kanalid"
+
+#~ msgid "application.partial.channels.lookAllLink"
+#~ msgstr "Vaata kõiki..."
+
+#~ msgid "application.partial.favorite-videos.removeLink"
+#~ msgstr "Eemalda"
+
+#~ msgid "application.partial.favorite-videos.sendMailLink"
+#~ msgstr "Saada"
+
+#~ msgid "application.partial.favorite-videos.NoVideosMessage"
+#~ msgstr "Teil puuduvad lemmikud videod."
+
+#~ msgid "application.partial.categories.heading"
+#~ msgstr "Kategooriad"
+
+#~ msgid "application.partial.categories.lookAllLink"
+#~ msgstr "Vaata kõiki..."
+
+#~ msgid "application.partial.favorite-actions.videoFavorite"
+#~ msgstr "Lemmik"
+
+#~ msgid "application.partial.favorite-actions.removeFavorite"
+#~ msgstr "Eemalda"
+
+#~ msgid "application.partial.favorite-actions.addToFavorite"
+#~ msgstr "Lisa lemmikuks"
+
+#~ msgid "application.partial.favorite-actions.sendMailLink"
+#~ msgstr "Saada"
+
+#~ msgid "application.partial.lastInserted.heading"
+#~ msgstr "Viimati lisatud"
+
+#~ msgid "application.partial.lastInserted.lookAllLink"
+#~ msgstr "Vaata kõiki"
+
+#~ msgid "application.partial.follow-actions.channelFollowed"
+#~ msgstr "Jälgin kanalit"
+
+#~ msgid "application.partial.follow-actions.removeChannel"
+#~ msgstr "Eemalda kanal"
+
+#~ msgid "application.partial.follow-actions.followChannel"
+#~ msgstr "Jälgi kanalit"
+
+#~ msgid "application.partial.mail-form.heading"
+#~ msgstr "Saada sõbrale"
+
+#~ msgid "application.partial.mail-form.receivers.heading"
+#~ msgstr "Saajad"
+
+#~ msgid "application.partial.mail-form.emailNotCorrect"
+#~ msgstr "E-posti aadress ei ole korrektne! "
+
+#~ msgid "application.partial.mail-form.note"
+#~ msgstr "Sisesta sõnumi saajate e-posti aadressid"
+
+#~ msgid "application.partial.mail-form.message.heading"
+#~ msgstr "Sõnum"
+
+#~ msgid "application.partial.mail-form.message.placeholder"
+#~ msgstr "Sõnumi sisu"
+
+#~ msgid "application.partial.mail-form.cancelButton"
+#~ msgstr "Loobu"
+
+#~ msgid "application.partial.mail-form.submitButton"
+#~ msgstr "Saada"
+
+#~ msgid "application.partial.comments.count"
+#~ msgstr "%1$s Kommentaari"
+
+#~ msgid "application.partial.comments.addCommentLabel"
+#~ msgstr "Lisa kommentaar"
+
+#~ msgid "application.partial.comments.notLoggedInMessage"
+#~ msgstr "Kommentaare saavad lisada sisseloginud kasutajad."
+
+#~ msgid "application.partial.comments.logIn"
+#~ msgstr "Login sisse"
+
+#~ msgid "application.partial.comments.addCommentButton"
+#~ msgstr "Lisa kommentaar"
+
+#~ msgid "application.partial.my-messages.heading"
+#~ msgstr "Teated"
+
+#~ msgid "application.partial.my-messages.sendMessageLink"
+#~ msgstr "Saada teade"
+
+#~ msgid "application.partial.my-messages.th.user"
+#~ msgstr "Kasutaja"
+
+#~ msgid "application.partial.my-messages.th.message"
+#~ msgstr "Sõnum"
+
+#~ msgid "application.partial.my-messages.th.date"
+#~ msgstr "Kuupäev"
+
+#~ msgid "application.partial.my-messages.NoMessagesMessage"
+#~ msgstr "Teil puuduvad teated."
+
+#~ msgid "application.partial.relatedVideos.heading"
+#~ msgstr "Seotud videod"
+
+#~ msgid "application.partial.relatedVideos.lookAllLink"
+#~ msgstr "Vaata kõiki"
+
+#~ msgid "application.partial.my-account.FavoriteCount"
+#~ msgstr "Lemmikud  (%1$s)"
+
+#~ msgid "application.partial.my-account.FollowedCount"
+#~ msgstr "Jälgitavad kanalid (%1$s)"
+
+#~ msgid "application.partial.my-account.UnreadMessageCount"
+#~ msgstr "Teated (%1$s)"
+
+#~ msgid "layout.footer.nav.link"
+#~ msgstr "Lingid"
+
+#~ msgid "layout.head.nav.link"
+#~ msgstr "Lingid"
+
+#~ msgid "application.partial.message-form.receivers.heading"
+#~ msgstr "Saajad"
+
+#~ msgid "newPassword.password.placeholder"
+#~ msgstr "Uus parool"
+
+#~ msgid "newPassword.passwordRepeat.placeholder"
+#~ msgstr "Uue parooli kordus"
+
+#~ msgid "register.heading"
+#~ msgstr "Registreerimine"
+
+#~ msgid "layout.forgotPasswordForm.heading"
+#~ msgstr "Parooli meeldetuletuseks sisesta e-posti aadress"
+
+#~ msgid "layout.forgotPasswordForm.sendButton"
+#~ msgstr "Saada"

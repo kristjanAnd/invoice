@@ -1,0 +1,504 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: skeletonSocialUser\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-03-13 08:56+0300\n"
+"PO-Revision-Date: 2015-03-13 08:57+0300\n"
+"Last-Translator: \n"
+"Language-Team: Andresson Developments OÜ\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: translate;noop\n"
+"X-Poedit-Basepath: /var/www/skeletonSocialUser/module\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SearchPath-0: Application\n"
+
+#: Application/src/Application/Form/RegisterForm.php:85
+msgid "register.firstName.placeholder"
+msgstr "First name"
+
+#: Application/src/Application/Form/RegisterForm.php:87
+msgid "register.firstName.label"
+msgstr "First name:"
+
+#: Application/src/Application/Form/RegisterForm.php:97
+msgid "register.lastName.placeholder"
+msgstr "Last name"
+
+#: Application/src/Application/Form/RegisterForm.php:99
+msgid "register.lastName.label"
+msgstr "Last name:"
+
+#: Application/src/Application/Form/RegisterForm.php:109
+msgid "register.phone.placeholder"
+msgstr "Phone"
+
+#: Application/src/Application/Form/RegisterForm.php:111
+msgid "register.phone.label"
+msgstr "Phone:"
+
+#: Application/src/Application/Form/RegisterForm.php:121
+msgid "register.personalCode.placeholder"
+msgstr "Personal code"
+
+#: Application/src/Application/Form/RegisterForm.php:123
+msgid "register.personalCode.label"
+msgstr "Personal code:"
+
+#: Application/src/Application/Form/RegisterForm.php:132
+msgid "register.email.placeholder"
+msgstr "E-mail"
+
+#: Application/src/Application/Form/RegisterForm.php:134
+#: Application/src/Application/Form/ForgotPassword.php:48
+msgid "register.email.label"
+msgstr "E-mail:"
+
+#: Application/src/Application/Form/RegisterForm.php:140
+msgid "register.password.placeholder"
+msgstr "Password"
+
+#: Application/src/Application/Form/RegisterForm.php:142
+msgid "register.password.label"
+msgstr "Password:"
+
+#: Application/src/Application/Form/RegisterForm.php:148
+msgid "register.passwordRepeat.placeholder"
+msgstr "Password repeat"
+
+#: Application/src/Application/Form/RegisterForm.php:150
+msgid "register.passwordRepeat.label"
+msgstr "Password repeat:"
+
+#: Application/src/Application/Form/RegisterForm.php:156
+msgid "register.submit.value"
+msgstr "Register"
+
+#: Application/src/Application/Form/RegisterForm.php:203
+msgid "register.personalCode.notDigits"
+msgstr "Only digits allowed!"
+
+#: Application/src/Application/Form/RegisterForm.php:207
+msgid "register.personalCode.incorrectLength.Toolong"
+msgstr "Too long!"
+
+#: Application/src/Application/Form/RegisterForm.php:208
+msgid "register.personalCode.incorrectLength.TooShort"
+msgstr "Too short!"
+
+#: Application/src/Application/Form/RegisterForm.php:230
+msgid "register.message.emailExists"
+msgstr "This e-mail exists!"
+
+#: Application/src/Application/Form/RegisterForm.php:232
+msgid "register.message.emailInvalidFormat"
+msgstr "E-mail is invalid format"
+
+#: Application/src/Application/Form/RegisterForm.php:244
+msgid "register.password.incorrectLength.long"
+msgstr "Too long!"
+
+#: Application/src/Application/Form/RegisterForm.php:245
+msgid "register.password.incorrectLength.short"
+msgstr "Too short!"
+
+#: Application/src/Application/Form/ForgotPassword.php:47
+msgid "forgotPassword.email.placeholder"
+msgstr "E-mail"
+
+#: Application/src/Application/Form/ForgotPassword.php:55
+msgid "forgotPassword.submitButton.submitButton"
+msgstr "Send"
+
+#: Application/src/Application/Form/ForgotPassword.php:74
+msgid "forgotPassword.email.notExists"
+msgstr "E-mail not exists!"
+
+#: Application/src/Application/Form/ForgotPassword.php:76
+msgid "forgotPassword.email.invalidFormat"
+msgstr "E-mail is invalid format"
+
+#: Application/src/Application/Form/NewPassword.php:37
+msgid "newPassword.new.placeholder"
+msgstr "New password"
+
+#: Application/src/Application/Form/NewPassword.php:39
+msgid "newPassword.new.label"
+msgstr "New password:"
+
+#: Application/src/Application/Form/NewPassword.php:47
+msgid "newPassword.repeat.placeholder"
+msgstr "Password repeat"
+
+#: Application/src/Application/Form/NewPassword.php:49
+msgid "newPassword.repeat.label"
+msgstr "Password repeat:"
+
+#: Application/src/Application/Form/NewPassword.php:55
+msgid "newPassword.submit.value"
+msgstr "Submit"
+
+#: Application/src/Application/Form/NewPassword.php:72
+msgid "newPassword.password.incorrectLength.long"
+msgstr "Password too long!"
+
+#: Application/src/Application/Form/NewPassword.php:73
+msgid "newPassword.password.incorrectLength.short"
+msgstr "Password too short!"
+
+#: Application/src/Application/Service/UserService.php:158
+msgid "mail.forgotPassword.subject"
+msgstr "Forgot password"
+
+#: Application/src/Application/Service/UserService.php:160
+msgid "mail.forgotPassword.bodyMessageBeforeLink"
+msgstr "Go to this link to reset Your password "
+
+#: Application/src/Application/Service/UserService.php:306
+msgid "IdAuth.errorMessage.USER_WITH_EMAIL_NOT_FOUND"
+msgstr ""
+
+#: Application/src/Application/Service/UserService.php:316
+msgid "IdAuth.errorMessage.NO_ID_CARD_USER_FOUND"
+msgstr ""
+
+#: Application/src/Application/Service/UserService.php:320
+msgid "IdAuth.errorMessage.NO_ID_CARD_USER_NOT_MATCH"
+msgstr ""
+
+#: Application/src/Application/Controller/UserController.php:207
+msgid "Application.user.message.passwordLinkSent"
+msgstr "Password link sent!"
+
+#: Application/src/Application/Controller/UserController.php:250
+msgid "Application.user.message.passwordChanged"
+msgstr "Password changed!"
+
+#: Application/src/Application/Controller/UserController.php:335
+#: Application/src/Application/Controller/UserController.php:360
+msgid "IdAuth.errorMessage.SESSION_DATA_NOT_VALID"
+msgstr ""
+
+#: Application/view/layout/layout.phtml:79
+#: Application/view/application/user/forgot-password.phtml:38
+msgid "layout.password.forgotPasswordSuccessMessage"
+msgstr "Password sent!"
+
+#: Application/view/layout/layout.phtml:80
+#: Application/view/application/user/forgot-password.phtml:39
+msgid "layout.password.forgotPasswordErrorMessage"
+msgstr "Something went wrong!"
+
+#: Application/view/layout/partial/language-select.phtml:10
+msgid "language.select.et"
+msgstr "Estonian"
+
+#: Application/view/layout/partial/language-select.phtml:11
+msgid "language.select.us"
+msgstr "English"
+
+#: Application/view/layout/partial/language-select.phtml:12
+msgid "language.select.ru"
+msgstr "Russian"
+
+#: Application/view/application/user/register.phtml:3
+msgid "application.user.register.registerIsDisabled"
+msgstr "Registration is disabled!"
+
+#: Application/view/application/user/register.phtml:8
+msgid "application.user.register.firstName.help-block"
+msgstr "First name is not correct!"
+
+#: Application/view/application/user/register.phtml:9
+msgid "application.user.register.lastName.help-block"
+msgstr "Last name is not correct!"
+
+#: Application/view/application/user/register.phtml:10
+msgid "application.user.register.phone.help-block"
+msgstr "Phone is not correct! (insert without country code)"
+
+#: Application/view/application/user/register.phtml:11
+msgid "application.user.register.personalCode.help-block"
+msgstr "Personal code is not correct!"
+
+#: Application/view/application/user/register.phtml:12
+msgid "application.user.register.email.help-block"
+msgstr "E-mail is not correct!"
+
+#: Application/view/application/user/register.phtml:13
+#: Application/view/application/user/register.phtml:14
+msgid "application.user.register.password.help-block"
+msgstr "Password is not correct!"
+
+#: Application/view/application/user/register.phtml:28
+msgid "application.user.register.heading"
+msgstr "Registration"
+
+#: Application/view/application/user/register.phtml:53
+#: Application/view/application/user/forgot-password.phtml:33
+msgid "Register.backLink"
+msgstr "Back"
+
+#: Application/view/application/user/id-login.phtml:8
+#: Application/view/application/user/login.phtml:10
+msgid "loginForm.email.placeholder"
+msgstr "E-mail"
+
+#: Application/view/application/user/id-login.phtml:9
+#: Application/view/application/user/login.phtml:11
+msgid "loginForm.email.label"
+msgstr "E-mail:"
+
+#: Application/view/application/user/id-login.phtml:12
+#: Application/view/application/user/login.phtml:15
+msgid "loginForm.password.placeholder"
+msgstr "Password"
+
+#: Application/view/application/user/id-login.phtml:13
+#: Application/view/application/user/login.phtml:16
+msgid "loginForm.password.label"
+msgstr "Password:"
+
+#: Application/view/application/user/id-login.phtml:58
+#: Application/view/application/user/login.phtml:68
+msgid "Login.MobileLogin.confirmationMessage"
+msgstr ""
+
+#: Application/view/application/user/id-login.phtml:59
+#: Application/view/application/user/login.phtml:69
+msgid "Login.MobileLogin.CancelLoginButton"
+msgstr ""
+
+#: Application/view/application/user/id-login.phtml:71
+#: Application/view/application/user/login.phtml:40
+msgid "Login.tab.simpleLogin"
+msgstr "Log in"
+
+#: Application/view/application/user/id-login.phtml:73
+#: Application/view/application/user/login.phtml:42
+msgid "Login.tab.IDLogin"
+msgstr "ID log in"
+
+#: Application/view/application/user/id-login.phtml:76
+#: Application/view/application/user/login.phtml:45
+msgid "Login.tab.MobileIDLogin"
+msgstr "Mobile ID log in"
+
+#: Application/view/application/user/id-login.phtml:96
+#: Application/view/application/user/login.phtml:77
+msgid "Login.NotRegistered.question"
+msgstr "Not registered? "
+
+#: Application/view/application/user/id-login.phtml:96
+#: Application/view/application/user/login.phtml:77
+msgid "login.NotRegistered.registerLink"
+msgstr "register"
+
+#: Application/view/application/user/id-login.phtml:99
+#: Application/view/application/user/login.phtml:80
+msgid "Login.forgotPasswordLink"
+msgstr "forgot password"
+
+#: Application/view/application/user/id-login.phtml:130
+#: Application/view/application/user/login.phtml:88
+msgid "IdLogin.Status.NOT_VALID"
+msgstr ""
+
+#: Application/view/application/user/id-login.phtml:131
+#: Application/view/application/user/login.phtml:89
+msgid "IdLogin.Status.EXPIRED_TRANSACTION"
+msgstr ""
+
+#: Application/view/application/user/id-login.phtml:132
+#: Application/view/application/user/login.phtml:90
+msgid "IdLogin.Status.USER_CANCEL"
+msgstr ""
+
+#: Application/view/application/user/id-login.phtml:133
+#: Application/view/application/user/login.phtml:91
+msgid "IdLogin.Status.MID_NOT_READY"
+msgstr ""
+
+#: Application/view/application/user/id-login.phtml:134
+#: Application/view/application/user/login.phtml:92
+msgid "IdLogin.Status.PHONE_ABSENT"
+msgstr ""
+
+#: Application/view/application/user/id-login.phtml:135
+#: Application/view/application/user/login.phtml:93
+msgid "IdLogin.Status.SENDING_ERROR"
+msgstr ""
+
+#: Application/view/application/user/id-login.phtml:136
+#: Application/view/application/user/login.phtml:94
+msgid "IdLogin.Status.SIM_ERROR"
+msgstr ""
+
+#: Application/view/application/user/id-login.phtml:137
+#: Application/view/application/user/login.phtml:95
+msgid "IdLogin.Status.INTERNAL_ERROR"
+msgstr ""
+
+#: Application/view/application/user/id-login.phtml:139
+#: Application/view/application/user/login.phtml:97
+msgid "IdLogin.Message.CHECKING_CONTRACT"
+msgstr ""
+
+#: Application/view/application/user/id-login.phtml:140
+#: Application/view/application/user/login.phtml:98
+msgid "IdLogin.Message.REQUEST_SENT"
+msgstr ""
+
+#: Application/view/application/user/id-login.phtml:141
+#: Application/view/application/user/login.phtml:99
+msgid "IdLogin.Message.SERVER_FAULT"
+msgstr ""
+
+#: Application/view/application/user/id-login.phtml:142
+#: Application/view/application/user/login.phtml:100
+msgid "IdLogin.Message.RESPONSE_RECEIVED"
+msgstr ""
+
+#: Application/view/application/user/forgot-password.phtml:11
+msgid "forgotPassword.heading"
+msgstr "Forgot password"
+
+#: Application/view/application/user/forgot-password.phtml:19
+msgid "layout.head.loginForm.error.email"
+msgstr "E-mail is not correct!"
+
+#: Application/view/application/user/forgot-password.phtml:20
+msgid "layout.head.loginForm.error.emailNotExists"
+msgstr "E-mail not found!"
+
+#: Application/view/application/user/new-password.phtml:13
+msgid "newPassword.heading"
+msgstr "Reset password"
+
+#: Application/view/application/user/new-password.phtml:21
+msgid "application.user.new-password.password.help-block"
+msgstr "Password is not correct!"
+
+#: Application/view/application/user/new-password.phtml:28
+msgid "application.user.new-password.passwordRepeat.help-block"
+msgstr "Password repeat is not correct!"
+
+#: Application/view/application/user/partial/id-login.phtml:3
+#: Application/view/application/user/partial/mobile-id-login.phtml:3
+msgid "Login.email.label"
+msgstr "E-mail:"
+
+#: Application/view/application/user/partial/id-login.phtml:6
+msgid "Login.email.help-block"
+msgstr "E-mail is not correct!"
+
+#: Application/view/application/user/partial/id-login.phtml:11
+#: Application/view/application/user/partial/mobile-id-login.phtml:18
+msgid "Login.submitButton.label"
+msgstr "Log in"
+
+#: Application/view/application/user/partial/mobile-id-login.phtml:6
+msgid "Login.emailMob.help-block"
+msgstr "E-mail is not correct!"
+
+#: Application/view/application/user/partial/mobile-id-login.phtml:10
+msgid "Login.phone.label"
+msgstr "Phone (without country code):"
+
+#: Application/view/application/user/partial/mobile-id-login.phtml:12
+msgid "Login.phone.placeholder"
+msgstr "Phone"
+
+#: Application/view/application/user/partial/mobile-id-login.phtml:13
+msgid "Login.phone.help-block"
+msgstr "Phone is not correct"
+
+#: Application/view/application/user/partial/normal-login.phtml:19
+msgid "Login.login-error.help-block"
+msgstr "Wrong e-mail or password!"
+
+#: Application/view/application/user/partial/normal-login.phtml:22
+msgid "login.submitButton"
+msgstr "Log in"
+
+#: Application/view/error/404.phtml:1
+msgid "A 404 error occurred"
+msgstr ""
+
+#: Application/view/error/404.phtml:10
+msgid "The requested controller was unable to dispatch the request."
+msgstr ""
+
+#: Application/view/error/404.phtml:13
+msgid ""
+"The requested controller could not be mapped to an existing controller class."
+msgstr ""
+
+#: Application/view/error/404.phtml:16
+msgid "The requested controller was not dispatchable."
+msgstr ""
+
+#: Application/view/error/404.phtml:19
+msgid "The requested URL could not be matched by routing."
+msgstr ""
+
+#: Application/view/error/404.phtml:22
+msgid "We cannot determine at this time why a 404 was generated."
+msgstr ""
+
+#: Application/view/error/404.phtml:34
+msgid "Controller"
+msgstr ""
+
+#: Application/view/error/404.phtml:41
+#, php-format
+msgid "resolves to %s"
+msgstr ""
+
+#: Application/view/error/404.phtml:53 Application/view/error/index.phtml:8
+msgid "Additional information"
+msgstr ""
+
+#: Application/view/error/404.phtml:56 Application/view/error/404.phtml:80
+#: Application/view/error/index.phtml:11 Application/view/error/index.phtml:35
+msgid "File"
+msgstr ""
+
+#: Application/view/error/404.phtml:60 Application/view/error/404.phtml:84
+#: Application/view/error/index.phtml:15 Application/view/error/index.phtml:39
+msgid "Message"
+msgstr ""
+
+#: Application/view/error/404.phtml:64 Application/view/error/404.phtml:88
+#: Application/view/error/index.phtml:19 Application/view/error/index.phtml:43
+msgid "Stack trace"
+msgstr ""
+
+#: Application/view/error/404.phtml:74 Application/view/error/index.phtml:29
+msgid "Previous exceptions"
+msgstr ""
+
+#: Application/view/error/404.phtml:103 Application/view/error/index.phtml:58
+msgid "No Exception available"
+msgstr ""
+
+#: Application/view/error/index.phtml:1
+msgid "An error occurred"
+msgstr ""
+
+#~ msgid "forgotPassword.submit.value"
+#~ msgstr "Send"
+
+#~ msgid "layout.head.logOutButton"
+#~ msgstr "Log out"
+
+#~ msgid "login.heading"
+#~ msgstr "Log in"
+
+#~ msgid "login.NotRegistered.question"
+#~ msgstr "Not registered? "
+
+#~ msgid "login.forgotPasswordLink"
+#~ msgstr "forgot password"
