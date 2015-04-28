@@ -29,6 +29,8 @@
     <!-- Morris Charts CSS -->
     <link href="/lib/morrisjs/morris.css" rel="stylesheet">
 
+    <link href="/lib/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
+
     <!-- Custom Fonts -->
     <link href="/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
@@ -39,34 +41,55 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <script src="/js/jquery-2.0.2.min.js"></script>
+
+    <!-- jQuery Validate -->
+    <script src="/js/jquery.validate.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="/lib/metisMenu/dist/metisMenu.min.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="/lib/raphael/raphael-min.js"></script>
+    <!--        <script src="/lib/morrisjs/morris.min.js"></script>-->
+    <!--        <script src="/js/morris-data.js"></script>-->
+
+    <script src="/lib/datatables/media/js/jquery.dataTables.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="/js/sb-admin-2.js"></script>
+
+    <script src="/js/_scripts.js"></script>
+
 </head>
     <body>
         <div id="wrapper">
-            <?php echo $this->partial('layout/partial/navigation'); ?>
+            <?php
+                $companyName = $this->currentUser() && $this->currentUser()->getCompany() ? $this->currentUser()->getCompany()->getName() : '';
+                $companyId = $this->currentUser() && $this->currentUser()->getCompany() ? $this->currentUser()->getCompany()->getId() : null;
+            ?>
+            <!-- Navigation -->
+            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="<?php echo $this->url('company', array('id' => $companyId), true)?>"><?php echo $companyName?></a>
+                </div>
+                <!-- /.navbar-header -->
+
+                <?php echo $this->partial('layout/partial/top-navigation')?>
             <?php echo $this->content; ?>
         </div>
     <!-- /#wrapper -->
         <?php echo $this->inlineScript() ?>
         <!-- jQuery -->
-        <script src="/lib/jquery/dist/jquery.min.js"></script>
-
-        <!-- jQuery Validate -->
-        <script src="/js/jquery.validate.min.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-
-        <!-- Metis Menu Plugin JavaScript -->
-        <script src="/lib/metisMenu/dist/metisMenu.min.js"></script>
-
-        <!-- Morris Charts JavaScript -->
-        <script src="/lib/raphael/raphael-min.js"></script>
-        <script src="/lib/morrisjs/morris.min.js"></script>
-        <script src="/js/morris-data.js"></script>
-
-        <!-- Custom Theme JavaScript -->
-        <script src="/js/sb-admin-2.js"></script>
-        <script src="/js/_scripts.js"></script>
         <?php
             $availableLanguages = $this->config['languages']['available'];
         ?>

@@ -12,6 +12,7 @@ namespace Application\Service;
 use Application\Common\SocialStorage;
 use Application\Entity\Role;
 use Application\Entity\RoleLinker;
+use Application\Entity\Subject\Company;
 use Application\Entity\User;
 use Zend\Crypt\Password\Bcrypt;
 use Zend\Mail\Message;
@@ -20,10 +21,23 @@ use BitWeb\IdServices\Authentication\IdCard\Authentication;
 use Zend\Soap\Client;
 
 class UserService extends AbstractService {
+    /**
+     * @var CompanyService
+     */
+    protected $companyService;
+
+    /**
+     * @param CompanyService $companyService
+     */
+    public function setCompanyService(CompanyService $companyService)
+    {
+        $this->companyService = $companyService;
+    }
 
     public function setRoleAfterRegister(User $user, Parameters $data) {
         if (count($user->getRoles()) == 0) {
-            $role = $this->getUserRole();
+            $role = $this->getAdminRoleEntity();
+            $user = $this->setCompanyToUserAfterRegister($user);
             $user = $this->saveUser($user, new Parameters());
             $roleLinker = new RoleLinker();
             $roleLinker->setUser($user);
@@ -31,6 +45,17 @@ class UserService extends AbstractService {
             $this->saveRoleLinker($roleLinker);
             $this->saveUser($user, new Parameters());
         }
+        return $user;
+    }
+
+    private function setCompanyToUserAfterRegister(User $user){
+        $company = new Company();
+        $company->setName($user->getFullName());
+        $company->setEmail($user->getEmail());
+        $company->setPhone($user->getPhone());
+        $company = $this->companyService->saveCompany($company, new Parameters());
+        $user->setCompany($company);
+
         return $user;
     }
 
@@ -246,6 +271,10 @@ class UserService extends AbstractService {
 
         if(isset($data->email)){
             $user->setLastName($data->lastName);
+        }
+
+        if(isset($data->language)){
+            $user->setLanguageCode($data->language);
         }
 
         if(isset($data->phone)){

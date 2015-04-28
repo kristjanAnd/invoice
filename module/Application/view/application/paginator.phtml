@@ -1,0 +1,25 @@
+<?php if ($this->pageCount > 1): ?>
+    <?php
+    $params = '';
+    if (!empty($_GET)) {
+        $params = '?' . http_build_query($_GET);
+    }
+    ?>
+    <div class="center">
+        <ul class="pagination">
+            <?php if ($this->previous != null): ?>
+                <li><a href="<?php echo $this->url($this->url , array('page' => $this->previous), array (), true);?><?php echo $params?>">«</a></li>
+            <?php endif; ?>
+            <?php foreach ($this->pagesInRange as $page): ?>
+                <?php if ($page != $this->current): ?>
+                    <li><a href="<?php echo $this->url($this->url, array('page' => $page), array (), true);?><?php echo $params?>"><?php echo $page; ?></a></li>
+                <?php else:?>
+                    <li class="active"><a href="<?php echo $this->url(null, array('page' => $page), array (), true);?><?php echo $params?>"><?php echo $page; ?></a></li>
+                <?php endif;?>
+            <?php endforeach; ?>
+            <?php if ($this->next != null): ?>
+                <li><a href="<?php echo $this->url($this->url, array_merge(array('page' => $this->next)), array (), true);?><?php echo $params?>">»</a></li>
+            <?php endif; ?>
+        </ul>
+    </div>
+<?php endif; ?>

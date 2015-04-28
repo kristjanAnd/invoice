@@ -1,0 +1,29 @@
+<?php
+$articleService = $this->service('Application\Service\Article');
+?>
+<tr id="row-<?php echo $this->category->getId()?>">
+    <td>
+        <p class="value-<?php echo $this->category->getId()?>" id="name-value-<?php echo $this->category->getId()?>"><?php echo $this->category->getName()?></p>
+        <input class="input-<?php echo $this->category->getId()?> form-control name" style="display: none" type="text" id="name-input-<?php echo $this->category->getId()?>" value="<?php echo $this->category->getName()?>">
+    </td>
+    <td>
+        <p class="value-<?php echo $this->category->getId()?>" id="code-value-<?php echo $this->category->getId()?>"><?php echo $this->category->getCode()?></p>
+        <input class="input-<?php echo $this->category->getId()?> form-control code" style="display: none" type="text" id="code-input-<?php echo $this->category->getId()?>" value="<?php echo $this->category->getCode()?>">
+    </td>
+    <td width="25%">
+        <p class="value-<?php echo $this->category->getId()?>" id="description-value-<?php echo $this->category->getId()?>"><?php echo $this->category->getDescription()?></p>
+        <textarea class="input-<?php echo $this->category->getId()?> form-control description" style="display: none"  id="description-input-<?php echo $this->category->getId()?>" rows="3" ><?php echo $this->category->getDescription()?></textarea>
+    </td>
+    <td>
+        <p class="value-<?php echo $this->category->getId()?>" id="status-value-<?php echo $this->category->getId()?>"><?php echo $this->category->getStatus()?></p>
+        <select class="input-<?php echo $this->category->getId()?> form-control status" style="display: none" id="status-input-<?php echo $this->category->getId()?>">
+            <?php foreach($articleService->getCategoryStatusSelect() as $k => $v):?>
+                <option value="<?php echo $k?>" <?php if($k == $this->category->getStatus()):?>selected<?php endif;?>><?php echo $k?></option>
+            <?php endforeach;?>
+        </select>
+    </td>
+    <td>
+        <button style="display: none" data-value="<?php echo $this->category->getId()?>" class="btn btn-xs btn-success saveCategory" rel="tooltip"><i class="fa fa-save"></i> <?php echo $this->translate('Article.category.row.action.saveButton')?></button>
+        <button data-value ="<?php echo $this->category->getId()?>" class="btn btn-xs btn-default editCategory" rel="tooltip"><i class="fa fa-pencil"></i> <?php echo $this->translate('Article.category.row.action.changeButton')?></button>
+    </td>
+</tr>

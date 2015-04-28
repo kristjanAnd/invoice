@@ -16,6 +16,7 @@ use Zend\View\Model\ViewModel;
 
 class IndexController extends AbstractActionController
 {
+    const NAV_KEY_DASHBOARD = 'dashboard';
     /**
      * @var UserService
      */
@@ -34,7 +35,15 @@ class IndexController extends AbstractActionController
         if (!$this->zfcUserAuthentication()->hasIdentity()) {
             return $this->redirect()->toRoute('zfcuser/login', [], true);
         }
-        return new ViewModel();
+        $user = $this->currentdata()->getCurrentUser();
+        return $this->redirect()->toRoute('dashboard', ['language' => $user->getLanguageCode()]);
+    }
+
+    public function dashboardAction()
+    {
+        $view = new ViewModel();
+        $view->navKey = self::NAV_KEY_DASHBOARD;
+        return $view;
     }
 
     public function emailExistsAction(){

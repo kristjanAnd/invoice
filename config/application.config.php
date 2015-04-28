@@ -1,4 +1,5 @@
 <?php
+use Zend\Console\Console;
 
 $modules = array(
     'ZfcBase',
@@ -12,6 +13,10 @@ $modules = array(
     'DoctrineORMModule',
     'BitWeb\ErrorReportingModule'
 );
+
+if (Console::isConsole()) {
+    unset ($modules['BjyAuthorize']);
+}
 
 return array(
     // This should be an array of module namespaces used in the application.

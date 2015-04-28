@@ -20,7 +20,7 @@ $settings = array(
      * Please specify the DI alias for the configured Zend\Session\SessionManager
      * instance that ScnSocialAuth should use.
      */
-    'zend_session_manager' => 'Zend\Session\SessionManager',
+//    'zend_session_manager' => 'Zend\Session\SessionManager',
 
     /**
      * User Provider Entity Class
@@ -28,14 +28,14 @@ $settings = array(
      * Name of Entity class to use. Useful for using your own entity class
      * instead of the default one provided. Default is ScnSocialAuth\Entity\UserProvider.
      */
-    'user_provider_entity_class' => 'Application\Entity\User\Provider',
+//    'user_provider_entity_class' => 'Application\Entity\User\Provider',
 
     /**
      * Facebook Enabled
      *
      * Please specify if Facebook is enabled
      */
-    'facebook_enabled' => true,
+//    'facebook_enabled' => false,
 
     /**
      * Facebook Scope
@@ -46,7 +46,7 @@ $settings = array(
      * See the Facebook docs for a full list of available permissions:
      * http://developers.facebook.com/docs/reference/api/permissions.
      */
-    'facebook_scope' => 'email, user_likes',
+//    'facebook_scope' => 'email, user_likes',
 
     /**
      * Facebook Display
@@ -65,7 +65,7 @@ $settings = array(
      *
      * Please specify if Foursquare is enabled
      */
-    'foursquare_enabled' => true,
+//    'foursquare_enabled' => true,
 
     /**
      * Github Enabled
@@ -75,7 +75,7 @@ $settings = array(
      * You can register a new application at:
      * https://github.com/settings/applications/new
      */
-    'github_enabled' => true,
+//    'github_enabled' => true,
 
     /**
      * Github Scope
@@ -93,7 +93,7 @@ $settings = array(
      *
      * Please specify if Google is enabled
      */
-    'google_enabled' => true,
+//    'google_enabled' => true,
 
     /**
      * Google Scope
@@ -104,35 +104,35 @@ $settings = array(
      * See the Google docs for a full list of available permissions:
      * https://developers.google.com/accounts/docs/OAuth2Login#scopeparameter.
      */
-    'google_scope' => 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
+//    'google_scope' => 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
 
     /**
      * LinkedIn Enabled
      *
      * Please specify if LinkedIn is enabled
      */
-    'linkedIn_enabled' => true,
+//    'linkedIn_enabled' => true,
 
     /**
      * Twitter Enabled
      *
      * Please specify if Twitter is enabled
      */
-    'twitter_enabled' => true,
+//    'twitter_enabled' => true,
 
     /**
      * Yahoo! Enabled
      *
      * Please specify if Yahoo! is enabled
      */
-    'yahoo_enabled' => true,
+//    'yahoo_enabled' => true,
 
     /**
      * tumblr Enabled
      *
      * Please specify if tumblr is enabled
      */
-    'tumblr_enabled' => true,
+//    'tumblr_enabled' => true,
 
     /**
      * Mailru Enabled
@@ -167,7 +167,7 @@ $settings = array(
      *
      * Please specify if Instagram is enabled
      */
-    'instagram_enabled' => true,
+//    'instagram_enabled' => true,
 
     /**
      * Set to true if you want to display only the social login buttons without

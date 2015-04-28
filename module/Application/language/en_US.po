@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skeletonSocialUser\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-13 08:56+0300\n"
-"PO-Revision-Date: 2015-03-13 08:57+0300\n"
+"POT-Creation-Date: 2015-04-24 08:01+0300\n"
+"PO-Revision-Date: 2015-04-24 14:30+0300\n"
 "Last-Translator: \n"
 "Language-Team: Andresson Developments OÜ\n"
 "Language: en_US\n"
@@ -11,98 +11,234 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: translate;noop\n"
-"X-Poedit-Basepath: /var/www/skeletonSocialUser/module\n"
+"X-Poedit-Basepath: /var/www/invoice/module\n"
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SearchPath-0: Application\n"
 
-#: Application/src/Application/Form/RegisterForm.php:85
+#: Application/src/Application/Form/RegisterForm.php:102
 msgid "register.firstName.placeholder"
 msgstr "First name"
 
-#: Application/src/Application/Form/RegisterForm.php:87
+#: Application/src/Application/Form/RegisterForm.php:104
 msgid "register.firstName.label"
 msgstr "First name:"
 
-#: Application/src/Application/Form/RegisterForm.php:97
+#: Application/src/Application/Form/RegisterForm.php:114
 msgid "register.lastName.placeholder"
 msgstr "Last name"
 
-#: Application/src/Application/Form/RegisterForm.php:99
+#: Application/src/Application/Form/RegisterForm.php:116
 msgid "register.lastName.label"
 msgstr "Last name:"
 
-#: Application/src/Application/Form/RegisterForm.php:109
+#: Application/src/Application/Form/RegisterForm.php:126
 msgid "register.phone.placeholder"
 msgstr "Phone"
 
-#: Application/src/Application/Form/RegisterForm.php:111
+#: Application/src/Application/Form/RegisterForm.php:128
 msgid "register.phone.label"
 msgstr "Phone:"
 
-#: Application/src/Application/Form/RegisterForm.php:121
+#: Application/src/Application/Form/RegisterForm.php:138
 msgid "register.personalCode.placeholder"
 msgstr "Personal code"
 
-#: Application/src/Application/Form/RegisterForm.php:123
+#: Application/src/Application/Form/RegisterForm.php:140
 msgid "register.personalCode.label"
 msgstr "Personal code:"
 
-#: Application/src/Application/Form/RegisterForm.php:132
+#: Application/src/Application/Form/RegisterForm.php:149
 msgid "register.email.placeholder"
 msgstr "E-mail"
 
-#: Application/src/Application/Form/RegisterForm.php:134
+#: Application/src/Application/Form/RegisterForm.php:151
 #: Application/src/Application/Form/ForgotPassword.php:48
 msgid "register.email.label"
 msgstr "E-mail:"
 
-#: Application/src/Application/Form/RegisterForm.php:140
+#: Application/src/Application/Form/RegisterForm.php:161
+#, fuzzy
+msgid "register.language.label"
+msgstr "Last name:"
+
+#: Application/src/Application/Form/RegisterForm.php:167
 msgid "register.password.placeholder"
 msgstr "Password"
 
-#: Application/src/Application/Form/RegisterForm.php:142
+#: Application/src/Application/Form/RegisterForm.php:169
 msgid "register.password.label"
 msgstr "Password:"
 
-#: Application/src/Application/Form/RegisterForm.php:148
+#: Application/src/Application/Form/RegisterForm.php:176
 msgid "register.passwordRepeat.placeholder"
 msgstr "Password repeat"
 
-#: Application/src/Application/Form/RegisterForm.php:150
+#: Application/src/Application/Form/RegisterForm.php:178
 msgid "register.passwordRepeat.label"
 msgstr "Password repeat:"
 
-#: Application/src/Application/Form/RegisterForm.php:156
+#: Application/src/Application/Form/RegisterForm.php:184
 msgid "register.submit.value"
 msgstr "Register"
 
-#: Application/src/Application/Form/RegisterForm.php:203
+#: Application/src/Application/Form/RegisterForm.php:231
 msgid "register.personalCode.notDigits"
 msgstr "Only digits allowed!"
 
-#: Application/src/Application/Form/RegisterForm.php:207
+#: Application/src/Application/Form/RegisterForm.php:235
 msgid "register.personalCode.incorrectLength.Toolong"
 msgstr "Too long!"
 
-#: Application/src/Application/Form/RegisterForm.php:208
+#: Application/src/Application/Form/RegisterForm.php:236
 msgid "register.personalCode.incorrectLength.TooShort"
 msgstr "Too short!"
 
-#: Application/src/Application/Form/RegisterForm.php:230
+#: Application/src/Application/Form/RegisterForm.php:258
 msgid "register.message.emailExists"
 msgstr "This e-mail exists!"
 
-#: Application/src/Application/Form/RegisterForm.php:232
+#: Application/src/Application/Form/RegisterForm.php:260
 msgid "register.message.emailInvalidFormat"
 msgstr "E-mail is invalid format"
 
-#: Application/src/Application/Form/RegisterForm.php:244
+#: Application/src/Application/Form/RegisterForm.php:275
 msgid "register.password.incorrectLength.long"
 msgstr "Too long!"
 
-#: Application/src/Application/Form/RegisterForm.php:245
+#: Application/src/Application/Form/RegisterForm.php:276
 msgid "register.password.incorrectLength.short"
 msgstr "Too short!"
+
+#: Application/src/Application/Form/ArticleForm.php:77
+#, fuzzy
+msgid "Article.form.name.placeholder"
+msgstr "First name"
+
+#: Application/src/Application/Form/ArticleForm.php:79
+#, fuzzy
+msgid "Article.form.name.label"
+msgstr "First name:"
+
+#: Application/src/Application/Form/ArticleForm.php:86
+#, fuzzy
+msgid "Article.form.code.placeholder"
+msgstr "Phone"
+
+#: Application/src/Application/Form/ArticleForm.php:88
+#, fuzzy
+msgid "Article.form.code.label"
+msgstr "Phone:"
+
+#: Application/src/Application/Form/ArticleForm.php:95
+#, fuzzy
+msgid "Article.form.salePrice.placeholder"
+msgstr "First name"
+
+#: Application/src/Application/Form/ArticleForm.php:97
+msgid "Article.form.salePrice.label"
+msgstr ""
+
+#: Application/src/Application/Form/ArticleForm.php:105
+msgid "Article.form.unit.emptyOption"
+msgstr ""
+
+#: Application/src/Application/Form/ArticleForm.php:107
+msgid "Article.form.unit.label"
+msgstr ""
+
+#: Application/src/Application/Form/ArticleForm.php:114
+#, fuzzy
+msgid "Article.form.quantity.placeholder"
+msgstr "E-mail"
+
+#: Application/src/Application/Form/ArticleForm.php:116
+msgid "Article.form.quantity.label"
+msgstr ""
+
+#: Application/src/Application/Form/ArticleForm.php:128
+#: Application/src/Application/Form/ArticleForm.php:136
+#: Application/src/Application/Form/SubjectForm.php:112
+msgid "Validator.message.notEmpty"
+msgstr ""
+
+#: Application/src/Application/Form/ArticleForm.php:128
+msgid "ArticleForm.message.nameInput"
+msgstr ""
+
+#: Application/src/Application/Form/ArticleForm.php:136
+msgid "ArticleForm.message.regNrInput"
+msgstr ""
+
+#: Application/src/Application/Form/SubjectForm.php:36
+#, fuzzy
+msgid "Company.form.name.placeholder"
+msgstr "Phone"
+
+#: Application/src/Application/Form/SubjectForm.php:38
+#, fuzzy
+msgid "Company.form.name.label"
+msgstr "Phone (without country code):"
+
+#: Application/src/Application/Form/SubjectForm.php:46
+#, fuzzy
+msgid "Company.form.code.placeholder"
+msgstr "E-mail"
+
+#: Application/src/Application/Form/SubjectForm.php:48
+msgid "Company.form.code.label"
+msgstr ""
+
+#: Application/src/Application/Form/SubjectForm.php:56
+#, fuzzy
+msgid "Company.form.email.placeholder"
+msgstr "E-mail"
+
+#: Application/src/Application/Form/SubjectForm.php:58
+#, fuzzy
+msgid "Company.form.email.label"
+msgstr "E-mail:"
+
+#: Application/src/Application/Form/SubjectForm.php:67
+#, fuzzy
+msgid "Company.form.address.placeholder"
+msgstr "Password"
+
+#: Application/src/Application/Form/SubjectForm.php:69
+#, fuzzy
+msgid "Company.form.address.label"
+msgstr "Password:"
+
+#: Application/src/Application/Form/SubjectForm.php:77
+#, fuzzy
+msgid "Company.form.regNo.placeholder"
+msgstr "E-mail"
+
+#: Application/src/Application/Form/SubjectForm.php:79
+msgid "Company.form.regNo.label"
+msgstr ""
+
+#: Application/src/Application/Form/SubjectForm.php:87
+#, fuzzy
+msgid "Company.form.vatNo.placeholder"
+msgstr "E-mail"
+
+#: Application/src/Application/Form/SubjectForm.php:89
+msgid "Company.form.vatNo.label"
+msgstr ""
+
+#: Application/src/Application/Form/SubjectForm.php:97
+#, fuzzy
+msgid "Company.form.phone.placeholder"
+msgstr "Phone"
+
+#: Application/src/Application/Form/SubjectForm.php:99
+#, fuzzy
+msgid "Company.form.phone.label"
+msgstr "Phone (without country code):"
+
+#: Application/src/Application/Form/SubjectForm.php:112
+msgid "CompanyForm.message.nameInput"
+msgstr ""
 
 #: Application/src/Application/Form/ForgotPassword.php:47
 msgid "forgotPassword.email.placeholder"
@@ -148,60 +284,64 @@ msgstr "Password too long!"
 msgid "newPassword.password.incorrectLength.short"
 msgstr "Password too short!"
 
-#: Application/src/Application/Service/UserService.php:158
-msgid "mail.forgotPassword.subject"
-msgstr "Forgot password"
-
-#: Application/src/Application/Service/UserService.php:160
-msgid "mail.forgotPassword.bodyMessageBeforeLink"
-msgstr "Go to this link to reset Your password "
-
-#: Application/src/Application/Service/UserService.php:306
-msgid "IdAuth.errorMessage.USER_WITH_EMAIL_NOT_FOUND"
-msgstr ""
-
-#: Application/src/Application/Service/UserService.php:316
-msgid "IdAuth.errorMessage.NO_ID_CARD_USER_FOUND"
-msgstr ""
-
-#: Application/src/Application/Service/UserService.php:320
-msgid "IdAuth.errorMessage.NO_ID_CARD_USER_NOT_MATCH"
-msgstr ""
-
-#: Application/src/Application/Controller/UserController.php:207
-msgid "Application.user.message.passwordLinkSent"
-msgstr "Password link sent!"
-
-#: Application/src/Application/Controller/UserController.php:250
-msgid "Application.user.message.passwordChanged"
-msgstr "Password changed!"
-
-#: Application/src/Application/Controller/UserController.php:335
-#: Application/src/Application/Controller/UserController.php:360
-msgid "IdAuth.errorMessage.SESSION_DATA_NOT_VALID"
-msgstr ""
-
-#: Application/view/layout/layout.phtml:79
-#: Application/view/application/user/forgot-password.phtml:38
-msgid "layout.password.forgotPasswordSuccessMessage"
-msgstr "Password sent!"
-
-#: Application/view/layout/layout.phtml:80
-#: Application/view/application/user/forgot-password.phtml:39
-msgid "layout.password.forgotPasswordErrorMessage"
-msgstr "Something went wrong!"
-
-#: Application/view/layout/partial/language-select.phtml:10
+#: Application/src/Application/Service/LanguageService.php:28
 msgid "language.select.et"
 msgstr "Estonian"
 
-#: Application/view/layout/partial/language-select.phtml:11
+#: Application/src/Application/Service/LanguageService.php:29
 msgid "language.select.us"
 msgstr "English"
 
-#: Application/view/layout/partial/language-select.phtml:12
+#: Application/src/Application/Service/LanguageService.php:30
 msgid "language.select.ru"
 msgstr "Russian"
+
+#: Application/src/Application/Service/UserService.php:183
+msgid "mail.forgotPassword.subject"
+msgstr "Forgot password"
+
+#: Application/src/Application/Service/UserService.php:185
+msgid "mail.forgotPassword.bodyMessageBeforeLink"
+msgstr "Go to this link to reset Your password "
+
+#: Application/src/Application/Service/UserService.php:335
+msgid "IdAuth.errorMessage.USER_WITH_EMAIL_NOT_FOUND"
+msgstr ""
+
+#: Application/src/Application/Service/UserService.php:345
+msgid "IdAuth.errorMessage.NO_ID_CARD_USER_FOUND"
+msgstr ""
+
+#: Application/src/Application/Service/UserService.php:349
+msgid "IdAuth.errorMessage.NO_ID_CARD_USER_NOT_MATCH"
+msgstr ""
+
+#: Application/src/Application/Controller/CompanyController.php:44
+msgid "Company.edit.successMessage"
+msgstr ""
+
+#: Application/src/Application/Controller/UserController.php:208
+msgid "Application.user.message.passwordLinkSent"
+msgstr "Password link sent!"
+
+#: Application/src/Application/Controller/UserController.php:251
+msgid "Application.user.message.passwordChanged"
+msgstr "Password changed!"
+
+#: Application/src/Application/Controller/UserController.php:336
+#: Application/src/Application/Controller/UserController.php:361
+msgid "IdAuth.errorMessage.SESSION_DATA_NOT_VALID"
+msgstr ""
+
+#: Application/view/layout/layout.phtml:96
+#: Application/view/application/user/forgot-password.phtml:40
+msgid "layout.password.forgotPasswordSuccessMessage"
+msgstr "Password sent!"
+
+#: Application/view/layout/layout.phtml:97
+#: Application/view/application/user/forgot-password.phtml:41
+msgid "layout.password.forgotPasswordErrorMessage"
+msgstr "Something went wrong!"
 
 #: Application/view/application/user/register.phtml:3
 msgid "application.user.register.registerIsDisabled"
@@ -236,8 +376,9 @@ msgstr "Password is not correct!"
 msgid "application.user.register.heading"
 msgstr "Registration"
 
-#: Application/view/application/user/register.phtml:53
-#: Application/view/application/user/forgot-password.phtml:33
+#: Application/view/application/user/register.phtml:57
+#: Application/view/application/user/forgot-password.phtml:35
+#: Application/view/application/user/new-password.phtml:41
 msgid "Register.backLink"
 msgstr "Back"
 
@@ -361,15 +502,15 @@ msgstr ""
 msgid "IdLogin.Message.RESPONSE_RECEIVED"
 msgstr ""
 
-#: Application/view/application/user/forgot-password.phtml:11
+#: Application/view/application/user/forgot-password.phtml:13
 msgid "forgotPassword.heading"
 msgstr "Forgot password"
 
-#: Application/view/application/user/forgot-password.phtml:19
+#: Application/view/application/user/forgot-password.phtml:21
 msgid "layout.head.loginForm.error.email"
 msgstr "E-mail is not correct!"
 
-#: Application/view/application/user/forgot-password.phtml:20
+#: Application/view/application/user/forgot-password.phtml:22
 msgid "layout.head.loginForm.error.emailNotExists"
 msgstr "E-mail not found!"
 
@@ -422,6 +563,19 @@ msgstr "Wrong e-mail or password!"
 #: Application/view/application/user/partial/normal-login.phtml:22
 msgid "login.submitButton"
 msgstr "Log in"
+
+#: Application/view/application/company/index.phtml:9
+#, fuzzy
+msgid "Company.edit.heading"
+msgstr "Log in"
+
+#: Application/view/application/company/index.phtml:66
+msgid "Company.edit.cancelButton"
+msgstr ""
+
+#: Application/view/application/company/index.phtml:70
+msgid "Company.edit.saveButton"
+msgstr ""
 
 #: Application/view/error/404.phtml:1
 msgid "A 404 error occurred"
@@ -493,9 +647,6 @@ msgstr ""
 
 #~ msgid "layout.head.logOutButton"
 #~ msgstr "Log out"
-
-#~ msgid "login.heading"
-#~ msgstr "Log in"
 
 #~ msgid "login.NotRegistered.question"
 #~ msgstr "Not registered? "

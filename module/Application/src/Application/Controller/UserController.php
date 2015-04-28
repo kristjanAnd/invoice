@@ -161,6 +161,7 @@ class UserController extends \ZfcUser\Controller\UserController {
             if($form->isValid()){
                 $userService = $this->getServiceLocator()->get('Application\Service\User'); /* @var $userService \Application\Service\UserService */
                 $params = new Parameters($form->getData());
+                $params->register = true;
                 $user = $userService->register($params);
                 $userService->setRoleAfterRegister($user, $params);
                 $data = new Parameters();

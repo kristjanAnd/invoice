@@ -1,0 +1,129 @@
+<?php
+use Application\Controller\ArticleController;
+$form = $this->form;
+$categories = $this->categories;
+?>
+<?php echo $this->partial('layout/partial/navigation', array('navKey' => $this->navKey)); ?>
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header"><?php echo $this->translate('Article.category.list.heading')?></h1>
+        </div>
+        <!-- /.col-lg-12 -->
+        <div class="col-lg-6">
+            <?php echo $this->successMessages($this->messages); ?>
+            <?php echo $this->errorMessages($this->errorMessages); ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-bar-chart-o fa-fw"></i> <?php echo $this->translate('Article.category.list.TableHeading')?>
+                    <?php if ($this->isAllowed(ArticleController::AUTHORIZE_CLASS . 'add-category')):?>
+                        <div class="pull-right">
+                            <div class="btn-group">
+                                <a id="addRow" class="btn btn-default btn-xs" href="#" data-target="#addCategory" data-toggle="modal" ><i class="fa fa-plus fa-fws"></i>  <?php echo $this->translate('Article.category.list.addRow')?></a>
+                            </div>
+                        </div>
+                    <?php endif;?>
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <table class="table table-striped table-bordered table-hover" id="unitTable">
+                        <thead>
+                        <tr>
+                            <th><?php echo $this->translate('Article.category.list.tableTh.name')?></th>
+                            <th><?php echo $this->translate('Article.category.list.tableTh.code')?></th>
+                            <th width="25%"><?php echo $this->translate('Article.category.list.tableTh.description')?></th>
+                            <th><?php echo $this->translate('Article.category.list.tableTh.status')?></th>
+                            <th><?php echo $this->translate('Article.category.list.tableTh.actions')?></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach($categories as $category):?>
+                            <?php echo $this->partial('application/article/partial/category-row', array('category' => $category))?>
+                        <?php endforeach;?>
+                        </tbody>
+                        <tfoot>
+                        <td colspan="5">
+                            <div class="pull-right">
+                                <?php echo $this->paginationControl($categories, 'Sliding', 'application/paginator')?>
+                            </div>
+                        </td>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+        </div>
+        <!-- /.col-lg-8 -->
+    </div>
+    <!-- /.row -->
+</div>
+
+<div class="modal fade" id="addCategory" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog  modal-lg">
+        <div class="row">
+            <div class="col-sm-7">
+                <div class="modal-content">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-bar-chart-o fa-fw"></i> <?php echo $this->translate('Article.category.list.add.modalHeading')?>
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <form id="categoryForm" class="form-horizontal" method="post" action="<?php echo $this->url('add-category', [], true)?>" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('name'))?>
+                                    <div class="col-sm-9">
+                                        <?php echo $this->formText($form->get('name'))?>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('code'))?>
+                                    <div class="col-sm-9">
+                                        <?php echo $this->formText($form->get('code'))?>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('description'))?>
+                                    <div class="col-sm-9">
+                                        <?php echo $this->formTextArea($form->get('description'))?>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('status'))?>
+                                    <div class="col-sm-9">
+                                        <?php echo $this->formSelect($form->get('status'))?>
+                                    </div>
+                                </div>
+                                <div class="form-actions pull-right">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                <?php echo $this->translate('Article.category.list.add.modal.cancelButton')?>
+                                            </button>
+                                            <button class="btn btn-primary" id="submit"  type="submit">
+                                                <i class="fa fa-save"></i>
+                                                <?php echo $this->translate('Article.category.list.add.modal.saveButton')?>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- /#page-wrapper -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        Validator.initCategoryForm();
+        Category.init();
+    });
+</script>

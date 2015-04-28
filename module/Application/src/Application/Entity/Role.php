@@ -2,6 +2,7 @@
 
 namespace Application\Entity;
 
+use Application\Entity\Subject\Company;
 use BjyAuthorize\Acl\HierarchicalRoleInterface;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -12,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Role extends AbstractEntity implements HierarchicalRoleInterface
 {
     const ROLE_USER = 'user';
+    const ROLE_GUEST = 'guest';
     const ROLE_ADMIN = 'admin';
 
     /**
@@ -33,6 +35,14 @@ class Role extends AbstractEntity implements HierarchicalRoleInterface
      * @ORM\ManyToOne(targetEntity="Application\Entity\Role")
      */
     protected $parent;
+
+    /**
+     * @var \Application\Entity\Subject\Company $company
+     *
+     *      @ORM\ManyToOne(targetEntity="Application\Entity\Subject\Company", inversedBy="roles")
+     *      @ORM\JoinColumn(name="company_id", referencedColumnName="id", nullable=false)
+     */
+    protected $company;
 
     /**
      * Get the id.
@@ -99,4 +109,22 @@ class Role extends AbstractEntity implements HierarchicalRoleInterface
     {
         $this->parent = $parent;
     }
+
+    /**
+     * @return Subject\Company
+     */
+    public function getCompany()
+    {
+        return $this->company;
+    }
+
+    /**
+     * @param Subject\Company $company
+     */
+    public function setCompany(Company $company)
+    {
+        $this->company = $company;
+    }
+
+
 }

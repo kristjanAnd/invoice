@@ -1,0 +1,21 @@
+<?php
+$articleService = $this->service('Application\Service\Article');
+?>
+<tr id="row-<?php echo $this->brand->getId()?>">
+    <td>
+        <p class="value-<?php echo $this->brand->getId()?>" id="name-value-<?php echo $this->brand->getId()?>"><?php echo $this->brand->getName()?></p>
+        <input class="input-<?php echo $this->brand->getId()?> form-control name" style="display: none" type="text" id="name-input-<?php echo $this->brand->getId()?>" value="<?php echo $this->brand->getName()?>">
+    </td>
+    <td>
+        <p class="value-<?php echo $this->brand->getId()?>" id="status-value-<?php echo $this->brand->getId()?>"><?php echo $this->brand->getStatus()?></p>
+        <select class="input-<?php echo $this->brand->getId()?> form-control status" style="display: none" id="status-input-<?php echo $this->brand->getId()?>">
+            <?php foreach($articleService->getBrandStatusSelect() as $k => $v):?>
+                <option value="<?php echo $k?>" <?php if($k == $this->brand->getStatus()):?>selected<?php endif;?>><?php echo $k?></option>
+            <?php endforeach;?>
+        </select>
+    </td>
+    <td>
+        <button style="display: none" data-value="<?php echo $this->brand->getId()?>" class="btn btn-xs btn-success saveBrand" rel="tooltip"><i class="fa fa-save"></i> <?php echo $this->translate('Article.brand.row.action.saveButton')?></button>
+        <button data-value ="<?php echo $this->brand->getId()?>" class="btn btn-xs btn-default editBrand" rel="tooltip"><i class="fa fa-pencil"></i> <?php echo $this->translate('Article.brand.row.action.changeButton')?></button>
+    </td>
+</tr>

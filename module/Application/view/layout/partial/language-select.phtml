@@ -1,4 +1,5 @@
 <?php
+$languageService = $this->service('Application\Service\Language');
 $currentLanguageId = $this->language;
 $id= $this->id;
 $page = $this->page;
@@ -6,11 +7,7 @@ $hash = $this->hash;
 $code = $this->code;
 $provider = $this->provider;
 
-$select = array(
-    'et' => $this->translate('language.select.et'),
-    'us' => $this->translate('language.select.us'),
-    'ru' => $this->translate('language.select.ru'),
-);
+$select = $languageService->getLanguageSelect();
 
 ?>
 <li role="presentation" class="dropdown">

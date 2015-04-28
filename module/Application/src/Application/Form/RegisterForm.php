@@ -4,8 +4,10 @@ namespace Application\Form;
 
 
 use Application\Entity\User;
+use Application\Service\LanguageService;
 use Doctrine\Common\Persistence\ObjectManager;
 use Zend\Form\Element\Password;
+use Zend\Form\Element\Select;
 use Zend\Form\Element\Submit;
 use Zend\Form\Element\Text;
 use Zend\Form\Form;
@@ -34,12 +36,27 @@ class RegisterForm extends Form  implements ObjectManagerAwareInterface{
     protected $configOptions = array();
 
     /**
+     * @var LanguageService
+     */
+    protected $languageService;
+
+    /**
      * @param mixed $user
      */
     public function setUser(User $user)
     {
         $this->user = $user;
     }
+
+    /**
+     * @param LanguageService $languageService
+     */
+    public function setLanguageService(LanguageService $languageService)
+    {
+        $this->languageService = $languageService;
+    }
+
+
 
     public function __construct(array $configOptions = null){
         if(is_array($configOptions)){
@@ -135,6 +152,16 @@ class RegisterForm extends Form  implements ObjectManagerAwareInterface{
         $email->setLabelAttributes(array('class' => 'col-sm-3 control-label'));
         $this->add($email);
 
+        $language = new Select('language');
+        $language->setAttributes(array(
+            'id' => 'language',
+            'class' => 'form-control'
+        ));
+        $language->setValueOptions($this->languageService->getLanguageSelect());
+        $language->setLabel($this->translator->translate('register.language.label'));
+        $language->setLabelAttributes(array('class' => 'col-sm-3 control-label'));
+        $this->add($language);
+
         $password = new Password('password');
         $password->setAttribute('id', 'password');
         $password->setAttribute('placeholder', $this->translator->translate('register.password.placeholder'));
@@ -142,6 +169,7 @@ class RegisterForm extends Form  implements ObjectManagerAwareInterface{
         $password->setLabel($this->translator->translate('register.password.label'));
         $password->setLabelAttributes(array('class' => 'col-sm-3 control-label'));
         $this->add($password);
+
 
         $passwordRepeat = new Password('passwordRepeat');
         $passwordRepeat->setAttribute('id', 'passwordRepeat');
@@ -234,6 +262,9 @@ class RegisterForm extends Form  implements ObjectManagerAwareInterface{
                 ->attach($emailAddress, true)
                 ->attach($noObjectExists, true);
             $this->filter->add($email);
+
+            $language = new Input('language');
+            $this->filter->add($language);
 
             $password = new Input('password');
             $password->setRequired(true);

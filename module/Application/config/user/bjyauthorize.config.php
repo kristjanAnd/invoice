@@ -1,16 +1,43 @@
 <?php
 
+$controllerGuard = array(
+    ['controller' => 'ScnSocialAuth-HybridAuth', 'roles' => []],
+    ['controller' => 'ScnSocialAuth-User', 'roles' => []],
+    ['controller' => 'zfcuser', 'roles' => []],
+    ['controller' => 'Application\Controller\Cron', 'roles' => ['admin']],
+    ['controller' => 'Application\Controller\Index', 'action' => 'index', 'roles' => ['guest']],
+    ['controller' => 'Application\Controller\Index', 'action' => 'email-exists', 'roles' => ['guest']],
+    ['controller' => 'Application\Controller\Index', 'action' => 'isPasswordValid', 'roles' => ['guest']],
+    ['controller' => 'Application\Controller\Index', 'action' => 'forgotPassword', 'roles' => ['guest']],
+);
+
+$adminControllerGuard = include 'controllers/admin.config.php';
+$articleControllerGuard = include 'controllers/article.config.php';
+$companyControllerGuard = include 'controllers/company.config.php';
+$indexControllerGuard = include 'controllers/index.config.php';
+
+$controllerGuard = array_merge(
+    $controllerGuard,
+    $adminControllerGuard,
+    $articleControllerGuard,
+    $companyControllerGuard,
+    $indexControllerGuard
+);
+
 return array(
     // Using the authentication identity provider, which basically reads the roles from the auth service's identity
     'identity_provider' => 'BjyAuthorize\Provider\Identity\AuthenticationIdentityProvider',
 
     'role_providers'        => array(
-        'BjyAuthorize\Provider\Role\Config' => array(
-            'guest' => array(),
-            'user'  => array('children' => array(
-                'admin' => array(),
-            )),
-        ),
+//        'BjyAuthorize\Provider\Role\Config' => array(
+//            'guest' => array( 'children' => array(
+//                    'user'  => array('children' => array(
+//                        'admin' => array(),
+//                    )),
+//                )
+//            ),
+//
+//        ),
         // using an object repository (entity repository) to load all roles into our ACL
         'BjyAuthorize\Provider\Role\ObjectRepositoryProvider' => array(
             'object_manager'    => 'doctrine.entity_manager.orm_default',
@@ -18,11 +45,7 @@ return array(
         ),
     ),
     'guards' => array(
-        'BjyAuthorize\Guard\Controller' => array(
-            array('controller' => 'ScnSocialAuth-HybridAuth', 'roles' => array()),
-            array('controller' => 'ScnSocialAuth-User', 'roles' => array()),
-            array('controller' => 'zfcuser', 'roles' => array()),
-            array('controller' => 'Application\Controller\Index', 'roles' => array()),
-        )
+        'BjyAuthorize\Guard\Controller' => $controllerGuard
     ),
+    'unauthorized_strategy' => 'BjyAuthorize\View\RedirectionStrategy',
 );

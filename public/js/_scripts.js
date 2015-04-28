@@ -23,10 +23,18 @@ $(function() {
 
 });
 
+function log(input){
+    console.log(input);
+}
+
 var Common = {
     language: 'et',
     setLanguage: function(language){
         Common.language = language;
+    },
+    replaceCommas: function(element) {
+        var val = element.val().replace(",", ".");
+        element.val(val);
     }
 };
 
@@ -135,6 +143,9 @@ var Validator = {
                     required: true,
                     email: true
                 },
+                "language": {
+                    required: true
+                },
                 "personalCode": {
                     required: true,
                     digits: true,
@@ -154,6 +165,103 @@ var Validator = {
                 "passwordRepeat": {
                     required: true,
                     equalTo: '#password'
+                }
+            },
+            errorPlacement: function (error, element) {
+
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).parent().addClass('has-error');
+                $(element).parent().find('.help-block').show();
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).parent().removeClass('has-error');
+                $(element).parent().find('.help-block').hide();
+            }
+        });
+    },
+
+    initUnitForm: function () {
+        $('#unitForm').validate({
+            rules: {
+                "code": {
+                    required: true
+                },
+                "value": {
+                    required: true,
+                    number: true
+                },
+                "status": {
+                    required: true
+                }
+            },
+            errorPlacement: function (error, element) {
+
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).parent().addClass('has-error');
+                $(element).parent().find('.help-block').show();
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).parent().removeClass('has-error');
+                $(element).parent().find('.help-block').hide();
+            }
+        });
+    },
+
+    initCompanyForm: function () {
+        $('#companyForm').validate({
+            rules: {
+                "name": {
+                    required: true
+                }
+            },
+            errorPlacement: function (error, element) {
+
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).parent().addClass('has-error');
+                $(element).parent().find('.help-block').show();
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).parent().removeClass('has-error');
+                $(element).parent().find('.help-block').hide();
+            }
+        });
+    },
+
+    initCategoryForm: function () {
+        $('#categoryForm').validate({
+            rules: {
+                "name": {
+                    required: true
+                },
+                "status": {
+                    required: true
+                }
+            },
+            errorPlacement: function (error, element) {
+
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).parent().addClass('has-error');
+                $(element).parent().find('.help-block').show();
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).parent().removeClass('has-error');
+                $(element).parent().find('.help-block').hide();
+            }
+        });
+    },
+
+    initBrandForm: function () {
+        $('#brandForm').validate({
+            rules: {
+                "name": {
+                    required: true
+                },
+                "status": {
+                    required: true
                 }
             },
             errorPlacement: function (error, element) {
@@ -261,16 +369,39 @@ var Validator = {
         });
     },
 
+    initRoleForm: function () {
+        $('#roleForm').validate({
+            rules: {
+                "name": {
+                    required: true,
+                },
+            },
+            errorPlacement: function (error, element) {
+
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).parent().addClass('has-error');
+                $(element).parent().find('.help-block').show();
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).parent().removeClass('has-error');
+                $(element).parent().find('.help-block').hide();
+            }
+        });
+    },
+
 
 
     checkIfEmailExists: function (element, action) {
         if(action == 'register'){
+            $('#submit').prop('disabled', true);
             $.get('/application/index/email-exists', {email: element.val()}, function (data) {
                 if (data == 1) {
                     $(element).parent().addClass('has-error');
                     $(element).parent().find('.email-exists').addClass('help-block');
                     $(element).parent().find('.email-exists').show();
                 } else {
+                    $('#submit').prop('disabled', false);
                     $(element).parent().removeClass('has-error');
                     $(element).parent().find('.email-exists').removeClass('help-block');
                     $(element).parent().find('.email-exists').hide();
@@ -430,7 +561,6 @@ var IdLogin = {
         })
     },
 
-    // @todo change min to 7
     initValidator: function () {
         $('form#mobile-id-login').validate({
             rules: {
@@ -442,7 +572,7 @@ var IdLogin = {
                     digits: true,
                     required: true,
                     minlength: 5,
-                    maxlength: 8
+                    maxlength: 7
                 }
             },
             errorPlacement: function (error, element) {
@@ -595,5 +725,234 @@ var Mail = {
     isValidEmail: function(email){
         var pattern = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
         return pattern.test(email);
+    }
+};
+
+var Unit = {
+    init: function(){
+        $(document).on('click', '.editUnit', function () {
+            Unit.editUnit($(this));
+        });
+
+        $(document).on('click', '.saveUnit', function () {
+            Unit.saveUnit($(this));
+        });
+
+        $(document).on('keyup', '.code, .value, .status', function () {
+            Unit.preValidate($(this));
+        });
+    },
+
+    editUnit: function(element){
+        var id = element.data('value');
+        element.hide();
+        element.parent().find('.saveUnit').show();
+        $('.value-' + id).hide();
+        $('.input-' + id).show();
+    },
+
+    saveUnit: function(element){
+        var id = element.data('value');
+        if(Unit.validateEdit(id)){
+            var code = $('#code-input-'+id).val();
+            var value = $('#value-input-'+id).val();
+            var status = $('#status-input-'+id).val();
+
+            $('#status-value-'+id).html(status);
+            $('#value-value-'+id).html(value);
+            $('#code-value-'+id).html(code);
+
+            element.hide();
+            element.parent().find('.editUnit').show();
+            $('.value-' + id).show();
+            $('.input-' + id).hide();
+
+            $.get('/application/article/edit-unit', {id: id, code: code, value: value, status: status}, function (data) {
+
+            });
+        }
+    },
+
+    preValidate: function(element) {
+        $(element).parent().removeClass('has-error');
+        if(!element.val().length > 0){
+            $(element).parent().addClass('has-error');
+            return false;
+        }
+        if(element.hasClass('value')){
+            Common.replaceCommas(element);
+            if(!$.isNumeric(element.val())){
+                $(element).parent().addClass('has-error');
+                return false;
+            }
+        }
+        return true;
+    },
+
+    validateEdit: function(id){
+        var breakOut;
+        var elements = [
+            $('#code-input-'+id),
+            $('#value-input-'+id),
+            $('#status-input-'+id),
+        ];
+        $.each(elements, function(){
+            if(!Unit.preValidate($(this))){
+                breakOut = true;
+                return false;
+            }
+        });
+        if(breakOut) {
+            breakOut = false;
+            return false;
+        }
+        return true;
+    }
+};
+
+var Category = {
+    init: function(){
+        $(document).on('click', '.editCategory', function () {
+            Category.editCategory($(this));
+        });
+
+        $(document).on('click', '.saveCategory', function () {
+            Category.saveCategory($(this));
+        });
+
+        $(document).on('keyup', '.name', function () {
+            Category.preValidate($(this));
+        });
+    },
+
+    editCategory: function(element){
+        var id = element.data('value');
+        element.hide();
+        element.parent().find('.saveCategory').show();
+        $('.value-' + id).hide();
+        $('.input-' + id).show();
+    },
+
+    saveCategory: function(element){
+        var id = element.data('value');
+        if(Category.validateEdit(id)){
+            var name = $('#name-input-'+id).val();
+            var code = $('#code-input-'+id).val();
+            var description = $('#description-input-'+id).val();
+            var status = $('#status-input-'+id).val();
+
+            $('#status-value-'+id).html(status);
+            $('#description-value-'+id).html(description);
+            $('#code-value-'+id).html(code);
+            $('#name-value-'+id).html(name);
+
+            element.hide();
+            element.parent().find('.editCategory').show();
+            $('.value-' + id).show();
+            $('.input-' + id).hide();
+
+            $.get('/application/article/editCategory', {id: id, name: name, code: code, description: description, status: status}, function (data) {
+
+            });
+        }
+    },
+
+    preValidate: function(element) {
+        $(element).parent().removeClass('has-error');
+        if(!element.val().length > 0){
+            $(element).parent().addClass('has-error');
+            return false;
+        }
+        return true;
+    },
+
+    validateEdit: function(id){
+        var breakOut;
+        var elements = [
+            $('#name-input-'+id),
+            $('#status-input-'+id),
+        ];
+        $.each(elements, function(){
+            if(!Category.preValidate($(this))){
+                breakOut = true;
+                return false;
+            }
+        });
+        if(breakOut) {
+            breakOut = false;
+            return false;
+        }
+        return true;
+    }
+};
+
+var Brand = {
+    init: function(){
+        $(document).on('click', '.editBrand', function () {
+            Brand.editBrand($(this));
+        });
+
+        $(document).on('click', '.saveBrand', function () {
+            Brand.saveBrand($(this));
+        });
+
+        $(document).on('keyup', '.name', function () {
+            Brand.preValidate($(this));
+        });
+    },
+
+    editBrand: function(element){
+        var id = element.data('value');
+        element.hide();
+        element.parent().find('.saveBrand').show();
+        $('.value-' + id).hide();
+        $('.input-' + id).show();
+    },
+
+    saveBrand: function(element){
+        var id = element.data('value');
+        if(Brand.validateEdit(id)){
+            var name = $('#name-input-'+id).val();
+            var status = $('#status-input-'+id).val();
+            $('#name-value-'+id).html(name);
+            $('#status-value-'+id).html(status);
+
+            element.hide();
+            element.parent().find('.editBrand').show();
+            $('.value-' + id).show();
+            $('.input-' + id).hide();
+
+            $.get('/application/article/edit-brand', {id: id, name: name, status: status}, function (data) {
+
+            });
+        }
+    },
+
+    preValidate: function(element) {
+        $(element).parent().removeClass('has-error');
+        if(!element.val().length > 0){
+            $(element).parent().addClass('has-error');
+            return false;
+        }
+        return true;
+    },
+
+    validateEdit: function(id){
+        var breakOut;
+        var elements = [
+            $('#name-input-'+id),
+            $('#status-input-'+id),
+        ];
+        $.each(elements, function(){
+            if(!Category.preValidate($(this))){
+                breakOut = true;
+                return false;
+            }
+        });
+        if(breakOut) {
+            breakOut = false;
+            return false;
+        }
+        return true;
     }
 };

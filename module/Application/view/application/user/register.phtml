@@ -34,15 +34,22 @@ $form->setAttribute('id', 'registerForm');
                                 <div class="form-group">
                                     <?php echo $this->formLabel($element) ?>
                                     <div class="col-sm-9">
-                                        <?php echo $this->formInput($element) ?>
+                                        <?php if($element instanceof \Zend\Form\Element\Select):?>
+                                            <?php echo $this->formSelect($element) ?>
+                                        <?php else:?>
+                                            <?php echo $this->formInput($element) ?>
+                                        <?php endif;?>
                                         <span style="display: none" class="help-block"><i class="fa fa-warning"></i> <?php echo $helpBlockMessages[$element->getName()]?></span>
+                                        <?php if($element->getName() == 'email'):?>
+                                            <span style="display: none" class="email-exists"><i class="fa fa-warning"></i> <?php echo $this->translate('Register.emailExists')?></span>
+                                        <?php endif;?>
                                     </div>
                                 </div>
                             <?php endif ?>
                         <?php endforeach ?>
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-9">
-                                <?php echo $this->formSubmit($form->get('submit')) ?>
+                                <?php echo $this->formSubmit($form->get('submit')->setAttribute('id', 'submit')) ?>
                             </div>
                         </div>
                     <?php echo $this->form()->closeTag() ?>

@@ -1,214 +1,40 @@
 <?php
-/**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
-
-use Application\Controller\IndexController;
-use Application\Controller\UserController;
-use Application\Form\ForgotPassword;
-use Application\Form\NewPassword;
-use Application\Form\RegisterForm;
-use Application\Service\AuthenticationService;
-use Application\Service\MailService;
-use Application\Service\UserService;
+use Application\Common\GeoZone;
+use Application\Controller\Plugin\CurrentData;
 use Application\View\Helper\CurrentRoute;
-use DoctrineModule\Persistence\ObjectManagerAwareInterface;
-use Zend\I18n\Translator\TranslatorAwareInterface;
-use Zend\Mvc\Controller\ControllerManager;
-use Zend\ServiceManager\ServiceManager;
+use Application\View\Helper\CurrentUser;
+use Application\View\Helper\ErrorMessages;
+use Application\View\Helper\FormErrors;
+use Application\View\Helper\SuccessMessages;
+use Zend\Mvc\Controller\PluginManager;
 use Zend\View\HelperPluginManager;
 
+function getDefaultLanguageByLocation(){
+    $languageCode = GeoZone::LANGUAGE_CODE_US;
+    $locationArray = GeoZone::getGeoLocationInfoArray();
+    if(isset($locationArray['geoplugin_countryCode'])){
+        if($locationArray['geoplugin_countryCode'] == GeoZone::COUNTRY_CODE_ESTONIA){
+            $languageCode = GeoZone::LANGUAGE_CODE_ET;
+        }
+        if($locationArray['geoplugin_countryCode'] == GeoZone::COUNTRY_CODE_RUSSIA){
+            $languageCode = GeoZone::LANGUAGE_CODE_RU;
+        }
+    }
+
+    return $languageCode;
+}
+
 return array(
-    'router' => array(
-        'routes' => array(
-            'home' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route' => '/[:language]',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Index',
-                        'action'     => 'index',
-                        'language' => 'us'
-                    ),
-                ),
-            ),
-            'zfcuser' => array(
-                'type' => 'Segment',
-                'priority' => 1000,
-                'options' => array(
-                    'route' => '[/:language]/user',
-                    'defaults' => array(
-                        'controller' => 'zfcuser',
-                        'action'     => 'index',
-                        'language' => 'us'
-                    ),
-                ),
-                'child_routes' => array(
-                    'forgot-password' => array (
-                        'type' => 'Segment',
-                        'options' => array (
-                            'route' => '/forgot-password',
-                            'defaults' => array (
-                                'controller' => 'zfcuser',
-                                'action' => 'forgotPassword',
-                            )
-                        )
-                    ),
-                    'new-password' => array (
-                        'type' => 'Segment',
-                        'options' => array (
-                            'route' => '/new-password/:hash',
-                            'defaults' => array (
-                                'controller' => 'zfcuser',
-                                'action' => 'newPassword',
-                            )
-                        )
-                    ),
-                    'mobile-id-authenticate' => array (
-                        'type' => 'Literal',
-                        'options' => array (
-                            'route' => '/mobile-id-authenticate',
-                            'defaults' => array (
-                                'controller' => 'zfcuser',
-                                'action' => 'mobile-id-authenticate',
-                            )
-                        )
-                    ),
-                    'mobile-id-authenticate-status' => array (
-                        'type' => 'Literal',
-                        'options' => array (
-                            'route' => '/mobile-id-authenticate-status',
-                            'defaults' => array (
-                                'controller' => 'zfcuser',
-                                'action' => 'mobile-id-authenticate-status',
-                            )
-                        )
-                    ),
-                    'id-card-login' => array (
-                        'type' => 'Literal',
-                        'options' => array (
-                            'route' => '/id-card-login',
-                            'defaults' => array (
-                                'controller' => 'zfcuser',
-                                'action' => 'id-card-login',
-                            )
-                        )
-                    ),
-                ),
-            ),
-
-            // The following is a route to simplify getting started creating
-            // new controllers and actions without needing to create a new
-            // module. Simply drop new controllers in, and you can access them
-            // using the path /application/:controller/:action
-            'application' => array (
-                'type' => 'Segment',
-                'options' => array (
-                    'route' => '[/:language]/application[/:controller[/:action]]',
-                    'constraints' => array (
-                        'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'language' => 'us'
-                    ),
-                    'defaults' => array (
-                        '__NAMESPACE__' => 'Application\Controller',
-                        'controller' => 'Index',
-                        'action' => 'index'
-                    )
-                ),
-                'may_terminate' => true,
-                'child_routes' => array (
-                    'default' => array (
-                        'type' => 'wildcard'
-                    )
-                )
-            ),
-        ),
+    'console' => include 'console.config.php',
+    'router'  => include 'module/route.config.php',
+    'navigation' => array(
+        'default' => include 'navigation.config.php'
     ),
-    'service_manager' => array(
-        'abstract_factories' => array(
-            'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
-            'Zend\Log\LoggerAbstractServiceFactory',
-        ),
-        'aliases' => array(
-            'translator' => 'MvcTranslator',
-        ),
-        'factories' => array(
-            'ScnSocialAuth\Authentication\Adapter\HybridAuth' => 'Application\Service\HybridAuthAdapterFactory',
-            'Zend\Session\SessionManager' => function (ServiceManager $sm) {
-                $sessionManager = new \Zend\Session\SessionManager();
-                $configuration = $sm->get('Config');
-                if (isset($configuration['sessionConfiguration'])) {
-                    $sessionConfig = new \Zend\Session\Config\SessionConfig();
-                    if (isset($configuration['sessionConfiguration']['rememberMeSeconds'])) {
-                        $sessionConfig->setRememberMeSeconds($configuration['sessionConfiguration']['rememberMeSeconds']);
-                    }
-                    if (isset($configuration['sessionConfiguration']['savePath'])) {
-                        $target = $configuration['sessionConfiguration']['savePath'];
-                        if ($target === true) {
-                            $target = realpath(dirname($_SERVER['SCRIPT_FILENAME'])) . '/../data/session';
-                        }
-                        if (!file_exists($target)) {
-                            mkdir($target);
-                        }
-                        $sessionConfig->setSavePath($target);
-
-                    }
-                    if (isset($configuration['sessionConfiguration']['options'])) {
-                        $sessionConfig->setOptions($configuration['sessionConfiguration']['options']);
-                    }
-                    $sessionManager->setConfig($sessionConfig);
-                }
-
-                return $sessionManager;
-            },
-            'Application\Form\ForgotPassword' => function (ServiceManager $sm) {
-                $form = new ForgotPassword();
-                $form->setTranslator($sm->get('Translator'));
-                return $form;
-            },
-            'Application\Form\NewPassword' => function (ServiceManager $sm) {
-                $form = new NewPassword();
-                $form->setTranslator($sm->get('Translator'));
-                return $form;
-            },
-            'Application\Form\Register' => function (ServiceManager $sm) {
-                $configOptions = $sm->get('Config')['registerOptions'];
-                $form = new RegisterForm($configOptions);
-                $form->setTranslator($sm->get('Translator'));
-                return $form;
-            },
-            'Application\Service\Authentication' => function (ServiceManager $sm) {
-                $service = new AuthenticationService();
-                return $service;
-            },
-            'Application\Service\Mail' => function (ServiceManager $sm) {
-                $service = new MailService();
-                return $service;
-            },
-            'Application\Service\User' => function (ServiceManager $sm) {
-                $service = new UserService();
-                return $service;
-            },
-        ),
-        'initializers' => array (
-            function ($service, $sm) {
-                if ($service instanceof TranslatorAwareInterface) {
-                    $service->setTranslator($sm->get('MvcTranslator'));
-                }
-                if ($service instanceof ObjectManagerAwareInterface) {
-                    $service->setObjectManager($sm->get('doctrine.entitymanager.orm_default'));
-                }
-            }
-        ),
-    ),
+    'service_manager' => include 'module/service.config.php',
     'view_helpers' => array (
         'invokables' => array (
-            'SocialLogin' => 'Application\View\Helper\SocialLogin'
+            'SocialLogin' => 'Application\View\Helper\SocialLogin',
+            'service' => 'Application\View\Helper\Service',
         ),
         'factories' => array (
             'currentRoute' => function (HelperPluginManager $pm) {
@@ -217,7 +43,26 @@ return array(
                 $helper->setRouteMatch($application->getMvcEvent()->getRouteMatch());
 
                 return $helper;
-            }
+            },
+            'currentUser' => function (HelperPluginManager $pm) {
+                $helper = new CurrentUser();
+                $helper->setUserService($pm->getServiceLocator()->get('Application\Service\User'));
+
+                return $helper;
+            },
+            'successMessages' => function () {
+                $helper = new SuccessMessages();
+                return $helper;
+            },
+            'errorMessages' => function () {
+                $helper = new ErrorMessages();
+                return $helper;
+            },
+            'formErrors' => function (HelperPluginManager $pm) {
+                $helper = new FormErrors();
+                $helper->setTranslator($pm->getServiceLocator()->get('Translator'));
+                return $helper;
+            },
         )
     ),
     'translator' => array(
@@ -244,27 +89,16 @@ return array(
             ),
         ),
     ),
-    'controllers' => array(
+    'controllers' => include 'module/controller.config.php',
+    'controller_plugins' => array(
         'invokables' => array(
 
         ),
         'factories' => [
-            'zfcuser' => function(ControllerManager $cm) {
-                /* @var ControllerManager $cm*/
-                $serviceManager = $cm->getServiceLocator();
-                /* @var RedirectCallback $redirectCallback */
-                $redirectCallback = $serviceManager->get('zfcuser_redirect_callback');
-                /* @var UserController $controller */
-                $controller = new UserController($redirectCallback);
-
-                return $controller;
-            },
-            'Application\Controller\Index'  => function(ControllerManager $cm) {
-                /* @var ControllerManager $cm*/
-                $serviceManager = $cm->getServiceLocator();
-                $controller = new IndexController();
-                $controller->setUserService($serviceManager->get('Application\Service\User'));
-                return $controller;
+            'currentData' => function(PluginManager $pm) {
+                $plugin = new CurrentData();
+                $plugin->setUserService($pm->getServiceLocator()->get('Application\Service\User'));
+                return $plugin;
             },
         ],
     ),
@@ -288,12 +122,6 @@ return array(
         )
     ),
     // Placeholder for console routes
-    'console' => array(
-        'router' => array(
-            'routes' => array(
-            ),
-        ),
-    ),
     'zfcuser' => include 'user/zfcuser.config.php',
     'bjyauthorize' => include 'user/bjyauthorize.config.php',
 );

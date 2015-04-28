@@ -2,11 +2,12 @@
 
 namespace Application\Entity;
 
-use Application\Entity\User\Favorite;
-use Application\Entity\User\Followed;
+use Application\Entity\Article\Brand;
+use Application\Entity\Article\Category;
+use Application\Entity\Article\Item;
+use Application\Entity\Article\Service;
+use Application\Entity\Subject\Company;
 use Application\Entity\User\Hash;
-use Application\Entity\User\Message;
-use Application\Entity\Video\Comment;
 use BjyAuthorize\Provider\Role\ProviderInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -62,6 +63,12 @@ class User extends AbstractEntity implements UserInterface, ProviderInterface
     protected $password;
 
     /**
+     * @var string
+     * @ORM\Column(name="language_code", type="string")
+     */
+    protected $languageCode;
+
+    /**
      * @ORM\OneToOne(targetEntity="Application\Entity\User\Hash", mappedBy="user")
      */
     protected $hash;
@@ -111,12 +118,70 @@ class User extends AbstractEntity implements UserInterface, ProviderInterface
     protected $status;
 
     /**
+     * @var \Application\Entity\Subject\Company $company
+     *
+     *      @ORM\ManyToOne(targetEntity="Application\Entity\Subject\Company", inversedBy="users")
+     *      @ORM\JoinColumn(name="company_id", referencedColumnName="id", nullable=false)
+     */
+    protected $company;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Application\Entity\Article\Service", mappedBy="user", cascade={"all"}, fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     * @ORM\OrderBy({"id" = "DESC"})
+     */
+    protected $services;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Application\Entity\Article\Item", mappedBy="user", cascade={"all"}, fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     * @ORM\OrderBy({"id" = "DESC"})
+     */
+    protected $items;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Application\Entity\Article\Brand", mappedBy="user", cascade={"all"}, fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     * @ORM\OrderBy({"id" = "DESC"})
+     */
+    protected $articleBrands;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Application\Entity\Article\Category", mappedBy="user", cascade={"all"}, fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     * @ORM\OrderBy({"id" = "DESC"})
+     */
+    protected $articleCategories;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Application\Entity\Unit", mappedBy="user", cascade={"all"}, fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     * @ORM\OrderBy({"id" = "DESC"})
+     */
+    protected $units;
+
+    /**
      * Initialies the roles variable.
      */
     public function __construct()
     {
         $this->roles = new ArrayCollection();
+        $this->services = new ArrayCollection();
+        $this->items = new ArrayCollection();
         $this->dateCreated = new \DateTime();
+        $this->articleBrands = new ArrayCollection();
+        $this->articleCategories = new ArrayCollection();
+        $this->units = new ArrayCollection();
     }
 
     /**
@@ -373,6 +438,120 @@ class User extends AbstractEntity implements UserInterface, ProviderInterface
         return $this->firstName . ' ' . $this->lastName;
     }
 
+    /**
+     * @return \Application\Entity\Subject\Company
+     */
+    public function getCompany()
+    {
+        return $this->company;
+    }
 
+    /**
+     * @param \Application\Entity\Subject\Company $company
+     */
+    public function setCompany(Company $company)
+    {
+        $this->company = $company;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLanguageCode()
+    {
+        return $this->languageCode;
+    }
+
+    /**
+     * @param string $languageCode
+     */
+    public function setLanguageCode($languageCode)
+    {
+        $this->languageCode = $languageCode;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getArticleBrands()
+    {
+        return $this->articleBrands;
+    }
+
+    /**
+     * @param Brand $brands
+     */
+    public function addArticleBrand(Brand $brand)
+    {
+        $this->articleBrands[] = $brand;
+        $brand->setUser($this);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getItems()
+    {
+        return $this->items;
+    }
+
+    /**
+     * @param Item $items
+     */
+    public function addItem(Item $item)
+    {
+        $this->items[] = $item;
+        $item->setUser($this);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getServices()
+    {
+        return $this->services;
+    }
+
+    /**
+     * @param Service $service
+     */
+    public function addService(Service $service)
+    {
+        $this->services[] = $service;
+        $service->setUser($this);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getUnits()
+    {
+        return $this->units;
+    }
+
+    /**
+     * @param Unit $units
+     */
+    public function addUnit(Unit $unit)
+    {
+        $this->units[] = $unit;
+        $unit->setUser($this);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getArticleCategories()
+    {
+        return $this->articleCategories;
+    }
+
+    /**
+     * @param Category $articleCategories
+     */
+    public function addArticleCategory(Category $articleCategory)
+    {
+        $this->articleCategories[] = $articleCategory;
+    }
 
 }
