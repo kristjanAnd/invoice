@@ -43,7 +43,9 @@ $roles = $this->roles;
                                         <?php echo str_replace($this->company->getId() . '-', '', $role->getRoleId())?>
                                     </td>
                                     <td>
-                                        <a href="<?php echo $this->url('edit-role', ['id' => $role->getId()], true)?>" class="btn btn-xs btn-success" rel="tooltip"><i class="fa fa-save"></i> <?php echo $this->translate('Admin.role.row.action.editButton')?></a>
+                                        <?php if ($this->isAllowed(AdminController::AUTHORIZE_CLASS . 'edit-role')):?>
+                                            <a href="<?php echo $this->url('edit-role', ['id' => $role->getId()], true)?>" class="btn btn-xs btn-success" rel="tooltip"><i class="fa fa-save"></i> <?php echo $this->translate('Admin.role.row.action.editButton')?></a>
+                                        <?php endif;?>
                                     </td>
                                 </tr>
                             <?php endforeach;?>

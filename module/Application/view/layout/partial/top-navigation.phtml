@@ -1,3 +1,6 @@
+<?php
+use Application\Controller\UserController;
+?>
 <ul class="nav navbar-top-links navbar-right">
 <li class="dropdown">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -197,16 +200,18 @@
         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
     </a>
     <ul class="dropdown-menu dropdown-user">
-        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-        </li>
-        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+        <?php if($this->isAllowed(UserController::AUTHORIZE_CLASS . 'profile')):?>
+            <li>
+                <a href="<?php echo $this->url('profile', [], true)?>"><i class="fa fa-user fa-fw"></i> <?php echo $this->translate('layout.top-navigation.user-profile')?></a>
+            </li>
+        <?php endif;?>
+        <li><a href="#"><i class="fa fa-gear fa-fw"></i> <?php echo $this->translate('layout.top-navigation.settings')?></a>
         </li>
         <li class="divider"></li>
-        <li><a href="<?php echo $this->url('zfcuser/logout', [], true)?>"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+        <li><a href="<?php echo $this->url('zfcuser/logout', [], true)?>"><i class="fa fa-sign-out fa-fw"></i> <?php echo $this->translate('layout.top-navigation.logout')?></a>
         </li>
     </ul>
     <!-- /.dropdown-user -->
 </li>
 <!-- /.dropdown -->
 </ul>
-<!-- /.navbar-top-links -->

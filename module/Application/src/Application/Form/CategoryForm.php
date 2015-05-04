@@ -81,7 +81,7 @@ class CategoryForm extends Form {
             'id' => 'unit',
             'class' => 'form-control'
         ));
-        $status->setValueOptions($this->articleService->getCategoryStatusSelect());
+        $status->setValueOptions($this->articleService->getArticleCategoryStatusSelect());
         $status->setLabel($this->translator->translate('Category.form.status.label'));
         $status->setLabelAttributes(array('class' => 'col-sm-3 control-label'));
         $this->add($status);

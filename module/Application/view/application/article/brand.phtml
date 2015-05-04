@@ -2,12 +2,51 @@
 use Application\Controller\ArticleController;
 $form = $this->form;
 $brands = $this->brands;
+$categories = $this->categories;
+$filterForm = $this->filterForm;
 ?>
 <?php echo $this->partial('layout/partial/navigation', array('navKey' => $this->navKey)); ?>
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header"><?php echo $this->translate('Article.brand.list.heading')?></h1>
+            <div class="col-lg-6">
+                <h1 class="page-header"><?php echo $this->translate('Article.brand.list.heading')?></h1>
+            </div>
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <?php echo $this->translate('FilterForm.Heading')?>
+                        <div class="pull-right">
+                            <div class="btn-group">
+                                <a id="openFilter" style="display: none" class="btn btn-default btn-xs" href="javascript:void(0)" ><i class="fa fa-plus fa-fws"></i> </a>
+                                <a id="closeFilter" class="btn btn-default btn-xs" href="javascript:void(0)" ><i class="fa fa-minus fa-fws"></i> </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="filterBody" class="panel-body">
+                        <form id="filterForm" class="form-horizontal" method="get" action="">
+                            <div class="col-lg-4">
+                                <?php echo $this->formCheckbox($filterForm->get('active'))?> <?php echo $this->translate('Article.brand.filterForm.status.active.label')?>
+                            </div>
+                            <div class="col-lg-4">
+                                <?php echo $this->formCheckbox($filterForm->get('disabled'))?> <?php echo $this->translate('Article.brand.filterForm.status.disabled.label')?>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-actions pull-right">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <button class="btn btn-primary btn-xs" id="submit"  type="submit">
+                                                <i class="fa fa-filter"></i>
+                                                <?php echo $this->translate('FilterForm.saveButton')?>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- /.col-lg-12 -->
         <div class="col-lg-6">
@@ -40,7 +79,7 @@ $brands = $this->brands;
                         </thead>
                         <tbody>
                         <?php foreach($brands as $brand):?>
-                            <?php echo $this->partial('application/article/partial/brand-row', array('brand' => $brand))?>
+                            <?php echo $this->partial('application/article/partial/brand-row', array('brand' => $brand, 'statuses' => $this->statuses))?>
                         <?php endforeach;?>
                         </tbody>
                         <tfoot>

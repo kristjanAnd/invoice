@@ -8,7 +8,10 @@
 
 namespace Application\Entity;
 
+use Application\Entity\Article\Brand;
+use Application\Entity\Article\Category;
 use Doctrine\ORM\Mapping as ORM;
+use Zend\Stdlib\Parameters;
 
 /**
  * Article
@@ -21,6 +24,9 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\DiscriminatorMap({"item" = "Application\Entity\Article\Item", "service" = "Application\Entity\Article\Service"})
  */
 abstract class Article extends AbstractEntity {
+
+    const STATUS_ACTIVE = 'active';
+    const STATUS_DISABLED = 'disabled';
 
     /**
      * @var integer
@@ -46,10 +52,24 @@ abstract class Article extends AbstractEntity {
     protected $code;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string")
+     */
+    protected $description;
+
+    /**
      * @var Unit
      * @ORM\OneToOne(targetEntity="Application\Entity\Unit")
      */
     protected $unit;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="status", type="string")
+     */
+    protected $status;
 
     /**
      * @var float
@@ -64,6 +84,39 @@ abstract class Article extends AbstractEntity {
      * @ORM\Column(name="qty", type="decimal", nullable=true)
      */
     protected $quantity;
+
+    /**
+     * @var \Application\Entity\Article\Brand $brand
+     *
+     *      @ORM\ManyToOne(targetEntity="Application\Entity\Article\Brand", inversedBy="articles")
+     *      @ORM\JoinColumn(name="brand_id", referencedColumnName="id", nullable=false)
+     */
+    protected $brand;
+
+    /**
+     * @var \Application\Entity\Article\Category $category
+     *
+     *      @ORM\ManyToOne(targetEntity="Application\Entity\Article\Category", inversedBy="articles")
+     *      @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)
+     */
+    protected $category;
+
+    /**
+     * @var \Application\Entity\Subject\Company $company
+     *
+     *      @ORM\ManyToOne(targetEntity="Application\Entity\Subject\Company", inversedBy="items")
+     *      @ORM\JoinColumn(name="company_id", referencedColumnName="id", nullable=false)
+     */
+    protected $company;
+
+    /**
+     * @var \Application\Entity\User $user
+     *
+     *      @ORM\ManyToOne(targetEntity="Application\Entity\User", inversedBy="items")
+     *      @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     */
+    protected $user;
+
 
     /**
      * @return string
@@ -151,6 +204,70 @@ abstract class Article extends AbstractEntity {
     public function setUnit(Unit $unit)
     {
         $this->unit = $unit;
+    }
+
+    /**
+     * @return Article\Brand
+     */
+    public function getBrand()
+    {
+        return $this->brand;
+    }
+
+    /**
+     * @param Article\Brand $brand
+     */
+    public function setBrand(Brand $brand)
+    {
+        $this->brand = $brand;
+    }
+
+    /**
+     * @return Article\Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param Article\Category $category
+     */
+    public function setCategory(Category $category)
+    {
+        $this->category = $category;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param string $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
     }
 
 

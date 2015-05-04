@@ -13,14 +13,15 @@ use Application\Entity\Article;
 use Application\Entity\Subject\Company;
 use Application\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
+use Zend\Stdlib\Parameters;
 
 /**
  * Service
  *
  * @ORM\Table(name="service")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Application\Repository\ServiceRepository")
  */
-class Service extends Article{
+class Service extends Article {
     /**
      * @var \Application\Entity\Subject\Company $company
      *
@@ -36,6 +37,15 @@ class Service extends Article{
      *      @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      */
     protected $user;
+
+    public function __construct(Parameters $data = null){
+        if(isset($data->user)){
+            $this->user = $data->user;
+        }
+        if(isset($data->company)){
+            $this->company = $data->company;
+        }
+    }
 
     /**
      * @return \Application\Entity\Subject\Company

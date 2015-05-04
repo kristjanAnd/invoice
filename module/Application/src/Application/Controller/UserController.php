@@ -12,6 +12,8 @@ namespace Application\Controller;
 
 use Application\Common\SocialStorage;
 use ScnSocialAuthDoctrineORM\Options\ModuleOptions;
+use Zend\Paginator\Adapter\ArrayAdapter;
+use Zend\Paginator\Paginator;
 use Zend\Session\Container;
 use Zend\Stdlib\Parameters;
 use Zend\View\Model\JsonModel;
@@ -25,6 +27,7 @@ class UserController extends \ZfcUser\Controller\UserController {
     protected $socialOptions;
 
     const MOBILE_ID_SESSION_COOKIE = 'mobileIdAuthSession';
+    const AUTHORIZE_CLASS = 'controller/Application\Controller\User:';
 
     public function indexAction()
     {
@@ -372,6 +375,63 @@ class UserController extends \ZfcUser\Controller\UserController {
     public function getSocialOptions()
     {
         return $this->getServiceLocator()->get('ScnSocialAuth-ModuleOptions');
+    }
+
+    public function profileAction(){
+        $userService = $this->getServiceLocator()->get('Application\Service\User'); /* @var $userService \Application\Service\UserService */
+        $adminService = $this->getServiceLocator()->get('Application\Service\Admin'); /* @var $adminService \Application\Service\AdminService */
+
+        $userData = $this->getUserData();
+        $user = $userData->user;
+        $view = new ViewModel();
+        $form = $this->getServiceLocator()->get('Application\Form\Register'); /* @var $form \Application\Form\RegisterForm */
+        $form->setUser($user);
+        $form->setConfigOptions($adminService->getCompanyUserFormConfiguration());
+        $form->setCompany($userData->company);
+        $form->init();
+        $form->populateWithValues();
+        $translator = $this->getTranslator();
+        if($this->request->isPost()){
+            $params = $this->request->getPost();
+            if(isset($params->isP) && $params->isP == 0){
+                $form->removePasswordValidation();
+            }
+            $form->setData($params);{
+                if($form->isValid()){
+                    $userService->saveUser($user, $params);
+                    $this->flashMessenger()->addMessage($translator->translate('User.profile.edit.successMessage'));
+                    return $this->redirect()->toRoute('profile', [], true);
+                }
+            }
+        }
+        $view->messages = $this->flashMessenger()->getMessages();
+        $view->form = $form;
+        $view->user = $user;
+        $view->messages = $this->flashMessenger()->getMessages();
+        $view->errorMessages = $this->flashMessenger()->getErrorMessages();
+        return $view;
+    }
+
+    private function getUserData(){
+        $data = new Parameters();
+        $user = $this->currentdata()->getCurrentUser();
+        $company = $user->getCompany();
+        $data->company = $company;
+        $data->user = $user;
+        return $data;
+    }
+
+    private function getPaginatedResult(array $collection, $currentPageNumber, $pageRange = 10, $cntPerPage = 10){
+        $paginated = new Paginator(new ArrayAdapter($collection));
+        $paginated->setCurrentPageNumber($currentPageNumber);
+        $paginated->setPageRange($pageRange);
+        $paginated->setItemCountPerPage($cntPerPage);
+
+        return $paginated;
+    }
+
+    private function getTranslator(){
+        return $this->serviceLocator->get('MvcTranslator');
     }
 
 

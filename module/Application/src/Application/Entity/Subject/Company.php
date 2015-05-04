@@ -13,10 +13,12 @@ use Application\Entity\Article\Brand;
 use Application\Entity\Article\Category;
 use Application\Entity\Article\Item;
 use Application\Entity\Article\Service;
+use Application\Entity\Document\Invoice;
 use Application\Entity\Role;
 use Application\Entity\Subject;
 use Application\Entity\Unit;
 use Application\Entity\User;
+use Application\Entity\Vat;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -36,6 +38,15 @@ class Company extends Subject{
      * @ORM\OrderBy({"id" = "DESC"})
      */
     protected $units;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Application\Entity\Vat", mappedBy="company", cascade={"all"}, fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="company_id", referencedColumnName="id", nullable=false)
+     * @ORM\OrderBy({"id" = "DESC"})
+     */
+    protected $vats;
 
     /**
      * @var ArrayCollection
@@ -91,6 +102,24 @@ class Company extends Subject{
      */
     protected $roles;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Application\Entity\Subject\Client", mappedBy="company", cascade={"all"}, fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="company_id", referencedColumnName="id", nullable=false)
+     * @ORM\OrderBy({"id" = "DESC"})
+     */
+    protected $clients;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Application\Entity\Document\Invoice", mappedBy="company", cascade={"all"}, fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="company_id", referencedColumnName="id", nullable=false)
+     * @ORM\OrderBy({"id" = "DESC"})
+     */
+    protected $invoices;
+
     public function __construct()
     {
         $this->units = new ArrayCollection();
@@ -100,6 +129,9 @@ class Company extends Subject{
         $this->users = new ArrayCollection();
         $this->articleCategories = new ArrayCollection();
         $this->roles = new ArrayCollection();
+        $this->vats = new ArrayCollection();
+        $this->clients = new ArrayCollection();
+        $this->invoices = new ArrayCollection();
     }
 
     /**
@@ -111,12 +143,29 @@ class Company extends Subject{
     }
 
     /**
-     * @param ArrayCollection $units
+     * @param Unit $unit
      */
     public function addUnit(Unit $unit)
     {
         $this->units[] = $unit;
         $unit->setCompany($this);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getVats()
+    {
+        return $this->vats;
+    }
+
+    /**
+     * @param Vat $vat
+     */
+    public function addVat(Vat $vat)
+    {
+        $this->vats[] = $vat;
+        $vat->setCompany($this);
     }
 
     /**
@@ -217,6 +266,39 @@ class Company extends Subject{
     public function addRole(Role $role)
     {
         $this->roles[] = $role;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getClients()
+    {
+        return $this->clients;
+    }
+
+    /**
+     * @param Client $client
+     */
+    public function addClients(Client $client)
+    {
+        $this->clients[] = $client;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getInvoices()
+    {
+        return $this->invoices;
+    }
+
+    /**
+     * @param Invoice $invoice
+     */
+    public function addInvoice(Invoice $invoice)
+    {
+        $this->invoices[] = $invoice;
+        $invoice->setCompany($this);
     }
 
 

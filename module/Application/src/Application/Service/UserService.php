@@ -67,6 +67,10 @@ class UserService extends AbstractService {
         return $this->entityManager->getRepository(User::getClass())->findOneBy(array('email' => $email));
     }
 
+    public function getCompanyUsers(Company $company){
+        return $this->entityManager->getRepository(User::getClass())->findBy(array('company' => $company));
+    }
+
     public function getUserById($id){
         return $this->entityManager->getRepository(User::getClass())->findOneBy(array('id' => $id));
     }
@@ -103,6 +107,9 @@ class UserService extends AbstractService {
     public function saveUser(User $user = null, Parameters $data) {
         if(!$user){
             $user = new User();
+            if(isset($data->company)){
+                $user->setCompany($data->company);
+            }
         }
         if(isset($data->firstName)){
             $user->setFirstName($data->firstName);
@@ -116,11 +123,22 @@ class UserService extends AbstractService {
         if(isset($data->phone)){
             $user->setPhone($data->phone);
         }
+        if(isset($data->language)){
+            $user->setLanguageCode($data->language);
+        }
         if(isset($data->personalCode)){
             $user->setPersonalCode($data->personalCode);
         }
-        if(isset($data->active)){
-            $user->setStatus(($data->active == 1) ? User::STATUS_ACTIVE : User::STATUS_INACTIVE);
+        if(!$user->isMaster() && isset($data->status)){
+            $user->setStatus($data->status);
+        }
+        if(!$user->isMaster() && isset($data->role)){
+            $adminService = $this->locator->get('Application\Service\Admin'); /* @var $adminService \Application\Service\AdminService */
+            $role = $adminService->getRoleById($data->role);
+            if($role !== $user->getRoles()->last()){
+                $user->getRoles()->clear();
+                $user->addRole($role);
+            }
         }
 
         if(isset($data->password) && strlen($data->password) > 5 && $data->password == $data->passwordRepeat){

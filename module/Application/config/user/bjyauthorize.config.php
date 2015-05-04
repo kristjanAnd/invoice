@@ -4,7 +4,9 @@ $controllerGuard = array(
     ['controller' => 'ScnSocialAuth-HybridAuth', 'roles' => []],
     ['controller' => 'ScnSocialAuth-User', 'roles' => []],
     ['controller' => 'zfcuser', 'roles' => []],
+    ['controller' => 'Application\Controller\Admin', 'action' => 'if-role-exists', 'roles' => ['guest']],
     ['controller' => 'Application\Controller\Cron', 'roles' => ['admin']],
+    ['controller' => 'Application\Controller\Index', 'action' => 'dashboard', 'roles' => ['guest']],
     ['controller' => 'Application\Controller\Index', 'action' => 'index', 'roles' => ['guest']],
     ['controller' => 'Application\Controller\Index', 'action' => 'email-exists', 'roles' => ['guest']],
     ['controller' => 'Application\Controller\Index', 'action' => 'isPasswordValid', 'roles' => ['guest']],
@@ -14,15 +16,13 @@ $controllerGuard = array(
 $adminControllerGuard = include 'controllers/admin.config.php';
 $articleControllerGuard = include 'controllers/article.config.php';
 $companyControllerGuard = include 'controllers/company.config.php';
-$indexControllerGuard = include 'controllers/index.config.php';
 
-$controllerGuard = array_merge(
-    $controllerGuard,
-    $adminControllerGuard,
-    $articleControllerGuard,
-    $companyControllerGuard,
-    $indexControllerGuard
-);
+//$controllerGuard = array_merge(
+//    $controllerGuard,
+//    $adminControllerGuard,
+//    $articleControllerGuard,
+//    $companyControllerGuard
+//);
 
 return array(
     // Using the authentication identity provider, which basically reads the roles from the auth service's identity

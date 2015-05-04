@@ -1,7 +1,135 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: kristjan
- * Date: 24.04.15
- * Time: 9:06
- */ 
+use Application\Controller\ArticleController;
+$items = $this->items;
+$filterForm = $this->filterForm;
+?>
+<?php echo $this->partial('layout/partial/navigation', array('navKey' => $this->navKey)); ?>
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header"><?php echo $this->translate('Article.item.list.heading')?></h1>
+        </div>
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <?php echo $this->translate('FilterForm.Heading')?>
+                    <div class="pull-right">
+                        <div class="btn-group">
+                            <a id="openFilter" style="display: none" class="btn btn-default btn-xs" href="javascript:void(0)" ><i class="fa fa-plus fa-fws"></i> </a>
+                            <a id="closeFilter" class="btn btn-default btn-xs" href="javascript:void(0)" ><i class="fa fa-minus fa-fws"></i> </a>
+                        </div>
+                    </div>
+                </div>
+                <div  id="filterBody" class="panel-body">
+                    <form id="filterForm" class="form-horizontal" method="get" action="">
+                        <div class="col-lg-2">
+                            <?php echo $this->formText($filterForm->get('name'))?>
+                        </div>
+                        <div class="col-lg-2">
+                            <?php echo $this->formText($filterForm->get('code'))?>
+                        </div>
+                        <div class="col-lg-2">
+                            <?php echo $this->formSelect($filterForm->get('articleCategory'))?>
+                        </div>
+                        <div class="col-lg-2">
+                            <?php echo $this->formSelect($filterForm->get('articleBrand'))?>
+                        </div>
+                        <div class="col-lg-1">
+                            <?php echo $this->formCheckbox($filterForm->get('active'))?> <?php echo $this->translate('Article.item.filterForm.status.active.label')?>
+                        </div>
+                        <div class="col-lg-1">
+                            <?php echo $this->formCheckbox($filterForm->get('disabled'))?> <?php echo $this->translate('Article.item.filterForm.status.disabled.label')?>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="form-actions pull-right">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <button class="btn btn-primary btn-xs" id="submit"  type="submit">
+                                            <i class="fa fa-filter"></i>
+                                            <?php echo $this->translate('FilterForm.saveButton')?>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- /.col-lg-12 -->
+        <div class="col-lg-6">
+            <?php echo $this->successMessages($this->messages); ?>
+            <?php echo $this->errorMessages($this->errorMessages); ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-bar-chart-o fa-fw"></i> <?php echo $this->translate('Article.item.list.TableHeading')?>
+                    <?php if ($this->isAllowed(ArticleController::AUTHORIZE_CLASS . 'add-item')):?>
+                        <div class="pull-right">
+                            <div class="btn-group">
+                                <a class="btn btn-default btn-xs" href="<?php echo $this->url('add-item', [], true)?>" ><i class="fa fa-plus fa-fws"></i>  <?php echo $this->translate('Article.item.list.addItem')?></a>
+                            </div>
+                        </div>
+                    <?php endif;?>
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <table class="table table-striped table-bordered table-hover" >
+                        <thead>
+                        <tr>
+                            <th><?php echo $this->translate('Article.item.list.tableTh.name')?></th>
+                            <th><?php echo $this->translate('Article.item.list.tableTh.code')?></th>
+                            <th><?php echo $this->translate('Article.item.list.tableTh.category')?></th>
+                            <th><?php echo $this->translate('Article.item.list.tableTh.brand')?></th>
+                            <th><?php echo $this->translate('Article.item.list.tableTh.unit')?></th>
+                            <th><?php echo $this->translate('Article.item.list.tableTh.salePrice')?></th>
+                            <th><?php echo $this->translate('Article.item.list.tableTh.qty')?></th>
+                            <th><?php echo $this->translate('Article.item.list.tableTh.status')?></th>
+                            <th><?php echo $this->translate('Article.item.list.tableTh.actions')?></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach($items as $item): /* @var $item \Application\Entity\Article\Item */?>
+                            <tr>
+                                <td><?php echo $item->getName()?></td>
+                                <td><?php echo $item->getCode()?></td>
+                                <td><?php echo $item->getCategory() ? $item->getCategory()->getName() : '' ?></td>
+                                <td><?php echo $item->getBrand() ? $item->getBrand()->getName() : '' ?></td>
+                                <td><?php echo $item->getUnit() ? $item->getUnit()->getCode() : '' ?></td>
+                                <td><?php echo $item->getSalePrice()?></td>
+                                <td><?php echo $item->getQuantity()?></td>
+                                <td><?php echo $this->statuses[$item->getStatus()]?></td>
+                                <td>
+                                    <?php if ($this->isAllowed(ArticleController::AUTHORIZE_CLASS . 'edit-item')):?>
+                                        <a href="<?php echo $this->url('edit-item', ['id' => $item->getId()], true)?>" class="btn btn-xs btn-success" rel="tooltip"><i class="fa fa-save"></i> <?php echo $this->translate('Article.item.row.action.editButton')?></a>
+                                    <?php endif;?>
+                                </td>
+                            </tr>
+                        <?php endforeach;?>
+                        </tbody>
+                        <tfoot>
+                        <td colspan="9">
+                            <div class="pull-right">
+                                <?php echo $this->paginationControl($items, 'Sliding', 'application/paginator')?>
+                            </div>
+                        </td>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+        </div>
+        <!-- /.col-lg-8 -->
+    </div>
+    <!-- /.row -->
+</div>
+
+<!-- /#page-wrapper -->
+<script type="text/javascript">
+    $(document).ready(function() {
+
+    });
+</script>

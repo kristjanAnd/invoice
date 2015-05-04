@@ -11,6 +11,8 @@ namespace Application\Controller;
 
 use Application\Entity\Article\Brand;
 use Application\Entity\Article\Category;
+use Application\Entity\Article\Item;
+use Application\Entity\Article\Service;
 use Application\Entity\Unit;
 use Application\Service\ArticleService;
 use Application\Service\UnitService;
@@ -27,6 +29,8 @@ class ArticleController extends AbstractActionController {
     const NAV_KEY_UNIT = 'unit';
     const NAV_KEY_CATEGORY = 'category';
     const NAV_KEY_BRAND = 'brand';
+    const NAV_KEY_ITEM = 'item';
+    const NAV_KEY_SERVICE = 'service';
 
     /**
      * @var ArticleService
@@ -56,19 +60,61 @@ class ArticleController extends AbstractActionController {
 
     public function itemAction(){
         $userData = $this->getUserData();
+        $filterForm = $this->getServiceLocator()->get('Application\Form\Filter')->setCompany($userData->company)->init();
+        if($this->request->isGet()){
+            $filterForm->setData($this->request->getQuery());
+            $filterData = $this->articleService->getFilterData($this->request->getQuery());
+        }
+        $items = $this->articleService->getItemsByCompany($userData->company, $filterData);
+
         $view = new ViewModel();
+        $view->items = $this->getPaginatedResult($items, $this->params('page'));
+        $view->navKey = self::NAV_KEY_ITEM;
+        $view->messages = $this->flashMessenger()->getMessages();
+        $view->errorMessages = $this->flashMessenger()->getErrorMessages();
+        $view->statuses = $this->articleService->getArticleStatusSelect();
+        $view->filterForm = $filterForm;
         return $view;
     }
 
     public function addItemAction(){
         $userData = $this->getUserData();
         $view = new ViewModel();
+        $form = $this->getServiceLocator()->get('Application\Form\Article')->setCompany($userData->company)->init();
+        if ($this->request->isPost()) {
+            $form->setData($this->request->getPost());
+            $translator = $this->getTranslator();
+            if($form->isValid()){
+                $item = $this->articleService->saveArticle(new Item($userData), new Parameters($form->getData()));
+                $this->flashMessenger()->addMessage($translator->translate('Article.item.add.successMessage'));
+                return $this->redirect()->toRoute('item', [], true);
+            }
+        }
+        $view->form = $form;
+        $view->navKey = self::NAV_KEY_ITEM;
         return $view;
     }
 
     public function editItemAction(){
+        $item = $this->articleService->getArticleById($this->params('id'));
         $userData = $this->getUserData();
+        if(!$item || !$item instanceof Item || $item->getCompany() !== $userData->company){
+            return $this->notFoundAction();
+        }
         $view = new ViewModel();
+        $form = $this->getServiceLocator()->get('Application\Form\Article')->setCompany($userData->company)->init();
+        $form->setFormValues($item);
+        if ($this->request->isPost()) {
+            $form->setData($this->request->getPost());
+            $translator = $this->getTranslator();
+            if($form->isValid()){
+                $item = $this->articleService->saveArticle($item, new Parameters($form->getData()));
+                $this->flashMessenger()->addMessage($translator->translate('Article.item.edit.successMessage'));
+                return $this->redirect()->toRoute('item', [], true);
+            }
+        }
+        $view->navKey = self::NAV_KEY_ITEM;
+        $view->form = $form;
         return $view;
     }
 
@@ -80,14 +126,22 @@ class ArticleController extends AbstractActionController {
 
     public function unitAction(){
         $userData = $this->getUserData();
-        $units = $this->unitService->getUnitsByCompany($userData->company);
         $form = $this->getServiceLocator()->get('Application\Form\Unit')->init();
+        $filterForm = $this->getServiceLocator()->get('Application\Form\Filter')->init();
+        if($this->request->isGet()){
+            $filterForm->setData($this->request->getQuery());
+            $filterData = $this->unitService->getFilterData($this->request->getQuery());
+        }
+        $units = $this->unitService->getUnitsByCompany($userData->company, $filterData);
+
         $view = new ViewModel();
         $view->units = $this->getPaginatedResult($units, $this->params('page'));
         $view->navKey = self::NAV_KEY_UNIT;
         $view->messages = $this->flashMessenger()->getMessages();
         $view->errorMessages = $this->flashMessenger()->getErrorMessages();
         $view->form = $form;
+        $view->statuses = $this->articleService->getUnitStatusSelect();
+        $view->filterForm = $filterForm;
         return $view;
     }
 
@@ -128,19 +182,61 @@ class ArticleController extends AbstractActionController {
 
     public function serviceAction(){
         $userData = $this->getUserData();
+        $filterForm = $this->getServiceLocator()->get('Application\Form\Filter')->init();
+        if($this->request->isGet()){
+            $filterForm->setData($this->request->getQuery());
+            $filterData = $this->articleService->getFilterData($this->request->getQuery());
+        }
+        $services = $this->articleService->getServicesByCompany($userData->company, $filterData);
+
         $view = new ViewModel();
+        $view->services = $this->getPaginatedResult($services, $this->params('page'));
+        $view->navKey = self::NAV_KEY_SERVICE;
+        $view->messages = $this->flashMessenger()->getMessages();
+        $view->errorMessages = $this->flashMessenger()->getErrorMessages();
+        $view->statuses = $this->articleService->getArticleStatusSelect();
+        $view->filterForm = $filterForm;
         return $view;
     }
 
     public function addServiceAction(){
         $userData = $this->getUserData();
         $view = new ViewModel();
+        $form = $this->getServiceLocator()->get('Application\Form\Article')->setCompany($userData->company)->init();
+        if ($this->request->isPost()) {
+            $form->setData($this->request->getPost());
+            $translator = $this->getTranslator();
+            if($form->isValid()){
+                $service = $this->articleService->saveArticle(new Service($userData), new Parameters($form->getData()));
+                $this->flashMessenger()->addMessage($translator->translate('Article.service.add.successMessage'));
+                return $this->redirect()->toRoute('service', [], true);
+            }
+        }
+        $view->form = $form;
+        $view->navKey = self::NAV_KEY_SERVICE;
         return $view;
     }
 
     public function editServiceAction(){
+        $service = $this->articleService->getArticleById($this->params('id'));
         $userData = $this->getUserData();
+        if(!$service || !$service instanceof Service || $service->getCompany() !== $userData->company){
+            return $this->notFoundAction();
+        }
         $view = new ViewModel();
+        $form = $this->getServiceLocator()->get('Application\Form\Article')->setCompany($userData->company)->init();
+        $form->setFormValues($service);
+        if ($this->request->isPost()) {
+            $form->setData($this->request->getPost());
+            $translator = $this->getTranslator();
+            if($form->isValid()){
+                $service = $this->articleService->saveArticle($service, new Parameters($form->getData()));
+                $this->flashMessenger()->addMessage($translator->translate('Article.service.edit.successMessage'));
+                return $this->redirect()->toRoute('service', [], true);
+            }
+        }
+        $view->navKey = self::NAV_KEY_SERVICE;
+        $view->form = $form;
         return $view;
     }
 
@@ -152,14 +248,22 @@ class ArticleController extends AbstractActionController {
 
     public function categoryAction(){
         $userData = $this->getUserData();
-        $categories = $this->articleService->getCategoriesByCompany($userData->company);
         $form = $this->getServiceLocator()->get('Application\Form\Category')->init();
+        $filterForm = $this->getServiceLocator()->get('Application\Form\Filter')->init();
+        if($this->request->isGet()){
+            $filterForm->setData($this->request->getQuery());
+            $filterData = $this->articleService->getFilterData($this->request->getQuery());
+        }
+        $categories = $this->articleService->getCategoriesByCompany($userData->company, $filterData);
+
         $view = new ViewModel();
         $view->categories = $this->getPaginatedResult($categories, $this->params('page'));
         $view->navKey = self::NAV_KEY_CATEGORY;
         $view->messages = $this->flashMessenger()->getMessages();
         $view->errorMessages = $this->flashMessenger()->getErrorMessages();
         $view->form = $form;
+        $view->statuses = $this->articleService->getArticleCategoryStatusSelect();
+        $view->filterForm = $filterForm;
         return $view;
     }
 
@@ -200,14 +304,21 @@ class ArticleController extends AbstractActionController {
 
     public function brandAction(){
         $userData = $this->getUserData();
-        $brands = $this->articleService->getBrandsByCompany($userData->company);
         $form = $this->getServiceLocator()->get('Application\Form\Brand')->init();
+        $filterForm = $this->getServiceLocator()->get('Application\Form\Filter')->init();
+        if($this->request->isGet()){
+            $filterForm->setData($this->request->getQuery());
+            $filterData = $this->articleService->getFilterData($this->request->getQuery());
+        }
+        $brands = $this->articleService->getBrandsByCompany($userData->company, $filterData);
         $view = new ViewModel();
         $view->brands = $this->getPaginatedResult($brands, $this->params('page'));
         $view->navKey = self::NAV_KEY_BRAND;
         $view->messages = $this->flashMessenger()->getMessages();
         $view->errorMessages = $this->flashMessenger()->getErrorMessages();
         $view->form = $form;
+        $view->statuses = $this->articleService->getArticleBrandStatusSelect();
+        $view->filterForm = $filterForm;
         return $view;
     }
 

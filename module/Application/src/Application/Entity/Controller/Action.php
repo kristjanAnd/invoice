@@ -36,6 +36,13 @@ class Action extends AbstractEntity {
     protected $name;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="order_no", type="integer")
+     */
+    protected $orderNumber;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="translation_key", type="string")
@@ -49,6 +56,13 @@ class Action extends AbstractEntity {
      *      @ORM\JoinColumn(name="controller_id", referencedColumnName="id", nullable=false)
      */
     protected $controller;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_navigation", type="boolean")
+     */
+    protected $isNavigation;
 
     /**
      * @return \Application\Entity\Controller
@@ -106,5 +120,36 @@ class Action extends AbstractEntity {
         $this->translationKey = $translationKey;
     }
 
+    /**
+     * @return boolean
+     */
+    public function isNavigation()
+    {
+        return $this->isNavigation;
+    }
+
+    /**
+     * @param boolean $isNavigation
+     */
+    public function setIsNavigation($isNavigation)
+    {
+        $this->isNavigation = $isNavigation;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOrderNumber()
+    {
+        return $this->orderNumber;
+    }
+
+    /**
+     * @param int $orderNumber
+     */
+    public function setOrderNumber($orderNumber)
+    {
+        $this->orderNumber = $orderNumber;
+    }
 
 } 

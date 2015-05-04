@@ -19,6 +19,8 @@
 
 namespace Application\Validator;
 
+use Application\Entity\Subject\Company;
+use Application\Util\StringUtil;
 use Zend\Validator\Exception;
 /**
  * Class that validates if objects does not exist in a given repository with a given list of matched fields
@@ -30,6 +32,17 @@ use Zend\Validator\Exception;
  */
 class NoObjectExists extends \DoctrineModule\Validator\ObjectExists
 {
+    protected $company;
+
+    /**
+     * @param Company $company
+     */
+    public function setCompany(Company $company)
+    {
+        $this->company = $company;
+    }
+
+
     /**
      * Error constants
      */
@@ -63,6 +76,9 @@ class NoObjectExists extends \DoctrineModule\Validator\ObjectExists
      */
     public function isValid($value)
     {
+        if($this->company){
+            $value = $this->company->getId() . '-' . StringUtil::urlify($value);
+        }
         $value = $this->cleanSearchValue($value);
         if ($this->exclude != null) {
             if ($value == $this->exclude) {

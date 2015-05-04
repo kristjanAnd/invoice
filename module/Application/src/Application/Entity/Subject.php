@@ -18,9 +18,12 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\HasLifecycleCallbacks
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="discr", type="string")
- * @ORM\DiscriminatorMap({"company" = "Application\Entity\Subject\Company"})
+ * @ORM\DiscriminatorMap({"company" = "Application\Entity\Subject\Company", "client" = "Application\Entity\Subject\Client"})
  */
 abstract class Subject extends AbstractEntity {
+
+    const STATUS_ACTIVE = 'active';
+    const STATUS_DISABLED = 'disabled';
 
     /**
      * @var integer
@@ -79,6 +82,13 @@ abstract class Subject extends AbstractEntity {
      * @ORM\Column(name="vat_no", type="string")
      */
     protected $vatNumber;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="status", type="string")
+     */
+    protected $status;
 
     /**
      * @return string
@@ -198,6 +208,22 @@ abstract class Subject extends AbstractEntity {
     public function setVatNumber($vatNumber)
     {
         $this->vatNumber = $vatNumber;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param string $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
     }
 
 

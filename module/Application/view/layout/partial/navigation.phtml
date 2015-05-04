@@ -1,7 +1,21 @@
 <?php
 use Application\Controller\AdminController;
 use Application\Controller\ArticleController;
+use Application\Controller\ClientController;
 use Application\Controller\IndexController;
+
+$adminNavKeys = array(
+    AdminController::NAV_KEY_ROLE,
+    AdminController::NAV_KEY_USER
+);
+
+$articleNavKeys = array(
+    ArticleController::NAV_KEY_ITEM,
+    ArticleController::NAV_KEY_BRAND,
+    ArticleController::NAV_KEY_CATEGORY,
+    ArticleController::NAV_KEY_UNIT,
+    ArticleController::NAV_KEY_SERVICE
+);
 
 ?>
 <div class="navbar-default sidebar" role="navigation">
@@ -23,46 +37,72 @@ use Application\Controller\IndexController;
                     <i class="fa fa-dashboard fa-fw"></i> <?php echo $this->translate('Navigation.dashboard')?>
                 </a>
             </li>
-            <li>
+            <li <?php if(in_array($this->navKey, $articleNavKeys)):?>class="active"<?php endif;?>>
                 <a href="#"><i class="fa fa-shopping-cart fa-fw"></i> <?php echo $this->translate('Navigation.articles')?><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li>
-                        <a href="#">
-                            <?php echo $this->translate('Navigation.articles.items')?>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <?php echo $this->translate('Navigation.articles.services')?>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?php echo $this->url('unit', [], true)?>" <?php if($this->navKey == ArticleController::NAV_KEY_UNIT):?>class="active"<?php endif;?>>
-                            <?php echo $this->translate('Navigation.articles.units')?>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?php echo $this->url('category', [], true)?>" <?php if($this->navKey == ArticleController::NAV_KEY_CATEGORY):?>class="active"<?php endif;?>>
-                            <?php echo $this->translate('Navigation.articles.categories')?>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?php echo $this->url('brand', [], true)?>" <?php if($this->navKey == ArticleController::NAV_KEY_BRAND):?>class="active"<?php endif;?>>
-                            <?php echo $this->translate('Navigation.articles.brands')?>
-                        </a>
-                    </li>
+                    <?php if($this->isAllowed(ArticleController::AUTHORIZE_CLASS . 'item')):?>
+                        <li>
+                            <a href="<?php echo $this->url('item', [], true)?>" <?php if($this->navKey == ArticleController::NAV_KEY_ITEM):?>class="active"<?php endif;?>>
+                                <?php echo $this->translate('Navigation.articles.items')?>
+                            </a>
+                        </li>
+                    <?php endif;?>
+                    <?php if($this->isAllowed(ArticleController::AUTHORIZE_CLASS . 'service')):?>
+                        <li>
+                            <a href="<?php echo $this->url('service', [], true)?>" <?php if($this->navKey == ArticleController::NAV_KEY_SERVICE):?>class="active"<?php endif;?>>
+                                <?php echo $this->translate('Navigation.articles.services')?>
+                            </a>
+                        </li>
+                    <?php endif;?>
+                    <?php if($this->isAllowed(ArticleController::AUTHORIZE_CLASS . 'unit')):?>
+                        <li>
+                            <a href="<?php echo $this->url('unit', [], true)?>" <?php if($this->navKey == ArticleController::NAV_KEY_UNIT):?>class="active"<?php endif;?>>
+                                <?php echo $this->translate('Navigation.articles.units')?>
+                            </a>
+                        </li>
+                    <?php endif;?>
+                    <?php if($this->isAllowed(ArticleController::AUTHORIZE_CLASS . 'category')):?>
+                        <li>
+                            <a href="<?php echo $this->url('category', [], true)?>" <?php if($this->navKey == ArticleController::NAV_KEY_CATEGORY):?>class="active"<?php endif;?>>
+                                <?php echo $this->translate('Navigation.articles.categories')?>
+                            </a>
+                        </li>
+                    <?php endif;?>
+                    <?php if($this->isAllowed(ArticleController::AUTHORIZE_CLASS . 'brand')):?>
+                        <li>
+                            <a href="<?php echo $this->url('brand', [], true)?>" <?php if($this->navKey == ArticleController::NAV_KEY_BRAND):?>class="active"<?php endif;?>>
+                                <?php echo $this->translate('Navigation.articles.brands')?>
+                            </a>
+                        </li>
+                    <?php endif;?>
                 </ul>
             </li>
-            <li>
+            <li <?php if(in_array($this->navKey, $adminNavKeys)):?>class="active"<?php endif;?>>
                 <a href="#"><i class="fa fa-gear fa-fw"></i> <?php echo $this->translate('Navigation.admin')?><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li>
-                        <a href="<?php echo $this->url('role', [], true)?>" <?php if($this->navKey == AdminController::NAV_KEY_ROLE):?>class="active"<?php endif;?>>
-                            <?php echo $this->translate('Navigation.admin.roles')?>
-                        </a>
-                    </li>
+                    <?php if($this->isAllowed(AdminController::AUTHORIZE_CLASS . 'role')):?>
+                        <li>
+                            <a href="<?php echo $this->url('role', [], true)?>" <?php if($this->navKey == AdminController::NAV_KEY_ROLE):?>class="active"<?php endif;?>>
+                                <?php echo $this->translate('Navigation.admin.roles')?>
+                            </a>
+                        </li>
+                    <?php endif;?>
+                    <?php if($this->isAllowed(AdminController::AUTHORIZE_CLASS . 'user')):?>
+                        <li>
+                            <a href="<?php echo $this->url('company-user', [], true)?>" <?php if($this->navKey == AdminController::NAV_KEY_USER):?>class="active"<?php endif;?>>
+                                <?php echo $this->translate('Navigation.admin.users')?>
+                            </a>
+                        </li>
+                    <?php endif;?>
                 </ul>
             </li>
+            <?php if($this->isAllowed(ClientController::AUTHORIZE_CLASS . 'client')):?>
+                <li>
+                    <a href="<?php echo $this->url('client', [], true)?>" <?php if($this->navKey == ClientController::NAV_KEY_CLIENT):?>class="active"<?php endif;?>>
+                        <i class="fa fa-users fa-fw"></i> <?php echo $this->translate('Navigation.clients')?>
+                    </a>
+                </li>
+            <?php endif;?>
             <!--li>
                 <a href="#"><i class="fa fa-table fa-fw"></i> Tables</a>
             </li>

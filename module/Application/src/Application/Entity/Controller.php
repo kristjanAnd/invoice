@@ -35,6 +35,13 @@ class Controller extends AbstractEntity {
     protected $name;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="order_no", type="integer")
+     */
+    protected $orderNumber;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="code", type="string")
@@ -53,7 +60,7 @@ class Controller extends AbstractEntity {
      *
      * @ORM\OneToMany(targetEntity="Application\Entity\Controller\Action", mappedBy="controller", cascade={"all"}, fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(name="controller_id", referencedColumnName="id", nullable=false)
-     * @ORM\OrderBy({"id" = "DESC"})
+     * @ORM\OrderBy({"orderNumber" = "ASC"})
      */
     protected $actions;
 
@@ -134,5 +141,20 @@ class Controller extends AbstractEntity {
         $action->setController($this);
     }
 
+    /**
+     * @return int
+     */
+    public function getOrderNumber()
+    {
+        return $this->orderNumber;
+    }
+
+    /**
+     * @param int $orderNumber
+     */
+    public function setOrderNumber($orderNumber)
+    {
+        $this->orderNumber = $orderNumber;
+    }
 
 } 

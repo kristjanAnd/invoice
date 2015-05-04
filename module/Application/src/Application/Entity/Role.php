@@ -26,9 +26,15 @@ class Role extends AbstractEntity implements HierarchicalRoleInterface
 
     /**
      * @var string
-     * @ORM\Column(type="string", name="role_id", length=255, unique=true, nullable=true)
+     * @ORM\Column(type="string", name="role_id", length=255, unique=true, nullable=false)
      */
     protected $roleId;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", name="name", length=255, nullable=false)
+     */
+    protected $name;
 
     /**
      * @var Role
@@ -126,5 +132,20 @@ class Role extends AbstractEntity implements HierarchicalRoleInterface
         $this->company = $company;
     }
 
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
 
 }

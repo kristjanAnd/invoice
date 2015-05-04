@@ -56,10 +56,10 @@ class BrandForm extends Form {
 
         $status = new Select('status');
         $status->setAttributes(array(
-            'id' => 'unit',
+            'id' => 'status',
             'class' => 'form-control'
         ));
-        $status->setValueOptions($this->articleService->getBrandStatusSelect());
+        $status->setValueOptions($this->articleService->getArticleBrandStatusSelect());
         $status->setLabel($this->translator->translate('Brand.form.status.label'));
         $status->setLabelAttributes(array('class' => 'col-sm-3 control-label'));
         $this->add($status);

@@ -10,8 +10,10 @@ namespace Application\Entity\Article;
 
 
 use Application\Entity\AbstractEntity;
+use Application\Entity\Article;
 use Application\Entity\Subject\Company;
 use Application\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Zend\Stdlib\Parameters;
 
@@ -19,7 +21,7 @@ use Zend\Stdlib\Parameters;
  * Category
  *
  * @ORM\Table(name="article_category")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Application\Repository\ArticleCategoryRepository")
  */
 class Category extends AbstractEntity {
     const STATUS_ACTIVE = 'active';
@@ -78,6 +80,15 @@ class Category extends AbstractEntity {
      */
     protected $user;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Application\Entity\Article", mappedBy="category", cascade={"all"}, fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)
+     * @ORM\OrderBy({"id" = "DESC"})
+     */
+    protected $articles;
+
     public function __construct(Parameters $data = null){
         $this->status = self::STATUS_DISABLED;
         if(isset($data->user)){
@@ -86,6 +97,7 @@ class Category extends AbstractEntity {
         if(isset($data->company)){
             $this->company = $data->company;
         }
+        $this->articles = new ArrayCollection();
     }
 
     /**
@@ -190,6 +202,22 @@ class Category extends AbstractEntity {
     public function setUser(User $user)
     {
         $this->user = $user;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getArticles()
+    {
+        return $this->articles;
+    }
+
+    /**
+     * @param Article $article
+     */
+    public function addArticle(Article $article)
+    {
+        $this->articles[] = $article;
     }
 
 

@@ -11,6 +11,7 @@
         <!-- /.col-lg-12 -->
         <div class="col-lg-6">
             <?php echo $this->successMessages($this->messages); ?>
+            <?php echo $this->formErrors($this->form); ?>
         </div>
     </div>
     <div class="row">
@@ -21,7 +22,7 @@
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
-                    <?php echo $this->partial('application/admin/role/partial/role-form', array('controllers' => $controllers, 'action' => $action, 'role' => null))?>
+                    <?php echo $this->partial('application/admin/role/partial/role-form', array('controllers' => $controllers, 'action' => $action, 'role' => null, 'form' => $this->form))?>
                 </div>
                 <!-- /.panel-body -->
             </div>
@@ -33,4 +34,5 @@
 <!-- /#page-wrapper -->
 <script type="text/javascript">
     Validator.initRoleForm();
+    Role.init();
 </script>

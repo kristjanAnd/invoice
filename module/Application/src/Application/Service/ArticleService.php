@@ -9,35 +9,64 @@
 namespace Application\Service;
 
 
+use Application\Entity\Article;
 use Application\Entity\Article\Brand;
 use Application\Entity\Article\Category;
+use Application\Entity\Article\Item;
 use Application\Entity\Subject\Company;
+use Application\Entity\Unit;
 use Zend\Stdlib\Parameters;
 
 class ArticleService extends AbstractService {
 
-    public function getBrandStatusSelect(){
-        $translator = $this->locator->get('Translator');
-        return array(
-            Brand::STATUS_ACTIVE => $translator->translate('Brand.status.active'),
-            Brand::STATUS_DISABLED => $translator->translate('Brand.status.disabled')
-        );
+    public function getCategoriesByCompany(Company $company, Parameters $data){
+        return $this->entityManager->getRepository(Category::getClass())->getCompanyArticleCategories($company, $data);
     }
 
-    public function getCategoryStatusSelect(){
-        $translator = $this->locator->get('Translator');
-        return array(
-            Brand::STATUS_ACTIVE => $translator->translate('Brand.status.active'),
-            Brand::STATUS_DISABLED => $translator->translate('Brand.status.disabled')
-        );
-    }
-
-    public function getCategoriesByCompany(Company $company, $status = null){
-        $data = array('company' => $company);
-        if($status){
-            $data['status'] = $status;
+    public function getFilterData(Parameters $data){
+        $filterData = new Parameters();
+        $filterData->statuses = array();
+        if(isset($data->active) && $data->active == 1){
+            $filterData->statuses[] = Unit::STATUS_ACTIVE;
         }
-        return $this->entityManager->getRepository(Category::getClass())->findBy($data);
+        if(isset($data->disabled) && $data->disabled == 1){
+            $filterData->statuses[] = Unit::STATUS_DISABLED;
+        }
+        if(isset($data->name) && strlen(trim($data->name)) > 0){
+            $filterData->name = $data->name;
+        }
+        if(isset($data->code) && strlen(trim($data->code)) > 0){
+            $filterData->code = $data->code;
+        }
+        if(isset($data->articleCategory) && $data->articleCategory > 0){
+            $category = $this->getCategoryById($data->articleCategory);
+            if($category){
+                $filterData->category = $category;
+            }
+        }
+        if(isset($data->articleBrand) && $data->articleBrand > 0){
+            $brand = $this->getBrandById($data->articleBrand);
+            if($brand){
+                $filterData->brand = $brand;
+            }
+        }
+        return $filterData;
+    }
+
+    public function getItemsByCompany(Company $company, Parameters $data){
+        return $this->entityManager->getRepository(Item::getClass())->getCompanyItems($company, $data);
+    }
+
+    public function getServicesByCompany(Company $company, Parameters $data){
+        return $this->entityManager->getRepository(Article\Service::getClass())->getCompanyServices($company, $data);
+    }
+
+    public function getActiveCompanyArticleCategories(Company $company){
+        return $this->entityManager->getRepository(Category::getClass())->findBy(array('company' => $company, 'status' => Category::STATUS_ACTIVE));
+    }
+
+    public function getActiveCompanyArticleBrands(Company $company){
+        return $this->entityManager->getRepository(Brand::getClass())->findBy(array('company' => $company, 'status' => Brand::STATUS_ACTIVE));
     }
 
     /**
@@ -56,12 +85,57 @@ class ArticleService extends AbstractService {
         return $this->entityManager->getRepository(Brand::getClass())->findOneBy(array('id' => $id));
     }
 
-    public function getBrandsByCompany(Company $company, $status = null){
-        $data = array('company' => $company);
-        if($status){
-            $data['status'] = $status;
+    public function getBrandsByCompany(Company $company, Parameters $data = null){
+        return $this->entityManager->getRepository(Brand::getClass())->getCompanyArticleBrands($company, $data);
+    }
+
+    public function getArticleById($id){
+        return $this->entityManager->getRepository(Article::getClass())->findOneBy(array('id' => $id));
+    }
+
+    public function saveArticle(Article $article, Parameters $data){
+        if(isset($data->name)){
+            $article->setName($data->name);
         }
-        return $this->entityManager->getRepository(Brand::getClass())->findBy($data);
+        if(isset($data->code)){
+            $article->setCode($data->code);
+        }
+        if(isset($data->quantity)){
+            $article->setQuantity($data->quantity);
+        }
+        if(isset($data->salePrice)){
+            $article->setSalePrice($data->salePrice);
+        }
+        if(isset($data->description)){
+            $article->setDescription($data->description);
+        }
+        if(isset($data->status)){
+            $article->setStatus($data->status);
+        }
+
+        if(isset($data->unit)){
+            $unit = $this->entityManager->getRepository(Unit::getClass())->findOneBy(array('id' => $data->unit));
+            if($unit){
+                $article->setUnit($unit);
+            }
+        }
+        if(isset($data->category)){
+            $category = $this->getCategoryById($data->category);
+            if($category){
+                $article->setCategory($category);
+            }
+        }
+        if(isset($data->brand)){
+            $brand = $this->getBrandById($data->brand);
+            if($brand){
+                $article->setBrand($brand);
+            }
+        }
+
+        $this->entityManager->persist($article);
+        $this->entityManager->flush($article);
+
+        return $article;
     }
 
     public function saveCategory(Category $category, Parameters $data){
@@ -94,5 +168,37 @@ class ArticleService extends AbstractService {
         $this->entityManager->flush($brand);
 
         return $brand;
+    }
+
+    public function getUnitStatusSelect(){
+        $translator = $this->locator->get('Translator');
+        return array(
+            Unit::STATUS_ACTIVE => $translator->translate('Unit.status.active'),
+            Unit::STATUS_DISABLED => $translator->translate('Unit.status.disabled')
+        );
+    }
+
+    public function getArticleStatusSelect(){
+        $translator = $this->locator->get('Translator');
+        return array(
+            Article::STATUS_ACTIVE => $translator->translate('Article.status.active'),
+            Article::STATUS_DISABLED => $translator->translate('Article.status.disabled')
+        );
+    }
+
+    public function getArticleCategoryStatusSelect(){
+        $translator = $this->locator->get('Translator');
+        return array(
+            Category::STATUS_ACTIVE => $translator->translate('ArticleCategory.status.active'),
+            Category::STATUS_DISABLED => $translator->translate('ArticleCategory.status.disabled')
+        );
+    }
+
+    public function getArticleBrandStatusSelect(){
+        $translator = $this->locator->get('Translator');
+        return array(
+            Brand::STATUS_ACTIVE => $translator->translate('ArticleBrand.status.active'),
+            Brand::STATUS_DISABLED => $translator->translate('ArticleBrand.status.disabled')
+        );
     }
 } 

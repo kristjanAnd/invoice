@@ -2,12 +2,50 @@
 use Application\Controller\ArticleController;
 $form = $this->form;
 $units = $this->units; /* @var $company \Application\Entity\Subject\Company */
+$filterForm = $this->filterForm;
 ?>
 <?php echo $this->partial('layout/partial/navigation', array('navKey' => $this->navKey)); ?>
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header"><?php echo $this->translate('Article.unit.list.heading')?></h1>
+            <div class="col-lg-6">
+                <h1 class="page-header"><?php echo $this->translate('Article.unit.list.heading')?></h1>
+            </div>
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <?php echo $this->translate('FilterForm.Heading')?>
+                        <div class="pull-right">
+                            <div class="btn-group">
+                                <a id="openFilter" style="display: none" class="btn btn-default btn-xs" href="javascript:void(0)" ><i class="fa fa-plus fa-fws"></i> </a>
+                                <a id="closeFilter"  class="btn btn-default btn-xs" href="javascript:void(0)" ><i class="fa fa-minus fa-fws"></i> </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div  id="filterBody" class="panel-body">
+                        <form id="filterForm" class="form-horizontal" method="get" action="">
+                            <div class="col-lg-4">
+                                <?php echo $this->formCheckbox($filterForm->get('active'))?> <?php echo $this->translate('Article.unit.filterForm.status.active.label')?>
+                            </div>
+                            <div class="col-lg-4">
+                                <?php echo $this->formCheckbox($filterForm->get('disabled'))?> <?php echo $this->translate('Article.unit.filterForm.status.disabled.label')?>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-actions pull-right">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <button class="btn btn-primary btn-xs" id="submit"  type="submit">
+                                                <i class="fa fa-filter"></i>
+                                                <?php echo $this->translate('FilterForm.saveButton')?>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- /.col-lg-12 -->
         <div class="col-lg-6">
@@ -34,14 +72,13 @@ $units = $this->units; /* @var $company \Application\Entity\Subject\Company */
                         <thead>
                             <tr>
                                 <th><?php echo $this->translate('Article.unit.list.tableTh.code')?></th>
-                                <th><?php echo $this->translate('Article.unit.list.tableTh.value')?></th>
                                 <th><?php echo $this->translate('Article.unit.list.tableTh.status')?></th>
                                 <th width="15%"><?php echo $this->translate('Article.unit.list.tableTh.actions')?></th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach($units as $unit):?>
-                                <?php echo $this->partial('application/article/partial/unit-row', array('unit' => $unit))?>
+                                <?php echo $this->partial('application/article/partial/unit-row', array('unit' => $unit, 'statuses' => $this->statuses))?>
                             <?php endforeach;?>
                         </tbody>
                         <tfoot>
@@ -77,12 +114,6 @@ $units = $this->units; /* @var $company \Application\Entity\Subject\Company */
                                     <?php echo $this->formLabel($form->get('code'))?>
                                     <div class="col-sm-8">
                                         <?php echo $this->formText($form->get('code'))?>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <?php echo $this->formLabel($form->get('value'))?>
-                                    <div class="col-sm-8">
-                                        <?php echo $this->formText($form->get('value'))?>
                                     </div>
                                 </div>
                                 <div class="form-group">

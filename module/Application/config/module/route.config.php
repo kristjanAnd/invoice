@@ -24,6 +24,72 @@ return array(
                 ),
             ),
         ),
+        'item' => array(
+            'type' => 'Segment',
+            'options' => array(
+                'route' => '[/:language]/item[/:page]',
+                'defaults' => array(
+                    'controller' => 'Application\Controller\Article',
+                    'action'     => 'item',
+                    'language' => 'us'
+                ),
+            ),
+        ),
+        'add-item' => array(
+            'type' => 'Segment',
+            'options' => array(
+                'route' => '[/:language]/add-item',
+                'defaults' => array(
+                    'controller' => 'Application\Controller\Article',
+                    'action'     => 'add-item',
+                    'language' => 'us'
+                ),
+            ),
+        ),
+        'edit-item' => array(
+            'type' => 'Segment',
+            'options' => array(
+                'route' => '[/:language]/edit-item[/:id]',
+                'defaults' => array(
+                    'controller' => 'Application\Controller\Article',
+                    'action'     => 'edit-item',
+                    'language' => 'us'
+                ),
+            ),
+        ),
+        'service' => array(
+            'type' => 'Segment',
+            'options' => array(
+                'route' => '[/:language]/service[/:page]',
+                'defaults' => array(
+                    'controller' => 'Application\Controller\Article',
+                    'action'     => 'service',
+                    'language' => 'us'
+                ),
+            ),
+        ),
+        'add-service' => array(
+            'type' => 'Segment',
+            'options' => array(
+                'route' => '[/:language]/add-service',
+                'defaults' => array(
+                    'controller' => 'Application\Controller\Article',
+                    'action'     => 'add-service',
+                    'language' => 'us'
+                ),
+            ),
+        ),
+        'edit-service' => array(
+            'type' => 'Segment',
+            'options' => array(
+                'route' => '[/:language]/edit-service[/:id]',
+                'defaults' => array(
+                    'controller' => 'Application\Controller\Article',
+                    'action'     => 'edit-service',
+                    'language' => 'us'
+                ),
+            ),
+        ),
         'role' => array(
             'type' => 'Segment',
             'options' => array(
@@ -57,6 +123,72 @@ return array(
                 ),
             ),
         ),
+        'client' => array(
+            'type' => 'Segment',
+            'options' => array(
+                'route' => '[/:language]/client[/:page]',
+                'defaults' => array(
+                    'controller' => 'Application\Controller\Client',
+                    'action'     => 'client',
+                    'language' => 'us'
+                ),
+            ),
+        ),
+        'add-client' => array(
+            'type' => 'Segment',
+            'options' => array(
+                'route' => '[/:language]/add-client',
+                'defaults' => array(
+                    'controller' => 'Application\Controller\Client',
+                    'action'     => 'add-client',
+                    'language' => 'us'
+                ),
+            ),
+        ),
+        'edit-client' => array(
+            'type' => 'Segment',
+            'options' => array(
+                'route' => '[/:language]/edit-client[/:id]',
+                'defaults' => array(
+                    'controller' => 'Application\Controller\Client',
+                    'action'     => 'edit-client',
+                    'language' => 'us'
+                ),
+            ),
+        ),
+        'invoice' => array(
+            'type' => 'Segment',
+            'options' => array(
+                'route' => '[/:language]/invoice[/:page]',
+                'defaults' => array(
+                    'controller' => 'Application\Controller\Invoice',
+                    'action'     => 'invoice',
+                    'language' => 'us'
+                ),
+            ),
+        ),
+        'add-invoice' => array(
+            'type' => 'Segment',
+            'options' => array(
+                'route' => '[/:language]/add-invoice',
+                'defaults' => array(
+                    'controller' => 'Application\Controller\Invoice',
+                    'action'     => 'add-invoice',
+                    'language' => 'us'
+                ),
+            ),
+        ),
+        'edit-invoice' => array(
+            'type' => 'Segment',
+            'options' => array(
+                'route' => '[/:language]/edit-invoice[/:id]',
+                'defaults' => array(
+                    'controller' => 'Application\Controller\Invoice',
+                    'action'     => 'edit-invoice',
+                    'language' => 'us'
+                ),
+            ),
+        ),
         'unit' => array(
             'type' => 'Segment',
             'options' => array(
@@ -79,6 +211,39 @@ return array(
                 ),
             ),
         ),
+        'company-user' => array(
+            'type' => 'Segment',
+            'options' => array(
+                'route' => '[/:language]/company-user[/:page]',
+                'defaults' => array(
+                    'controller' => 'Application\Controller\Admin',
+                    'action'     => 'user',
+                    'language' => 'us'
+                ),
+            ),
+        ),
+        'add-user' => array(
+            'type' => 'Segment',
+            'options' => array(
+                'route' => '[/:language]/add-user',
+                'defaults' => array(
+                    'controller' => 'Application\Controller\Admin',
+                    'action'     => 'add-user',
+                    'language' => 'us'
+                ),
+            ),
+        ),
+        'edit-user' => array(
+            'type' => 'Segment',
+            'options' => array(
+                'route' => '[/:language]/edit-user[/:id]',
+                'defaults' => array(
+                    'controller' => 'Application\Controller\Admin',
+                    'action'     => 'edit-user',
+                    'language' => 'us'
+                ),
+            ),
+        ),
         'category' => array(
             'type' => 'Segment',
             'options' => array(
@@ -89,6 +254,17 @@ return array(
                     'language' => 'us'
                 ),
             ),
+        ),
+        'profile' => array (
+            'type' => 'Segment',
+            'options' => array (
+                'route' => '[/:language]/profile',
+                'defaults' => array (
+                    'controller' => 'zfcuser',
+                    'action'     => 'profile',
+                    'language' => 'us'
+                )
+            )
         ),
         'add-category' => array(
             'type' => 'Segment',

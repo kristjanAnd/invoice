@@ -41,6 +41,9 @@ class IndexController extends AbstractActionController
 
     public function dashboardAction()
     {
+        if (!$this->zfcUserAuthentication()->hasIdentity()) {
+            return $this->notFoundAction();
+        }
         $view = new ViewModel();
         $view->navKey = self::NAV_KEY_DASHBOARD;
         return $view;
@@ -50,7 +53,8 @@ class IndexController extends AbstractActionController
         if ($this->request->isGet() && $this->request->isXmlHttpRequest()) {
             $userService = $this->serviceLocator->get('Application\Service\User'); /* @var $userService \Application\Service\UserService */
             $user = $userService->getUserByEmail($this->request->getQuery()->email);
-            $result = ($user) ? array(1) : array(0);
+            $exclude = (isset($this->request->getQuery()->exclude) && $user && $user->getId() == $this->request->getQuery()->exclude) ? true : false;
+            $result = ($user && !$exclude) ? array(1) : array(0);
 
             return new JsonModel($result);
         }

@@ -1,5 +1,7 @@
 <?php
-    $unitService = $this->service('Application\Service\Unit');
+use Application\Controller\ArticleController;
+
+$unitService = $this->service('Application\Service\Unit');
 ?>
 <tr id="row-<?php echo $this->unit->getId()?>">
     <td>
@@ -7,19 +9,17 @@
         <input class="input-<?php echo $this->unit->getId()?> form-control code" style="display: none" type="text" id="code-input-<?php echo $this->unit->getId()?>" value="<?php echo $this->unit->getCode()?>">
     </td>
     <td>
-        <p class="value-<?php echo $this->unit->getId()?>" id="value-value-<?php echo $this->unit->getId()?>"><?php echo $this->unit->getValue()?></p>
-        <input class="input-<?php echo $this->unit->getId()?> form-control value" style="display: none" type="text" id="value-input-<?php echo $this->unit->getId()?>" value="<?php echo $this->unit->getValue()?>">
-    </td>
-    <td>
-        <p class="value-<?php echo $this->unit->getId()?>" id="status-value-<?php echo $this->unit->getId()?>"><?php echo $this->unit->getStatus()?></p>
+        <p class="value-<?php echo $this->unit->getId()?>" id="status-value-<?php echo $this->unit->getId()?>"><?php echo $this->statuses[$this->unit->getStatus()]?></p>
         <select class="input-<?php echo $this->unit->getId()?> form-control status" style="display: none" id="status-input-<?php echo $this->unit->getId()?>">
             <?php foreach($unitService->getUnitStatusSelect() as $k => $v):?>
-                <option value="<?php echo $k?>" <?php if($k == $this->unit->getStatus()):?>selected<?php endif;?>><?php echo $k?></option>
+                <option value="<?php echo $k?>" <?php if($k == $this->unit->getStatus()):?>selected<?php endif;?>><?php echo $this->statuses[$k]?></option>
             <?php endforeach;?>
         </select>
     </td>
     <td>
-        <button style="display: none" data-value="<?php echo $this->unit->getId()?>" class="btn btn-xs btn-success saveUnit" rel="tooltip"><i class="fa fa-save"></i> <?php echo $this->translate('Article.unit.row.action.saveButton')?></button>
-        <button data-value ="<?php echo $this->unit->getId()?>" class="btn btn-xs btn-default editUnit" rel="tooltip"><i class="fa fa-pencil"></i> <?php echo $this->translate('Article.unit.row.action.changeButton')?></button>
+        <?php if ($this->isAllowed(ArticleController::AUTHORIZE_CLASS . 'edit-unit')):?>
+            <button style="display: none" data-value="<?php echo $this->unit->getId()?>" class="btn btn-xs btn-success saveUnit" rel="tooltip"><i class="fa fa-save"></i> <?php echo $this->translate('Article.unit.row.action.saveButton')?></button>
+            <button data-value ="<?php echo $this->unit->getId()?>" class="btn btn-xs btn-default editUnit" rel="tooltip"><i class="fa fa-pencil"></i> <?php echo $this->translate('Article.unit.row.action.changeButton')?></button>
+        <?php endif;?>
     </td>
 </tr>

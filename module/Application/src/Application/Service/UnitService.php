@@ -15,8 +15,24 @@ use Zend\Stdlib\Parameters;
 
 class UnitService extends AbstractService {
 
-    public function getUnitsByCompany(Company $company){
-        return $this->entityManager->getRepository(Unit::getClass())->findBy(array('company' => $company));
+    public function getUnitsByCompany(Company $company, Parameters $data = null) {
+        return $this->entityManager->getRepository(Unit::getClass())->getCompanyUnits($company, $data);
+    }
+
+    public function getFilterData(Parameters $data){
+        $filterData = new Parameters();
+        $filterData->statuses = array();
+        if(isset($data->active) && $data->active == 1){
+            $filterData->statuses[] = Unit::STATUS_ACTIVE;
+        }
+        if(isset($data->disabled) && $data->disabled == 1){
+            $filterData->statuses[] = Unit::STATUS_DISABLED;
+        }
+        return $filterData;
+    }
+
+    public function getActiveCompanyUnits(Company $company){
+        return $this->entityManager->getRepository(Unit::getClass())->findBy(array('company' => $company, 'status' => Unit::STATUS_ACTIVE));
     }
 
     /**
@@ -30,9 +46,6 @@ class UnitService extends AbstractService {
     public function saveUnit(Unit $unit, Parameters $data){
         if(isset($data->code)){
             $unit->setCode($data->code);
-        }
-        if(isset($data->value)){
-            $unit->setValue($data->value);
         }
         if(isset($data->status)){
             $unit->setStatus($data->status);

@@ -28,6 +28,8 @@ function log(input){
 }
 
 var Common = {
+    companyId: null,
+    userId: null,
     language: 'et',
     setLanguage: function(language){
         Common.language = language;
@@ -146,6 +148,12 @@ var Validator = {
                 "language": {
                     required: true
                 },
+                "role": {
+                    required: true
+                },
+                "status": {
+                    required: true
+                },
                 "personalCode": {
                     required: true,
                     digits: true,
@@ -164,6 +172,94 @@ var Validator = {
                 },
                 "passwordRepeat": {
                     required: true,
+                    equalTo: '#password'
+                }
+            },
+            errorPlacement: function (error, element) {
+
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).parent().addClass('has-error');
+                $(element).parent().find('.help-block').show();
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).parent().removeClass('has-error');
+                $(element).parent().find('.help-block').hide();
+            }
+        });
+    },
+
+    initUserForm: function (userId) {
+
+        $(document).on('blur', '#email', function () {
+            Validator.checkIfEmailExists($(this), 'register', userId);
+        });
+
+        $(document).on('click', '#changePass', function () {
+            $("#isP").val(1);
+            $(this).hide();
+            $('#passwordDiv').show();
+            $('#cancelPass').show();
+        });
+
+        $(document).on('click', '#cancelPass', function () {
+            $("#isP").val(0);
+            $(this).hide();
+            $('#passwordDiv').hide();
+            $('#changePass').show();
+        });
+
+        $.validator.addMethod('password', function (value, element) {
+            return this.optional(element) || Password.isValid(value);
+        });
+
+        $('#userForm').validate({
+            rules: {
+                "firstName": {
+                    required: true
+                },
+                "lastName": {
+                    required: true
+                },
+                "email": {
+                    required: true,
+                    email: true
+                },
+                "language": {
+                    required: true
+                },
+                "role": {
+                    required: true
+                },
+                "status": {
+                    required: true
+                },
+                "personalCode": {
+                    required: true,
+                    digits: true,
+                    maxlength: 11,
+                    minlength: 11
+                },
+                "phone": {
+                    digits: true,
+                    required: true,
+                    minlength: 5,
+                    maxlength: 8
+                },
+                "password": {
+                    required: {
+                        depends: function(element) {
+                            return $("#isP").val() == 1;
+                        }
+                    },
+                    password: true
+                },
+                "passwordRepeat": {
+                    required: {
+                        depends: function(element) {
+                            return $("#isP").val() == 1;
+                        }
+                    },
                     equalTo: '#password'
                 }
             },
@@ -213,6 +309,77 @@ var Validator = {
         $('#companyForm').validate({
             rules: {
                 "name": {
+                    required: true
+                }
+            },
+            errorPlacement: function (error, element) {
+
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).parent().addClass('has-error');
+                $(element).parent().find('.help-block').show();
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).parent().removeClass('has-error');
+                $(element).parent().find('.help-block').hide();
+            }
+        });
+    },
+
+    initClientForm: function () {
+        $(document).on('change', '#delayPercent', function(){
+            Common.replaceCommas($(this));
+        });
+        $('#clientForm').validate({
+            rules: {
+                "name": {
+                    required: true
+                },
+                "clientUser": {
+                    required: true
+                },
+                "status": {
+                    required: true
+                },
+                "deadlineDays": {
+                    digits: true
+                },
+                "delayPercent": {
+                    number: true,
+                    min: 0,
+                    max: 100
+                }
+            },
+            errorPlacement: function (error, element) {
+
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).parent().addClass('has-error');
+                $(element).parent().find('.help-block').show();
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).parent().removeClass('has-error');
+                $(element).parent().find('.help-block').hide();
+            }
+        });
+    },
+
+    initArticleForm: function () {
+        $(document).on('change', '#salePrice', function(){
+            Common.replaceCommas($(this));
+        });
+        $('#articleForm').validate({
+            rules: {
+                "name": {
+                    required: true
+                },
+                "unit": {
+                    required: true
+                },
+                "salePrice": {
+                    number: true
+                },
+                "status": {
                     required: true
                 }
             },
@@ -373,8 +540,8 @@ var Validator = {
         $('#roleForm').validate({
             rules: {
                 "name": {
-                    required: true,
-                },
+                    required: true
+                }
             },
             errorPlacement: function (error, element) {
 
@@ -392,10 +559,10 @@ var Validator = {
 
 
 
-    checkIfEmailExists: function (element, action) {
+    checkIfEmailExists: function (element, action, userid) {
         if(action == 'register'){
             $('#submit').prop('disabled', true);
-            $.get('/application/index/email-exists', {email: element.val()}, function (data) {
+            $.get('/application/index/email-exists', {email: element.val(), exclude: userid}, function (data) {
                 if (data == 1) {
                     $(element).parent().addClass('has-error');
                     $(element).parent().find('.email-exists').addClass('help-block');
@@ -738,7 +905,7 @@ var Unit = {
             Unit.saveUnit($(this));
         });
 
-        $(document).on('keyup', '.code, .value, .status', function () {
+        $(document).on('keyup', '.code, .status', function () {
             Unit.preValidate($(this));
         });
     },
@@ -755,11 +922,9 @@ var Unit = {
         var id = element.data('value');
         if(Unit.validateEdit(id)){
             var code = $('#code-input-'+id).val();
-            var value = $('#value-input-'+id).val();
             var status = $('#status-input-'+id).val();
 
-            $('#status-value-'+id).html(status);
-            $('#value-value-'+id).html(value);
+            $('#status-value-'+id).html($("#status-input-" + id + " option:selected").text());
             $('#code-value-'+id).html(code);
 
             element.hide();
@@ -767,7 +932,7 @@ var Unit = {
             $('.value-' + id).show();
             $('.input-' + id).hide();
 
-            $.get('/application/article/edit-unit', {id: id, code: code, value: value, status: status}, function (data) {
+            $.get('/application/article/edit-unit', {id: id, code: code, status: status}, function (data) {
 
             });
         }
@@ -793,7 +958,6 @@ var Unit = {
         var breakOut;
         var elements = [
             $('#code-input-'+id),
-            $('#value-input-'+id),
             $('#status-input-'+id),
         ];
         $.each(elements, function(){
@@ -841,7 +1005,7 @@ var Category = {
             var description = $('#description-input-'+id).val();
             var status = $('#status-input-'+id).val();
 
-            $('#status-value-'+id).html(status);
+            $('#status-value-'+id).html($("#status-input-" + id + " option:selected").text());
             $('#description-value-'+id).html(description);
             $('#code-value-'+id).html(code);
             $('#name-value-'+id).html(name);
@@ -851,7 +1015,7 @@ var Category = {
             $('.value-' + id).show();
             $('.input-' + id).hide();
 
-            $.get('/application/article/editCategory', {id: id, name: name, code: code, description: description, status: status}, function (data) {
+            $.get('/application/article/edit-category', {id: id, name: name, code: code, description: description, status: status}, function (data) {
 
             });
         }
@@ -915,7 +1079,7 @@ var Brand = {
             var name = $('#name-input-'+id).val();
             var status = $('#status-input-'+id).val();
             $('#name-value-'+id).html(name);
-            $('#status-value-'+id).html(status);
+            $('#status-value-'+id).html($("#status-input-" + id + " option:selected").text());
 
             element.hide();
             element.parent().find('.editBrand').show();
@@ -954,5 +1118,48 @@ var Brand = {
             return false;
         }
         return true;
+    }
+};
+
+var Role = {
+    excludeId: null,
+    init: function(excludeId){
+        Role.excludeId = excludeId;
+
+        $(document).on('keyup, focusout, change', '#name', function () {
+            $('#submit').prop('disabled', true);
+            Role.checkIfRoleExists($(this));
+        });
+    },
+
+    checkIfRoleExists: function(element){
+        $.get('/application/admin/if-role-exists', {name: element.val(), exclude: Role.excludeId}, function (data) {
+            if(data == 1){
+                $('#submit').prop('disabled', false);
+                $(element).parent().removeClass('has-error');
+                $(element).parent().find('.role-exists').removeClass('help-block');
+                $(element).parent().find('.role-exists').hide();
+            } else {
+                $(element).parent().addClass('has-error');
+                $(element).parent().find('.role-exists').addClass('help-block');
+                $(element).parent().find('.role-exists').show();
+            }
+        });
+    }
+};
+
+var FilterForm = {
+    init: function(){
+        $(document).on('click', '#openFilter', function () {
+            $(this).hide();
+            $('#closeFilter').show();
+            $('#filterBody').show();
+        });
+
+        $(document).on('click', '#closeFilter', function () {
+            $(this).hide();
+            $('#openFilter').show();
+            $('#filterBody').hide();
+        });
     }
 };

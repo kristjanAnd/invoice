@@ -70,6 +70,7 @@
             <?php
                 $companyName = $this->currentUser() && $this->currentUser()->getCompany() ? $this->currentUser()->getCompany()->getName() : '';
                 $companyId = $this->currentUser() && $this->currentUser()->getCompany() ? $this->currentUser()->getCompany()->getId() : null;
+                $userId = $this->currentUser() ? $this->currentUser()->getId() : null;
             ?>
             <!-- Navigation -->
             <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -80,7 +81,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="<?php echo $this->url('company', array('id' => $companyId), true)?>"><?php echo $companyName?></a>
+                    <a class="navbar-brand" href="<?php echo ($this->isAllowed(\Application\Controller\CompanyController::AUTHORIZE_CLASS . 'index')) ? $this->url('company', array('id' => $companyId), true) : 'javascript:void(0)'?>"><?php echo $companyName?></a>
                 </div>
                 <!-- /.navbar-header -->
 
@@ -96,12 +97,19 @@
         <?php if(strlen($this->language) > 0 && array_key_exists($this->language, $availableLanguages)):?>
             <script type="text/javascript">
                 Common.setLanguage('<?php echo $this->language?>');
+                <?php if($userId):?>
+                    Common.userId = <?php echo $userId?>;
+                <?php endif;?>
+                <?php if($companyId):?>
+                    Common.companyId = <?php echo $companyId?>;
+                <?php endif;?>
             </script>
         <?php endif;?>
         <script type="text/javascript">
             Password.forgotPasswordSuccessMessage = '<?php echo $this->translate('layout.password.forgotPasswordSuccessMessage')?>';
             Password.forgotPasswordErrorMessage = '<?php echo $this->translate('layout.password.forgotPasswordErrorMessage')?>';
             Password.initForgot();
+            FilterForm.init();
         </script>
     </body>
 </html>

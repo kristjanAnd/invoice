@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skeletonSocialUser\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-28 19:11+0300\n"
-"PO-Revision-Date: 2015-04-28 19:12+0300\n"
+"POT-Creation-Date: 2015-05-04 18:59+0300\n"
+"PO-Revision-Date: 2015-05-04 19:01+0300\n"
 "Last-Translator: \n"
 "Language-Team: Andresson Developments OÜ\n"
 "Language: et_EE\n"
@@ -31,154 +31,329 @@ msgstr "Rolli lisamine"
 msgid "Controller.admin.action.edit-role"
 msgstr "Rolli muutmine"
 
+#: Application/language/translations.php:8
+msgid "Controller.admin.action.user"
+msgstr "Kasutajad"
+
 #: Application/language/translations.php:9
+msgid "Controller.admin.action.add-user"
+msgstr "Kasutaja lisamine"
+
+#: Application/language/translations.php:10
+msgid "Controller.admin.action.edit-user"
+msgstr "Kasutaja muutmine"
+
+#: Application/language/translations.php:13
 msgid "Controller.article"
 msgstr "Artiklid"
 
-#: Application/language/translations.php:10
+#: Application/language/translations.php:14
 msgid "Controller.article.action.unit"
 msgstr "Ühikud"
 
-#: Application/language/translations.php:11
+#: Application/language/translations.php:15
 msgid "Controller.article.action.add-unit"
 msgstr "Ühiku lisamine"
 
-#: Application/language/translations.php:12
+#: Application/language/translations.php:16
 msgid "Controller.article.action.edit-unit"
 msgstr "Ühiku muutmine"
 
-#: Application/language/translations.php:13
+#: Application/language/translations.php:17
 msgid "Controller.article.action.category"
 msgstr "Artikli kategooriad"
 
-#: Application/language/translations.php:14
+#: Application/language/translations.php:18
 msgid "Controller.article.action.add-category"
 msgstr "Artikli kategooria lisamine"
 
-#: Application/language/translations.php:15
+#: Application/language/translations.php:19
 msgid "Controller.article.action.edit-category"
 msgstr "Artikli kategooria muutmine"
 
-#: Application/language/translations.php:16
+#: Application/language/translations.php:20
 msgid "Controller.article.action.brand"
 msgstr "Artikli brändid"
 
-#: Application/language/translations.php:17
+#: Application/language/translations.php:21
 msgid "Controller.article.action.add-brand"
 msgstr "Artikli brändi lisamine"
 
-#: Application/language/translations.php:18
+#: Application/language/translations.php:22
 msgid "Controller.article.action.edit-brand"
 msgstr "Artikli brändi muutmine"
 
-#: Application/language/translations.php:20
+#: Application/language/translations.php:23
+msgid "Controller.article.action.item"
+msgstr "Tooted"
+
+#: Application/language/translations.php:24
+msgid "Controller.article.action.add-item"
+msgstr "Toote lisamine"
+
+#: Application/language/translations.php:25
+msgid "Controller.article.action.edit-item"
+msgstr "Toote muutmine"
+
+#: Application/language/translations.php:26
+msgid "Controller.article.action.service"
+msgstr "Teenused"
+
+#: Application/language/translations.php:27
+msgid "Controller.article.action.add-service"
+msgstr "Teenuse lisamine"
+
+#: Application/language/translations.php:28
+msgid "Controller.article.action.edit-service"
+msgstr "Teenuse muutmine"
+
+#: Application/language/translations.php:30
 msgid "Controller.company"
 msgstr "Ettevõte"
 
-#: Application/language/translations.php:21
+#: Application/language/translations.php:31
 msgid "Controller.company.action.index"
 msgstr "Ettevõtte andmed"
 
-#: Application/language/translations.php:23
+#: Application/language/translations.php:33
 msgid "Controller.index"
 msgstr "Töölaud"
 
-#: Application/language/translations.php:24
+#: Application/language/translations.php:34
 msgid "Controller.index.action.dashboard"
 msgstr "Töölaud"
 
-#: Application/src/Application/Form/RegisterForm.php:102
+#: Application/language/translations.php:36
+msgid "Controller.user"
+msgstr "Kasutaja"
+
+#: Application/language/translations.php:37
+msgid "Controller.user.action.profile"
+msgstr "Enda profiil"
+
+#: Application/language/translations.php:39
+msgid "Controller.client"
+msgstr "Kliendid"
+
+#: Application/language/translations.php:40
+msgid "Controller.client.action.client"
+msgstr "Kliendid"
+
+#: Application/language/translations.php:41
+msgid "Controller.client.action.add-client"
+msgstr "Kliendi lisamine"
+
+#: Application/language/translations.php:42
+msgid "Controller.client.action.edit-client"
+msgstr "Kliendi muutmine"
+
+#: Application/language/translations.php:44
+msgid "Controller.invoice"
+msgstr "Arved"
+
+#: Application/language/translations.php:45
+msgid "Controller.invoice.action.invoice"
+msgstr "Arved"
+
+#: Application/language/translations.php:46
+msgid "Controller.invoice.action.add-invoice"
+msgstr "Arve lisamine"
+
+#: Application/language/translations.php:47
+msgid "Controller.invoice.action.edit-invoice"
+msgstr "Arve muutmine"
+
+#: Application/src/Application/Form/RegisterForm.php:142
 msgid "register.firstName.placeholder"
 msgstr "Eesnimi"
 
-#: Application/src/Application/Form/RegisterForm.php:104
+#: Application/src/Application/Form/RegisterForm.php:144
 msgid "register.firstName.label"
 msgstr "Eesnimi:"
 
-#: Application/src/Application/Form/RegisterForm.php:114
+#: Application/src/Application/Form/RegisterForm.php:154
 msgid "register.lastName.placeholder"
 msgstr "Perekonnanimi"
 
-#: Application/src/Application/Form/RegisterForm.php:116
+#: Application/src/Application/Form/RegisterForm.php:156
 msgid "register.lastName.label"
 msgstr "Perekonnanimi:"
 
-#: Application/src/Application/Form/RegisterForm.php:126
+#: Application/src/Application/Form/RegisterForm.php:166
 msgid "register.phone.placeholder"
 msgstr "Telefon"
 
-#: Application/src/Application/Form/RegisterForm.php:128
+#: Application/src/Application/Form/RegisterForm.php:168
 msgid "register.phone.label"
 msgstr "Telefon:"
 
-#: Application/src/Application/Form/RegisterForm.php:138
+#: Application/src/Application/Form/RegisterForm.php:178
 msgid "register.personalCode.placeholder"
 msgstr "Isikukood"
 
-#: Application/src/Application/Form/RegisterForm.php:140
+#: Application/src/Application/Form/RegisterForm.php:180
 msgid "register.personalCode.label"
 msgstr "Isikukood:"
 
-#: Application/src/Application/Form/RegisterForm.php:149
+#: Application/src/Application/Form/RegisterForm.php:189
 msgid "register.email.placeholder"
 msgstr "E-mail (kasutajanimi)"
 
-#: Application/src/Application/Form/RegisterForm.php:151
+#: Application/src/Application/Form/RegisterForm.php:191
 #: Application/src/Application/Form/ForgotPassword.php:48
 msgid "register.email.label"
 msgstr "E-mail (kasutajanimi):"
 
-#: Application/src/Application/Form/RegisterForm.php:161
+#: Application/src/Application/Form/RegisterForm.php:201
 msgid "register.language.label"
 msgstr "Eelistatud keel:"
 
-#: Application/src/Application/Form/RegisterForm.php:167
+#: Application/src/Application/Form/RegisterForm.php:213
+msgid "register.role.label"
+msgstr "Roll:"
+
+#: Application/src/Application/Form/RegisterForm.php:225
+msgid "register.status.label"
+msgstr "Staatus:"
+
+#: Application/src/Application/Form/RegisterForm.php:232
 msgid "register.password.placeholder"
 msgstr "Parool"
 
-#: Application/src/Application/Form/RegisterForm.php:169
+#: Application/src/Application/Form/RegisterForm.php:234
 msgid "register.password.label"
 msgstr "Parool:"
 
-#: Application/src/Application/Form/RegisterForm.php:176
+#: Application/src/Application/Form/RegisterForm.php:241
 msgid "register.passwordRepeat.placeholder"
 msgstr "Parooli kordus"
 
-#: Application/src/Application/Form/RegisterForm.php:178
+#: Application/src/Application/Form/RegisterForm.php:243
 msgid "register.passwordRepeat.label"
 msgstr "Parooli kordus:"
 
-#: Application/src/Application/Form/RegisterForm.php:184
+#: Application/src/Application/Form/RegisterForm.php:249
 msgid "register.submit.value"
 msgstr "Registreeru"
 
-#: Application/src/Application/Form/RegisterForm.php:231
+#: Application/src/Application/Form/RegisterForm.php:278
+#: Application/src/Application/Form/RegisterForm.php:284
+#: Application/src/Application/Form/RegisterForm.php:290
+#: Application/src/Application/Form/RegisterForm.php:321
+#: Application/src/Application/Form/RegisterForm.php:348
+#: Application/src/Application/Form/RegisterForm.php:352
+#: Application/src/Application/Form/RegisterForm.php:357
+#: Application/src/Application/Form/RegisterForm.php:363
+#: Application/src/Application/Form/RegisterForm.php:376
+#: Application/src/Application/Form/RegisterForm.php:386
+#: Application/src/Application/Form/RoleForm.php:130
+#: Application/src/Application/Form/UnitForm.php:76
+#: Application/src/Application/Form/UnitForm.php:80
+#: Application/src/Application/Form/CategoryForm.php:98
+#: Application/src/Application/Form/CategoryForm.php:110
+#: Application/src/Application/Form/ArticleForm.php:204
+#: Application/src/Application/Form/ArticleForm.php:212
+#: Application/src/Application/Form/ArticleForm.php:236
+#: Application/src/Application/Form/SubjectForm.php:241
+#: Application/src/Application/Form/SubjectForm.php:273
+#: Application/src/Application/Form/SubjectForm.php:277
+#: Application/src/Application/Form/DocumentForm.php:239
+#: Application/src/Application/Form/DocumentForm.php:243
+#: Application/src/Application/Form/DocumentForm.php:261
+#: Application/src/Application/Form/DocumentForm.php:270
+#: Application/src/Application/Form/DocumentForm.php:274
+#: Application/src/Application/Form/DocumentForm.php:278
+#: Application/src/Application/Form/VatForm.php:86
+#: Application/src/Application/Form/VatForm.php:90
+#: Application/src/Application/Form/VatForm.php:94
+#: Application/src/Application/Form/BrandForm.php:76
+#: Application/src/Application/Form/BrandForm.php:80
+msgid "Validator.message.notEmpty"
+msgstr "%1$s ei tohi tühi olla!"
+
+#: Application/src/Application/Form/RegisterForm.php:278
+msgid "register.message.firstNameInput"
+msgstr "Eesnimi "
+
+#: Application/src/Application/Form/RegisterForm.php:284
+msgid "register.message.lastNameInput"
+msgstr "Perekonnanimi "
+
+#: Application/src/Application/Form/RegisterForm.php:290
+msgid "register.message.phoneInput"
+msgstr "Telefon"
+
+#: Application/src/Application/Form/RegisterForm.php:314
 msgid "register.personalCode.notDigits"
 msgstr "Lubatud ainult numbrid!"
 
-#: Application/src/Application/Form/RegisterForm.php:235
+#: Application/src/Application/Form/RegisterForm.php:318
 msgid "register.personalCode.incorrectLength.Toolong"
 msgstr "Isikukood on liiga pikk"
 
-#: Application/src/Application/Form/RegisterForm.php:236
+#: Application/src/Application/Form/RegisterForm.php:319
 msgid "register.personalCode.incorrectLength.TooShort"
 msgstr "Isikukood on liiga lühike"
 
-#: Application/src/Application/Form/RegisterForm.php:258
+#: Application/src/Application/Form/RegisterForm.php:321
+msgid "register.message.personalCodeInput"
+msgstr "Isikukood"
+
+#: Application/src/Application/Form/RegisterForm.php:342
 msgid "register.message.emailExists"
 msgstr "Selline e-post on juba olemas!"
 
-#: Application/src/Application/Form/RegisterForm.php:260
+#: Application/src/Application/Form/RegisterForm.php:344
 msgid "register.message.emailInvalidFormat"
 msgstr "E-posti formaat ei ole õige!"
 
-#: Application/src/Application/Form/RegisterForm.php:275
+#: Application/src/Application/Form/RegisterForm.php:348
+msgid "register.message.emailInput"
+msgstr "E-post "
+
+#: Application/src/Application/Form/RegisterForm.php:352
+msgid "register.message.languageInput"
+msgstr "Eelistatud keel"
+
+#: Application/src/Application/Form/RegisterForm.php:357
+msgid "register.message.roleInput"
+msgstr "Roll"
+
+#: Application/src/Application/Form/RegisterForm.php:363
+msgid "register.message.statusInput"
+msgstr "Staatus "
+
+#: Application/src/Application/Form/RegisterForm.php:373
 msgid "register.password.incorrectLength.long"
 msgstr "Parool on liiga pikk"
 
-#: Application/src/Application/Form/RegisterForm.php:276
+#: Application/src/Application/Form/RegisterForm.php:374
 msgid "register.password.incorrectLength.short"
 msgstr "Parool on liiga lühike"
+
+#: Application/src/Application/Form/RegisterForm.php:376
+msgid "register.message.passwordInput"
+msgstr "Parool"
+
+#: Application/src/Application/Form/RegisterForm.php:380
+msgid "register.passwordRepeat.notSame"
+msgstr "Parool ja parooli kordus ei ühti!"
+
+#: Application/src/Application/Form/RegisterForm.php:386
+msgid "register.message.passwordRepeatInput"
+msgstr "Parooli kordus"
+
+#: Application/src/Application/Form/RoleForm.php:96
+msgid "role.form.name.placeholder"
+msgstr "Rolli nimetus"
+
+#: Application/src/Application/Form/RoleForm.php:98
+msgid "role.form.name.label"
+msgstr "Rolli nimetus:"
+
+#: Application/src/Application/Form/RoleForm.php:130
+msgid "RoleForm.message.nameInput"
+msgstr "Rolli nimetus"
 
 #: Application/src/Application/Form/UnitForm.php:51
 msgid "Unit.form.code.placeholder"
@@ -188,40 +363,15 @@ msgstr "Kood"
 msgid "Unit.form.code.label"
 msgstr "Kood:"
 
-#: Application/src/Application/Form/UnitForm.php:61
-msgid "Unit.form.value.placeholder"
-msgstr "Väärtus"
-
 #: Application/src/Application/Form/UnitForm.php:63
-msgid "Unit.form.value.label"
-msgstr "Väärtus:"
-
-#: Application/src/Application/Form/UnitForm.php:73
 msgid "Unit.form.status.label"
 msgstr "Staatus:"
 
-#: Application/src/Application/Form/UnitForm.php:86
-#: Application/src/Application/Form/UnitForm.php:90
-#: Application/src/Application/Form/UnitForm.php:94
-#: Application/src/Application/Form/CategoryForm.php:98
-#: Application/src/Application/Form/CategoryForm.php:110
-#: Application/src/Application/Form/ArticleForm.php:128
-#: Application/src/Application/Form/ArticleForm.php:136
-#: Application/src/Application/Form/SubjectForm.php:112
-#: Application/src/Application/Form/BrandForm.php:76
-#: Application/src/Application/Form/BrandForm.php:80
-msgid "Validator.message.notEmpty"
-msgstr "%1$s ei tohi tühi olla!"
-
-#: Application/src/Application/Form/UnitForm.php:86
+#: Application/src/Application/Form/UnitForm.php:76
 msgid "UnitForm.message.codeInput"
 msgstr "Kood"
 
-#: Application/src/Application/Form/UnitForm.php:90
-msgid "UnitForm.message.valueInput"
-msgstr "Väärtus"
-
-#: Application/src/Application/Form/UnitForm.php:94
+#: Application/src/Application/Form/UnitForm.php:80
 msgid "UnitForm.message.statusInput"
 msgstr "Staatus"
 
@@ -261,113 +411,353 @@ msgstr "Nimi"
 msgid "CategoryForm.message.statusInput"
 msgstr "Staatus"
 
-#: Application/src/Application/Form/ArticleForm.php:77
+#: Application/src/Application/Form/FilterForm.php:95
+msgid "Filter.form.clintUser.notActiveNotice"
+msgstr "Peatatud"
+
+#: Application/src/Application/Form/FilterForm.php:135
+msgid "Filter.form.name.placeholder"
+msgstr "Nimi"
+
+#: Application/src/Application/Form/FilterForm.php:142
+msgid "Filter.form.email.placeholder"
+msgstr "E-post"
+
+#: Application/src/Application/Form/FilterForm.php:149
+msgid "Filter.form.address.placeholder"
+msgstr "Aadress"
+
+#: Application/src/Application/Form/FilterForm.php:156
+msgid "Filter.form.regNo.placeholder"
+msgstr "Reg. nr"
+
+#: Application/src/Application/Form/FilterForm.php:163
+msgid "Filter.form.vatNo.placeholder"
+msgstr "KMKR nr"
+
+#: Application/src/Application/Form/FilterForm.php:170
+msgid "Filter.form.code.placeholder"
+msgstr "Kood"
+
+#: Application/src/Application/Form/FilterForm.php:179
+msgid "FilterForm.clientUser.emptyOption"
+msgstr "-Kliendihaldur-"
+
+#: Application/src/Application/Form/FilterForm.php:187
+msgid "FilterForm.articleCategory.emptyOption"
+msgstr "-Kategooria-"
+
+#: Application/src/Application/Form/FilterForm.php:195
+msgid "FilterForm.articleBrand.emptyOption"
+msgstr "-Bränd-"
+
+#: Application/src/Application/Form/ArticleForm.php:103
 msgid "Article.form.name.placeholder"
 msgstr "Nimetus"
 
-#: Application/src/Application/Form/ArticleForm.php:79
+#: Application/src/Application/Form/ArticleForm.php:105
 msgid "Article.form.name.label"
 msgstr "Nimetus:"
 
-#: Application/src/Application/Form/ArticleForm.php:86
+#: Application/src/Application/Form/ArticleForm.php:113
 msgid "Article.form.code.placeholder"
 msgstr "Kood"
 
-#: Application/src/Application/Form/ArticleForm.php:88
+#: Application/src/Application/Form/ArticleForm.php:115
 msgid "Article.form.code.label"
 msgstr "Kood:"
 
-#: Application/src/Application/Form/ArticleForm.php:95
+#: Application/src/Application/Form/ArticleForm.php:123
 msgid "Article.form.salePrice.placeholder"
 msgstr "Müügihind"
 
-#: Application/src/Application/Form/ArticleForm.php:97
+#: Application/src/Application/Form/ArticleForm.php:125
 msgid "Article.form.salePrice.label"
 msgstr "Müügihind:"
 
-#: Application/src/Application/Form/ArticleForm.php:105
+#: Application/src/Application/Form/ArticleForm.php:134
 msgid "Article.form.unit.emptyOption"
 msgstr "-Ühik-"
 
-#: Application/src/Application/Form/ArticleForm.php:107
+#: Application/src/Application/Form/ArticleForm.php:136
 msgid "Article.form.unit.label"
 msgstr "Ühik:"
 
-#: Application/src/Application/Form/ArticleForm.php:114
+#: Application/src/Application/Form/ArticleForm.php:145
+msgid "Article.form.brand.emptyOption"
+msgstr "-Bränd-"
+
+#: Application/src/Application/Form/ArticleForm.php:147
+msgid "Article.form.brand.label"
+msgstr "Bränd:"
+
+#: Application/src/Application/Form/ArticleForm.php:156
+msgid "Article.form.category.emptyOption"
+msgstr "-Kategooria-"
+
+#: Application/src/Application/Form/ArticleForm.php:158
+msgid "Article.form.category.label"
+msgstr "Kategooria:"
+
+#: Application/src/Application/Form/ArticleForm.php:166
 msgid "Article.form.quantity.placeholder"
 msgstr "Kogus"
 
-#: Application/src/Application/Form/ArticleForm.php:116
+#: Application/src/Application/Form/ArticleForm.php:168
 msgid "Article.form.quantity.label"
 msgstr "Kogus:"
 
-#: Application/src/Application/Form/ArticleForm.php:128
+#: Application/src/Application/Form/ArticleForm.php:178
+msgid "Article.form.status.label"
+msgstr "Staatus:"
+
+#: Application/src/Application/Form/ArticleForm.php:187
+msgid "Article.form.description.placeholder"
+msgstr "Kirjeldus"
+
+#: Application/src/Application/Form/ArticleForm.php:189
+msgid "Article.form.description.label"
+msgstr "Kirjeldus:"
+
+#: Application/src/Application/Form/ArticleForm.php:204
 msgid "ArticleForm.message.nameInput"
 msgstr "Nimetus"
 
-#: Application/src/Application/Form/ArticleForm.php:136
+#: Application/src/Application/Form/ArticleForm.php:212
 msgid "ArticleForm.message.unitInput"
 msgstr "Ühik"
 
-#: Application/src/Application/Form/SubjectForm.php:36
+#: Application/src/Application/Form/ArticleForm.php:236
+msgid "ArticleForm.message.statusInput"
+msgstr "Staatus"
+
+#: Application/src/Application/Form/SubjectForm.php:109
 msgid "Company.form.name.placeholder"
 msgstr "Nimi"
 
-#: Application/src/Application/Form/SubjectForm.php:38
+#: Application/src/Application/Form/SubjectForm.php:111
 msgid "Company.form.name.label"
 msgstr "Nimi:"
 
-#: Application/src/Application/Form/SubjectForm.php:46
+#: Application/src/Application/Form/SubjectForm.php:119
 msgid "Company.form.code.placeholder"
 msgstr "Kood"
 
-#: Application/src/Application/Form/SubjectForm.php:48
+#: Application/src/Application/Form/SubjectForm.php:121
 msgid "Company.form.code.label"
 msgstr "Kood:"
 
-#: Application/src/Application/Form/SubjectForm.php:56
+#: Application/src/Application/Form/SubjectForm.php:129
 msgid "Company.form.email.placeholder"
 msgstr "E-mail"
 
-#: Application/src/Application/Form/SubjectForm.php:58
+#: Application/src/Application/Form/SubjectForm.php:131
 msgid "Company.form.email.label"
 msgstr "E-mail:"
 
-#: Application/src/Application/Form/SubjectForm.php:67
+#: Application/src/Application/Form/SubjectForm.php:140
 msgid "Company.form.address.placeholder"
 msgstr "Aadress"
 
-#: Application/src/Application/Form/SubjectForm.php:69
+#: Application/src/Application/Form/SubjectForm.php:142
 msgid "Company.form.address.label"
 msgstr "Aadress:"
 
-#: Application/src/Application/Form/SubjectForm.php:77
+#: Application/src/Application/Form/SubjectForm.php:150
 msgid "Company.form.regNo.placeholder"
 msgstr "Registri nr."
 
-#: Application/src/Application/Form/SubjectForm.php:79
+#: Application/src/Application/Form/SubjectForm.php:152
 msgid "Company.form.regNo.label"
 msgstr "Registri nr. :"
 
-#: Application/src/Application/Form/SubjectForm.php:87
+#: Application/src/Application/Form/SubjectForm.php:160
 msgid "Company.form.vatNo.placeholder"
 msgstr "KMKR nr."
 
-#: Application/src/Application/Form/SubjectForm.php:89
+#: Application/src/Application/Form/SubjectForm.php:162
 msgid "Company.form.vatNo.label"
 msgstr "KMKR nr. :"
 
-#: Application/src/Application/Form/SubjectForm.php:97
+#: Application/src/Application/Form/SubjectForm.php:170
 msgid "Company.form.phone.placeholder"
 msgstr "Telefon"
 
-#: Application/src/Application/Form/SubjectForm.php:99
+#: Application/src/Application/Form/SubjectForm.php:172
 msgid "Company.form.phone.label"
 msgstr "Telefon:"
 
-#: Application/src/Application/Form/SubjectForm.php:112
+#: Application/src/Application/Form/SubjectForm.php:183
+msgid "Company.form.status.label"
+msgstr "Staatus :"
+
+#: Application/src/Application/Form/SubjectForm.php:193
+msgid "Company.form.clientUser.label"
+msgstr "Kliendihaldur:"
+
+#: Application/src/Application/Form/SubjectForm.php:201
+msgid "Company.form.delayPercent.placeholder"
+msgstr "Viivis"
+
+#: Application/src/Application/Form/SubjectForm.php:203
+msgid "Company.form.delayPercent.label"
+msgstr "Viivis:"
+
+#: Application/src/Application/Form/SubjectForm.php:211
+msgid "Company.form.deadlineDays.placeholder"
+msgstr "Maksetähtaeg päevades"
+
+#: Application/src/Application/Form/SubjectForm.php:213
+msgid "Company.form.deadlineDays.label"
+msgstr "Maksetähtaeg päevades:"
+
+#: Application/src/Application/Form/SubjectForm.php:221
+msgid "Company.form.referenceNumber.placeholder"
+msgstr "Viitenumber"
+
+#: Application/src/Application/Form/SubjectForm.php:223
+msgid "Company.form.referenceNumber.label"
+msgstr "Viitenumber:"
+
+#: Application/src/Application/Form/SubjectForm.php:241
 msgid "CompanyForm.message.nameInput"
 msgstr "Nimi"
+
+#: Application/src/Application/Form/SubjectForm.php:273
+msgid "CompanyForm.message.statusInput"
+msgstr "Staatus"
+
+#: Application/src/Application/Form/SubjectForm.php:277
+msgid "CompanyForm.message.clientUserInput"
+msgstr "Kliendihaldur"
+
+#: Application/src/Application/Form/SubjectForm.php:281
+msgid "subject.form.delayPercent.notDigits"
+msgstr "Viivis peab olema number!"
+
+#: Application/src/Application/Form/SubjectForm.php:284
+msgid "subject.form.deadlineDays.notDigits"
+msgstr "Maksetähtaeg päevades peab olema number!"
+
+#: Application/src/Application/Form/DocumentForm.php:101
+msgid "Document.form.documentDate.placeholder"
+msgstr "Dokumendi kuupäev"
+
+#: Application/src/Application/Form/DocumentForm.php:103
+msgid "Document.form.documentDate.label"
+msgstr "Dokumendi kuupäev:"
+
+#: Application/src/Application/Form/DocumentForm.php:113
+msgid "Document.form.user.label"
+msgstr "Töötaja:"
+
+#: Application/src/Application/Form/DocumentForm.php:123
+msgid "Document.form.dateFormat.label"
+msgstr "Kuupäeva formaat:"
+
+#: Application/src/Application/Form/DocumentForm.php:133
+msgid "Document.form.language.label"
+msgstr "Dokumendi keel:"
+
+#: Application/src/Application/Form/DocumentForm.php:141
+msgid "Document.form.documentNumber.placeholder"
+msgstr "Dokumendi number"
+
+#: Application/src/Application/Form/DocumentForm.php:143
+msgid "Document.form.documentNumber.label"
+msgstr "Dokumendi number:"
+
+#: Application/src/Application/Form/DocumentForm.php:151
+msgid "Document.form.amount.placeholder"
+msgstr "Summa"
+
+#: Application/src/Application/Form/DocumentForm.php:153
+msgid "Document.form.amount.label"
+msgstr "Summa:"
+
+#: Application/src/Application/Form/DocumentForm.php:161
+msgid "Document.form.vatAmount.placeholder"
+msgstr "KM summa"
+
+#: Application/src/Application/Form/DocumentForm.php:163
+msgid "Document.form.vatAmount.label"
+msgstr "KM summa:"
+
+#: Application/src/Application/Form/DocumentForm.php:171
+msgid "Document.form.amountVat.placeholder"
+msgstr "Summa + KM"
+
+#: Application/src/Application/Form/DocumentForm.php:173
+msgid "Document.form.amountVat.label"
+msgstr "Summa + KM:"
+
+#: Application/src/Application/Form/DocumentForm.php:239
+msgid "DocumentForm.message.documentDateInput"
+msgstr "Dokumendi kuupäev"
+
+#: Application/src/Application/Form/DocumentForm.php:243
+msgid "DocumentForm.message.userInput"
+msgstr "Töötaja"
+
+#: Application/src/Application/Form/DocumentForm.php:251
+msgid "Document.form.amount.notDigits"
+msgstr "Summa peab olema number!"
+
+#: Application/src/Application/Form/DocumentForm.php:254
+msgid "Document.form.vatAmount.notDigits"
+msgstr "KM summa peab olema number!"
+
+#: Application/src/Application/Form/DocumentForm.php:257
+msgid "Document.form.amountVat.notDigits"
+msgstr "Summa + KM peab olema number!"
+
+#: Application/src/Application/Form/DocumentForm.php:261
+msgid "DocumentForm.message.amountInput"
+msgstr "Summa"
+
+#: Application/src/Application/Form/DocumentForm.php:270
+msgid "DocumentForm.message.amountVatInput"
+msgstr "Summa + KM"
+
+#: Application/src/Application/Form/DocumentForm.php:274
+msgid "DocumentForm.message.dateFormatInput"
+msgstr "Kuupäeva formaat"
+
+#: Application/src/Application/Form/DocumentForm.php:278
+msgid "DocumentForm.message.languageInput"
+msgstr "Dokumendi keel"
+
+#: Application/src/Application/Form/VatForm.php:51
+msgid "Vat.form.code.placeholder"
+msgstr "Kood"
+
+#: Application/src/Application/Form/VatForm.php:53
+msgid "Vat.form.code.label"
+msgstr "Kood:"
+
+#: Application/src/Application/Form/VatForm.php:61
+msgid "Vat.form.value.placeholder"
+msgstr "Väärtus"
+
+#: Application/src/Application/Form/VatForm.php:63
+msgid "Vat.form.value.label"
+msgstr "Väärtus:"
+
+#: Application/src/Application/Form/VatForm.php:73
+msgid "Vat.form.status.label"
+msgstr "Staatus:"
+
+#: Application/src/Application/Form/VatForm.php:86
+msgid "VatForm.message.codeInput"
+msgstr "Kood"
+
+#: Application/src/Application/Form/VatForm.php:90
+msgid "VatForm.message.valueInput"
+msgstr "Väärtus"
+
+#: Application/src/Application/Form/VatForm.php:94
+msgid "VatForm.message.statusInput"
+msgstr "Staatus"
 
 #: Application/src/Application/Form/ForgotPassword.php:47
 msgid "forgotPassword.email.placeholder"
@@ -433,15 +823,139 @@ msgstr "Nimi"
 msgid "BrandForm.message.statusInput"
 msgstr "Staatus"
 
-#: Application/src/Application/Service/ArticleService.php:22
-#: Application/src/Application/Service/ArticleService.php:30
-msgid "Brand.status.active"
+#: Application/src/Application/Form/Document/InvoiceForm.php:45
+msgid "Invoice.form.client.emptyOption"
+msgstr "-Klient-"
+
+#: Application/src/Application/Form/Document/InvoiceForm.php:49
+msgid "Invoice.form.clientName.placeholder"
+msgstr "Kliendi nimi"
+
+#: Application/src/Application/Form/Document/InvoiceForm.php:50
+msgid "Invoice.form.clientName.label"
+msgstr "Kliendi nimi:"
+
+#: Application/src/Application/Form/Document/InvoiceForm.php:52
+msgid "Invoice.form.clientEmail.placeholder"
+msgstr "Kliendi e-post"
+
+#: Application/src/Application/Form/Document/InvoiceForm.php:53
+msgid "Invoice.form.clientEmail.label"
+msgstr "Kliendi e-post:"
+
+#: Application/src/Application/Form/Document/InvoiceForm.php:55
+msgid "Invoice.form.clientAddress.placeholder"
+msgstr "Kliendi aadress"
+
+#: Application/src/Application/Form/Document/InvoiceForm.php:56
+msgid "Invoice.form.clientAddress.label"
+msgstr "Kliendi aadress:"
+
+#: Application/src/Application/Form/Document/InvoiceForm.php:58
+msgid "Invoice.form.clientRegNo.placeholder"
+msgstr "Kliendi reg. nr"
+
+#: Application/src/Application/Form/Document/InvoiceForm.php:59
+msgid "Invoice.form.clientRegNo.label"
+msgstr "Kliendi reg. nr:"
+
+#: Application/src/Application/Form/Document/InvoiceForm.php:61
+msgid "Invoice.form.clientVatNo.placeholder"
+msgstr "Kliendi KMKR nr"
+
+#: Application/src/Application/Form/Document/InvoiceForm.php:62
+msgid "Invoice.form.clientVatNo.label"
+msgstr "Kliendi KMKR nr:"
+
+#: Application/src/Application/Form/Document/InvoiceForm.php:68
+msgid "Invoice.form.delayPercent.placeholder"
+msgstr "Viivis"
+
+#: Application/src/Application/Form/Document/InvoiceForm.php:70
+msgid "Invoice.form.delayPercent.label"
+msgstr "Viivis:"
+
+#: Application/src/Application/Form/Document/InvoiceForm.php:78
+msgid "Invoice.form.deadlineDays.placeholder"
+msgstr "Maksetähtaeg päevades"
+
+#: Application/src/Application/Form/Document/InvoiceForm.php:80
+msgid "Invoice.form.deadlineDays.label"
+msgstr "Maksetähtaeg päevades:"
+
+#: Application/src/Application/Form/Document/InvoiceForm.php:88
+msgid "Invoice.form.referenceNumber.placeholder"
+msgstr "Viitenumber"
+
+#: Application/src/Application/Form/Document/InvoiceForm.php:90
+msgid "Invoice.form.referenceNumber.label"
+msgstr "Viitenumber:"
+
+#: Application/src/Application/Form/Document/InvoiceForm.php:98
+msgid "Invoice.form.deadlineDate.placeholder"
+msgstr "Maksetähtaeg"
+
+#: Application/src/Application/Form/Document/InvoiceForm.php:100
+msgid "Invoice.form.deadlineDate.label"
+msgstr "Maksetähtaeg:"
+
+#: Application/src/Application/Form/Document/InvoiceForm.php:116
+msgid "Invoice.form.delayPercent.notDigits"
+msgstr "Viivis peab olema number!"
+
+#: Application/src/Application/Form/Document/InvoiceForm.php:119
+msgid "Invoice.form.deadlineDays.notDigits"
+msgstr "Maksetähtaeg päevades peab olema number!"
+
+#: Application/src/Application/Service/ClientService.php:39
+msgid "Client.status.active"
 msgstr "Aktiivne"
 
-#: Application/src/Application/Service/ArticleService.php:23
-#: Application/src/Application/Service/ArticleService.php:31
-msgid "Brand.status.disabled"
-msgstr "Peatatud"
+#: Application/src/Application/Service/ClientService.php:40
+msgid "Client.status.disabled"
+msgstr "Arhiveeritud"
+
+#: Application/src/Application/Service/ArticleService.php:176
+#: Application/src/Application/Service/UnitService.php:62
+msgid "Unit.status.active"
+msgstr "Aktiivne"
+
+#: Application/src/Application/Service/ArticleService.php:177
+#: Application/src/Application/Service/UnitService.php:63
+msgid "Unit.status.disabled"
+msgstr "Arhiveeritud"
+
+#: Application/src/Application/Service/ArticleService.php:184
+msgid "Article.status.active"
+msgstr "Aktiivne"
+
+#: Application/src/Application/Service/ArticleService.php:185
+msgid "Article.status.disabled"
+msgstr "Arhiveeritud"
+
+#: Application/src/Application/Service/ArticleService.php:192
+msgid "ArticleCategory.status.active"
+msgstr "Aktiivne"
+
+#: Application/src/Application/Service/ArticleService.php:193
+msgid "ArticleCategory.status.disabled"
+msgstr "Arhiveeritud"
+
+#: Application/src/Application/Service/ArticleService.php:200
+msgid "ArticleBrand.status.active"
+msgstr "Aktiivne"
+
+#: Application/src/Application/Service/ArticleService.php:201
+msgid "ArticleBrand.status.disabled"
+msgstr "Arhiveeritud"
+
+#: Application/src/Application/Service/VatService.php:65
+msgid "Vat.status.active"
+msgstr "Aktiivne"
+
+#: Application/src/Application/Service/VatService.php:66
+msgid "Vat.status.disabled"
+msgstr "Arhiveeritud"
 
 #: Application/src/Application/Service/LanguageService.php:28
 msgid "language.select.et"
@@ -455,120 +969,189 @@ msgstr "Inglise"
 msgid "language.select.ru"
 msgstr "Vene"
 
-#: Application/src/Application/Service/UserService.php:183
+#: Application/src/Application/Service/UserService.php:201
 msgid "mail.forgotPassword.subject"
 msgstr "Parooli uuendamine"
 
-#: Application/src/Application/Service/UserService.php:185
+#: Application/src/Application/Service/UserService.php:203
 msgid "mail.forgotPassword.bodyMessageBeforeLink"
 msgstr "Te saate määrata endale uue parooli, vajutades järgnevale lingile: "
 
-#: Application/src/Application/Service/UserService.php:335
+#: Application/src/Application/Service/UserService.php:353
 msgid "IdAuth.errorMessage.USER_WITH_EMAIL_NOT_FOUND"
 msgstr ""
 
-#: Application/src/Application/Service/UserService.php:345
+#: Application/src/Application/Service/UserService.php:363
 msgid "IdAuth.errorMessage.NO_ID_CARD_USER_FOUND"
 msgstr ""
 
-#: Application/src/Application/Service/UserService.php:349
+#: Application/src/Application/Service/UserService.php:367
 msgid "IdAuth.errorMessage.NO_ID_CARD_USER_NOT_MATCH"
 msgstr ""
 
-#: Application/src/Application/Service/UnitService.php:49
-msgid "Unit.status.active"
+#: Application/src/Application/Service/AdminService.php:349
+#: Application/view/application/admin/user.phtml:63
+msgid "SystemRoles.admin"
+msgstr "Administraator"
+
+#: Application/src/Application/Service/AdminService.php:361
+msgid "User.status.active"
 msgstr "Aktiivne"
 
-#: Application/src/Application/Service/UnitService.php:50
-msgid "Unit.status.disabled"
+#: Application/src/Application/Service/AdminService.php:362
+msgid "User.status.inActive"
 msgstr "Peatatud"
 
-#: Application/src/Application/Controller/ArticleController.php:102
+#: Application/src/Application/Controller/ClientController.php:68
+msgid "Client.add.successMessage"
+msgstr "Uus klient lisatud!"
+
+#: Application/src/Application/Controller/ClientController.php:91
+msgid "Client.edit.successMessage"
+msgstr "Kliendi andmed muudetud!"
+
+#: Application/src/Application/Controller/ArticleController.php:89
+msgid "Article.item.add.successMessage"
+msgstr "Uus toode lisatud!"
+
+#: Application/src/Application/Controller/ArticleController.php:112
+msgid "Article.item.edit.successMessage"
+msgstr "Toote info muudetud!"
+
+#: Application/src/Application/Controller/ArticleController.php:156
 msgid "Article.unit.add.successMessage"
 msgstr "Uus ühik lisatud!"
 
-#: Application/src/Application/Controller/ArticleController.php:105
+#: Application/src/Application/Controller/ArticleController.php:159
 msgid "Article.unit.add.errorMessage"
 msgstr "Ühikut ei saanud lisada. Vaadake andmed üle ja proovige uuesti!"
 
-#: Application/src/Application/Controller/ArticleController.php:174
+#: Application/src/Application/Controller/ArticleController.php:211
+msgid "Article.service.add.successMessage"
+msgstr "Uus teenus lisatud!"
+
+#: Application/src/Application/Controller/ArticleController.php:234
+msgid "Article.service.edit.successMessage"
+msgstr "Teenuse info muudetud!"
+
+#: Application/src/Application/Controller/ArticleController.php:278
 msgid "Article.category.add.successMessage"
 msgstr "Uus kategooria lisatud!"
 
-#: Application/src/Application/Controller/ArticleController.php:177
+#: Application/src/Application/Controller/ArticleController.php:281
 msgid "Article.category.add.errorMessage"
 msgstr "kategooriat ei saanud lisada. Vaadake andmed üle ja proovige uuesti!"
 
-#: Application/src/Application/Controller/ArticleController.php:222
+#: Application/src/Application/Controller/ArticleController.php:333
 msgid "Article.brand.add.successMessage"
 msgstr "Uus bränd lisatud!"
 
-#: Application/src/Application/Controller/ArticleController.php:225
+#: Application/src/Application/Controller/ArticleController.php:336
 msgid "Article.brand.add.errorMessage"
 msgstr "Brändi ei saanud lisada. Vaadake andmed üle ja proovige uuesti!"
+
+#: Application/src/Application/Controller/AdminController.php:76
+msgid "Admin.role.add.successMessage"
+msgstr "Uus roll lisatud!"
+
+#: Application/src/Application/Controller/AdminController.php:105
+msgid "Admin.role.edit.successMessage"
+msgstr "Roll on salvestatud!"
+
+#: Application/src/Application/Controller/AdminController.php:143
+msgid "Admin.user.add.successMessage"
+msgstr "Uus kasutaja lisatud!"
+
+#: Application/src/Application/Controller/AdminController.php:177
+msgid "Admin.user.edit.successMessage"
+msgstr "Kasutaja on salvestatud!"
 
 #: Application/src/Application/Controller/CompanyController.php:46
 msgid "Company.edit.successMessage"
 msgstr "Ettevõtte andmed salvestatud!"
 
-#: Application/src/Application/Controller/UserController.php:208
+#: Application/src/Application/Controller/UserController.php:211
 msgid "Application.user.message.passwordLinkSent"
 msgstr "Parooli uuendamise link saadeti e-mailile"
 
-#: Application/src/Application/Controller/UserController.php:251
+#: Application/src/Application/Controller/UserController.php:254
 msgid "Application.user.message.passwordChanged"
 msgstr "Parool on muudetud"
 
-#: Application/src/Application/Controller/UserController.php:336
-#: Application/src/Application/Controller/UserController.php:361
+#: Application/src/Application/Controller/UserController.php:339
+#: Application/src/Application/Controller/UserController.php:364
 msgid "IdAuth.errorMessage.SESSION_DATA_NOT_VALID"
 msgstr ""
 
-#: Application/view/layout/layout.phtml:102
+#: Application/src/Application/Controller/UserController.php:402
+msgid "User.profile.edit.successMessage"
+msgstr "Profiili andmed muudetud!"
+
+#: Application/view/layout/layout.phtml:109
 #: Application/view/application/user/forgot-password.phtml:40
 msgid "layout.password.forgotPasswordSuccessMessage"
 msgstr "Parooli saadeti e-mailile."
 
-#: Application/view/layout/layout.phtml:103
+#: Application/view/layout/layout.phtml:110
 #: Application/view/application/user/forgot-password.phtml:41
 msgid "layout.password.forgotPasswordErrorMessage"
 msgstr "Midagi läks valesti!"
 
-#: Application/view/layout/partial/navigation.phtml:23
+#: Application/view/layout/partial/navigation.phtml:37
 msgid "Navigation.dashboard"
 msgstr "Töölaud"
 
-#: Application/view/layout/partial/navigation.phtml:27
+#: Application/view/layout/partial/navigation.phtml:41
 msgid "Navigation.articles"
 msgstr "Artiklid"
 
-#: Application/view/layout/partial/navigation.phtml:31
+#: Application/view/layout/partial/navigation.phtml:46
 msgid "Navigation.articles.items"
 msgstr "Tooted"
 
-#: Application/view/layout/partial/navigation.phtml:36
+#: Application/view/layout/partial/navigation.phtml:53
 msgid "Navigation.articles.services"
 msgstr "Teenused"
 
-#: Application/view/layout/partial/navigation.phtml:41
+#: Application/view/layout/partial/navigation.phtml:60
 msgid "Navigation.articles.units"
 msgstr "Ühikud"
 
-#: Application/view/layout/partial/navigation.phtml:46
+#: Application/view/layout/partial/navigation.phtml:67
 msgid "Navigation.articles.categories"
 msgstr "Artikli kategooriad"
 
-#: Application/view/layout/partial/navigation.phtml:51
+#: Application/view/layout/partial/navigation.phtml:74
 msgid "Navigation.articles.brands"
 msgstr "Artikli brändid"
 
-#: Application/view/layout/partial/navigation.phtml:57
+#: Application/view/layout/partial/navigation.phtml:81
 msgid "Navigation.admin"
 msgstr "Administraator"
 
-#: Application/view/layout/partial/navigation.phtml:61
+#: Application/view/layout/partial/navigation.phtml:86
 msgid "Navigation.admin.roles"
 msgstr "Rollid"
+
+#: Application/view/layout/partial/navigation.phtml:93
+msgid "Navigation.admin.users"
+msgstr "Kasutajad"
+
+#: Application/view/layout/partial/navigation.phtml:102
+msgid "Navigation.clients"
+msgstr "Kliendid"
+
+#: Application/view/layout/partial/top-navigation.phtml:205
+msgid "layout.top-navigation.user-profile"
+msgstr "Profiil"
+
+#: Application/view/layout/partial/top-navigation.phtml:208
+msgid "layout.top-navigation.settings"
+msgstr "Seaded"
+
+#: Application/view/layout/partial/top-navigation.phtml:211
+msgid "layout.top-navigation.logout"
+msgstr "Logi välja"
 
 #: Application/view/application/index/dashboard.phtml:5
 msgid "Index.dashboard.heading"
@@ -579,27 +1162,48 @@ msgid "application.user.register.registerIsDisabled"
 msgstr "R¤egistreerimine ei ole avatud!"
 
 #: Application/view/application/user/register.phtml:8
+#: Application/view/application/user/profile.phtml:3
+#: Application/view/application/admin/user/edit-user.phtml:3
+#: Application/view/application/admin/user/add-user.phtml:3
 msgid "application.user.register.firstName.help-block"
 msgstr "Eesnimi ei ole korrektne!"
 
 #: Application/view/application/user/register.phtml:9
+#: Application/view/application/user/profile.phtml:4
+#: Application/view/application/admin/user/edit-user.phtml:4
+#: Application/view/application/admin/user/add-user.phtml:4
 msgid "application.user.register.lastName.help-block"
 msgstr "Perekonnanimi ei ole korrektne!"
 
 #: Application/view/application/user/register.phtml:10
+#: Application/view/application/user/profile.phtml:5
+#: Application/view/application/admin/user/edit-user.phtml:5
+#: Application/view/application/admin/user/add-user.phtml:5
 msgid "application.user.register.phone.help-block"
 msgstr "Telefoni nr ei ole korrektne!"
 
 #: Application/view/application/user/register.phtml:11
+#: Application/view/application/user/profile.phtml:6
+#: Application/view/application/admin/user/edit-user.phtml:6
+#: Application/view/application/admin/user/add-user.phtml:6
 msgid "application.user.register.personalCode.help-block"
 msgstr "Isikukood ei ole korrektne!"
 
 #: Application/view/application/user/register.phtml:12
+#: Application/view/application/user/profile.phtml:7
+#: Application/view/application/admin/user/edit-user.phtml:7
+#: Application/view/application/admin/user/add-user.phtml:7
 msgid "application.user.register.email.help-block"
 msgstr "E-mail ei ole korrektne!"
 
 #: Application/view/application/user/register.phtml:13
 #: Application/view/application/user/register.phtml:14
+#: Application/view/application/user/profile.phtml:8
+#: Application/view/application/user/profile.phtml:9
+#: Application/view/application/admin/user/edit-user.phtml:8
+#: Application/view/application/admin/user/edit-user.phtml:9
+#: Application/view/application/admin/user/add-user.phtml:8
+#: Application/view/application/admin/user/add-user.phtml:9
 msgid "application.user.register.password.help-block"
 msgstr "Parool ei ole korrektne! (6 - 20 märki)"
 
@@ -608,6 +1212,9 @@ msgid "application.user.register.heading"
 msgstr "Registreeru"
 
 #: Application/view/application/user/register.phtml:44
+#: Application/view/application/user/profile.phtml:64
+#: Application/view/application/admin/user/edit-user.phtml:64
+#: Application/view/application/admin/user/add-user.phtml:53
 msgid "Register.emailExists"
 msgstr "Selline e-post on juba olemas!"
 
@@ -737,6 +1344,43 @@ msgstr ""
 msgid "IdLogin.Message.RESPONSE_RECEIVED"
 msgstr ""
 
+#: Application/view/application/user/profile.phtml:10
+#: Application/view/application/admin/user/edit-user.phtml:10
+#: Application/view/application/admin/user/add-user.phtml:10
+msgid "application.user.register.language.help-block"
+msgstr "Eelistatud keel ei ole korrektne!"
+
+#: Application/view/application/user/profile.phtml:11
+#: Application/view/application/admin/user/edit-user.phtml:11
+#: Application/view/application/admin/user/add-user.phtml:11
+msgid "application.user.register.role.help-block"
+msgstr "Roll ei ole korrektne!"
+
+#: Application/view/application/user/profile.phtml:23
+#: Application/view/application/user/profile.phtml:35
+msgid "User.profile.heading"
+msgstr "Profiil"
+
+#: Application/view/application/user/profile.phtml:45
+#: Application/view/application/admin/user/edit-user.phtml:45
+msgid "UserForm.changePasswordLink"
+msgstr "Muuda parooli"
+
+#: Application/view/application/user/profile.phtml:46
+#: Application/view/application/admin/user/edit-user.phtml:46
+msgid "UserForm.cancelPasswordLink"
+msgstr "Loobu parooli vahetusest"
+
+#: Application/view/application/user/profile.phtml:77
+#: Application/view/application/admin/user/edit-user.phtml:77
+msgid "Admin.user.edit.cancelButton"
+msgstr "Tühista"
+
+#: Application/view/application/user/profile.phtml:81
+#: Application/view/application/admin/user/edit-user.phtml:81
+msgid "Admin.user.edit.saveButton"
+msgstr "Salvesta"
+
 #: Application/view/application/user/forgot-password.phtml:13
 msgid "forgotPassword.heading"
 msgstr "Parooli meeldetuletus"
@@ -799,147 +1443,357 @@ msgstr "Vale kasutajanimi või parool!"
 msgid "login.submitButton"
 msgstr "Logi sisse"
 
-#: Application/view/application/article/brand.phtml:10
+#: Application/view/application/article/edit-item.phtml:8
+#: Application/view/application/article/edit-item.phtml:20
+msgid "Article.item.edit.heading"
+msgstr "Muuda toodet"
+
+#: Application/view/application/article/edit-item.phtml:75
+msgid "Article.item.edit.cancelButton"
+msgstr "Loobu"
+
+#: Application/view/application/article/edit-item.phtml:79
+msgid "Article.item.edit.saveButton"
+msgstr "Salvesta"
+
+#: Application/view/application/article/brand.phtml:13
 msgid "Article.brand.list.heading"
 msgstr "Brändid"
 
-#: Application/view/application/article/brand.phtml:22
+#: Application/view/application/article/brand.phtml:18
+#: Application/view/application/article/category.phtml:17
+#: Application/view/application/article/service.phtml:15
+#: Application/view/application/article/item.phtml:15
+#: Application/view/application/article/unit.phtml:17
+#: Application/view/application/client/client.phtml:17
+msgid "FilterForm.Heading"
+msgstr "Filter"
+
+#: Application/view/application/article/brand.phtml:29
+msgid "Article.brand.filterForm.status.active.label"
+msgstr "Aktiivsed?"
+
+#: Application/view/application/article/brand.phtml:32
+msgid "Article.brand.filterForm.status.disabled.label"
+msgstr "Arhiveeritud?"
+
+#: Application/view/application/article/brand.phtml:40
+#: Application/view/application/article/category.phtml:39
+#: Application/view/application/article/service.phtml:49
+#: Application/view/application/article/item.phtml:49
+#: Application/view/application/article/unit.phtml:39
+#: Application/view/application/client/client.phtml:62
+msgid "FilterForm.saveButton"
+msgstr "Filtreeri"
+
+#: Application/view/application/article/brand.phtml:61
 msgid "Article.brand.list.TableHeading"
 msgstr "Brändid"
 
-#: Application/view/application/article/brand.phtml:26
+#: Application/view/application/article/brand.phtml:65
 msgid "Article.brand.list.addRow"
 msgstr "Lisa bränd"
 
-#: Application/view/application/article/brand.phtml:36
+#: Application/view/application/article/brand.phtml:75
 msgid "Article.brand.list.tableTh.name"
 msgstr "Nimi"
 
-#: Application/view/application/article/brand.phtml:37
+#: Application/view/application/article/brand.phtml:76
 msgid "Article.brand.list.tableTh.status"
 msgstr "Staatus"
 
-#: Application/view/application/article/brand.phtml:38
+#: Application/view/application/article/brand.phtml:77
 msgid "Article.brand.list.tableTh.actions"
 msgstr "Tegevused"
 
-#: Application/view/application/article/brand.phtml:70
+#: Application/view/application/article/brand.phtml:109
 msgid "Article.brand.list.add.modalHeading"
 msgstr "Brändi lisamine"
 
-#: Application/view/application/article/brand.phtml:91
+#: Application/view/application/article/brand.phtml:130
 msgid "Article.brand.list.add.modal.cancelButton"
 msgstr "Loobu"
 
-#: Application/view/application/article/brand.phtml:95
+#: Application/view/application/article/brand.phtml:134
 msgid "Article.brand.list.add.modal.saveButton"
 msgstr "Salvesta"
 
-#: Application/view/application/article/category.phtml:10
+#: Application/view/application/article/add-item.phtml:9
+#: Application/view/application/article/add-item.phtml:21
+msgid "Article.item.add.heading"
+msgstr "Toote lisamine"
+
+#: Application/view/application/article/add-item.phtml:76
+msgid "Article.item.add.cancelButton"
+msgstr "Loobu"
+
+#: Application/view/application/article/add-item.phtml:80
+msgid "Article.item.add.saveButton"
+msgstr "Salvesta"
+
+#: Application/view/application/article/category.phtml:12
 msgid "Article.category.list.heading"
 msgstr "Kategooriad"
 
-#: Application/view/application/article/category.phtml:22
+#: Application/view/application/article/category.phtml:28
+msgid "Article.category.filterForm.status.active.label"
+msgstr "Aktiivsed?"
+
+#: Application/view/application/article/category.phtml:31
+msgid "Article.category.filterForm.status.disabled.label"
+msgstr "Arhiveeritud?"
+
+#: Application/view/application/article/category.phtml:60
 msgid "Article.category.list.TableHeading"
 msgstr "Kategooriad"
 
-#: Application/view/application/article/category.phtml:26
+#: Application/view/application/article/category.phtml:64
 msgid "Article.category.list.addRow"
 msgstr "Lisa kategooria"
 
-#: Application/view/application/article/category.phtml:36
+#: Application/view/application/article/category.phtml:74
 msgid "Article.category.list.tableTh.name"
 msgstr "Nimi"
 
-#: Application/view/application/article/category.phtml:37
+#: Application/view/application/article/category.phtml:75
 msgid "Article.category.list.tableTh.code"
 msgstr "Kood"
 
-#: Application/view/application/article/category.phtml:38
+#: Application/view/application/article/category.phtml:76
 msgid "Article.category.list.tableTh.description"
 msgstr "Kirjeldus"
 
-#: Application/view/application/article/category.phtml:39
+#: Application/view/application/article/category.phtml:77
 msgid "Article.category.list.tableTh.status"
 msgstr "Staatus"
 
-#: Application/view/application/article/category.phtml:40
+#: Application/view/application/article/category.phtml:78
 msgid "Article.category.list.tableTh.actions"
 msgstr "Tegevused"
 
-#: Application/view/application/article/category.phtml:72
+#: Application/view/application/article/category.phtml:110
 msgid "Article.category.list.add.modalHeading"
 msgstr "Kategooria lisamine"
 
-#: Application/view/application/article/category.phtml:105
+#: Application/view/application/article/category.phtml:143
 msgid "Article.category.list.add.modal.cancelButton"
 msgstr "Loobu"
 
-#: Application/view/application/article/category.phtml:109
+#: Application/view/application/article/category.phtml:147
 msgid "Article.category.list.add.modal.saveButton"
 msgstr "Salvesta"
 
-#: Application/view/application/article/unit.phtml:10
+#: Application/view/application/article/service.phtml:10
+msgid "Article.service.list.heading"
+msgstr "Teenused"
+
+#: Application/view/application/article/service.phtml:38
+msgid "Article.service.filterForm.status.active.label"
+msgstr "Aktiivsed?"
+
+#: Application/view/application/article/service.phtml:41
+msgid "Article.service.filterForm.status.disabled.label"
+msgstr "Arhiveeritud?"
+
+#: Application/view/application/article/service.phtml:69
+msgid "Article.service.list.TableHeading"
+msgstr "Teenused"
+
+#: Application/view/application/article/service.phtml:73
+msgid "Article.service.list.addService"
+msgstr "Lisa teenus"
+
+#: Application/view/application/article/service.phtml:83
+msgid "Article.service.list.tableTh.name"
+msgstr "Nimi"
+
+#: Application/view/application/article/service.phtml:84
+msgid "Article.service.list.tableTh.code"
+msgstr "Kood"
+
+#: Application/view/application/article/service.phtml:85
+msgid "Article.service.list.tableTh.category"
+msgstr "Kategooria"
+
+#: Application/view/application/article/service.phtml:86
+msgid "Article.service.list.tableTh.brand"
+msgstr "Bränd"
+
+#: Application/view/application/article/service.phtml:87
+msgid "Article.service.list.tableTh.unit"
+msgstr "Ühik"
+
+#: Application/view/application/article/service.phtml:88
+msgid "Article.service.list.tableTh.salePrice"
+msgstr "Müügihind"
+
+#: Application/view/application/article/service.phtml:89
+msgid "Article.service.list.tableTh.qty"
+msgstr "Kogus"
+
+#: Application/view/application/article/service.phtml:90
+msgid "Article.service.list.tableTh.status"
+msgstr "Staatus"
+
+#: Application/view/application/article/service.phtml:91
+msgid "Article.service.list.tableTh.actions"
+msgstr "Tegevused"
+
+#: Application/view/application/article/service.phtml:107
+msgid "Article.service.row.action.editButton"
+msgstr "Muuda"
+
+#: Application/view/application/article/add-service.phtml:9
+#: Application/view/application/article/add-service.phtml:21
+msgid "Article.service.add.heading"
+msgstr "Teenuse lisamine"
+
+#: Application/view/application/article/add-service.phtml:76
+msgid "Article.service.add.cancelButton"
+msgstr "Loobu"
+
+#: Application/view/application/article/add-service.phtml:80
+msgid "Article.service.add.saveButton"
+msgstr "Salvesta"
+
+#: Application/view/application/article/item.phtml:10
+msgid "Article.item.list.heading"
+msgstr "Tooted"
+
+#: Application/view/application/article/item.phtml:38
+msgid "Article.item.filterForm.status.active.label"
+msgstr "Aktiivsed?"
+
+#: Application/view/application/article/item.phtml:41
+msgid "Article.item.filterForm.status.disabled.label"
+msgstr "Arhiveeritud?"
+
+#: Application/view/application/article/item.phtml:69
+msgid "Article.item.list.TableHeading"
+msgstr "Tooted"
+
+#: Application/view/application/article/item.phtml:73
+msgid "Article.item.list.addItem"
+msgstr "Lisa toode"
+
+#: Application/view/application/article/item.phtml:83
+msgid "Article.item.list.tableTh.name"
+msgstr "Nimi"
+
+#: Application/view/application/article/item.phtml:84
+msgid "Article.item.list.tableTh.code"
+msgstr "Kood"
+
+#: Application/view/application/article/item.phtml:85
+msgid "Article.item.list.tableTh.category"
+msgstr "Kategooria"
+
+#: Application/view/application/article/item.phtml:86
+msgid "Article.item.list.tableTh.brand"
+msgstr "Bränd"
+
+#: Application/view/application/article/item.phtml:87
+msgid "Article.item.list.tableTh.unit"
+msgstr "Ühik"
+
+#: Application/view/application/article/item.phtml:88
+msgid "Article.item.list.tableTh.salePrice"
+msgstr "Müügihind"
+
+#: Application/view/application/article/item.phtml:89
+msgid "Article.item.list.tableTh.qty"
+msgstr "Kogus"
+
+#: Application/view/application/article/item.phtml:90
+msgid "Article.item.list.tableTh.status"
+msgstr "Staatus"
+
+#: Application/view/application/article/item.phtml:91
+msgid "Article.item.list.tableTh.actions"
+msgstr "Tegevused"
+
+#: Application/view/application/article/item.phtml:107
+msgid "Article.item.row.action.editButton"
+msgstr "Muuda"
+
+#: Application/view/application/article/edit-service.phtml:8
+#: Application/view/application/article/edit-service.phtml:20
+msgid "Article.service.edit.heading"
+msgstr "Muuda teenust"
+
+#: Application/view/application/article/edit-service.phtml:75
+msgid "Article.service.edit.cancelButton"
+msgstr "Loobu"
+
+#: Application/view/application/article/edit-service.phtml:79
+msgid "Article.service.edit.saveButton"
+msgstr "Salvesta"
+
+#: Application/view/application/article/unit.phtml:12
 msgid "Article.unit.list.heading"
 msgstr "Ühikud"
 
-#: Application/view/application/article/unit.phtml:22
+#: Application/view/application/article/unit.phtml:28
+msgid "Article.unit.filterForm.status.active.label"
+msgstr "Aktiivsed?"
+
+#: Application/view/application/article/unit.phtml:31
+msgid "Article.unit.filterForm.status.disabled.label"
+msgstr "Arhiveeritud?"
+
+#: Application/view/application/article/unit.phtml:60
 msgid "Article.unit.list.TableHeading"
 msgstr "Ühikud"
 
-#: Application/view/application/article/unit.phtml:26
+#: Application/view/application/article/unit.phtml:64
 msgid "Article.unit.list.addRow"
 msgstr "Lisa ühik"
 
-#: Application/view/application/article/unit.phtml:36
+#: Application/view/application/article/unit.phtml:74
 msgid "Article.unit.list.tableTh.code"
 msgstr "Kood"
 
-#: Application/view/application/article/unit.phtml:37
-msgid "Article.unit.list.tableTh.value"
-msgstr "Väärtus"
-
-#: Application/view/application/article/unit.phtml:38
+#: Application/view/application/article/unit.phtml:75
 msgid "Article.unit.list.tableTh.status"
 msgstr "Staatus"
 
-#: Application/view/application/article/unit.phtml:39
+#: Application/view/application/article/unit.phtml:76
 msgid "Article.unit.list.tableTh.actions"
 msgstr "Tegevused"
 
-#: Application/view/application/article/unit.phtml:71
+#: Application/view/application/article/unit.phtml:108
 msgid "Article.unit.list.add.modalHeading"
 msgstr "Ühiku lisamine"
 
-#: Application/view/application/article/unit.phtml:98
+#: Application/view/application/article/unit.phtml:129
 msgid "Article.unit.list.add.modal.cancelButton"
 msgstr "Loobu"
 
-#: Application/view/application/article/unit.phtml:102
+#: Application/view/application/article/unit.phtml:133
 msgid "Article.unit.list.add.modal.saveButton"
 msgstr "Salvesta"
 
-#: Application/view/application/article/partial/unit-row.phtml:22
+#: Application/view/application/article/partial/unit-row.phtml:21
 msgid "Article.unit.row.action.saveButton"
 msgstr "Salvesta"
 
-#: Application/view/application/article/partial/unit-row.phtml:23
+#: Application/view/application/article/partial/unit-row.phtml:22
 msgid "Article.unit.row.action.changeButton"
 msgstr "Muuda"
 
-#: Application/view/application/article/partial/brand-row.phtml:18
+#: Application/view/application/article/partial/brand-row.phtml:21
 msgid "Article.brand.row.action.saveButton"
 msgstr "Salvesta"
 
-#: Application/view/application/article/partial/brand-row.phtml:19
+#: Application/view/application/article/partial/brand-row.phtml:22
 msgid "Article.brand.row.action.changeButton"
 msgstr "Muuda"
 
-#: Application/view/application/article/partial/category-row.phtml:26
+#: Application/view/application/article/partial/category-row.phtml:29
 msgid "Article.category.row.action.saveButton"
 msgstr "Salvesta"
 
-#: Application/view/application/article/partial/category-row.phtml:27
+#: Application/view/application/article/partial/category-row.phtml:30
 msgid "Article.category.row.action.changeButton"
 msgstr "Muuda"
 
@@ -963,41 +1817,112 @@ msgstr "Nimi"
 msgid "Admin.role.list.tableTh.actions"
 msgstr "Tegevused"
 
-#: Application/view/application/admin/role.phtml:46
+#: Application/view/application/admin/role.phtml:47
 msgid "Admin.role.row.action.editButton"
 msgstr "Muuda"
 
+#: Application/view/application/admin/user.phtml:9
+msgid "Admin.user.list.heading"
+msgstr "Kasutajad"
+
+#: Application/view/application/admin/user.phtml:21
+msgid "Admin.user.list.TableHeading"
+msgstr "Kasutajad"
+
+#: Application/view/application/admin/user.phtml:25
+msgid "Admin.user.list.addUser"
+msgstr "Lisa kasutaja"
+
+#: Application/view/application/admin/user.phtml:35
+msgid "Admin.user.list.tableTh.name"
+msgstr "Nimi"
+
+#: Application/view/application/admin/user.phtml:36
+msgid "Admin.user.list.tableTh.email"
+msgstr "E-mail (kasutajanimi)"
+
+#: Application/view/application/admin/user.phtml:37
+msgid "Admin.user.list.tableTh.phone"
+msgstr "Telefon"
+
+#: Application/view/application/admin/user.phtml:38
+msgid "Admin.user.list.tableTh.role"
+msgstr "Roll"
+
+#: Application/view/application/admin/user.phtml:39
+msgid "Admin.user.list.tableTh.status"
+msgstr "Staatus"
+
+#: Application/view/application/admin/user.phtml:40
+msgid "Admin.user.list.tableTh.actions"
+msgstr "Tegevused"
+
+#: Application/view/application/admin/user.phtml:59
+msgid "SystemRoles.master-admin"
+msgstr "Ülem administraator"
+
+#: Application/view/application/admin/user.phtml:77
+msgid "Admin.user.row.action.editButton"
+msgstr "Muuda"
+
+#: Application/view/application/admin/role/edit-role.phtml:9
+#: Application/view/application/admin/role/edit-role.phtml:21
+msgid "Admin.role.edit.heading"
+msgstr "Rolli muutmine"
+
 #: Application/view/application/admin/role/add-role.phtml:9
-#: Application/view/application/admin/role/add-role.phtml:20
+#: Application/view/application/admin/role/add-role.phtml:21
 msgid "Admin.role.add.heading"
 msgstr "Rolli lisamine"
 
-#: Application/view/application/admin/role/partial/role-form.phtml:7
-msgid "Admin.role.role-form.name.label"
-msgstr "Rolli nimi:"
+#: Application/view/application/admin/role/partial/role-form.phtml:11
+msgid "Admin.role.role-form.roleExists"
+msgstr "Selline roll on juba olemas"
 
-#: Application/view/application/admin/role/partial/role-form.phtml:9
-msgid "Admin.role.role-form.name.placeholder"
-msgstr "Rolli nimi"
-
-#: Application/view/application/admin/role/partial/role-form.phtml:15
+#: Application/view/application/admin/role/partial/role-form.phtml:17
 msgid "Admin.role.role-form-table.th.name"
 msgstr "Nimi"
 
-#: Application/view/application/admin/role/partial/role-form.phtml:16
+#: Application/view/application/admin/role/partial/role-form.phtml:18
 msgid "Admin.role.role-form-table.th.action"
 msgstr "Tegevus/vaade"
 
-#: Application/view/application/admin/role/partial/role-form.phtml:17
+#: Application/view/application/admin/role/partial/role-form.phtml:19
 msgid "Admin.role.role-form-table.th.isAllowed"
 msgstr "Lubatud?"
 
-#: Application/view/application/admin/role/partial/role-form.phtml:45
+#: Application/view/application/admin/role/partial/role-form.phtml:35
+msgid "Admin.role.role-form.navigationAction"
+msgstr "Menüüpunkt"
+
+#: Application/view/application/admin/role/partial/role-form.phtml:52
 msgid "Admin.role.role-form.cancelButton"
 msgstr "Tühista"
 
-#: Application/view/application/admin/role/partial/role-form.phtml:49
+#: Application/view/application/admin/role/partial/role-form.phtml:56
 msgid "Admin.role.role-form.saveButton"
+msgstr "Salvesta"
+
+#: Application/view/application/admin/user/edit-user.phtml:23
+#: Application/view/application/admin/user/edit-user.phtml:35
+msgid "Admin.user.edit.heading"
+msgstr "Muuda kasutajat"
+
+#: Application/view/application/admin/user/add-user.phtml:12
+msgid "application.user.register.status.help-block"
+msgstr "Staatuse väärtus ei ole korrektne!"
+
+#: Application/view/application/admin/user/add-user.phtml:24
+#: Application/view/application/admin/user/add-user.phtml:36
+msgid "Admin.user.add.heading"
+msgstr "Kasutaja lisamine"
+
+#: Application/view/application/admin/user/add-user.phtml:63
+msgid "Admin.user.add.cancelButton"
+msgstr "Tühista"
+
+#: Application/view/application/admin/user/add-user.phtml:67
+msgid "Admin.user.add.saveButton"
 msgstr "Salvesta"
 
 #: Application/view/application/company/index.phtml:9
@@ -1010,6 +1935,88 @@ msgstr "Tagasi"
 
 #: Application/view/application/company/index.phtml:70
 msgid "Company.edit.saveButton"
+msgstr "Salvesta"
+
+#: Application/view/application/client/client.phtml:12
+msgid "Client.list.heading"
+msgstr "Kliendid"
+
+#: Application/view/application/client/client.phtml:51
+msgid "Client.filterForm.status.active.label"
+msgstr "Aktiivsed?"
+
+#: Application/view/application/client/client.phtml:54
+msgid "Client.filterForm.status.disabled.label"
+msgstr "Arhiveeritud?"
+
+#: Application/view/application/client/client.phtml:82
+msgid "Client.list.TableHeading"
+msgstr "Kliendid"
+
+#: Application/view/application/client/client.phtml:86
+msgid "Client.list.addClient"
+msgstr "Lisa klient"
+
+#: Application/view/application/client/client.phtml:96
+msgid "Client.list.tableTh.name"
+msgstr "Nimi"
+
+#: Application/view/application/client/client.phtml:97
+msgid "Client.list.tableTh.code"
+msgstr "Kood"
+
+#: Application/view/application/client/client.phtml:98
+msgid "Client.list.tableTh.email"
+msgstr "E-mail"
+
+#: Application/view/application/client/client.phtml:99
+msgid "Client.list.tableTh.address"
+msgstr "Aadress"
+
+#: Application/view/application/client/client.phtml:100
+msgid "Client.list.tableTh.regNo"
+msgstr "Reg. nr"
+
+#: Application/view/application/client/client.phtml:101
+msgid "Client.list.tableTh.vatNo"
+msgstr "KMKR nr"
+
+#: Application/view/application/client/client.phtml:102
+msgid "Client.list.tableTh.status"
+msgstr "Staatus"
+
+#: Application/view/application/client/client.phtml:103
+msgid "Client.list.tableTh.actions"
+msgstr "Tegevused"
+
+#: Application/view/application/client/client.phtml:118
+msgid "Client.row.action.editButton"
+msgstr "Muuda"
+
+#: Application/view/application/client/edit-client.phtml:8
+#: Application/view/application/client/edit-client.phtml:20
+msgid "Client.edit.heading"
+msgstr "Kliendi muutmine"
+
+#: Application/view/application/client/edit-client.phtml:91
+msgid "Client.edit.cancelButton"
+msgstr "Loobu"
+
+#: Application/view/application/client/edit-client.phtml:95
+msgid "Client.edit.saveButton"
+msgstr "Salvesta"
+
+#: Application/view/application/client/add-client.phtml:8
+#: Application/view/application/client/add-client.phtml:20
+msgid "Client.add.heading"
+msgstr "Kliendi lisamine"
+
+#: Application/view/application/client/add-client.phtml:91
+msgid "Client.add.cancelButton"
+msgstr "Loobu"
+
+#: Application/view/application/client/add-client.phtml:95
+msgid "Client.add.saveButton"
 msgstr "Salvesta"
 
 #: Application/view/error/404.phtml:1
@@ -1077,9 +2084,30 @@ msgstr ""
 msgid "An error occurred"
 msgstr ""
 
+#~ msgid "Invoice.form.client.label"
+#~ msgstr "Klient:"
+
+#~ msgid "Article.unit.list.tableTh.value"
+#~ msgstr "Väärtus"
+
+#~ msgid "Brand.status.active"
+#~ msgstr "Aktiivne"
+
+#~ msgid "Brand.status.disabled"
+#~ msgstr "Peatatud"
+
 #, fuzzy
-#~ msgid "Unit.form.unit.label"
-#~ msgstr "Ühik:"
+#~ msgid "User.status.disabled"
+#~ msgstr "Peatatud"
+
+#~ msgid "register.isActive.label"
+#~ msgstr "Aktiivne?:"
+
+#~ msgid "Admin.role.role-form.name.label"
+#~ msgstr "Rolli nimi:"
+
+#~ msgid "Admin.role.role-form.name.placeholder"
+#~ msgstr "Rolli nimi"
 
 #, fuzzy
 #~ msgid "ArticleForm.message.regNrInput"
@@ -1115,12 +2143,6 @@ msgstr ""
 
 #~ msgid "login.forgotPasswordLink"
 #~ msgstr "Unustasin parooli"
-
-#~ msgid "register.message.firstNameInput"
-#~ msgstr "Eesnimi "
-
-#~ msgid "register.message.emailInput"
-#~ msgstr "E-post "
 
 #~ msgid "filterForm.value.lastInserted"
 #~ msgstr "Viimati lisatud"

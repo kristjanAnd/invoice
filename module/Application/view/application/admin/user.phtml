@@ -1,0 +1,105 @@
+<?php
+use Application\Controller\AdminController;
+$users = $this->users;
+?>
+<?php echo $this->partial('layout/partial/navigation', array('navKey' => $this->navKey)); ?>
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header"><?php echo $this->translate('Admin.user.list.heading')?></h1>
+        </div>
+        <!-- /.col-lg-12 -->
+        <div class="col-lg-6">
+            <?php echo $this->successMessages($this->messages); ?>
+            <?php echo $this->errorMessages($this->errorMessages); ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-bar-chart-o fa-fw"></i> <?php echo $this->translate('Admin.user.list.TableHeading')?>
+                    <?php if ($this->isAllowed(AdminController::AUTHORIZE_CLASS . 'add-user')):?>
+                        <div class="pull-right">
+                            <div class="btn-group">
+                                <a class="btn btn-default btn-xs" href="<?php echo $this->url('add-user', [], true)?>"><i class="fa fa-plus fa-fws"></i>  <?php echo $this->translate('Admin.user.list.addUser')?></a>
+                            </div>
+                        </div>
+                    <?php endif;?>
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <table class="table table-striped table-bordered table-hover" >
+                        <thead>
+                        <tr>
+                            <th><?php echo $this->translate('Admin.user.list.tableTh.name')?></th>
+                            <th><?php echo $this->translate('Admin.user.list.tableTh.email')?></th>
+                            <th><?php echo $this->translate('Admin.user.list.tableTh.phone')?></th>
+                            <th><?php echo $this->translate('Admin.user.list.tableTh.role')?></th>
+                            <th><?php echo $this->translate('Admin.user.list.tableTh.status')?></th>
+                            <th><?php echo $this->translate('Admin.user.list.tableTh.actions')?></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach($users as $user): /* @var $user \Application\Entity\User */?>
+                            <tr id="row-<?php echo $user->getId()?>">
+                                <td>
+                                    <?php echo $user->getFullName()?>
+                                </td>
+                                <td>
+                                    <?php echo $user->getEmail()?>
+                                </td>
+                                <td>
+                                    <?php echo $user->getPhone()?>
+                                </td>
+                                <td>
+                                    <?php
+                                        $roleName = '';
+                                        if($user->isMaster()){
+                                            $roleName = $this->translate('SystemRoles.master-admin');
+                                        } else {
+                                            $role = $user->getRoles()->last();
+                                            if($role->getRoleId() == \Application\Entity\Role::ROLE_ADMIN){
+                                                $roleName = $this->translate('SystemRoles.admin');
+                                            } else {
+                                                $roleName = $role->getName();
+                                            }
+                                        }
+                                    ?>
+                                    <?php echo $roleName ?>
+                                </td>
+                                <td>
+                                    <?php echo $this->userStatusArray[$user->getStatus()]?>
+                                </td>
+                                <td>
+                                    <?php if ($this->isAllowed(AdminController::AUTHORIZE_CLASS . 'edit-user')):?>
+                                        <?php if(($user->isMaster() && $this->currentUser()->isMaster()) || (!$user->isMaster())):?>
+                                            <a href="<?php echo $this->url('edit-user', ['id' => $user->getId()], true)?>" class="btn btn-xs btn-success" rel="tooltip"><i class="fa fa-save"></i> <?php echo $this->translate('Admin.user.row.action.editButton')?></a>
+                                        <?php endif;?>
+                                    <?php endif;?>
+                                </td>
+                            </tr>
+                        <?php endforeach;?>
+                        </tbody>
+                        <tfoot>
+                        <td colspan="6">
+                            <div class="pull-right">
+                                <?php echo $this->paginationControl($users, 'Sliding', 'application/paginator')?>
+                            </div>
+                        </td>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+        </div>
+        <!-- /.col-lg-8 -->
+    </div>
+    <!-- /.row -->
+</div>
+
+<!-- /#page-wrapper -->
+<script type="text/javascript">
+    $(document).ready(function() {
+    });
+</script>

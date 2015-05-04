@@ -13,9 +13,8 @@ use Application\Entity\Subject\Company;
 use Zend\Stdlib\Parameters;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Application\Repository\UnitRepository")
  * @ORM\Table(name="unit")
- *
  */
 class Unit extends AbstractEntity {
 
@@ -37,13 +36,6 @@ class Unit extends AbstractEntity {
      * @ORM\Column(name="code", type="string")
      */
     protected $code;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="value", type="string")
-     */
-    protected $value;
 
     /**
      * @var string
@@ -115,22 +107,6 @@ class Unit extends AbstractEntity {
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getValue()
-    {
-        return $this->value;
-    }
-
-    /**
-     * @param string $value
-     */
-    public function setValue($value)
-    {
-        $this->value = $value;
     }
 
     /**

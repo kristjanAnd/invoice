@@ -8,20 +8,93 @@
 
 namespace Application\Form;
 
+use Application\Entity\Subject;
 use Application\Entity\Subject\Company;
+use Application\Entity\User;
+use Application\Service\ClientService;
+use Application\Validator\MoneyValidator;
+use Zend\Form\Element\Select;
 use Zend\Form\Element\Text;
 use Zend\Form\Element\Textarea;
 use Zend\Form\Form;
 use Zend\InputFilter\Input;
 use Zend\InputFilter\InputFilter;
 use Zend\Mvc\I18n\Translator;
+use Zend\Validator\Digits;
 use Zend\Validator\NotEmpty;
+use Zend\Validator\StringLength;
 
-class SubjectForm extends Form{
+class SubjectForm extends Form {
     /**
      * @var Translator
      */
     protected $translator;
+
+    /**
+     * @var Subject\Client
+     */
+    protected $client;
+
+    protected $isClient = false;
+
+    /**
+     * @param $isClient
+     * @return $this
+     */
+    public function setIsClient($isClient)
+    {
+        $this->isClient = $isClient;
+        return $this;
+    }
+
+    /**
+     * @var Company
+     */
+    protected $company;
+
+    /**
+     * @param Company $company
+     * @return $this
+     */
+    public function setCompany(Company $company)
+    {
+        $this->company = $company;
+        return $this;
+    }
+
+    /**
+     * @var ClientService
+     */
+    protected $clientService;
+
+    /**
+     * @param ClientService $clientService
+     */
+    public function setClientService(ClientService $clientService)
+    {
+        $this->clientService = $clientService;
+    }
+
+    public function setClient(Subject\Client $client)
+    {
+        $this->client = $client;
+        $this->isClient = true;
+        return $this;
+    }
+
+    public function getCompanyUsersSelect(){
+        $result = array();
+        if($this->company){
+            foreach($this->company->getUsers() as $user){
+                if($user->getStatus() !== User::STATUS_ACTIVE){
+                    continue;
+                }
+                $result[$user->getId()] = $user->getFullName();
+            }
+        }
+        return $result;
+    }
+
 
     public function setTranslator(Translator $t)
     {
@@ -100,7 +173,63 @@ class SubjectForm extends Form{
         $phone->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
         $this->add($phone);
 
+        if($this->isClient){
+            $status = new Select('status');
+            $status->setAttributes(array(
+                'id' => 'status',
+                'class' => 'form-control'
+            ));
+            $status->setValueOptions($this->clientService->getClientStatusSelect());
+            $status->setLabel($this->translator->translate('Company.form.status.label'));
+            $status->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+            $this->add($status);
+
+            $clientUser = new Select('clientUser');
+            $clientUser->setAttributes(array(
+                'id' => 'clientUser',
+                'class' => 'form-control'
+            ));
+            $clientUser->setValueOptions($this->getCompanyUsersSelect());
+            $clientUser->setLabel($this->translator->translate('Company.form.clientUser.label'));
+            $clientUser->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+            $this->add($clientUser);
+
+            $delayPercent = new Text('delayPercent');
+            $delayPercent->setAttributes(array(
+                'id' => 'delayPercent',
+                'class' => 'form-control',
+                'placeholder' => $this->translator->translate('Company.form.delayPercent.placeholder')
+            ));
+            $delayPercent->setLabel($this->translator->translate('Company.form.delayPercent.label'));
+            $delayPercent->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+            $this->add($delayPercent);
+
+            $deadlineDays = new Text('deadlineDays');
+            $deadlineDays->setAttributes(array(
+                'id' => 'deadlineDays',
+                'class' => 'form-control',
+                'placeholder' => $this->translator->translate('Company.form.deadlineDays.placeholder')
+            ));
+            $deadlineDays->setLabel($this->translator->translate('Company.form.deadlineDays.label'));
+            $deadlineDays->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+            $this->add($deadlineDays);
+
+            $referenceNumber = new Text('referenceNumber');
+            $referenceNumber->setAttributes(array(
+                'id' => 'referenceNumber',
+                'class' => 'form-control',
+                'placeholder' => $this->translator->translate('Company.form.referenceNumber.placeholder')
+            ));
+            $referenceNumber->setLabel($this->translator->translate('Company.form.referenceNumber.label'));
+            $referenceNumber->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+            $this->add($referenceNumber);
+        }
+
         return $this;
+    }
+
+    public function setDefaultClientUser(User $user){
+        $this->get('clientUser')->setValue($user->getId());
     }
 
     public function getInputFilter() {
@@ -136,21 +265,63 @@ class SubjectForm extends Form{
             $phone->setRequired(false)->setAllowEmpty(true);
             $filter->add($phone);
 
+            if($this->isClient){
+                $notEmpty1 = new NotEmpty();
+                $notEmpty2 = new NotEmpty();
+
+                $status = new Input('status');
+                $status->getValidatorChain()->attach($notEmpty1->setMessage(sprintf($this->translator->translate('Validator.message.notEmpty'), $this->translator->translate('CompanyForm.message.statusInput')), NotEmpty::IS_EMPTY));
+                $filter->add($status);
+
+                $clientUser = new Input('clientUser');
+                $clientUser->getValidatorChain()->attach($notEmpty2->setMessage(sprintf($this->translator->translate('Validator.message.notEmpty'), $this->translator->translate('CompanyForm.message.clientUserInput')), NotEmpty::IS_EMPTY));
+                $filter->add($clientUser);
+
+                $floatValidator = new MoneyValidator();
+                $floatValidator->setMessage($this->translator->translate('subject.form.delayPercent.notDigits'), MoneyValidator::NOT_FLOAT);
+
+                $deadlineDayDigits = new Digits();
+                $deadlineDayDigits->setMessage($this->translator->translate('subject.form.deadlineDays.notDigits'), Digits::NOT_DIGITS);
+
+                $delayPercent = new Input('delayPercent');
+                $delayPercent->setRequired(false)->setAllowEmpty(true);
+                $delayPercent->getValidatorChain()->attach($floatValidator);
+                $filter->add($delayPercent);
+
+                $deadlineDays = new Input('deadlineDays');
+                $deadlineDays->setRequired(false)->setAllowEmpty(true);
+                $deadlineDays->getValidatorChain()->attach($deadlineDayDigits);
+                $filter->add($deadlineDays);
+
+                $referenceNumber = new Input('referenceNumber');
+                $referenceNumber->setRequired(false)->setAllowEmpty(true);
+                $filter->add($referenceNumber);
+            }
+
             $this->filter = $filter;
         }
 
         return $this->filter;
     }
 
-    public function setFormValues(Company $company){
-        if($company){
-            $this->get('name')->setValue($company->getName());
-            $this->get('code')->setValue($company->getCode());
-            $this->get('email')->setValue($company->getEmail());
-            $this->get('address')->setValue($company->getAddress());
-            $this->get('regNo')->setValue($company->getRegistrationNumber());
-            $this->get('vatNo')->setValue($company->getVatNumber());
-            $this->get('phone')->setValue($company->getPhone());
+    public function setFormValues(Subject $subject){
+        if($subject){
+            $this->get('name')->setValue($subject->getName());
+            $this->get('code')->setValue($subject->getCode());
+            $this->get('email')->setValue($subject->getEmail());
+            $this->get('address')->setValue($subject->getAddress());
+            $this->get('regNo')->setValue($subject->getRegistrationNumber());
+            $this->get('vatNo')->setValue($subject->getVatNumber());
+            $this->get('phone')->setValue($subject->getPhone());
+            if($subject instanceof Subject\Client){
+                $this->get('status')->setValue($subject->getStatus());
+                $this->get('delayPercent')->setValue($subject->getDelayPercent());
+                $this->get('deadlineDays')->setValue($subject->getDeadlineDays());
+                $this->get('referenceNumber')->setValue($subject->getReferenceNumber());
+                if($subject->getClientUser()){
+                    $this->get('clientUser')->setValue($subject->getClientUser()->getId());
+                }
+            }
         }
     }
 } 

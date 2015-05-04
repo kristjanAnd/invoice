@@ -6,6 +6,8 @@ use Application\Entity\Article\Brand;
 use Application\Entity\Article\Category;
 use Application\Entity\Article\Item;
 use Application\Entity\Article\Service;
+use Application\Entity\Document\Invoice;
+use Application\Entity\Subject\Client;
 use Application\Entity\Subject\Company;
 use Application\Entity\User\Hash;
 use BjyAuthorize\Provider\Role\ProviderInterface;
@@ -171,6 +173,40 @@ class User extends AbstractEntity implements UserInterface, ProviderInterface
     protected $units;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Application\Entity\Vat", mappedBy="user", cascade={"all"}, fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     * @ORM\OrderBy({"id" = "DESC"})
+     */
+    protected $vats;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_master", type="boolean")
+     */
+    protected $isMaster;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Application\Entity\Subject\Client", mappedBy="clientUser", cascade={"all"}, fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="client_user_id", referencedColumnName="id", nullable=false)
+     * @ORM\OrderBy({"id" = "DESC"})
+     */
+    protected $clients;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Application\Entity\Document\Invoice", mappedBy="company", cascade={"all"}, fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     * @ORM\OrderBy({"id" = "DESC"})
+     */
+    protected $invoices;
+
+    /**
      * Initialies the roles variable.
      */
     public function __construct()
@@ -182,6 +218,11 @@ class User extends AbstractEntity implements UserInterface, ProviderInterface
         $this->articleBrands = new ArrayCollection();
         $this->articleCategories = new ArrayCollection();
         $this->units = new ArrayCollection();
+        $this->isMaster = false;
+        $this->status = self::STATUS_ACTIVE;
+        $this->vats = new ArrayCollection();
+        $this->clients = new ArrayCollection();
+        $this->invoices = new ArrayCollection();
     }
 
     /**
@@ -541,6 +582,23 @@ class User extends AbstractEntity implements UserInterface, ProviderInterface
     /**
      * @return ArrayCollection
      */
+    public function getVats()
+    {
+        return $this->vats;
+    }
+
+    /**
+     * @param Vat $vat
+     */
+    public function addVat(Vat $vat)
+    {
+        $this->vats[] = $vat;
+        $vat->setUser($this);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
     public function getArticleCategories()
     {
         return $this->articleCategories;
@@ -552,6 +610,56 @@ class User extends AbstractEntity implements UserInterface, ProviderInterface
     public function addArticleCategory(Category $articleCategory)
     {
         $this->articleCategories[] = $articleCategory;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isMaster()
+    {
+        return $this->isMaster;
+    }
+
+    /**
+     * @param boolean $isMaster
+     */
+    public function setIsMaster($isMaster)
+    {
+        $this->isMaster = $isMaster;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getClients()
+    {
+        return $this->clients;
+    }
+
+    /**
+     * @param Client $client
+     */
+    public function addClient(Client $client)
+    {
+        $this->clients[] = $client;
+        $client->setClientUser($this);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getInvoices()
+    {
+        return $this->invoices;
+    }
+
+    /**
+     * @param Invoice $invoice
+     */
+    public function addInvoice(Invoice $invoice)
+    {
+        $this->invoices[] = $invoice;
+        $invoice->setUser($this);
     }
 
 }

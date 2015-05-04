@@ -1,12 +1,14 @@
 <?php
     $controllers = $this->controllers;
     $adminService = $this->service('Application\Service\Admin'); /* @var $adminService \Application\Service\AdminService  */
+    $form = $this->form;
 ?>
 <form id="roleForm" method="post" action="<?php echo $this->action?>">
     <div class="form-group" >
-        <label class="col-sm-2 control-label" for="name"><?php echo $this->translate('Admin.role.role-form.name.label')?></label>
+        <?php echo $this->formLabel($form->get('name'))?>
         <div class="col-sm-2">
-            <input type="text" name="name" id="name" class="form-control" placeholder="<?php echo $this->translate('Admin.role.role-form.name.placeholder')?>" value="<?php echo $this->role ? $this->role->getName() : ''?>">
+            <?php echo $this->formText($form->get('name'))?>
+            <span style="display: none" class="role-exists"><i class="fa fa-warning"></i> <?php echo $this->translate('Admin.role.role-form.roleExists')?></span>
         </div>
     </div><br/><br/><br/>
 
@@ -25,9 +27,14 @@
             <?php foreach($controller->getActions() as $action): /* @var $action \Application\Entity\Controller\Action */?>
                 <?php
                     $roleAction = $this->role ? $adminService->getRoleActionByRoleAndAction($this->role, $action) : null;
+                    $isNavigation = $action->isNavigation();
                 ?>
                 <tr>
-                    <td></td>
+                    <td>
+                        <?php if($isNavigation):?>
+                            <i class="fa fa-exclamation fa-fws"></i>  <?php echo $this->translate('Admin.role.role-form.navigationAction')?>
+                        <?php endif;?>
+                    </td>
                     <td><?php echo $this->translate($action->getTranslationKey())?></td>
                     <td>
                         <input type="checkbox" name="isAllowed[<?php echo $action->getId()?>]" <?php if($roleAction && $roleAction->isEnabled()):?>checked<?php endif;?>>
@@ -41,7 +48,7 @@
                 <div class="form-actions pull-right">
                     <div class="row">
                         <div class="col-sm-12">
-                            <a href="<?php echo $this->url('home', [], true)?>" class="btn btn-default">
+                            <a href="<?php echo $this->url('role', [], true)?>" class="btn btn-default">
                                 <?php echo $this->translate('Admin.role.role-form.cancelButton')?>
                             </a>
                             <button class="btn btn-primary" id="submit"  type="submit">

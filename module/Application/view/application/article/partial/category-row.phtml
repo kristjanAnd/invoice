@@ -1,4 +1,6 @@
 <?php
+use Application\Controller\ArticleController;
+
 $articleService = $this->service('Application\Service\Article');
 ?>
 <tr id="row-<?php echo $this->category->getId()?>">
@@ -15,15 +17,17 @@ $articleService = $this->service('Application\Service\Article');
         <textarea class="input-<?php echo $this->category->getId()?> form-control description" style="display: none"  id="description-input-<?php echo $this->category->getId()?>" rows="3" ><?php echo $this->category->getDescription()?></textarea>
     </td>
     <td>
-        <p class="value-<?php echo $this->category->getId()?>" id="status-value-<?php echo $this->category->getId()?>"><?php echo $this->category->getStatus()?></p>
+        <p class="value-<?php echo $this->category->getId()?>" id="status-value-<?php echo $this->category->getId()?>"><?php echo $this->statuses[$this->category->getStatus()]?></p>
         <select class="input-<?php echo $this->category->getId()?> form-control status" style="display: none" id="status-input-<?php echo $this->category->getId()?>">
-            <?php foreach($articleService->getCategoryStatusSelect() as $k => $v):?>
-                <option value="<?php echo $k?>" <?php if($k == $this->category->getStatus()):?>selected<?php endif;?>><?php echo $k?></option>
+            <?php foreach($articleService->getArticleCategoryStatusSelect() as $k => $v):?>
+                <option value="<?php echo $k?>" <?php if($k == $this->category->getStatus()):?>selected<?php endif;?>><?php echo $v?></option>
             <?php endforeach;?>
         </select>
     </td>
     <td>
-        <button style="display: none" data-value="<?php echo $this->category->getId()?>" class="btn btn-xs btn-success saveCategory" rel="tooltip"><i class="fa fa-save"></i> <?php echo $this->translate('Article.category.row.action.saveButton')?></button>
-        <button data-value ="<?php echo $this->category->getId()?>" class="btn btn-xs btn-default editCategory" rel="tooltip"><i class="fa fa-pencil"></i> <?php echo $this->translate('Article.category.row.action.changeButton')?></button>
+        <?php if ($this->isAllowed(ArticleController::AUTHORIZE_CLASS . 'edit-category')):?>
+            <button style="display: none" data-value="<?php echo $this->category->getId()?>" class="btn btn-xs btn-success saveCategory" rel="tooltip"><i class="fa fa-save"></i> <?php echo $this->translate('Article.category.row.action.saveButton')?></button>
+            <button data-value ="<?php echo $this->category->getId()?>" class="btn btn-xs btn-default editCategory" rel="tooltip"><i class="fa fa-pencil"></i> <?php echo $this->translate('Article.category.row.action.changeButton')?></button>
+        <?php endif;?>
     </td>
 </tr>

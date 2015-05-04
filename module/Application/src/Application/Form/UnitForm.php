@@ -54,16 +54,6 @@ class UnitForm extends Form {
         $code->setLabelAttributes(array('class' => 'col-sm-4 control-label'));
         $this->add($code);
 
-        $value = new Text('value');
-        $value->setAttributes(array(
-            'id' => 'value',
-            'class' => 'form-control',
-            'placeholder' => $this->translator->translate('Unit.form.value.placeholder')
-        ));
-        $value->setLabel($this->translator->translate('Unit.form.value.label'));
-        $value->setLabelAttributes(array('class' => 'col-sm-4 control-label'));
-        $this->add($value);
-
         $status = new Select('status');
         $status->setAttributes(array(
             'id' => 'unit',
@@ -85,10 +75,6 @@ class UnitForm extends Form {
             $code = new Input('code');
             $code->getValidatorChain()->attach($notEmpty->setMessage(sprintf($this->translator->translate('Validator.message.notEmpty'), $this->translator->translate('UnitForm.message.codeInput')), NotEmpty::IS_EMPTY));
             $filter->add($code);
-
-            $value = new Input('value');
-            $value->getValidatorChain()->attach($notEmpty->setMessage(sprintf($this->translator->translate('Validator.message.notEmpty'), $this->translator->translate('UnitForm.message.valueInput')), NotEmpty::IS_EMPTY));
-            $filter->add($value);
 
             $status = new Input('status');
             $status->getValidatorChain()->attach($notEmpty->setMessage(sprintf($this->translator->translate('Validator.message.notEmpty'), $this->translator->translate('UnitForm.message.statusInput')), NotEmpty::IS_EMPTY));
