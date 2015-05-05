@@ -22,16 +22,16 @@ class ServiceRepository extends AbstractRepository {
                 $queryBuilder->andWhere("Service.status IN ('" . implode("', '", $data->statuses) . "')");
             }
             if(isset($data->name)){
-                $queryBuilder->andWhere('Item.name LIKE :name')->setParameter('name', '%' . $data->name . '%');
+                $queryBuilder->andWhere('Service.name LIKE :name')->setParameter('name', '%' . $data->name . '%');
             }
             if(isset($data->code)){
-                $queryBuilder->andWhere('Item.code LIKE :code')->setParameter('code', '%' . $data->code . '%');
+                $queryBuilder->andWhere('Service.code LIKE :code')->setParameter('code', '%' . $data->code . '%');
             }
             if(isset($data->category)){
-                $queryBuilder->andWhere('Item.category =:category')->setParameter('category', $data->category);
+                $queryBuilder->andWhere('Service.category =:category')->setParameter('category', $data->category);
             }
             if(isset($data->brand)){
-                $queryBuilder->andWhere('Item.brand =:brand')->setParameter('brand', $data->brand);
+                $queryBuilder->andWhere('Service.brand =:brand')->setParameter('brand', $data->brand);
             }
         }
 
