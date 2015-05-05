@@ -1,0 +1,6 @@
+<?php
+
+echo $this->headLink()->appendStylesheet($this->basePath() . '/lib/custom-datepicker/css/normalize.css')
+    ->appendStylesheet($this->basePath() . '/lib/custom-datepicker/css/datepicker.css');
+
+echo $this->headScript()->prependFile($this->basePath() . '/lib/jquery-ui-1.10.4/js/jquery-ui-1.10.4.custom.min.js');

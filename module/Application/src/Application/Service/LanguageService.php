@@ -11,7 +11,7 @@ namespace Application\Service;
 
 class LanguageService extends AbstractService {
 
-    public function getLanguageSelect(){
+    public function getLanguageSelect() {
         $result = array();
         $languages = $this->locator->get('Config')['languages']['available'];
         foreach($languages as $k => $v){
@@ -31,5 +31,32 @@ class LanguageService extends AbstractService {
         );
 
         return isset($translations[$id]) ? $translations[$id] : $translations['et'];
+    }
+
+    public static function getCurrentLanguageCode($locator){
+        /* @var $sessionManager \Zend\Session\SessionManager */
+        $sessionManager = $locator->get('Zend\Session\SessionManager');
+        $availableLanguages = $locator->get('Config')['languages']['available'];
+        $sessionStorage = $sessionManager->getStorage();
+        $code = $sessionStorage->offsetGet('language');
+        if(!array_key_exists($code, $availableLanguages)){
+            $code = $locator->get('Config')['languages']['defaultIdentificator'];
+        }
+        return $code;
+    }
+
+    public static function getDateFormatByLanguageCode($code){
+        $dateFormats = array(
+            'et' => 'd.m.Y',
+            'ru' => 'd.m.Y',
+            'us' => 'd/m/Y'
+
+        );
+        if(array_key_exists($code, $dateFormats)){
+           $format =  $dateFormats[$code];
+        } else {
+            $format = 'd.m.Y';
+        }
+        return $format;
     }
 } 

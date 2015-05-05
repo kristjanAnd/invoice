@@ -220,6 +220,18 @@ return [
                 'key' => 'Controller.invoice.action.edit-invoice',
                 'is_navigation' => false,
                 'order_no' => 3,
+            ],
+            [
+                'name' => 'invoice-setting',
+                'key' => 'Controller.invoice.action.invoice-setting',
+                'is_navigation' => true,
+                'order_no' => 4,
+            ],
+            [
+                'name' => 'edit-invoice-setting',
+                'key' => 'Controller.invoice.action.edit-invoice-setting',
+                'is_navigation' => false,
+                'order_no' => 5,
             ]
         ]
     ],

@@ -37,6 +37,12 @@ class Role extends AbstractEntity implements HierarchicalRoleInterface
     protected $name;
 
     /**
+     * @var string
+     * @ORM\Column(type="string", name="redirect_route", length=90, nullable=true)
+     */
+    protected $redirectRoute;
+
+    /**
      * @var Role
      * @ORM\ManyToOne(targetEntity="Application\Entity\Role")
      */
@@ -146,6 +152,22 @@ class Role extends AbstractEntity implements HierarchicalRoleInterface
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRedirectRoute()
+    {
+        return $this->redirectRoute;
+    }
+
+    /**
+     * @param string $redirectRoute
+     */
+    public function setRedirectRoute($redirectRoute)
+    {
+        $this->redirectRoute = $redirectRoute;
     }
 
 }

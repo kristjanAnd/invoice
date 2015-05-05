@@ -28,6 +28,9 @@ abstract class Article extends AbstractEntity {
     const STATUS_ACTIVE = 'active';
     const STATUS_DISABLED = 'disabled';
 
+    const ARTICLE_TYPE_ITEM = 'item';
+    const ARTICLE_TYPE_SERVICE = 'service';
+
     /**
      * @var integer
      *

@@ -15,6 +15,7 @@ use Application\Entity\Subject\Company;
 use Application\Entity\User;
 use Application\Entity\Vat;
 use Doctrine\ORM\Mapping as ORM;
+use Zend\Stdlib\Parameters;
 
 /**
  * Invoice
@@ -27,6 +28,9 @@ class Invoice extends Document {
     const STATUS_PENDING = 'pending';
     const STATUS_ARCHIVED = 'archived';
     const STATUS_CONFIRMED = 'confirmed';
+
+    const PAYMENT_STATUS_PAID = 'paid';
+    const PAYMENT_STATUS_UNPAID = 'unpaid';
 
     /**
      * @var \Application\Entity\User $user
@@ -48,7 +52,7 @@ class Invoice extends Document {
      * @var \Application\Entity\Subject\Client $client
      *
      *      @ORM\ManyToOne(targetEntity="Application\Entity\Subject\Client", inversedBy="invoices")
-     *      @ORM\JoinColumn(name="subject_id", referencedColumnName="id", nullable=false)
+     *      @ORM\JoinColumn(name="client_id", referencedColumnName="id", nullable=false)
      */
     protected $client;
 
@@ -97,10 +101,20 @@ class Invoice extends Document {
 
     /**
      * @var string
-     *
      * @ORM\Column(name="status", type="string")
      */
     protected $status;
+
+    /**
+     * @var string
+     * @ORM\Column(name="payment_status", type="string")
+     */
+    protected $paymentStatus;
+
+    public function __construct(Parameters $data = null){
+        parent::__construct($data);
+        $this->paymentStatus = self::PAYMENT_STATUS_UNPAID;
+    }
 
     /**
      * @return \Application\Entity\Subject\Client

@@ -10,6 +10,7 @@ namespace Application\Controller;
 
 
 use Application\Service\InvoiceService;
+use Application\Service\LanguageService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Paginator\Adapter\ArrayAdapter;
 use Zend\Paginator\Paginator;
@@ -20,6 +21,7 @@ class InvoiceController extends AbstractActionController {
 
     const AUTHORIZE_CLASS = 'controller/Application\Controller\Invoice:';
     const NAV_KEY_INVOICE = 'invoice';
+    const NAV_KEY_INVOICE_SETTING = 'invoice-setting';
 
     /**
      * @var InvoiceService
@@ -36,10 +38,18 @@ class InvoiceController extends AbstractActionController {
 
     public function invoiceAction(){
         $userData = $this->getUserData();
-        $filterForm = $this->getServiceLocator()->get('Application\Form\Filter')->setCompany($userData->company)->init();
-        if($this->request->isGet()){
+        $filterForm = $this->getServiceLocator()->get('Application\Form\Filter')
+            ->setFilterDateFormat(LanguageService::getCurrentLanguageCode($this->getServiceLocator()))
+            ->setCompany($userData->company)
+            ->init();
+        $filterForm->setDefaultFilterDates();
+        if($this->request->isGet() && count($this->request->getQuery()) > 0){
             $filterForm->setData($this->request->getQuery());
-            $filterData = $this->invoiceService->getFilterData($this->request->getQuery(), $userData->user);
+            if($filterForm->isValid()){
+                $filterData = $this->invoiceService->getFilterData(new Parameters($filterForm->getData()), $userData->user, $filterForm->getFilterDateFormat());
+            }
+        } else {
+            $filterData = $this->invoiceService->getDefaultFilterData($filterForm, $userData->user);
         }
         $invoices = $this->invoiceService->getCompanyInvoices($userData->company, $filterData);
 
@@ -49,13 +59,33 @@ class InvoiceController extends AbstractActionController {
         $view->messages = $this->flashMessenger()->getMessages();
         $view->errorMessages = $this->flashMessenger()->getErrorMessages();
         $view->statuses = $this->invoiceService->getInvoiceStatusSelect();
+        $view->paymentStatuses = $this->invoiceService->getInvoiceStatusSelect();
         $view->filterForm = $filterForm;
         $view->user = $userData->user;
         return $view;
     }
 
     public function addInvoiceAction(){
+        $userData = $this->getUserData();
+        $currentLanguageCode = LanguageService::getCurrentLanguageCode($this->getServiceLocator());
+        $defaultDateFormat = LanguageService::getDateFormatByLanguageCode($currentLanguageCode);
         $view = new ViewModel();
+        $form = $this->getServiceLocator()->get('Application\Form\Document\Invoice')->setCompany($userData->company)->setDateFormat($defaultDateFormat)->setLanguageCode($currentLanguageCode)->init();
+        $form->setDefaultUser($userData->user);
+        $form->setDefaultData($userData->invoiceSetting);
+        $addArticleForm = $this->getServiceLocator()->get('Application\Form\AddArticle')->setCompany($userData->company)->init();
+        if ($this->request->isPost()) {
+            $form->setData($this->request->getPost());
+            $translator = $this->getTranslator();
+            if($form->isValid()){
+//                $client = $this->clientService->saveClient(new Client($userData), new Parameters($form->getData()));
+//                $this->flashMessenger()->addMessage($translator->translate('Client.add.successMessage'));
+//                return $this->redirect()->toRoute('client', [], true);
+            }
+        }
+        $view->form = $form;
+        $view->navKey = self::NAV_KEY_INVOICE;
+        $view->addArticleFrom = $addArticleForm;
         return $view;
     }
 
@@ -64,12 +94,45 @@ class InvoiceController extends AbstractActionController {
         return $view;
     }
 
+    public function invoiceSettingAction(){
+        $view = new ViewModel();
+        $userData = $this->getUserData();
+        $companyInvoiceSetting = $this->invoiceService->getInvoiceSettingByCompany($userData->company, $userData->user);
+        $form = $this->getServiceLocator()->get('Application\Form\DocumentSetting\InvoiceSetting')->setCompany($userData->company)->init();
+        $form->setFormValues($companyInvoiceSetting);
+
+        $view->form = $form;
+        $view->navKey = self::NAV_KEY_INVOICE_SETTING;
+        $view->messages = $this->flashMessenger()->getMessages();
+        $view->errorMessages = $this->flashMessenger()->getErrorMessages();
+        return $view;
+    }
+
+    public function editInvoiceSettingAction(){
+        $userData = $this->getUserData();
+        $companyInvoiceSetting = $this->invoiceService->getInvoiceSettingByCompany($userData->company, $userData->user);
+        $form = $this->getServiceLocator()->get('Application\Form\DocumentSetting\InvoiceSetting')->setCompany($userData->company)->init();
+        if($this->request->isPost()){
+            $translator = $this->getTranslator();
+            $form->setData($this->request->getPost());
+            if($form->isValid()){
+                $this->invoiceService->saveInvoiceSetting($companyInvoiceSetting, $this->request->getPost());
+                $this->flashMessenger()->addMessage($translator->translate('Invoice.editInvoiceSetting.successMessage'));
+            } else {
+                $this->flashMessenger()->addErrorMessage($translator->translate('Invoice.editInvoiceSetting.errorMessage'));
+            }
+        }
+        return $this->redirect()->toRoute('invoice-setting', [], true);
+    }
+
     private function getUserData(){
         $data = new Parameters();
         $user = $this->currentdata()->getCurrentUser();
         $company = $user->getCompany();
+        $companyInvoiceSetting = $this->invoiceService->getInvoiceSettingByCompany($company, $user);
         $data->company = $company;
         $data->user = $user;
+        $data->invoiceSetting = $companyInvoiceSetting;
         return $data;
     }
 

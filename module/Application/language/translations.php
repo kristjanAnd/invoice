@@ -45,3 +45,6 @@ Translator::noop('Controller.invoice');
 Translator::noop('Controller.invoice.action.invoice');
 Translator::noop('Controller.invoice.action.add-invoice');
 Translator::noop('Controller.invoice.action.edit-invoice');
+
+Translator::noop('Controller.invoice.action.invoice-setting');
+Translator::noop('Controller.invoice.action.edit-invoice-setting');

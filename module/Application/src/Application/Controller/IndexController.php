@@ -17,6 +17,7 @@ use Zend\View\Model\ViewModel;
 class IndexController extends AbstractActionController
 {
     const NAV_KEY_DASHBOARD = 'dashboard';
+    const DEFAULT_REDIRECT_ROUTE = 'dashboard';
     /**
      * @var UserService
      */
@@ -36,7 +37,8 @@ class IndexController extends AbstractActionController
             return $this->redirect()->toRoute('zfcuser/login', [], true);
         }
         $user = $this->currentdata()->getCurrentUser();
-        return $this->redirect()->toRoute('dashboard', ['language' => $user->getLanguageCode()]);
+        $redirectRoute = $user->getRoles()->last()->getRedirectRoute() !== null ? $user->getRoles()->last()->getRedirectRoute() : self::DEFAULT_REDIRECT_ROUTE;
+        return $this->redirect()->toRoute($redirectRoute, ['language' => $user->getLanguageCode()]);
     }
 
     public function dashboardAction()

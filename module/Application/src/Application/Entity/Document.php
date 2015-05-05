@@ -96,14 +96,11 @@ abstract class Document extends AbstractEntity {
     protected $suffix;
 
     /**
-     * @var \Application\Entity\Subject
+     * @var string
      *
-     * @ORM\ManyToOne(targetEntity="Application\Entity\Subject")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="subject_id", referencedColumnName="id")
-     * })
+     * @ORM\Column(name="full_number", type="string")
      */
-    protected $subject;
+    protected $fullNumber;
 
     /**
      * @var string
@@ -276,6 +273,7 @@ abstract class Document extends AbstractEntity {
     public function setDocumentNumber($documentNumber)
     {
         $this->documentNumber = $documentNumber;
+        $this->fullNumber = $this->prefix . $documentNumber . $this->suffix;
     }
 
     /**
@@ -300,22 +298,6 @@ abstract class Document extends AbstractEntity {
     public function setPrefix($prefix)
     {
         $this->prefix = $prefix;
-    }
-
-    /**
-     * @return Subject
-     */
-    public function getSubject()
-    {
-        return $this->subject;
-    }
-
-    /**
-     * @param Subject $subject
-     */
-    public function setSubject(Subject $subject)
-    {
-        $this->subject = $subject;
     }
 
     /**
@@ -478,5 +460,12 @@ abstract class Document extends AbstractEntity {
         $this->languageCode = $languageCode;
     }
 
+    /**
+     * @return string
+     */
+    public function getFullNumber()
+    {
+        return $this->fullNumber;
+    }
 
 } 

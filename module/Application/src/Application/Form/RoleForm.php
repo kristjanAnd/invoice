@@ -11,8 +11,10 @@ namespace Application\Form;
 
 use Application\Entity\Role;
 use Application\Entity\Subject\Company;
+use Application\Service\AdminService;
 use Application\Validator\NoObjectExists;
 use Doctrine\Common\Persistence\ObjectManager;
+use Zend\Form\Element\Select;
 use Zend\Form\Element\Text;
 use Zend\Form\Form;
 use DoctrineModule\Persistence\ObjectManagerAwareInterface;
@@ -30,9 +32,22 @@ class RoleForm extends Form  implements ObjectManagerAwareInterface{
     protected $role;
 
     protected $company;
+    /**
+     * @var AdminService
+     */
+    protected $adminService;
+
+    /**
+     * @param AdminService $adminService
+     */
+    public function setAdminService(AdminService $adminService)
+    {
+        $this->adminService = $adminService;
+    }
 
     /**
      * @param Company $company
+     * @return $this
      */
     public function setCompany(Company $company)
     {
@@ -96,10 +111,24 @@ class RoleForm extends Form  implements ObjectManagerAwareInterface{
             'placeholder' => $this->translator->translate('role.form.name.placeholder')
         ));
         $name->setLabel($this->translator->translate('role.form.name.label'));
-        $name->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+        $name->setLabelAttributes(array('class' => 'col-sm-1 control-label'));
         $this->add($name);
 
+        $redirectRoute = new Select('redirectRoute');
+        $redirectRoute->setAttributes(array(
+            'id' => 'redirectRoute',
+            'class' => 'form-control'
+        ));
+        $redirectRoute->setValueOptions($this->adminService->getRedirectRouteSelectForRole());
+        $redirectRoute->setLabel($this->translator->translate('role.form.redirectRoute.label'));
+        $redirectRoute->setLabelAttributes(array('class' => 'col-sm-1 control-label'));
+        $this->add($redirectRoute);
+
         return $this;
+    }
+
+    public function setDefaultRedirectRoute($route){
+        $this->get('redirectRoute')->setValue($route);
     }
 
     public function getInputFilter()
@@ -125,10 +154,14 @@ class RoleForm extends Form  implements ObjectManagerAwareInterface{
                 ));
             }
             $noObjectExists->setCompany($this->company);
-            $noObjectExists->setMessage('Selline roll on juba olemas', NoObjectExists::ERROR_OBJECT_FOUND);
+            $noObjectExists->setMessage($this->translator->translate('Role.form.error.roleExists'), NoObjectExists::ERROR_OBJECT_FOUND);
             $name = new Input('name');
             $name->getValidatorChain()->attach($notEmpty->setMessage(sprintf($this->translator->translate('Validator.message.notEmpty'), $this->translator->translate('RoleForm.message.nameInput')), NotEmpty::IS_EMPTY))->attach($noObjectExists);
             $this->filter->add($name);
+
+            $redirectRoute = new Input('redirectRoute');
+            $this->filter->add($redirectRoute);
+
         }
 
         return $this->filter;
@@ -137,6 +170,7 @@ class RoleForm extends Form  implements ObjectManagerAwareInterface{
     public function setFormValues(Role $role = null){
         if($role){
             $this->get('name')->setValue($role->getName());
+            $this->get('redirectRoute')->setValue($role->getRedirectRoute());
         }
     }
 }

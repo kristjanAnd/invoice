@@ -3,6 +3,7 @@ use Application\Controller\AdminController;
 use Application\Controller\ArticleController;
 use Application\Controller\ClientController;
 use Application\Controller\IndexController;
+use Application\Controller\InvoiceController;
 
 $adminNavKeys = array(
     AdminController::NAV_KEY_ROLE,
@@ -15,6 +16,11 @@ $articleNavKeys = array(
     ArticleController::NAV_KEY_CATEGORY,
     ArticleController::NAV_KEY_UNIT,
     ArticleController::NAV_KEY_SERVICE
+);
+
+$invoiceNavKeys = array(
+    InvoiceController::NAV_KEY_INVOICE,
+    InvoiceController::NAV_KEY_INVOICE_SETTING
 );
 
 ?>
@@ -103,6 +109,25 @@ $articleNavKeys = array(
                     </a>
                 </li>
             <?php endif;?>
+            <li <?php if(in_array($this->navKey, $invoiceNavKeys)):?>class="active"<?php endif;?>>
+                <a href="#"><i class="fa fa-file-text-o fa-fw"></i> <?php echo $this->translate('Navigation.invoice')?><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <?php if($this->isAllowed(InvoiceController::AUTHORIZE_CLASS . 'invoice')):?>
+                        <li>
+                            <a href="<?php echo $this->url('invoice', [], true)?>" <?php if($this->navKey == InvoiceController::NAV_KEY_INVOICE):?>class="active"<?php endif;?>>
+                                <?php echo $this->translate('Navigation.invoice.invoices')?>
+                            </a>
+                        </li>
+                    <?php endif;?>
+                    <?php if($this->isAllowed(InvoiceController::AUTHORIZE_CLASS . 'invoice-setting')):?>
+                        <li>
+                            <a href="<?php echo $this->url('invoice-setting', [], true)?>" <?php if($this->navKey == InvoiceController::NAV_KEY_INVOICE_SETTING):?>class="active"<?php endif;?>>
+                                <?php echo $this->translate('Navigation.invoice.invoice-settings')?>
+                            </a>
+                        </li>
+                    <?php endif;?>
+                </ul>
+            </li>
             <!--li>
                 <a href="#"><i class="fa fa-table fa-fw"></i> Tables</a>
             </li>

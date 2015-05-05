@@ -28,7 +28,7 @@ class ClientService extends AbstractService {
     public function getCompanyActiveClientSelect(Company $company){
         $result = array();
         foreach($this->getCompanyActiveClients($company) as $client){
-            $result[$client] = $client->getName();
+            $result[$client->getId()] = $client->getName();
         }
         return $result;
     }

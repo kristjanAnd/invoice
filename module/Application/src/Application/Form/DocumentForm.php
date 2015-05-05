@@ -9,6 +9,7 @@
 namespace Application\Form;
 
 use Application\Entity\Document;
+use Application\Entity\DocumentSetting;
 use Application\Entity\Subject\Company;
 use Application\Entity\User;
 use Application\Service\DocumentService;
@@ -17,6 +18,7 @@ use Application\Validator\MoneyValidator;
 use Zend\Form\Element\Select;
 use Zend\Form\Element\Text;
 use Zend\Form\Element\Textarea;
+use Zend\I18n\Validator\DateTime;
 use Zend\InputFilter\Input;
 use Zend\InputFilter\InputFilter;
 use Zend\Mvc\I18n\Translator;
@@ -44,6 +46,46 @@ class DocumentForm extends Form
      * @var LanguageService
      */
     protected $languageService;
+
+    protected $dateFormat;
+
+    protected $languageCode;
+
+    /**
+     * @return mixed
+     */
+    public function getLanguageCode()
+    {
+        return $this->languageCode;
+    }
+
+    /**
+     * @param $languageCode
+     * @return $this
+     */
+    public function setLanguageCode($languageCode)
+    {
+        $this->languageCode = $languageCode;
+        return $this;
+    }
+
+    /**
+     * @param $dateFormat
+     * @return $this
+     */
+    public function setDateFormat($dateFormat)
+    {
+        $this->dateFormat = $dateFormat;
+        return  $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDateFormat()
+    {
+        return $this->dateFormat;
+    }
 
     /**
      * @param LanguageService $languageService
@@ -101,7 +143,7 @@ class DocumentForm extends Form
             'placeholder' => $this->translator->translate('Document.form.documentDate.placeholder')
         ));
         $documentDate->setLabel($this->translator->translate('Document.form.documentDate.label'));
-        $documentDate->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+        $documentDate->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
         $this->add($documentDate);
 
         $user = new Select('user');
@@ -111,7 +153,7 @@ class DocumentForm extends Form
         ));
         $user->setValueOptions($this->getCompanyUsersSelect());
         $user->setLabel($this->translator->translate('Document.form.user.label'));
-        $user->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+        $user->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
         $this->add($user);
 
         $dateFormat = new Select('dateFormat');
@@ -121,7 +163,7 @@ class DocumentForm extends Form
         ));
         $dateFormat->setValueOptions($this->documentService->getDateFormatSelect());
         $dateFormat->setLabel($this->translator->translate('Document.form.dateFormat.label'));
-        $dateFormat->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+        $dateFormat->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
         $this->add($dateFormat);
 
         $language = new Select('language');
@@ -131,47 +173,51 @@ class DocumentForm extends Form
         ));
         $language->setValueOptions($this->languageService->getLanguageSelect());
         $language->setLabel($this->translator->translate('Document.form.language.label'));
-        $language->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+        $language->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
         $this->add($language);
 
         $documentNumber = new Text('documentNumber');
         $documentNumber->setAttributes(array(
             'id' => 'documentNumber',
+            'readonly' => 'readonly',
             'class' => 'form-control',
             'placeholder' => $this->translator->translate('Document.form.documentNumber.placeholder')
         ));
         $documentNumber->setLabel($this->translator->translate('Document.form.documentNumber.label'));
-        $documentNumber->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+        $documentNumber->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
         $this->add($documentNumber);
 
         $amount = new Text('amount');
         $amount->setAttributes(array(
             'id' => 'amount',
+            'readonly' => 'readonly',
             'class' => 'form-control',
             'placeholder' => $this->translator->translate('Document.form.amount.placeholder')
         ));
         $amount->setLabel($this->translator->translate('Document.form.amount.label'));
-        $amount->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+        $amount->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
         $this->add($amount);
 
         $vatAmount = new Text('vatAmount');
         $vatAmount->setAttributes(array(
             'id' => 'vatAmount',
+            'readonly' => 'readonly',
             'class' => 'form-control',
             'placeholder' => $this->translator->translate('Document.form.vatAmount.placeholder')
         ));
         $vatAmount->setLabel($this->translator->translate('Document.form.vatAmount.label'));
-        $vatAmount->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+        $vatAmount->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
         $this->add($vatAmount);
 
         $amountVat = new Text('amountVat');
         $amountVat->setAttributes(array(
             'id' => 'amountVat',
+            'readonly' => 'readonly',
             'class' => 'form-control',
             'placeholder' => $this->translator->translate('Document.form.amountVat.placeholder')
         ));
         $amountVat->setLabel($this->translator->translate('Document.form.amountVat.label'));
-        $amountVat->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+        $amountVat->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
         $this->add($amountVat);
 
         $subjectName = new Text('subjectName');
@@ -179,7 +225,7 @@ class DocumentForm extends Form
             'id' => 'subjectName',
             'class' => 'form-control',
         ));
-        $subjectName->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+        $subjectName->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
         $this->add($subjectName);
 
         $subjectEmail = new Text('subjectEmail');
@@ -187,7 +233,7 @@ class DocumentForm extends Form
             'id' => 'subjectEmail',
             'class' => 'form-control',
         ));
-        $subjectEmail->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+        $subjectEmail->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
         $this->add($subjectEmail);
 
         $subjectAddress = new Textarea('subjectAddress');
@@ -196,7 +242,7 @@ class DocumentForm extends Form
             'rows' => 3,
             'class' => 'form-control',
         ));
-        $subjectAddress->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+        $subjectAddress->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
         $this->add($subjectAddress);
 
         $subjectRegNo = new Text('subjectRegNo');
@@ -204,7 +250,7 @@ class DocumentForm extends Form
             'id' => 'subjectRegNo',
             'class' => 'form-control',
         ));
-        $subjectRegNo->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+        $subjectRegNo->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
         $this->add($subjectRegNo);
 
         $subjectVatNo = new Text('subjectVatNo');
@@ -212,7 +258,7 @@ class DocumentForm extends Form
             'id' => 'subjectVatNo',
             'class' => 'form-control',
         ));
-        $subjectVatNo->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+        $subjectVatNo->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
         $this->add($subjectVatNo);
 
 
@@ -222,6 +268,16 @@ class DocumentForm extends Form
     public function setDefaultUser(User $user)
     {
         $this->get('user')->setValue($user->getId());
+    }
+
+    public function setDefaultData(DocumentSetting $documentSetting)
+    {
+        $date = new \DateTime();
+        $datePdfFormat = $documentSetting->getDatePdfFormat() ? $documentSetting->getDatePdfFormat() : $this->getDateFormat();
+        $pdfLanguageCode = $documentSetting->getPdfLanguageCode() ? $documentSetting->getPdfLanguageCode() : $this->getLanguageCode();
+        $this->get('dateFormat')->setValue($datePdfFormat);
+        $this->get('language')->setValue($pdfLanguageCode);
+        $this->get('documentDate')->setValue($date->format($this->getDateFormat()));
     }
 
     public function getInputFilter()

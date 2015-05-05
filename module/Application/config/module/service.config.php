@@ -1,9 +1,12 @@
 <?php
+use Application\Form\AddArticleForm;
 use Application\Form\ArticleForm;
 use Application\Form\BrandForm;
 use Application\Form\CategoryForm;
 use Application\Form\Document\InvoiceForm;
 use Application\Form\DocumentForm;
+use Application\Form\DocumentSetting\InvoiceSettingForm;
+use Application\Form\DocumentSettingForm;
 use Application\Form\FilterForm;
 use Application\Form\ForgotPassword;
 use Application\Form\NewPassword;
@@ -73,6 +76,12 @@ return array(
             $form->setArticleService($sm->get('Application\Service\Article'));
             return $form;
         },
+        'Application\Form\AddArticle' => function (ServiceManager $sm) {
+            $form = new AddArticleForm();
+            $form->setTranslator($sm->get('Translator'));
+            $form->setArticleService($sm->get('Application\Service\Article'));
+            return $form;
+        },
         'Application\Form\Brand' => function (ServiceManager $sm) {
             $form = new BrandForm();
             $form->setTranslator($sm->get('Translator'));
@@ -92,11 +101,6 @@ return array(
             $form->setLanguageService($sm->get('Application\Service\Language'));
             return $form;
         },
-        'Application\Form\ForgotPassword' => function (ServiceManager $sm) {
-            $form = new ForgotPassword();
-            $form->setTranslator($sm->get('Translator'));
-            return $form;
-        },
         'Application\Form\Document\Invoice' => function (ServiceManager $sm) {
             $form = new InvoiceForm();
             $form->setTranslator($sm->get('Translator'));
@@ -104,6 +108,26 @@ return array(
             $form->setLanguageService($sm->get('Application\Service\Language'));
             $form->setClientService($sm->get('Application\Service\Client'));
             $form->setVatService($sm->get('Application\Service\Vat'));
+            return $form;
+        },
+        'Application\Form\DocumentSetting' => function (ServiceManager $sm) {
+            $form = new DocumentSettingForm();
+            $form->setTranslator($sm->get('Translator'));
+            $form->setDocumentService($sm->get('Application\Service\Document'));
+            $form->setLanguageService($sm->get('Application\Service\Language'));
+            return $form;
+        },
+        'Application\Form\DocumentSetting\InvoiceSetting' => function (ServiceManager $sm) {
+            $form = new InvoiceSettingForm();
+            $form->setTranslator($sm->get('Translator'));
+            $form->setDocumentService($sm->get('Application\Service\Document'));
+            $form->setLanguageService($sm->get('Application\Service\Language'));
+            $form->setVatService($sm->get('Application\Service\Vat'));
+            return $form;
+        },
+        'Application\Form\ForgotPassword' => function (ServiceManager $sm) {
+            $form = new ForgotPassword();
+            $form->setTranslator($sm->get('Translator'));
             return $form;
         },
         'Application\Form\NewPassword' => function (ServiceManager $sm) {
@@ -122,6 +146,7 @@ return array(
         'Application\Form\Role' => function (ServiceManager $sm) {
             $form = new RoleForm();
             $form->setTranslator($sm->get('Translator'));
+            $form->setAdminService($sm->get('Application\Service\Admin'));
             return $form;
         },
         'Application\Form\Filter' => function (ServiceManager $sm) {

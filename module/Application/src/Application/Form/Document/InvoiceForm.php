@@ -10,6 +10,7 @@ namespace Application\Form\Document;
 
 
 use Application\Entity\Document\Invoice;
+use Application\Entity\DocumentSetting\InvoiceSetting;
 use Application\Form\DocumentForm;
 use Application\Service\ClientService;
 use Application\Service\VatService;
@@ -56,7 +57,8 @@ class InvoiceForm extends DocumentForm {
         ));
         $client->setValueOptions($this->clientService->getCompanyActiveClientSelect($this->company));
         $client->setEmptyOption($this->translator->translate('Invoice.form.client.emptyOption'));
-        $client->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+        $client->setLabel($this->translator->translate('Invoice.form.client.label'));
+        $client->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
         $this->add($client);
 
         $vat = new Select('vat');
@@ -66,7 +68,8 @@ class InvoiceForm extends DocumentForm {
         ));
         $vat->setValueOptions($this->vatService->getCompanyActiveVatSelect($this->company));
         $vat->setEmptyOption($this->translator->translate('Invoice.form.vat.emptyOption'));
-        $vat->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+        $vat->setLabel($this->translator->translate('Invoice.form.vat.label'));
+        $vat->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
         $this->add($vat);
 
         $this->get('subjectName')->setAttributes(array('placeholder' => $this->translator->translate('Invoice.form.clientName.placeholder')));
@@ -91,7 +94,7 @@ class InvoiceForm extends DocumentForm {
             'placeholder' => $this->translator->translate('Invoice.form.delayPercent.placeholder')
         ));
         $delayPercent->setLabel($this->translator->translate('Invoice.form.delayPercent.label'));
-        $delayPercent->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+        $delayPercent->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
         $this->add($delayPercent);
 
         $deadlineDays = new Text('deadlineDays');
@@ -101,7 +104,7 @@ class InvoiceForm extends DocumentForm {
             'placeholder' => $this->translator->translate('Invoice.form.deadlineDays.placeholder')
         ));
         $deadlineDays->setLabel($this->translator->translate('Invoice.form.deadlineDays.label'));
-        $deadlineDays->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+        $deadlineDays->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
         $this->add($deadlineDays);
 
         $referenceNumber = new Text('referenceNumber');
@@ -111,7 +114,7 @@ class InvoiceForm extends DocumentForm {
             'placeholder' => $this->translator->translate('Invoice.form.referenceNumber.placeholder')
         ));
         $referenceNumber->setLabel($this->translator->translate('Invoice.form.referenceNumber.label'));
-        $referenceNumber->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+        $referenceNumber->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
         $this->add($referenceNumber);
 
         $deadlineDate = new Text('deadlineDate');
@@ -121,7 +124,7 @@ class InvoiceForm extends DocumentForm {
             'placeholder' => $this->translator->translate('Invoice.form.deadlineDate.placeholder')
         ));
         $deadlineDate->setLabel($this->translator->translate('Invoice.form.deadlineDate.label'));
-        $deadlineDate->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+        $deadlineDate->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
         $this->add($deadlineDate);
 
         return $this;
@@ -174,8 +177,33 @@ class InvoiceForm extends DocumentForm {
         if($invoice->getDeadlineDate()){
             $this->get('deadlineDate')->setValue($invoice->getDeadlineDate()->format($invoice->getDateFormat()));
         }
+        if($invoice->getVat()){
+            $this->get('vat')->setValue($invoice->getVat()->getId());
+        }
         $this->get('delayPercent')->setValue($invoice->getDelayPercent());
         $this->get('deadlineDays')->setValue($invoice->getDeadlineDays());
         $this->get('referenceNumber')->setValue($invoice->getReferenceNumber());
+    }
+
+    public function setDefaultData(InvoiceSetting $invoiceSetting)
+    {
+        parent::setDefaultData($invoiceSetting);
+        if($invoiceSetting->getDelayPercent()){
+            $this->get('delayPercent')->setValue($invoiceSetting->getDelayPercent());
+        }
+        if($invoiceSetting->getVat()){
+            $this->get('delayPercent')->setValue($invoiceSetting->getDelayPercent());
+        }
+        if($invoiceSetting->getVat()){
+            $this->get('vat')->setValue($invoiceSetting->getVat()->getId());
+        }
+        if($invoiceSetting->getDeadlineDays()){
+            $this->get('deadlineDays')->setValue($invoiceSetting->getDeadlineDays());
+            $date = \DateTime::createFromFormat($this->getDateFormat(), $this->get('documentDate')->getValue());
+            if($date){
+                $date->modify('+' . $invoiceSetting->getDeadlineDays() . ' days');
+                $this->get('deadlineDate')->setValue($date->format($this->getDateFormat()));
+            }
+        }
     }
 } 

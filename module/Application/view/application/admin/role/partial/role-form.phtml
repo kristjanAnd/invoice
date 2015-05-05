@@ -10,6 +10,10 @@
             <?php echo $this->formText($form->get('name'))?>
             <span style="display: none" class="role-exists"><i class="fa fa-warning"></i> <?php echo $this->translate('Admin.role.role-form.roleExists')?></span>
         </div>
+        <?php echo $this->formLabel($form->get('redirectRoute'))?>
+        <div class="col-sm-2">
+            <?php echo $this->formSelect($form->get('redirectRoute'))?>
+        </div>
     </div><br/><br/><br/>
 
     <table class="table table-bordered" >
@@ -37,7 +41,7 @@
                     </td>
                     <td><?php echo $this->translate($action->getTranslationKey())?></td>
                     <td>
-                        <input type="checkbox" name="isAllowed[<?php echo $action->getId()?>]" <?php if($roleAction && $roleAction->isEnabled()):?>checked<?php endif;?>>
+                        <input id="<?php echo $action->getName()?>" class="isAllowed" type="checkbox" name="isAllowed[<?php echo $action->getId()?>]" <?php if($roleAction && $roleAction->isEnabled()):?>checked<?php endif;?>>
                     </td>
                 </tr>
             <?php endforeach;?>

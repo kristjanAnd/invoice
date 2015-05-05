@@ -31,12 +31,27 @@ var Common = {
     companyId: null,
     userId: null,
     language: 'et',
+    datepickerBaseSrc: '/lib/jquery-ui-1.10.4/development-bundle/ui/i18n/jquery.ui.datepicker-',
+    datePickerLocaleMapper: {
+        'us': 'en-GB',
+        'ru': 'ru',
+        'et': 'et'
+    },
     setLanguage: function(language){
+        if(language == undefined){
+            language = Common.language;
+        }
         Common.language = language;
+        Common.initDatepickerRegion(Common.datePickerLocaleMapper[language]);
     },
     replaceCommas: function(element) {
         var val = element.val().replace(",", ".");
         element.val(val);
+    },
+    initDatepickerRegion: function(locale){
+        $.getScript(Common.datepickerBaseSrc + locale + '.js', function () {
+            $.datepicker.setDefaults($.datepicker.regional[locale]);
+        });
     }
 };
 
@@ -310,6 +325,38 @@ var Validator = {
             rules: {
                 "name": {
                     required: true
+                }
+            },
+            errorPlacement: function (error, element) {
+
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).parent().addClass('has-error');
+                $(element).parent().find('.help-block').show();
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).parent().removeClass('has-error');
+                $(element).parent().find('.help-block').hide();
+            }
+        });
+    },
+
+    initInvoiceSettingForm: function () {
+        $(document).on('change', '#delayPercent', function(){
+            Common.replaceCommas($(this));
+        });
+        $('#invoiceSettingForm').validate({
+            rules: {
+                "deadlineDays": {
+                    digits: true
+                },
+                "nextNumber": {
+                    digits: true
+                },
+                "delayPercent": {
+                    number: true,
+                    min: 0,
+                    max: 100
                 }
             },
             errorPlacement: function (error, element) {
@@ -1122,6 +1169,7 @@ var Brand = {
 };
 
 var Role = {
+    defaultRoute: 'dashboard',
     excludeId: null,
     init: function(excludeId){
         Role.excludeId = excludeId;
@@ -1129,6 +1177,20 @@ var Role = {
         $(document).on('keyup, focusout, change', '#name', function () {
             $('#submit').prop('disabled', true);
             Role.checkIfRoleExists($(this));
+        });
+
+        $(document).on('change', '#redirectRoute', function () {
+            if($(this).val() !== Role.defaultRoute){
+                $('#' + $(this).val()).prop('checked', true);
+            }
+        });
+
+        $(document).on('change', '.isAllowed', function () {
+            var id = $(this).prop('id');
+            if(!$(this).is(':checked') && id == $('#redirectRoute').val()){
+                $('#redirectRoute').val(Role.defaultRoute)
+            }
+
         });
     },
 
@@ -1150,6 +1212,7 @@ var Role = {
 
 var FilterForm = {
     init: function(){
+        FilterForm.initDates();
         $(document).on('click', '#openFilter', function () {
             $(this).hide();
             $('#closeFilter').show();
@@ -1161,5 +1224,25 @@ var FilterForm = {
             $('#openFilter').show();
             $('#filterBody').hide();
         });
+    },
+    initDates: function(){
+        var fromDate = $('#fromDate');
+        var toDate = $('#toDate');
+        var datepickerParams = {
+            inline: true,
+            //nextText: '&rarr;',
+            //prevText: '&larr;',
+            showOtherMonths: true
+            //dateFormat: 'dd MM yy',
+            //showOn: "button",
+            //buttonImage: "img/calendar-blue.png",
+            //buttonImageOnly: true,
+        };
+        if(fromDate.length){
+            fromDate.datepicker(datepickerParams);
+        }
+        if(toDate.length){
+            toDate.datepicker(datepickerParams);
+        }
     }
 };

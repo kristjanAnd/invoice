@@ -69,6 +69,14 @@ class ArticleService extends AbstractService {
         return $this->entityManager->getRepository(Brand::getClass())->findBy(array('company' => $company, 'status' => Brand::STATUS_ACTIVE));
     }
 
+    public function getArticleTypeSelect(){
+        $translator = $this->locator->get('Translator');
+        return array(
+            Article::ARTICLE_TYPE_ITEM => $translator->translate('Article.type.item'),
+            Article::ARTICLE_TYPE_SERVICE => $translator->translate('Article.type.service')
+        );
+    }
+
     /**
      * @param $id
      * @return null|Category

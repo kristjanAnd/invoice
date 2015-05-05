@@ -147,7 +147,7 @@ class AdminService extends AbstractService {
      */
     public function addRoleAndActions(Parameters $data, Company $company){
         $isAllowedArray = $data->isAllowed;
-        $role = $this->createCompanyRole($company, $data->name);
+        $role = $this->createCompanyRole($company, $data->name, $data->redirectRoute);
         foreach($this->getControllerActions() as $action){ /* @var $action \Application\Entity\Controller\Action */
             $isAllowed = isset($isAllowedArray[$action->getId()]);
             $this->createRoleAction($role, $action, $isAllowed);
@@ -156,7 +156,7 @@ class AdminService extends AbstractService {
     }
 
     public function editRoleAndActions(Parameters $data, Role $role){
-        $role = $this->editRole($role, $data->name);
+        $role = $this->editRole($role, $data->name, $data->redirectRoute);
         $isAllowedArray = $data->isAllowed;
         foreach($this->getControllerActions() as $action){ /* @var $action \Application\Entity\Controller\Action */
             $isAllowed = isset($isAllowedArray[$action->getId()]);
@@ -171,10 +171,13 @@ class AdminService extends AbstractService {
         }
     }
 
-    public function editRole(Role $role, $name){
+    public function editRole(Role $role, $name, $redirectRoute){
         if($name !== $role->getName()){
             $role->setName($name);
             $role->setRoleId($role->getCompany()->getId() . '-' . StringUtil::urlify($name));
+        }
+        if($redirectRoute !== $role->getRedirectRoute()){
+            $role->setRedirectRoute($redirectRoute);
         }
         $this->entityManager->persist($role);
         $this->entityManager->flush($role);
@@ -202,12 +205,13 @@ class AdminService extends AbstractService {
         return $roleAction;
     }
 
-    public function createCompanyRole(Company $company, $roleName){
+    public function createCompanyRole(Company $company, $roleName, $redirectRoute){
         $role = new Role();
         $role->setCompany($company);
         $role->setParent($this->getGuestRole());
         $role->setName($roleName);
         $role->setRoleId($company->getId() . '-' . StringUtil::urlify($roleName));
+        $role->setRedirectRoute($redirectRoute);
 
         $this->entityManager->persist($role);
         $this->entityManager->flush($role);
@@ -370,6 +374,17 @@ class AdminService extends AbstractService {
         $configOptions['addStatus'] = true;
 
         return $configOptions;
+    }
+
+    public function getRedirectRouteSelectForRole() {
+        $translator = $this->locator->get('Translator');
+        $result['dashboard'] = $translator->translate('Controller.index.action.dashboard');
+        foreach($this->getControllerActions() as $action){ /* @var $action \Application\Entity\Controller\Action */
+            if($action->isNavigation()){
+                $result[$action->getName()] = $translator->translate($action->getTranslationKey());
+            }
+        }
+        return $result;
     }
 
 } 

@@ -156,6 +156,28 @@ return array(
                 ),
             ),
         ),
+        'invoice-setting' => array(
+            'type' => 'Segment',
+            'options' => array(
+                'route' => '[/:language]/invoice-setting[/:page]',
+                'defaults' => array(
+                    'controller' => 'Application\Controller\Invoice',
+                    'action'     => 'invoice-setting',
+                    'language' => 'us'
+                ),
+            ),
+        ),
+        'edit-invoice-setting' => array(
+            'type' => 'Segment',
+            'options' => array(
+                'route' => '[/:language]/edit-invoice-setting',
+                'defaults' => array(
+                    'controller' => 'Application\Controller\Invoice',
+                    'action'     => 'edit-invoice-setting',
+                    'language' => 'us'
+                ),
+            ),
+        ),
         'invoice' => array(
             'type' => 'Segment',
             'options' => array(
