@@ -5,6 +5,8 @@ use Application\Form\BrandForm;
 use Application\Form\CategoryForm;
 use Application\Form\Document\InvoiceForm;
 use Application\Form\DocumentForm;
+use Application\Form\DocumentRow\InvoiceRowForm;
+use Application\Form\DocumentRowForm;
 use Application\Form\DocumentSetting\InvoiceSettingForm;
 use Application\Form\DocumentSettingForm;
 use Application\Form\FilterForm;
@@ -107,6 +109,18 @@ return array(
             $form->setDocumentService($sm->get('Application\Service\Document'));
             $form->setLanguageService($sm->get('Application\Service\Language'));
             $form->setClientService($sm->get('Application\Service\Client'));
+            $form->setVatService($sm->get('Application\Service\Vat'));
+            return $form;
+        },
+        'Application\Form\DocumentRow' => function (ServiceManager $sm) {
+            $form = new DocumentRowForm();
+            $form->setUnitService($sm->get('Application\Service\Unit'));
+            $form->setVatService($sm->get('Application\Service\Vat'));
+            return $form;
+        },
+        'Application\Form\DocumentRow\InvoiceRow' => function (ServiceManager $sm) {
+            $form = new InvoiceRowForm();
+            $form->setUnitService($sm->get('Application\Service\Unit'));
             $form->setVatService($sm->get('Application\Service\Vat'));
             return $form;
         },

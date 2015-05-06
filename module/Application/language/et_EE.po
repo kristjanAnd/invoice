@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skeletonSocialUser\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-05 19:00+0300\n"
-"PO-Revision-Date: 2015-05-05 19:00+0300\n"
+"POT-Creation-Date: 2015-05-06 08:43+0300\n"
+"PO-Revision-Date: 2015-05-06 08:45+0300\n"
 "Last-Translator: \n"
 "Language-Team: Andresson Developments OÜ\n"
 "Language: et_EE\n"
@@ -428,31 +428,28 @@ msgstr "Nimi"
 msgid "CategoryForm.message.statusInput"
 msgstr "Staatus"
 
-#: Application/src/Application/Form/AddArticleForm.php:81
-msgid "ArticleAdd.form.articleType.emptyOption"
-msgstr "-Tüüp-"
-
-#: Application/src/Application/Form/AddArticleForm.php:83
+#: Application/src/Application/Form/AddArticleForm.php:82
 msgid "ArticleAdd.form.articleType.label"
-msgstr ""
+msgstr "Artikli tüüp:"
 
-#: Application/src/Application/Form/AddArticleForm.php:93
+#: Application/src/Application/Form/AddArticleForm.php:92
 msgid "ArticleAdd.form.brand.emptyOption"
 msgstr "-Bränd-"
 
-#: Application/src/Application/Form/AddArticleForm.php:95
+#: Application/src/Application/Form/AddArticleForm.php:94
 msgid "ArticleAdd.form.brand.label"
 msgstr "Bränd:"
 
-#: Application/src/Application/Form/AddArticleForm.php:104
+#: Application/src/Application/Form/AddArticleForm.php:103
 msgid "ArticleAdd.form.category.emptyOption"
 msgstr "-Kategooria-"
 
-#: Application/src/Application/Form/AddArticleForm.php:106
+#: Application/src/Application/Form/AddArticleForm.php:105
 msgid "ArticleAdd.form.category.label"
 msgstr "Kategooria:"
 
-#: Application/src/Application/Form/AddArticleForm.php:115
+#: Application/src/Application/Form/AddArticleForm.php:114
+#: Application/src/Application/Controller/ArticleController.php:382
 msgid "ArticleAdd.form.article.emptyOption"
 msgstr "-Artikkel-"
 
@@ -1068,45 +1065,45 @@ msgstr "Aktiivne"
 msgid "Client.status.disabled"
 msgstr "Arhiveeritud"
 
-#: Application/src/Application/Service/ArticleService.php:75
+#: Application/src/Application/Service/ArticleService.php:99
 msgid "Article.type.item"
 msgstr "Toode"
 
-#: Application/src/Application/Service/ArticleService.php:76
+#: Application/src/Application/Service/ArticleService.php:100
 msgid "Article.type.service"
 msgstr "Teenus"
 
-#: Application/src/Application/Service/ArticleService.php:184
+#: Application/src/Application/Service/ArticleService.php:208
 #: Application/src/Application/Service/UnitService.php:62
 msgid "Unit.status.active"
 msgstr "Aktiivne"
 
-#: Application/src/Application/Service/ArticleService.php:185
+#: Application/src/Application/Service/ArticleService.php:209
 #: Application/src/Application/Service/UnitService.php:63
 msgid "Unit.status.disabled"
 msgstr "Arhiveeritud"
 
-#: Application/src/Application/Service/ArticleService.php:192
+#: Application/src/Application/Service/ArticleService.php:216
 msgid "Article.status.active"
 msgstr "Aktiivne"
 
-#: Application/src/Application/Service/ArticleService.php:193
+#: Application/src/Application/Service/ArticleService.php:217
 msgid "Article.status.disabled"
 msgstr "Arhiveeritud"
 
-#: Application/src/Application/Service/ArticleService.php:200
+#: Application/src/Application/Service/ArticleService.php:224
 msgid "ArticleCategory.status.active"
 msgstr "Aktiivne"
 
-#: Application/src/Application/Service/ArticleService.php:201
+#: Application/src/Application/Service/ArticleService.php:225
 msgid "ArticleCategory.status.disabled"
 msgstr "Arhiveeritud"
 
-#: Application/src/Application/Service/ArticleService.php:208
+#: Application/src/Application/Service/ArticleService.php:232
 msgid "ArticleBrand.status.active"
 msgstr "Aktiivne"
 
-#: Application/src/Application/Service/ArticleService.php:209
+#: Application/src/Application/Service/ArticleService.php:233
 msgid "ArticleBrand.status.disabled"
 msgstr "Arhiveeritud"
 
@@ -1191,43 +1188,43 @@ msgstr "Uus klient lisatud!"
 msgid "Client.edit.successMessage"
 msgstr "Kliendi andmed muudetud!"
 
-#: Application/src/Application/Controller/ArticleController.php:89
+#: Application/src/Application/Controller/ArticleController.php:91
 msgid "Article.item.add.successMessage"
 msgstr "Uus toode lisatud!"
 
-#: Application/src/Application/Controller/ArticleController.php:112
+#: Application/src/Application/Controller/ArticleController.php:114
 msgid "Article.item.edit.successMessage"
 msgstr "Toote info muudetud!"
 
-#: Application/src/Application/Controller/ArticleController.php:156
+#: Application/src/Application/Controller/ArticleController.php:158
 msgid "Article.unit.add.successMessage"
 msgstr "Uus ühik lisatud!"
 
-#: Application/src/Application/Controller/ArticleController.php:159
+#: Application/src/Application/Controller/ArticleController.php:161
 msgid "Article.unit.add.errorMessage"
 msgstr "Ühikut ei saanud lisada. Vaadake andmed üle ja proovige uuesti!"
 
-#: Application/src/Application/Controller/ArticleController.php:211
+#: Application/src/Application/Controller/ArticleController.php:213
 msgid "Article.service.add.successMessage"
 msgstr "Uus teenus lisatud!"
 
-#: Application/src/Application/Controller/ArticleController.php:234
+#: Application/src/Application/Controller/ArticleController.php:236
 msgid "Article.service.edit.successMessage"
 msgstr "Teenuse info muudetud!"
 
-#: Application/src/Application/Controller/ArticleController.php:278
+#: Application/src/Application/Controller/ArticleController.php:280
 msgid "Article.category.add.successMessage"
 msgstr "Uus kategooria lisatud!"
 
-#: Application/src/Application/Controller/ArticleController.php:281
+#: Application/src/Application/Controller/ArticleController.php:283
 msgid "Article.category.add.errorMessage"
 msgstr "kategooriat ei saanud lisada. Vaadake andmed üle ja proovige uuesti!"
 
-#: Application/src/Application/Controller/ArticleController.php:333
+#: Application/src/Application/Controller/ArticleController.php:335
 msgid "Article.brand.add.successMessage"
 msgstr "Uus bränd lisatud!"
 
-#: Application/src/Application/Controller/ArticleController.php:336
+#: Application/src/Application/Controller/ArticleController.php:338
 msgid "Article.brand.add.errorMessage"
 msgstr "Brändi ei saanud lisada. Vaadake andmed üle ja proovige uuesti!"
 
@@ -1276,12 +1273,12 @@ msgstr ""
 msgid "User.profile.edit.successMessage"
 msgstr "Profiili andmed muudetud!"
 
-#: Application/view/layout/layout.phtml:109
+#: Application/view/layout/layout.phtml:110
 #: Application/view/application/user/forgot-password.phtml:40
 msgid "layout.password.forgotPasswordSuccessMessage"
 msgstr "Parooli saadeti e-mailile."
 
-#: Application/view/layout/layout.phtml:110
+#: Application/view/layout/layout.phtml:111
 #: Application/view/application/user/forgot-password.phtml:41
 msgid "layout.password.forgotPasswordErrorMessage"
 msgstr "Midagi läks valesti!"
@@ -2086,7 +2083,6 @@ msgid "Invoice.add.heading"
 msgstr "Arve lisamine"
 
 #: Application/view/application/invoice/add-invoice.phtml:22
-#: Application/view/application/invoice/add-invoice.phtml:145
 msgid "Invoice.add.panel1.label"
 msgstr "Arve andmed"
 
@@ -2098,6 +2094,10 @@ msgstr "Arve andmed"
 msgid "Invoice.add.panel3.label"
 msgstr "Arve andmed"
 
+#: Application/view/application/invoice/add-invoice.phtml:145
+msgid "Invoice.add.articleSelect"
+msgstr "Artiklite ja ridade lisamine"
+
 #: Application/view/application/invoice/add-invoice.phtml:162
 msgid "Invoice.add.addArticleRow"
 msgstr "Lisa artikkel"
@@ -2105,6 +2105,38 @@ msgstr "Lisa artikkel"
 #: Application/view/application/invoice/add-invoice.phtml:165
 msgid "Invoice.add.addEmptyRow"
 msgstr "Lisa tühi rida"
+
+#: Application/view/application/invoice/add-invoice.phtml:174
+msgid "Invoice.add.rows"
+msgstr "Arveread"
+
+#: Application/view/application/invoice/add-invoice.phtml:181
+msgid "Invoice.rows.tableTh.article"
+msgstr "Artikkel"
+
+#: Application/view/application/invoice/add-invoice.phtml:182
+msgid "Invoice.rows.tableTh.name"
+msgstr "Nimetus"
+
+#: Application/view/application/invoice/add-invoice.phtml:183
+msgid "Invoice.rows.tableTh.quantity"
+msgstr "Kogus"
+
+#: Application/view/application/invoice/add-invoice.phtml:184
+msgid "Invoice.rows.tableTh.unit"
+msgstr "Ühik"
+
+#: Application/view/application/invoice/add-invoice.phtml:185
+msgid "Invoice.rows.tableTh.amount"
+msgstr "Summa"
+
+#: Application/view/application/invoice/add-invoice.phtml:186
+msgid "Invoice.rows.tableTh.vat"
+msgstr "KM"
+
+#: Application/view/application/invoice/add-invoice.phtml:187
+msgid "Invoice.rows.tableTh.amountVat"
+msgstr "Summa + KM"
 
 #: Application/view/application/admin/role.phtml:9
 msgid "Admin.role.list.heading"
@@ -2392,6 +2424,9 @@ msgstr ""
 #: Application/view/error/index.phtml:1
 msgid "An error occurred"
 msgstr ""
+
+#~ msgid "ArticleAdd.form.articleType.emptyOption"
+#~ msgstr "-Tüüp-"
 
 #~ msgid "Article.unit.list.tableTh.value"
 #~ msgstr "Väärtus"

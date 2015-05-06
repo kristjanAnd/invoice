@@ -72,6 +72,7 @@ return array(
             $serviceManager = $cm->getServiceLocator();
             $controller = new InvoiceController();
             $controller->setInvoiceService($serviceManager->get('Application\Service\Invoice'));
+            $controller->setArticleService($serviceManager->get('Application\Service\Article'));
             return $controller;
         },
     ],

@@ -69,6 +69,30 @@ class ArticleService extends AbstractService {
         return $this->entityManager->getRepository(Brand::getClass())->findBy(array('company' => $company, 'status' => Brand::STATUS_ACTIVE));
     }
 
+    public function getActiveCompanyItems(Company $company){
+        return $this->entityManager->getRepository(Item::getClass())->findBy(array('company' => $company, 'status' => Item::STATUS_ACTIVE));
+    }
+
+    public function getActiveCompanyServices(Company $company){
+        return $this->entityManager->getRepository(Article\Service::getClass())->findBy(array('company' => $company, 'status' => Article\Service::STATUS_ACTIVE));
+    }
+
+    public function getItemSelect(Company $company){
+        $result = array();
+        foreach($this->getActiveCompanyItems($company) as $item){
+            $result[$item->getId()] = $item->getName() . ' ' . $item->getCode();
+        }
+        return $result;
+    }
+
+    public function getServiceSelect(Company $company){
+        $result = array();
+        foreach($this->getActiveCompanyServices($company) as $service){
+            $result[$service->getId()] = $service->getName() . ' ' . $service->getCode();
+        }
+        return $result;
+    }
+
     public function getArticleTypeSelect(){
         $translator = $this->locator->get('Translator');
         return array(
@@ -97,6 +121,10 @@ class ArticleService extends AbstractService {
         return $this->entityManager->getRepository(Brand::getClass())->getCompanyArticleBrands($company, $data);
     }
 
+    /**
+     * @param $id
+     * @return null|Article
+     */
     public function getArticleById($id){
         return $this->entityManager->getRepository(Article::getClass())->findOneBy(array('id' => $id));
     }

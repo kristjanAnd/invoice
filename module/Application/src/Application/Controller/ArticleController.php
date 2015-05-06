@@ -9,12 +9,14 @@
 namespace Application\Controller;
 
 
+use Application\Entity\Article;
 use Application\Entity\Article\Brand;
 use Application\Entity\Article\Category;
 use Application\Entity\Article\Item;
 use Application\Entity\Article\Service;
 use Application\Entity\Unit;
 use Application\Service\ArticleService;
+use Application\Service\LanguageService;
 use Application\Service\UnitService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Paginator\Adapter\ArrayAdapter;
@@ -357,6 +359,34 @@ class ArticleController extends AbstractActionController {
         return $view;
     }
 
+    public function getArticleSelectAction(){
+        if ($this->request->isGet() && $this->request->isXmlHttpRequest()) {
+            $userData = $this->getUserData();
+            $type = $this->request->getQuery()->type;
+            $category = $this->articleService->getCategoryById($this->request->getQuery()->category);
+            $brand = $this->articleService->getBrandById($this->request->getQuery()->brand);
+            $params = new Parameters();
+            $params->statuses = array(Article::STATUS_ACTIVE);
+            if($category){
+                $params->category = $category;
+            }
+            if($brand){
+                $params->brand = $brand;
+            }
+
+            $articles = $type == Article::ARTICLE_TYPE_SERVICE ? $this->articleService->getServicesByCompany($userData->company, $params) : $this->articleService->getItemsByCompany($userData->company, $params);
+            $view = new ViewModel();
+            $view->setTemplate('form/select/article');
+            $view->setTerminal(true);
+            $view->articles = $articles;
+            $view->emptyOption = $this->getTranslator($this->request->getQuery()->locale)->translate('ArticleAdd.form.article.emptyOption');
+
+            return $view;
+
+        }
+        return $this->response;
+    }
+
     private function getUserData(){
         $data = new Parameters();
         $user = $this->currentdata()->getCurrentUser();
@@ -375,7 +405,23 @@ class ArticleController extends AbstractActionController {
         return $paginated;
     }
 
-    private function getTranslator(){
-        return $this->serviceLocator->get('MvcTranslator');
+    private function getTranslator($locale = null){
+        $translator =  $this->serviceLocator->get('MvcTranslator');
+        if($locale){
+            $translator->setLocale($locale);
+        }
+        return $translator;
+    }
+
+    private function addTestData(){
+        $params = new Parameters();
+        for($i = 0; $i < 40; $i++){
+            $params->name = 'Toode-' . $i;
+            $params->code = 'Kood-' . $i;
+            $params->quantity = 1;
+            $params->salePrice = 10 + $i;
+            $params->unit = 29;
+            $params->status = Item::STATUS_ACTIVE;
+        }
     }
 } 

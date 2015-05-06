@@ -120,6 +120,16 @@ abstract class Article extends AbstractEntity {
      */
     protected $user;
 
+    /**
+     * @var \Application\Entity\Vat
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Entity\Vat")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="vat_id", referencedColumnName="id")
+     * })
+     */
+    protected $vat;
+
 
     /**
      * @return string
@@ -271,6 +281,22 @@ abstract class Article extends AbstractEntity {
     public function setStatus($status)
     {
         $this->status = $status;
+    }
+
+    /**
+     * @return Vat
+     */
+    public function getVat()
+    {
+        return $this->vat;
+    }
+
+    /**
+     * @param Vat $vat
+     */
+    public function setVat(Vat $vat)
+    {
+        $this->vat = $vat;
     }
 
 

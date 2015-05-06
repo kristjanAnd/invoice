@@ -9,6 +9,7 @@
 namespace Application\Controller;
 
 
+use Application\Service\ArticleService;
 use Application\Service\InvoiceService;
 use Application\Service\LanguageService;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -27,6 +28,18 @@ class InvoiceController extends AbstractActionController {
      * @var InvoiceService
      */
     protected $invoiceService;
+    /**
+     * @var ArticleService
+     */
+    protected $articleService;
+
+    /**
+     * @param ArticleService $articleService
+     */
+    public function setArticleService(ArticleService $articleService)
+    {
+        $this->articleService = $articleService;
+    }
 
     /**
      * @param InvoiceService $invoiceService
@@ -74,6 +87,7 @@ class InvoiceController extends AbstractActionController {
         $form->setDefaultUser($userData->user);
         $form->setDefaultData($userData->invoiceSetting);
         $addArticleForm = $this->getServiceLocator()->get('Application\Form\AddArticle')->setCompany($userData->company)->init();
+        $rowForm = $this->getServiceLocator()->get('Application\Form\DocumentRow\InvoiceRow')->setCompany($userData->company)->init();
         if ($this->request->isPost()) {
             $form->setData($this->request->getPost());
             $translator = $this->getTranslator();
@@ -86,6 +100,7 @@ class InvoiceController extends AbstractActionController {
         $view->form = $form;
         $view->navKey = self::NAV_KEY_INVOICE;
         $view->addArticleFrom = $addArticleForm;
+        $view->rowForm = $rowForm;
         return $view;
     }
 
@@ -123,6 +138,27 @@ class InvoiceController extends AbstractActionController {
             }
         }
         return $this->redirect()->toRoute('invoice-setting', [], true);
+    }
+
+    public function addArticleAction(){
+        if ($this->request->isGet() && $this->request->isXmlHttpRequest()) {
+            $userData = $this->getUserData();
+            $type = $this->request->getQuery()->type;
+            $invoice = $this->invoiceService->getInvoiceById($this->request->getQuery()->invoiceId);
+            $article = $this->articleService->getArticleById($this->request->getQuery()->articleId);
+            $rowDto = $this->invoiceService->createInvoiceRowDto($invoice, $article);
+            $rowForm = $this->getServiceLocator()->get('Application\Form\DocumentRow\InvoiceRow')->setCompany($userData->company)->init();
+            $rowForm->setFormValues($rowDto);
+
+            $view = new ViewModel();
+            $view->setTemplate('application/invoice/partial/row');
+            $view->setTerminal(true);
+            $view->form = $rowForm;
+
+            return $view;
+
+        }
+        return $this->response;
     }
 
     private function getUserData(){

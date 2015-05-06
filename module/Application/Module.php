@@ -115,6 +115,7 @@ class Module
         $viewRenderer = $serviceManager->get('viewRenderer');
         $viewRenderer->layout()->config = $config;
         $viewRenderer->layout()->language = $sessionStorage->offsetGet('language');
+        $viewRenderer->layout()->locale = $sessionStorage->offsetGet('locale');
         $viewRenderer->layout()->currentUser = $userService->getCurrentUser();
         if($id > 0){
             $viewRenderer->layout()->id = $id;

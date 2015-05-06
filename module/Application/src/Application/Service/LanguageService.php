@@ -45,6 +45,18 @@ class LanguageService extends AbstractService {
         return $code;
     }
 
+    public static function getCurrentLocale($locator){
+        /* @var $sessionManager \Zend\Session\SessionManager */
+        $sessionManager = $locator->get('Zend\Session\SessionManager');
+        $availableLanguages = $locator->get('Config')['languages']['available'];
+        $sessionStorage = $sessionManager->getStorage();
+        $locale = $sessionStorage->offsetGet('locale');
+        if(!in_array($locale, $availableLanguages)){
+            $locale = $locator->get('Config')['languages']['defaultLocale'];
+        }
+        return $locale;
+    }
+
     public static function getDateFormatByLanguageCode($code){
         $dateFormats = array(
             'et' => 'd.m.Y',

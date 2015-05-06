@@ -1,0 +1,4 @@
+<option><?php echo $this->emptyOption ?></option>
+<?php foreach($this->articles as $article): /* @var $article \Application\Entity\Article */?>
+    <option value="<?php echo $article->getId()?>"><?php echo $article->getName() . ' ' . $article->getCode()?></option>
+<?php endforeach;?>

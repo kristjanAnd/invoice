@@ -5,6 +5,8 @@ $controllerGuard = array(
     ['controller' => 'ScnSocialAuth-User', 'roles' => []],
     ['controller' => 'zfcuser', 'roles' => []],
     ['controller' => 'Application\Controller\Admin', 'action' => 'if-role-exists', 'roles' => ['guest']],
+    ['controller' => 'Application\Controller\Article', 'action' => 'get-article-select', 'roles' => ['guest']],
+    ['controller' => 'Application\Controller\Invoice', 'action' => 'add-article', 'roles' => ['guest']],
     ['controller' => 'Application\Controller\Cron', 'roles' => ['admin']],
     ['controller' => 'Application\Controller\Index', 'action' => 'dashboard', 'roles' => ['guest']],
     ['controller' => 'Application\Controller\Index', 'action' => 'index', 'roles' => ['guest']],

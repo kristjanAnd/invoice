@@ -30,7 +30,8 @@ function log(input){
 var Common = {
     companyId: null,
     userId: null,
-    language: 'et',
+    language: 'us',
+    locale: 'en_US',
     datepickerBaseSrc: '/lib/jquery-ui-1.10.4/development-bundle/ui/i18n/jquery.ui.datepicker-',
     datePickerLocaleMapper: {
         'us': 'en-GB',
@@ -43,6 +44,11 @@ var Common = {
         }
         Common.language = language;
         Common.initDatepickerRegion(Common.datePickerLocaleMapper[language]);
+    },
+    setLocale: function(locale){
+        if(locale !== undefined){
+            Common.locale = locale;
+        }
     },
     replaceCommas: function(element) {
         var val = element.val().replace(",", ".");
@@ -1246,3 +1252,61 @@ var FilterForm = {
         }
     }
 };
+
+var AddArticle = {
+    type_item: 'item',
+    type_service: 'service',
+    type_select: $('#articleType'),
+    category_select: $('#add-category'),
+    brand_select: $('#add-brand'),
+    article_select: $('#add-article'),
+
+    init: function(){
+        $(document).on('change', '#articleType, #add-category, #add-brand', function () {
+            if($(this).prop('id') == 'articleType'){
+                $('#add-category').val('');
+                $('#add-brand').val('');
+            }
+            AddArticle.populateArticleSelect();
+        });
+    },
+
+    populateArticleSelect: function(){
+        var type = $('#articleType').val();
+        var category = $('#add-category').val();
+        var brand = $('#add-brand').val();
+
+        $.get('/application/article/get-article-select', {type: type, category: category, brand: brand, locale: Common.locale}, function (data) {
+            $('#add-article').html(data);
+        });
+    }
+};
+
+var Invoice = {
+    invoiceId: null,
+    init: function(invoiceId){
+        Invoice.invoiceId = invoiceId;
+
+        $(document).on('click', '#add-article-row', function(){
+            Invoice.addArticle();
+        });
+        $(document).on('click', '#add-empty-row', function(){
+            Invoice.addEmptyRow();
+        });
+    },
+
+    addArticle: function(){
+        var articleId = $('#add-article').val();
+        if(articleId > 0){
+            $.get('/application/invoice/add-article', {invoiceId: Invoice.invoiceId, articleId: articleId}, function (data) {
+                $('#invoice-rows').append(data);
+            });
+        }
+    },
+
+    addEmptyRow: function(){
+        $.get('/application/invoice/add-article', {invoiceId: Invoice.invoiceId, articleId: null}, function (data) {
+            $('#invoice-rows').append(data);
+        });
+    }
+}

@@ -1,7 +1,16 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: kristjan
- * Date: 5.05.15
- * Time: 16:35
- */ 
+    $form = $this->form; /* @var $form \Application\Form\DocumentRow\InvoiceRowForm */
+?>
+<tr <?php echo $form->get('invoiceIds[]')->getValue()?> >
+    <th><?php echo $form->getArticle() ? $form->getArticle()->getName() : ''?></th>
+    <th><?php echo $this->formText($form->get('names[]'))?></th>
+    <th><?php echo $this->formText($form->get('quantities[]'))?></th>
+    <th><?php echo $this->formSelect($form->get('units[]'))?></th>
+    <th><?php echo $this->formText($form->get('amounts[]'))?></th>
+    <th><?php echo $this->formSelect($form->get('vats[]'))?></th>
+    <th><?php echo $this->formText($form->get('amountVats[]'))?></th>
+    <th>
+        <?php echo $this->formHidden($form->get('vatAmounts[]'))?>
+        <?php echo $this->formHidden($form->get('invoiceIds[]'))?>
+    </th>
+</tr>

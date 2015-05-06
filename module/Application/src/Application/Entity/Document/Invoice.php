@@ -58,21 +58,18 @@ class Invoice extends Document {
 
     /**
      * @var string
-     *
      * @ORM\Column(name="client_reference_no", type="string")
      */
     protected $referenceNumber;
 
     /**
      * @var float
-     *
      * @ORM\Column(name="client_delay_percent", type="decimal")
      */
     protected $delayPercent;
 
     /**
      * @var integer
-     *
      * @ORM\Column(name="client_deadline_days", type="integer")
      */
     protected $deadlineDays;

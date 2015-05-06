@@ -9,6 +9,8 @@
 namespace Application\Service;
 
 
+use Application\Domain\DocumentRow\InvoiceRowDto;
+use Application\Entity\Article;
 use Application\Entity\Document\Invoice;
 use Application\Entity\DocumentSetting\InvoiceSetting;
 use Application\Entity\Role;
@@ -99,6 +101,14 @@ class InvoiceService extends DocumentService
         return $this->entityManager->getRepository(Invoice::getClass())->getCompanyInvoices($company, $data);
     }
 
+    /**
+     * @param $id
+     * @return null|Invoice
+     */
+    public function getInvoiceById($id){
+        return $this->entityManager->getRepository(Invoice::getClass())->findOneBy(array('id' => $id));
+    }
+
     public function getInvoiceStatusSelect(){
         $translator = $this->locator->get('Translator');
         return array(
@@ -167,5 +177,34 @@ class InvoiceService extends DocumentService
         $this->entityManager->flush($invoiceSetting);
 
         return $invoiceSetting;
+    }
+
+    /**
+     * @param Invoice $invoice
+     * @param Article $article
+     * @return InvoiceRowDto
+     */
+    public function createInvoiceRowDto(Invoice $invoice = null, Article $article = null, $vatPercent = 0){
+        $vatPercent = $article && $article->getVat() ? $article->getVat()->getValue()/100 : $vatPercent;
+        $dto = new InvoiceRowDto();
+        $dto->setInvoice($invoice);
+        $dto->setArticle($article);
+        if($article){
+            $dto->setName($article->getName());
+        }
+        if($article && $article->getUnit()){
+            $dto->setUnit($article->getUnit());
+        }
+        if($article && $article->getVat()){
+            $dto->setVat($article->getVat());
+        }
+
+        $dto->setQuantity($article ? $article->getQuantity() : 1);
+        $dto->setAmount($article ? $article->getSalePrice() : 0);
+        $dto->setVatAmount($dto->getAmount()*$vatPercent);
+        $dto->setAmountVat($dto->getAmount() + $dto->getVatAmount());
+
+        return $dto;
+
     }
 }

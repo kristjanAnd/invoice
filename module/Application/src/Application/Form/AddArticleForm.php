@@ -78,7 +78,6 @@ class AddArticleForm extends Form {
             'id' => 'articleType',
             'class' => 'form-control'
         ));
-        $articleType->setEmptyOption($this->translator->translate('ArticleAdd.form.articleType.emptyOption'));
         $articleType->setValueOptions($this->articleService->getArticleTypeSelect());
         $articleType->setLabel($this->translator->translate('ArticleAdd.form.articleType.label'));
         $articleType->setLabelAttributes(array('class' => 'col-sm-1 control-label'));
@@ -87,7 +86,7 @@ class AddArticleForm extends Form {
 
         $brand = new Select('brand');
         $brand->setAttributes(array(
-            'id' => 'brand',
+            'id' => 'add-brand',
             'class' => 'form-control'
         ));
         $brand->setEmptyOption($this->translator->translate('ArticleAdd.form.brand.emptyOption'));
@@ -98,7 +97,7 @@ class AddArticleForm extends Form {
 
         $category = new Select('category');
         $category->setAttributes(array(
-            'id' => 'category',
+            'id' => 'add-category',
             'class' => 'form-control'
         ));
         $category->setEmptyOption($this->translator->translate('ArticleAdd.form.category.emptyOption'));
@@ -109,10 +108,11 @@ class AddArticleForm extends Form {
 
         $article = new Select('article');
         $article->setAttributes(array(
-            'id' => 'article',
+            'id' => 'add-article',
             'class' => 'form-control'
         ));
         $article->setEmptyOption($this->translator->translate('ArticleAdd.form.article.emptyOption'));
+        $article->setValueOptions($this->articleService->getItemSelect($this->company));
         $article->setLabel($this->translator->translate('ArticleAdd.form.article.label'));
         $article->setLabelAttributes(array('class' => 'col-sm-1 control-label'));
         $this->add($article);

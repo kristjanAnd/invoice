@@ -83,14 +83,12 @@ abstract class Document extends AbstractEntity {
 
     /**
      * @var string
-     *
      * @ORM\Column(name="prefix", type="string")
      */
     protected $prefix;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="suffix", type="string")
      */
     protected $suffix;
