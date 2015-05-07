@@ -91,4 +91,28 @@ class IndexController extends AbstractActionController
 
         return $this->response;
     }
+
+    public function getUnitAddFormAction(){
+        if ($this->request->isGet() && $this->request->isXmlHttpRequest()) {
+            $form = $this->getServiceLocator()->get('Application\Form\Unit')->init();
+            $form->removeInputValidation('status');
+            $this->getTranslator($this->request->getQuery()->locale);
+            $view = new ViewModel();
+            $view->setTemplate('form/add/unit-form');
+            $view->setTerminal(true);
+            $view->form = $form;
+
+            return $view;
+        }
+
+        return $this->response;
+    }
+
+    private function getTranslator($locale = null){
+        $translator =  $this->serviceLocator->get('MvcTranslator');
+        if($locale){
+            $translator->setLocale($locale);
+        }
+        return $translator;
+    }
 }

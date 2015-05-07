@@ -1,7 +1,7 @@
 <?php
 use Application\Controller\ArticleController;
 $form = $this->form;
-$units = $this->units; /* @var $company \Application\Entity\Subject\Company */
+$vats = $this->vats;
 $filterForm = $this->filterForm;
 ?>
 <?php echo $this->partial('layout/partial/navigation', array('navKey' => $this->navKey)); ?>
@@ -9,7 +9,7 @@ $filterForm = $this->filterForm;
     <div class="row">
         <div class="col-lg-12">
             <div class="col-lg-6">
-                <h1 class="page-header"><?php echo $this->translate('Article.unit.list.heading')?></h1>
+                <h1 class="page-header"><?php echo $this->translate('Article.vat.list.heading')?></h1>
             </div>
             <div class="col-lg-6">
                 <div class="panel panel-default">
@@ -25,10 +25,10 @@ $filterForm = $this->filterForm;
                     <div  id="filterBody" class="panel-body">
                         <form id="filterForm" class="form-horizontal" method="get" action="">
                             <div class="col-lg-4">
-                                <?php echo $this->formCheckbox($filterForm->get('active'))?> <?php echo $this->translate('Article.unit.filterForm.status.active.label')?>
+                                <?php echo $this->formCheckbox($filterForm->get('active'))?> <?php echo $this->translate('Article.vat.filterForm.status.active.label')?>
                             </div>
                             <div class="col-lg-4">
-                                <?php echo $this->formCheckbox($filterForm->get('disabled'))?> <?php echo $this->translate('Article.unit.filterForm.status.disabled.label')?>
+                                <?php echo $this->formCheckbox($filterForm->get('disabled'))?> <?php echo $this->translate('Article.vat.filterForm.status.disabled.label')?>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-actions pull-right">
@@ -57,36 +57,37 @@ $filterForm = $this->filterForm;
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <i class="fa fa-bar-chart-o fa-fw"></i> <?php echo $this->translate('Article.unit.list.TableHeading')?>
-                    <?php if ($this->isAllowed(ArticleController::AUTHORIZE_CLASS . 'add-unit')):?>
+                    <i class="fa fa-bar-chart-o fa-fw"></i> <?php echo $this->translate('Article.vat.list.TableHeading')?>
+                    <?php if ($this->isAllowed(ArticleController::AUTHORIZE_CLASS . 'add-vat')):?>
                         <div class="pull-right">
                             <div class="btn-group">
-                                <a id="addRow" class="btn btn-default btn-xs" href="#" data-target="#addUnit" data-toggle="modal" ><i class="fa fa-plus fa-fws"></i>  <?php echo $this->translate('Article.unit.list.addRow')?></a>
+                                <a id="addRow" class="btn btn-default btn-xs" href="#" data-target="#addVat" data-toggle="modal" ><i class="fa fa-plus fa-fws"></i>  <?php echo $this->translate('Article.vat.list.addRow')?></a>
                             </div>
                         </div>
                     <?php endif;?>
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
-                    <table class="table table-striped table-bordered table-hover" id="unitTable">
+                    <table class="table table-striped table-bordered table-hover" id="vatTable">
                         <thead>
-                            <tr>
-                                <th><?php echo $this->translate('Article.unit.list.tableTh.code')?></th>
-                                <th><?php echo $this->translate('Article.unit.list.tableTh.status')?></th>
-                                <th width="15%"><?php echo $this->translate('Article.unit.list.tableTh.actions')?></th>
-                            </tr>
+                        <tr>
+                            <th><?php echo $this->translate('Article.vat.list.tableTh.code')?></th>
+                            <th><?php echo $this->translate('Article.vat.list.tableTh.value')?></th>
+                            <th><?php echo $this->translate('Article.vat.list.tableTh.status')?></th>
+                            <th width="15%"><?php echo $this->translate('Article.vat.list.tableTh.actions')?></th>
+                        </tr>
                         </thead>
                         <tbody>
-                            <?php foreach($units as $unit):?>
-                                <?php echo $this->partial('application/article/partial/unit-row', array('unit' => $unit, 'statuses' => $this->statuses))?>
-                            <?php endforeach;?>
+                        <?php foreach($vats as $vat):?>
+                            <?php echo $this->partial('application/article/partial/vat-row', array('vat' => $vat, 'statuses' => $this->statuses))?>
+                        <?php endforeach;?>
                         </tbody>
                         <tfoot>
-                            <td colspan="4">
-                                <div class="pull-right">
-                                    <?php echo $this->paginationControl($units, 'Sliding', 'application/paginator')?>
-                                </div>
-                            </td>
+                        <td colspan="4">
+                            <div class="pull-right">
+                                <?php echo $this->paginationControl($vats, 'Sliding', 'application/paginator')?>
+                            </div>
+                        </td>
                         </tfoot>
                     </table>
                 </div>
@@ -98,7 +99,7 @@ $filterForm = $this->filterForm;
     <!-- /.row -->
 </div>
 
-<div class="modal fade" id="addUnit" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="addVat" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog  modal-lg">
         <div class="row">
             <div class="col-sm-3"></div>
@@ -106,15 +107,21 @@ $filterForm = $this->filterForm;
                 <div class="modal-content">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <i class="fa fa-bar-chart-o fa-fw"></i> <?php echo $this->translate('Article.unit.list.add.modalHeading')?>
+                            <i class="fa fa-bar-chart-o fa-fw"></i> <?php echo $this->translate('Article.vat.list.add.modalHeading')?>
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <form id="unitForm" class="form-horizontal" method="post" action="<?php echo $this->url('add-unit', [], true)?>" enctype="multipart/form-data">
+                            <form id="vatForm" class="form-horizontal" method="post" action="<?php echo $this->url('add-vat', [], true)?>" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <?php echo $this->formLabel($form->get('code'))?>
                                     <div class="col-sm-8">
                                         <?php echo $this->formText($form->get('code'))?>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('value'))?>
+                                    <div class="col-sm-8">
+                                        <?php echo $this->formText($form->get('value'))?>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -127,18 +134,18 @@ $filterForm = $this->filterForm;
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">
-                                                <?php echo $this->translate('Article.unit.list.add.modal.cancelButton')?>
+                                                <?php echo $this->translate('Article.vat.list.add.modal.cancelButton')?>
                                             </button>
                                             <button class="btn btn-primary" id="submit"  type="submit">
                                                 <i class="fa fa-save"></i>
-                                                <?php echo $this->translate('Article.unit.list.add.modal.saveButton')?>
+                                                <?php echo $this->translate('Article.vat.list.add.modal.saveButton')?>
                                             </button>
                                         </div>
                                     </div>
                                 </div>
                             </form>
                         </div>
-                    <!-- /.panel-body -->
+                        <!-- /.panel-body -->
                     </div>
                 </div>
             </div>
@@ -149,7 +156,7 @@ $filterForm = $this->filterForm;
 <!-- /#page-wrapper -->
 <script type="text/javascript">
     $(document).ready(function() {
-        Unit.init();
-        Validator.initUnitForm();
+        Vat.init();
+        Validator.initVatForm();
     });
 </script>

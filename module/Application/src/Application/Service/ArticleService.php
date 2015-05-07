@@ -13,8 +13,13 @@ use Application\Entity\Article;
 use Application\Entity\Article\Brand;
 use Application\Entity\Article\Category;
 use Application\Entity\Article\Item;
+use Application\Entity\ArticleSetting;
+use Application\Entity\ArticleSetting\ItemSetting;
+use Application\Entity\ArticleSetting\ServiceSetting;
 use Application\Entity\Subject\Company;
 use Application\Entity\Unit;
+use Application\Entity\User;
+use Application\Entity\Vat;
 use Zend\Stdlib\Parameters;
 
 class ArticleService extends AbstractService {
@@ -214,6 +219,14 @@ class ArticleService extends AbstractService {
         );
     }
 
+    public function getVatStatusSelect(){
+        $translator = $this->locator->get('Translator');
+        return array(
+            Vat::STATUS_ACTIVE => $translator->translate('Vat.status.active'),
+            Vat::STATUS_DISABLED => $translator->translate('Vat.status.disabled')
+        );
+    }
+
     public function getArticleStatusSelect(){
         $translator = $this->locator->get('Translator');
         return array(
@@ -236,5 +249,78 @@ class ArticleService extends AbstractService {
             Brand::STATUS_ACTIVE => $translator->translate('ArticleBrand.status.active'),
             Brand::STATUS_DISABLED => $translator->translate('ArticleBrand.status.disabled')
         );
+    }
+
+    public function getArticleSettingById($id){
+        return $this->entityManager->getRepository(ArticleSetting::getClass())->findOneBy(array('id' => $id));
+    }
+
+    public function getItemSettingByCompany(Company $company, User $user){
+        $itemSetting = $this->entityManager->getRepository(ItemSetting::getClass())->findOneBy(array('company' => $company));
+        if(!$itemSetting){
+            $itemSetting = $this->createItemSetting($company, $user);
+        }
+        return $itemSetting;
+    }
+
+    public function createItemSetting(Company $company, User $user){
+        $itemSetting = new ItemSetting();
+        $itemSetting->setCompany($company);
+        $itemSetting->setUser($user);
+
+        $this->entityManager->persist($itemSetting);
+        $this->entityManager->flush($itemSetting);
+
+        return $itemSetting;
+    }
+
+    public function saveArticleSetting(ArticleSetting $articleSetting, Parameters $data){
+        if(isset($data->vat) && $data->vat > 0){
+            $vat = $this->entityManager->getRepository(Vat::getClass())->findOneBy(array('id' => $data->vat));
+            if($vat && $vat->getCompany() === $articleSetting->getCompany()){
+                $articleSetting->setVat($vat);
+            }
+        }
+        if(isset($data->unit) && $data->unit > 0){
+            $unit = $this->entityManager->getRepository(Unit::getClass())->findOneBy(array('id' => $data->unit));
+            if($unit && $unit->getCompany() === $articleSetting->getCompany()){
+                $articleSetting->setUnit($unit);
+            }
+        }
+        if(isset($data->quantity)){
+            $articleSetting->setQuantity($data->quantity);
+        }
+
+        $this->entityManager->persist($articleSetting);
+        $this->entityManager->flush($articleSetting);
+
+        return $articleSetting;
+    }
+
+    public function saveItemSetting(ItemSetting $itemSetting, Parameters $data){
+        return $this->saveArticleSetting($itemSetting, $data);
+    }
+
+    public function saveServiceSetting(ServiceSetting $serviceSetting, Parameters $data){
+        return $this->saveArticleSetting($serviceSetting, $data);
+    }
+
+    public function getServiceSettingByCompany(Company $company, User $user){
+        $serviceSetting = $this->entityManager->getRepository(ServiceSetting::getClass())->findOneBy(array('company' => $company));
+        if(!$serviceSetting){
+            $serviceSetting = $this->createServiceSetting($company, $user);
+        }
+        return $serviceSetting;
+    }
+
+    public function createServiceSetting(Company $company, User $user){
+        $serviceSetting = new ServiceSetting();
+        $serviceSetting->setCompany($company);
+        $serviceSetting->setUser($user);
+
+        $this->entityManager->persist($serviceSetting);
+        $this->entityManager->flush($serviceSetting);
+
+        return $serviceSetting;
     }
 } 

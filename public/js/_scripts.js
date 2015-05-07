@@ -1,26 +1,20 @@
 $(function() {
+    function reposition() {
+        var modal = $(this),
+            dialog = modal.find('.modal-dialog');
+        modal.css('display', 'block');
 
-    //$( "#forgotPassword" ).dialog({
-    //    autoOpen: false,
-    //    modal: true
-    //});
-    //
-    //$( "#forgotPasswordButton" )
-    //    .click(function() {
-    //        $( "#forgotPassword" ).dialog( "open" );
-    //        $( "#login" ).dialog( "close" );
-    //    });
-    //
-    //$( "#twitterLogin" ).dialog({
-    //    autoOpen: false,
-    //    modal: true
-    //});
-    //
-    //$( "#twitterLoginButton" )
-    //    .click(function() {
-    //        $( "#twitterLogin" ).dialog( "open" );
-    //    });
-
+        // Dividing by two centers the modal exactly, but dividing by three
+        // or four works better for larger screens.
+        dialog.css("margin-top", Math.max(0, ($(window).height() - dialog.height()) / 2));
+        dialog.css("margin-left", Math.max(0, ($(window).width() - dialog.width()) / 2));
+    }
+    // Reposition when a modal is shown
+    $('.modal').on('show.bs.modal', reposition);
+    // Reposition when the window is resized
+    $(window).on('resize', function() {
+        $('.modal:visible').each(reposition);
+    });
 });
 
 function log(input){
@@ -326,6 +320,36 @@ var Validator = {
         });
     },
 
+    initVatForm: function () {
+        $('#vatForm').validate({
+            rules: {
+                "code": {
+                    required: true
+                },
+                "value": {
+                    required: true,
+                    number: true,
+                    min: 0,
+                    max: 100
+                },
+                "status": {
+                    required: true
+                }
+            },
+            errorPlacement: function (error, element) {
+
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).parent().addClass('has-error');
+                $(element).parent().find('.help-block').show();
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).parent().removeClass('has-error');
+                $(element).parent().find('.help-block').hide();
+            }
+        });
+    },
+
     initCompanyForm: function () {
         $('#companyForm').validate({
             rules: {
@@ -363,6 +387,72 @@ var Validator = {
                     number: true,
                     min: 0,
                     max: 100
+                }
+            },
+            errorPlacement: function (error, element) {
+
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).parent().addClass('has-error');
+                $(element).parent().find('.help-block').show();
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).parent().removeClass('has-error');
+                $(element).parent().find('.help-block').hide();
+            }
+        });
+    },
+
+    initArticleSettingForm: function () {
+        $(document).on('click', '#add-unit-submit', function(e){
+            e.preventDefault();
+            var form = $('#unitForm');
+            if(form.valid()){
+                var url = '/application/article/add-unit?modal=1';
+                $.post(url, form.serializeArray()).done(function (data) {
+                    $('#item-unit').html(data);
+                    $('#add-modal').modal('hide');
+                });
+            } else {
+                return false;
+            }
+        });
+        $(document).on('change', '.quantity', function(){
+            Common.replaceCommas($(this));
+        });
+        $(document).on('click', '.add-modal-unit', function(){
+            var addModal = $('#add-modal');
+
+            $.get('/application/index/get-unit-add-form', {locale: Common.locale}, function (data) {
+                $('#add-modal-content').html(data);
+                addModal.modal('show');
+            });
+        });
+
+        $('#itemSettingForm').validate({
+            rules: {
+                "quantity": {
+                    number: true,
+                    required: true
+                }
+            },
+            errorPlacement: function (error, element) {
+
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).parent().addClass('has-error');
+                $(element).parent().find('.help-block').show();
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).parent().removeClass('has-error');
+                $(element).parent().find('.help-block').hide();
+            }
+        });
+        $('#serviceSettingForm').validate({
+            rules: {
+                "quantity": {
+                    number: true,
+                    required: true
                 }
             },
             errorPlacement: function (error, element) {
@@ -1027,6 +1117,88 @@ var Unit = {
     }
 };
 
+var Vat = {
+    init: function(){
+        $(document).on('click', '.editVat', function () {
+            Vat.editVat($(this));
+        });
+
+        $(document).on('click', '.saveVat', function () {
+            Vat.saveVat($(this));
+        });
+
+        $(document).on('keyup', '.code, .status', function () {
+            Vat.preValidate($(this));
+        });
+    },
+
+    editVat: function(element){
+        var id = element.data('value');
+        element.hide();
+        element.parent().find('.saveVat').show();
+        $('.value-' + id).hide();
+        $('.input-' + id).show();
+    },
+
+    saveVat: function(element){
+        var id = element.data('value');
+        if(Vat.validateEdit(id)){
+            var code = $('#code-input-'+id).val();
+            var value = $('#value-input-'+id).val();
+            var status = $('#status-input-'+id).val();
+
+            $('#status-value-'+id).html($("#status-input-" + id + " option:selected").text());
+            $('#code-value-'+id).html(code);
+            $('#value-value-'+id).html(value);
+
+            element.hide();
+            element.parent().find('.editVat').show();
+            $('.value-' + id).show();
+            $('.input-' + id).hide();
+
+            $.get('/application/article/edit-vat', {id: id, code: code, value: value, status: status}, function (data) {
+
+            });
+        }
+    },
+
+    preValidate: function(element) {
+        $(element).parent().removeClass('has-error');
+        if(!element.val().length > 0){
+            $(element).parent().addClass('has-error');
+            return false;
+        }
+        if(element.hasClass('value')){
+            Common.replaceCommas(element);
+            if(!$.isNumeric(element.val())){
+                $(element).parent().addClass('has-error');
+                return false;
+            }
+        }
+        return true;
+    },
+
+    validateEdit: function(id){
+        var breakOut;
+        var elements = [
+            $('#code-input-'+id),
+            $('#value-input-'+id),
+            $('#status-input-'+id),
+        ];
+        $.each(elements, function(){
+            if(!Vat.preValidate($(this))){
+                breakOut = true;
+                return false;
+            }
+        });
+        if(breakOut) {
+            breakOut = false;
+            return false;
+        }
+        return true;
+    }
+};
+
 var Category = {
     init: function(){
         $(document).on('click', '.editCategory', function () {
@@ -1298,14 +1470,14 @@ var Invoice = {
     addArticle: function(){
         var articleId = $('#add-article').val();
         if(articleId > 0){
-            $.get('/application/invoice/add-article', {invoiceId: Invoice.invoiceId, articleId: articleId}, function (data) {
+            $.get('/application/invoice/add-article', {invoiceId: Invoice.invoiceId, articleId: articleId, locale: Common.locale}, function (data) {
                 $('#invoice-rows').append(data);
             });
         }
     },
 
     addEmptyRow: function(){
-        $.get('/application/invoice/add-article', {invoiceId: Invoice.invoiceId, articleId: null}, function (data) {
+        $.get('/application/invoice/add-article', {invoiceId: Invoice.invoiceId, articleId: null, locale: Common.locale}, function (data) {
             $('#invoice-rows').append(data);
         });
     }

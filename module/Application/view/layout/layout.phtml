@@ -96,6 +96,7 @@
         ?>
         <?php if(strlen($this->language) > 0 && array_key_exists($this->language, $availableLanguages)):?>
             <script type="text/javascript">
+                $('[data-toggle="tooltip"]').tooltip();
                 Common.setLanguage('<?php echo $this->language?>');
                 Common.setLocale('<?php echo $this->locale?>');
                 <?php if($userId):?>
@@ -112,5 +113,13 @@
             Password.initForgot();
             FilterForm.init();
         </script>
+
+        <div class="modal fade" id="add-modal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog  modal-lg">
+                <div id="add-modal-content" class="row">
+
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
     </body>
 </html>

@@ -1,0 +1,35 @@
+<?php
+$rowDto = $this->dto; /* @var $rowDto \Application\Domain\DocumentRow\InvoiceRowDto  */
+$units = $this->units;
+$vats = $this->vats;
+$invoiceId = $rowDto->getInvoice() ? $rowDto->getInvoice()->getId() : null;
+$unitId = $rowDto->getUnit() ? $rowDto->getUnit()->getId() : null;
+$vatId = $rowDto->getVat() ? $rowDto->getVat()->getId() : null;
+?>
+<tr <?php echo $invoiceId ?> >
+    <th><?php echo $rowDto->getArticle() ? $rowDto->getArticle()->getName() : ''?></th>
+    <th><input type="text" name="names[]" class="form-control name" value="<?php echo $rowDto->getName() ?>"></th>
+    <th><input type="text" name="quantities[]" class="form-control quantity" value="<?php echo $rowDto->getQuantity() ?>"></th>
+    <th>
+        <select name="units[]" class="form-control unit">
+            <option value=""><?php echo $this->unitEmptyOption ?></option>
+            <?php foreach($units as $unit):?>
+                <option value="<?php echo $unit->getId()?>" <?php if($unit->getId() == $unitId):?>selected<?php endif?>><?php echo $unit->getCode()?></option>
+            <?php endforeach;?>
+        </select>
+    </th>
+    <th><input type="text" name="amounts[]" class="form-control amount" value="<?php echo $rowDto->getAmount()?>"></th>
+    <th>
+        <select name="vats[]" class="form-control vat">
+            <option value=""><?php echo $this->vatEmptyOption ?></option>
+            <?php foreach($vats as $vat):?>
+                <option value="<?php echo $vat->getId()?>" <?php if($vat->getId() == $vatId):?>selected<?php endif?>><?php echo $vat->getCode()?></option>
+            <?php endforeach;?>
+        </select>
+    </th>
+    <th><input type="text" name="amountVats[]" class="form-control amountVat" value="<?php echo $rowDto->getAmountVat()?>"></th>
+    <th>
+        <input type="hidden" name="vatAmounts[]" class="form-control vatAmount" value="<?php echo $rowDto->getVatAmount() ?>">
+        <input type="hidden" name="invoiceIds[]" class="form-control" value="<?php echo $invoiceId ?>">
+    </th>
+</tr>

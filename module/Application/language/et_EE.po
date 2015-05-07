@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skeletonSocialUser\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-06 08:43+0300\n"
-"PO-Revision-Date: 2015-05-06 08:45+0300\n"
+"POT-Creation-Date: 2015-05-07 17:48+0300\n"
+"PO-Revision-Date: 2015-05-07 17:48+0300\n"
 "Last-Translator: \n"
 "Language-Team: Andresson Developments OÜ\n"
 "Language: et_EE\n"
@@ -449,7 +449,7 @@ msgid "ArticleAdd.form.category.label"
 msgstr "Kategooria:"
 
 #: Application/src/Application/Form/AddArticleForm.php:114
-#: Application/src/Application/Controller/ArticleController.php:382
+#: Application/src/Application/Controller/ArticleController.php:444
 msgid "ArticleAdd.form.article.emptyOption"
 msgstr "-Artikkel-"
 
@@ -600,6 +600,16 @@ msgstr "Ühik"
 #: Application/src/Application/Form/ArticleForm.php:236
 msgid "ArticleForm.message.statusInput"
 msgstr "Staatus"
+
+#: Application/src/Application/Form/DocumentRowForm.php:112
+#: Application/src/Application/Controller/InvoiceController.php:185
+msgid "DocumentRowForm.form.vat.emptyOption"
+msgstr "-Käibemaks-"
+
+#: Application/src/Application/Form/DocumentRowForm.php:120
+#: Application/src/Application/Controller/InvoiceController.php:186
+msgid "DocumentRowForm.form.unit.emptyOption"
+msgstr "-Ühik-"
 
 #: Application/src/Application/Form/SubjectForm.php:109
 msgid "Company.form.name.placeholder"
@@ -778,6 +788,7 @@ msgid "Document.form.vatAmount.notDigits"
 msgstr "KM summa peab olema number!"
 
 #: Application/src/Application/Form/DocumentForm.php:313
+#: Application/src/Application/Form/ArticleSettingForm.php:133
 msgid "Document.form.amountVat.notDigits"
 msgstr "Summa + KM peab olema number!"
 
@@ -828,6 +839,30 @@ msgstr "Väärtus"
 #: Application/src/Application/Form/VatForm.php:94
 msgid "VatForm.message.statusInput"
 msgstr "Staatus"
+
+#: Application/src/Application/Form/ArticleSettingForm.php:88
+msgid "ArticleSetting.form.unit.emptyOption"
+msgstr "-Ühik-"
+
+#: Application/src/Application/Form/ArticleSettingForm.php:90
+msgid "ArticleSetting.form.unit.label"
+msgstr "Ühik:"
+
+#: Application/src/Application/Form/ArticleSettingForm.php:100
+msgid "ArticleSetting.form.vat.emptyOption"
+msgstr "-Käibemaks-"
+
+#: Application/src/Application/Form/ArticleSettingForm.php:101
+msgid "ArticleSetting.form.vat.label"
+msgstr "Vaikimisi käibemaks:"
+
+#: Application/src/Application/Form/ArticleSettingForm.php:110
+msgid "ArticleSetting.form.quantity.placeholder"
+msgstr "Kogus"
+
+#: Application/src/Application/Form/ArticleSettingForm.php:112
+msgid "ArticleSetting.form.quantity.label"
+msgstr "Kogus:"
 
 #: Application/src/Application/Form/ForgotPassword.php:47
 msgid "forgotPassword.email.placeholder"
@@ -1049,11 +1084,11 @@ msgstr "-Käibemaks-"
 msgid "InvoiceSetting.form.vat.label"
 msgstr "Vaikimisi käibemaks:"
 
-#: Application/src/Application/Form/DocumentSetting/InvoiceSettingForm.php:104
+#: Application/src/Application/Form/DocumentSetting/InvoiceSettingForm.php:98
 msgid "InvoiceSetting.form.delayPercent.notDigits"
 msgstr "Viivis peab olema number!"
 
-#: Application/src/Application/Form/DocumentSetting/InvoiceSettingForm.php:107
+#: Application/src/Application/Form/DocumentSetting/InvoiceSettingForm.php:101
 msgid "InvoiceSetting.form.deadlineDays.notDigits"
 msgstr "Maksetähtaeg päevades peab olema number!"
 
@@ -1065,75 +1100,77 @@ msgstr "Aktiivne"
 msgid "Client.status.disabled"
 msgstr "Arhiveeritud"
 
-#: Application/src/Application/Service/ArticleService.php:99
+#: Application/src/Application/Service/ArticleService.php:104
 msgid "Article.type.item"
 msgstr "Toode"
 
-#: Application/src/Application/Service/ArticleService.php:100
+#: Application/src/Application/Service/ArticleService.php:105
 msgid "Article.type.service"
 msgstr "Teenus"
 
-#: Application/src/Application/Service/ArticleService.php:208
-#: Application/src/Application/Service/UnitService.php:62
+#: Application/src/Application/Service/ArticleService.php:217
+#: Application/src/Application/Service/UnitService.php:70
 msgid "Unit.status.active"
 msgstr "Aktiivne"
 
-#: Application/src/Application/Service/ArticleService.php:209
-#: Application/src/Application/Service/UnitService.php:63
+#: Application/src/Application/Service/ArticleService.php:218
+#: Application/src/Application/Service/UnitService.php:71
 msgid "Unit.status.disabled"
 msgstr "Arhiveeritud"
 
-#: Application/src/Application/Service/ArticleService.php:216
-msgid "Article.status.active"
-msgstr "Aktiivne"
-
-#: Application/src/Application/Service/ArticleService.php:217
-msgid "Article.status.disabled"
-msgstr "Arhiveeritud"
-
-#: Application/src/Application/Service/ArticleService.php:224
-msgid "ArticleCategory.status.active"
-msgstr "Aktiivne"
-
 #: Application/src/Application/Service/ArticleService.php:225
-msgid "ArticleCategory.status.disabled"
-msgstr "Arhiveeritud"
-
-#: Application/src/Application/Service/ArticleService.php:232
-msgid "ArticleBrand.status.active"
-msgstr "Aktiivne"
-
-#: Application/src/Application/Service/ArticleService.php:233
-msgid "ArticleBrand.status.disabled"
-msgstr "Arhiveeritud"
-
-#: Application/src/Application/Service/InvoiceService.php:105
-msgid "Invoice.status.pending"
-msgstr "Ootel"
-
-#: Application/src/Application/Service/InvoiceService.php:106
-msgid "Invoice.status.archived"
-msgstr "Arhiveeritud"
-
-#: Application/src/Application/Service/InvoiceService.php:107
-msgid "Invoice.status.confirmed"
-msgstr "Kinnitatud"
-
-#: Application/src/Application/Service/InvoiceService.php:114
-msgid "Invoice.paymentStatus.paid"
-msgstr "Makstud"
-
-#: Application/src/Application/Service/InvoiceService.php:115
-msgid "Invoice.paymentStatus.unPaid"
-msgstr "Maksmata"
-
 #: Application/src/Application/Service/VatService.php:77
 msgid "Vat.status.active"
 msgstr "Aktiivne"
 
+#: Application/src/Application/Service/ArticleService.php:226
 #: Application/src/Application/Service/VatService.php:78
 msgid "Vat.status.disabled"
 msgstr "Arhiveeritud"
+
+#: Application/src/Application/Service/ArticleService.php:233
+msgid "Article.status.active"
+msgstr "Aktiivne"
+
+#: Application/src/Application/Service/ArticleService.php:234
+msgid "Article.status.disabled"
+msgstr "Arhiveeritud"
+
+#: Application/src/Application/Service/ArticleService.php:241
+msgid "ArticleCategory.status.active"
+msgstr "Aktiivne"
+
+#: Application/src/Application/Service/ArticleService.php:242
+msgid "ArticleCategory.status.disabled"
+msgstr "Arhiveeritud"
+
+#: Application/src/Application/Service/ArticleService.php:249
+msgid "ArticleBrand.status.active"
+msgstr "Aktiivne"
+
+#: Application/src/Application/Service/ArticleService.php:250
+msgid "ArticleBrand.status.disabled"
+msgstr "Arhiveeritud"
+
+#: Application/src/Application/Service/InvoiceService.php:115
+msgid "Invoice.status.pending"
+msgstr "Ootel"
+
+#: Application/src/Application/Service/InvoiceService.php:116
+msgid "Invoice.status.archived"
+msgstr "Arhiveeritud"
+
+#: Application/src/Application/Service/InvoiceService.php:117
+msgid "Invoice.status.confirmed"
+msgstr "Kinnitatud"
+
+#: Application/src/Application/Service/InvoiceService.php:124
+msgid "Invoice.paymentStatus.paid"
+msgstr "Makstud"
+
+#: Application/src/Application/Service/InvoiceService.php:125
+msgid "Invoice.paymentStatus.unPaid"
+msgstr "Maksmata"
 
 #: Application/src/Application/Service/LanguageService.php:28
 msgid "language.select.et"
@@ -1188,45 +1225,61 @@ msgstr "Uus klient lisatud!"
 msgid "Client.edit.successMessage"
 msgstr "Kliendi andmed muudetud!"
 
-#: Application/src/Application/Controller/ArticleController.php:91
+#: Application/src/Application/Controller/ArticleController.php:109
 msgid "Article.item.add.successMessage"
 msgstr "Uus toode lisatud!"
 
-#: Application/src/Application/Controller/ArticleController.php:114
+#: Application/src/Application/Controller/ArticleController.php:132
 msgid "Article.item.edit.successMessage"
 msgstr "Toote info muudetud!"
 
-#: Application/src/Application/Controller/ArticleController.php:158
+#: Application/src/Application/Controller/ArticleController.php:176
 msgid "Article.unit.add.successMessage"
 msgstr "Uus ühik lisatud!"
 
-#: Application/src/Application/Controller/ArticleController.php:161
+#: Application/src/Application/Controller/ArticleController.php:179
 msgid "Article.unit.add.errorMessage"
 msgstr "Ühikut ei saanud lisada. Vaadake andmed üle ja proovige uuesti!"
 
-#: Application/src/Application/Controller/ArticleController.php:213
+#: Application/src/Application/Controller/ArticleController.php:226
+msgid "Article.vat.add.successMessage"
+msgstr "Uus käibemaks lisatud!"
+
+#: Application/src/Application/Controller/ArticleController.php:229
+msgid "Article.vat.add.errorMessage"
+msgstr "Käibemaksu ei saanud lisada. Vaadake andmed üle ja proovige uuesti!"
+
+#: Application/src/Application/Controller/ArticleController.php:275
 msgid "Article.service.add.successMessage"
 msgstr "Uus teenus lisatud!"
 
-#: Application/src/Application/Controller/ArticleController.php:236
+#: Application/src/Application/Controller/ArticleController.php:298
 msgid "Article.service.edit.successMessage"
 msgstr "Teenuse info muudetud!"
 
-#: Application/src/Application/Controller/ArticleController.php:280
+#: Application/src/Application/Controller/ArticleController.php:342
 msgid "Article.category.add.successMessage"
 msgstr "Uus kategooria lisatud!"
 
-#: Application/src/Application/Controller/ArticleController.php:283
+#: Application/src/Application/Controller/ArticleController.php:345
 msgid "Article.category.add.errorMessage"
 msgstr "kategooriat ei saanud lisada. Vaadake andmed üle ja proovige uuesti!"
 
-#: Application/src/Application/Controller/ArticleController.php:335
+#: Application/src/Application/Controller/ArticleController.php:397
 msgid "Article.brand.add.successMessage"
 msgstr "Uus bränd lisatud!"
 
-#: Application/src/Application/Controller/ArticleController.php:338
+#: Application/src/Application/Controller/ArticleController.php:400
 msgid "Article.brand.add.errorMessage"
 msgstr "Brändi ei saanud lisada. Vaadake andmed üle ja proovige uuesti!"
+
+#: Application/src/Application/Controller/ArticleController.php:490
+msgid "Article.editArticleSetting.successMessage"
+msgstr "Artikli seaded muudetud!"
+
+#: Application/src/Application/Controller/ArticleController.php:492
+msgid "Article.editArticleSetting.errorMessage"
+msgstr "Midagi läks valesti. Artikli seadeid ei salvestatud!"
 
 #: Application/src/Application/Controller/AdminController.php:76
 msgid "Admin.role.add.successMessage"
@@ -1248,11 +1301,11 @@ msgstr "Kasutaja on salvestatud!"
 msgid "Company.edit.successMessage"
 msgstr "Ettevõtte andmed salvestatud!"
 
-#: Application/src/Application/Controller/InvoiceController.php:120
+#: Application/src/Application/Controller/InvoiceController.php:161
 msgid "Invoice.editInvoiceSetting.successMessage"
 msgstr "Arve seaded muudetud!"
 
-#: Application/src/Application/Controller/InvoiceController.php:122
+#: Application/src/Application/Controller/InvoiceController.php:163
 msgid "Invoice.editInvoiceSetting.errorMessage"
 msgstr "Midagi läks valesti. Arve seadeid ei salvestatud!"
 
@@ -1273,69 +1326,92 @@ msgstr ""
 msgid "User.profile.edit.successMessage"
 msgstr "Profiili andmed muudetud!"
 
-#: Application/view/layout/layout.phtml:110
+#: Application/view/form/add/unit-form.phtml:5
+#: Application/view/application/article/unit.phtml:108
+msgid "Article.unit.list.add.modalHeading"
+msgstr "Ühiku lisamine"
+
+#: Application/view/form/add/unit-form.phtml:20
+#: Application/view/application/article/unit.phtml:129
+msgid "Article.unit.list.add.modal.cancelButton"
+msgstr "Loobu"
+
+#: Application/view/form/add/unit-form.phtml:24
+#: Application/view/application/article/unit.phtml:133
+msgid "Article.unit.list.add.modal.saveButton"
+msgstr "Salvesta"
+
+#: Application/view/layout/layout.phtml:111
 #: Application/view/application/user/forgot-password.phtml:40
 msgid "layout.password.forgotPasswordSuccessMessage"
 msgstr "Parooli saadeti e-mailile."
 
-#: Application/view/layout/layout.phtml:111
+#: Application/view/layout/layout.phtml:112
 #: Application/view/application/user/forgot-password.phtml:41
 msgid "layout.password.forgotPasswordErrorMessage"
 msgstr "Midagi läks valesti!"
 
-#: Application/view/layout/partial/navigation.phtml:43
+#: Application/view/layout/partial/navigation.phtml:45
 msgid "Navigation.dashboard"
 msgstr "Töölaud"
 
-#: Application/view/layout/partial/navigation.phtml:47
+#: Application/view/layout/partial/navigation.phtml:49
 msgid "Navigation.articles"
 msgstr "Artiklid"
 
-#: Application/view/layout/partial/navigation.phtml:52
+#: Application/view/layout/partial/navigation.phtml:54
+msgid "Navigation.articles.article-setting"
+msgstr "Artikli seaded"
+
+#: Application/view/layout/partial/navigation.phtml:61
 msgid "Navigation.articles.items"
 msgstr "Tooted"
 
-#: Application/view/layout/partial/navigation.phtml:59
+#: Application/view/layout/partial/navigation.phtml:68
 msgid "Navigation.articles.services"
 msgstr "Teenused"
 
-#: Application/view/layout/partial/navigation.phtml:66
+#: Application/view/layout/partial/navigation.phtml:75
 msgid "Navigation.articles.units"
 msgstr "Ühikud"
 
-#: Application/view/layout/partial/navigation.phtml:73
+#: Application/view/layout/partial/navigation.phtml:82
 msgid "Navigation.articles.categories"
 msgstr "Artikli kategooriad"
 
-#: Application/view/layout/partial/navigation.phtml:80
+#: Application/view/layout/partial/navigation.phtml:89
 msgid "Navigation.articles.brands"
 msgstr "Artikli brändid"
 
-#: Application/view/layout/partial/navigation.phtml:87
+#: Application/view/layout/partial/navigation.phtml:96
+msgid "Navigation.articles.vats"
+msgstr "Käibemaksud"
+
+#: Application/view/layout/partial/navigation.phtml:103
 msgid "Navigation.admin"
 msgstr "Administraator"
 
-#: Application/view/layout/partial/navigation.phtml:92
+#: Application/view/layout/partial/navigation.phtml:108
 msgid "Navigation.admin.roles"
 msgstr "Rollid"
 
-#: Application/view/layout/partial/navigation.phtml:99
+#: Application/view/layout/partial/navigation.phtml:115
 msgid "Navigation.admin.users"
 msgstr "Kasutajad"
 
-#: Application/view/layout/partial/navigation.phtml:108
+#: Application/view/layout/partial/navigation.phtml:124
 msgid "Navigation.clients"
 msgstr "Kliendid"
 
-#: Application/view/layout/partial/navigation.phtml:113
+#: Application/view/layout/partial/navigation.phtml:129
 msgid "Navigation.invoice"
 msgstr "Arve"
 
-#: Application/view/layout/partial/navigation.phtml:118
+#: Application/view/layout/partial/navigation.phtml:134
 msgid "Navigation.invoice.invoices"
 msgstr "Arved"
 
-#: Application/view/layout/partial/navigation.phtml:125
+#: Application/view/layout/partial/navigation.phtml:141
 msgid "Navigation.invoice.invoice-settings"
 msgstr "Arve seaded"
 
@@ -1661,6 +1737,7 @@ msgstr "Brändid"
 #: Application/view/application/article/brand.phtml:18
 #: Application/view/application/article/category.phtml:17
 #: Application/view/application/article/service.phtml:15
+#: Application/view/application/article/vat.phtml:17
 #: Application/view/application/article/item.phtml:15
 #: Application/view/application/article/unit.phtml:17
 #: Application/view/application/invoice/invoice.phtml:19
@@ -1679,6 +1756,7 @@ msgstr "Arhiveeritud?"
 #: Application/view/application/article/brand.phtml:40
 #: Application/view/application/article/category.phtml:39
 #: Application/view/application/article/service.phtml:49
+#: Application/view/application/article/vat.phtml:39
 #: Application/view/application/article/item.phtml:49
 #: Application/view/application/article/unit.phtml:39
 #: Application/view/application/invoice/invoice.phtml:82
@@ -1729,6 +1807,39 @@ msgstr "Loobu"
 
 #: Application/view/application/article/add-item.phtml:80
 msgid "Article.item.add.saveButton"
+msgstr "Salvesta"
+
+#: Application/view/application/article/article-setting.phtml:15
+#: Application/view/application/article/article-setting.phtml:28
+msgid "ArticleSetting.edit.heading"
+msgstr "Artikli seaded"
+
+#: Application/view/application/article/article-setting.phtml:33
+msgid "ArticleSetting.edit.tabs.itemSettings"
+msgstr "Toote seaded"
+
+#: Application/view/application/article/article-setting.phtml:34
+msgid "ArticleSetting.edit.tabs.serviceSettings"
+msgstr "Teenuse seaded"
+
+#: Application/view/application/article/article-setting.phtml:47
+#: Application/view/application/article/article-setting.phtml:94
+msgid "tooltip.add-vat"
+msgstr "Lisa käibemaks"
+
+#: Application/view/application/article/article-setting.phtml:58
+#: Application/view/application/article/article-setting.phtml:105
+msgid "tooltip.add-unit"
+msgstr "Lisa ühik"
+
+#: Application/view/application/article/article-setting.phtml:72
+#: Application/view/application/article/article-setting.phtml:119
+msgid "ArticleSetting.edit.cancelButton"
+msgstr "Loobu"
+
+#: Application/view/application/article/article-setting.phtml:77
+#: Application/view/application/article/article-setting.phtml:124
+msgid "ArticleSetting.edit.saveButton"
 msgstr "Salvesta"
 
 #: Application/view/application/article/category.phtml:12
@@ -1842,6 +1953,54 @@ msgstr "Tegevused"
 #: Application/view/application/article/service.phtml:107
 msgid "Article.service.row.action.editButton"
 msgstr "Muuda"
+
+#: Application/view/application/article/vat.phtml:12
+msgid "Article.vat.list.heading"
+msgstr "Käibemaksud"
+
+#: Application/view/application/article/vat.phtml:28
+msgid "Article.vat.filterForm.status.active.label"
+msgstr "Aktiivsed?"
+
+#: Application/view/application/article/vat.phtml:31
+msgid "Article.vat.filterForm.status.disabled.label"
+msgstr "Arhiveeritud?"
+
+#: Application/view/application/article/vat.phtml:60
+msgid "Article.vat.list.TableHeading"
+msgstr "Käibemaksud"
+
+#: Application/view/application/article/vat.phtml:64
+msgid "Article.vat.list.addRow"
+msgstr "Lisa käibemaks"
+
+#: Application/view/application/article/vat.phtml:74
+msgid "Article.vat.list.tableTh.code"
+msgstr "Kood"
+
+#: Application/view/application/article/vat.phtml:75
+msgid "Article.vat.list.tableTh.value"
+msgstr "Väärtus"
+
+#: Application/view/application/article/vat.phtml:76
+msgid "Article.vat.list.tableTh.status"
+msgstr "Staatus"
+
+#: Application/view/application/article/vat.phtml:77
+msgid "Article.vat.list.tableTh.actions"
+msgstr "Tegevused"
+
+#: Application/view/application/article/vat.phtml:109
+msgid "Article.vat.list.add.modalHeading"
+msgstr "Käibemaksu lisamine"
+
+#: Application/view/application/article/vat.phtml:136
+msgid "Article.vat.list.add.modal.cancelButton"
+msgstr "Loobu"
+
+#: Application/view/application/article/vat.phtml:140
+msgid "Article.vat.list.add.modal.saveButton"
+msgstr "Salvesta"
 
 #: Application/view/application/article/add-service.phtml:9
 #: Application/view/application/article/add-service.phtml:21
@@ -1961,17 +2120,13 @@ msgstr "Staatus"
 msgid "Article.unit.list.tableTh.actions"
 msgstr "Tegevused"
 
-#: Application/view/application/article/unit.phtml:108
-msgid "Article.unit.list.add.modalHeading"
-msgstr "Ühiku lisamine"
-
-#: Application/view/application/article/unit.phtml:129
-msgid "Article.unit.list.add.modal.cancelButton"
-msgstr "Loobu"
-
-#: Application/view/application/article/unit.phtml:133
-msgid "Article.unit.list.add.modal.saveButton"
+#: Application/view/application/article/partial/vat-row.phtml:25
+msgid "Article.vat.row.action.saveButton"
 msgstr "Salvesta"
+
+#: Application/view/application/article/partial/vat-row.phtml:26
+msgid "Article.vat.row.action.changeButton"
+msgstr "Muuda"
 
 #: Application/view/application/article/partial/unit-row.phtml:21
 msgid "Article.unit.row.action.saveButton"
@@ -2078,63 +2233,63 @@ msgstr "Tegevused"
 msgid "Invoice.row.action.editButton"
 msgstr "Muuda"
 
-#: Application/view/application/invoice/add-invoice.phtml:9
+#: Application/view/application/invoice/add-invoice.phtml:10
 msgid "Invoice.add.heading"
 msgstr "Arve lisamine"
 
-#: Application/view/application/invoice/add-invoice.phtml:22
+#: Application/view/application/invoice/add-invoice.phtml:23
 msgid "Invoice.add.panel1.label"
 msgstr "Arve andmed"
 
-#: Application/view/application/invoice/add-invoice.phtml:63
+#: Application/view/application/invoice/add-invoice.phtml:64
 msgid "Invoice.add.panel2.label"
 msgstr "Arve andmed"
 
-#: Application/view/application/invoice/add-invoice.phtml:104
+#: Application/view/application/invoice/add-invoice.phtml:105
 msgid "Invoice.add.panel3.label"
 msgstr "Arve andmed"
 
-#: Application/view/application/invoice/add-invoice.phtml:145
+#: Application/view/application/invoice/add-invoice.phtml:146
 msgid "Invoice.add.articleSelect"
 msgstr "Artiklite ja ridade lisamine"
 
-#: Application/view/application/invoice/add-invoice.phtml:162
+#: Application/view/application/invoice/add-invoice.phtml:163
 msgid "Invoice.add.addArticleRow"
 msgstr "Lisa artikkel"
 
-#: Application/view/application/invoice/add-invoice.phtml:165
+#: Application/view/application/invoice/add-invoice.phtml:166
 msgid "Invoice.add.addEmptyRow"
 msgstr "Lisa tühi rida"
 
-#: Application/view/application/invoice/add-invoice.phtml:174
+#: Application/view/application/invoice/add-invoice.phtml:175
 msgid "Invoice.add.rows"
 msgstr "Arveread"
 
-#: Application/view/application/invoice/add-invoice.phtml:181
+#: Application/view/application/invoice/add-invoice.phtml:182
 msgid "Invoice.rows.tableTh.article"
 msgstr "Artikkel"
 
-#: Application/view/application/invoice/add-invoice.phtml:182
+#: Application/view/application/invoice/add-invoice.phtml:183
 msgid "Invoice.rows.tableTh.name"
 msgstr "Nimetus"
 
-#: Application/view/application/invoice/add-invoice.phtml:183
+#: Application/view/application/invoice/add-invoice.phtml:184
 msgid "Invoice.rows.tableTh.quantity"
 msgstr "Kogus"
 
-#: Application/view/application/invoice/add-invoice.phtml:184
+#: Application/view/application/invoice/add-invoice.phtml:185
 msgid "Invoice.rows.tableTh.unit"
 msgstr "Ühik"
 
-#: Application/view/application/invoice/add-invoice.phtml:185
+#: Application/view/application/invoice/add-invoice.phtml:186
 msgid "Invoice.rows.tableTh.amount"
 msgstr "Summa"
 
-#: Application/view/application/invoice/add-invoice.phtml:186
+#: Application/view/application/invoice/add-invoice.phtml:187
 msgid "Invoice.rows.tableTh.vat"
 msgstr "KM"
 
-#: Application/view/application/invoice/add-invoice.phtml:187
+#: Application/view/application/invoice/add-invoice.phtml:188
 msgid "Invoice.rows.tableTh.amountVat"
 msgstr "Summa + KM"
 
@@ -2427,9 +2582,6 @@ msgstr ""
 
 #~ msgid "ArticleAdd.form.articleType.emptyOption"
 #~ msgstr "-Tüüp-"
-
-#~ msgid "Article.unit.list.tableTh.value"
-#~ msgstr "Väärtus"
 
 #~ msgid "Brand.status.active"
 #~ msgstr "Aktiivne"

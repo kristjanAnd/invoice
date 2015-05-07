@@ -1,6 +1,9 @@
 <?php
 use Application\Form\AddArticleForm;
 use Application\Form\ArticleForm;
+use Application\Form\ArticleSetting\ItemSettingForm;
+use Application\Form\ArticleSetting\ServiceSettingForm;
+use Application\Form\ArticleSettingForm;
 use Application\Form\BrandForm;
 use Application\Form\CategoryForm;
 use Application\Form\Document\InvoiceForm;
@@ -71,6 +74,12 @@ return array(
 
             return $sessionManager;
         },
+        'Application\Form\AddArticle' => function (ServiceManager $sm) {
+            $form = new AddArticleForm();
+            $form->setTranslator($sm->get('Translator'));
+            $form->setArticleService($sm->get('Application\Service\Article'));
+            return $form;
+        },
         'Application\Form\Article' => function (ServiceManager $sm) {
             $form = new ArticleForm();
             $form->setTranslator($sm->get('Translator'));
@@ -78,10 +87,22 @@ return array(
             $form->setArticleService($sm->get('Application\Service\Article'));
             return $form;
         },
-        'Application\Form\AddArticle' => function (ServiceManager $sm) {
-            $form = new AddArticleForm();
+        'Application\Form\ArticleSetting' => function (ServiceManager $sm) {
+            $form = new ArticleSettingForm();
+            return $form;
+        },
+        'Application\Form\ArticleSetting\ItemSetting' => function (ServiceManager $sm) {
+            $form = new ItemSettingForm();
             $form->setTranslator($sm->get('Translator'));
-            $form->setArticleService($sm->get('Application\Service\Article'));
+            $form->setUnitService($sm->get('Application\Service\Unit'));
+            $form->setVatService($sm->get('Application\Service\Vat'));
+            return $form;
+        },
+        'Application\Form\ArticleSetting\ServiceSetting' => function (ServiceManager $sm) {
+            $form = new ServiceSettingForm();
+            $form->setTranslator($sm->get('Translator'));
+            $form->setUnitService($sm->get('Application\Service\Unit'));
+            $form->setVatService($sm->get('Application\Service\Vat'));
             return $form;
         },
         'Application\Form\Brand' => function (ServiceManager $sm) {
@@ -114,12 +135,14 @@ return array(
         },
         'Application\Form\DocumentRow' => function (ServiceManager $sm) {
             $form = new DocumentRowForm();
+            $form->setTranslator($sm->get('Translator'));
             $form->setUnitService($sm->get('Application\Service\Unit'));
             $form->setVatService($sm->get('Application\Service\Vat'));
             return $form;
         },
         'Application\Form\DocumentRow\InvoiceRow' => function (ServiceManager $sm) {
             $form = new InvoiceRowForm();
+            $form->setTranslator($sm->get('Translator'));
             $form->setUnitService($sm->get('Application\Service\Unit'));
             $form->setVatService($sm->get('Application\Service\Vat'));
             return $form;

@@ -1,0 +1,29 @@
+<?php
+use Application\Controller\ArticleController;
+
+$vatService = $this->service('Application\Service\Vat');
+?>
+<tr id="row-<?php echo $this->vat->getId()?>">
+    <td>
+        <p class="value-<?php echo $this->vat->getId()?>" id="code-value-<?php echo $this->vat->getId()?>"><?php echo $this->vat->getCode()?></p>
+        <input class="input-<?php echo $this->vat->getId()?> form-control code" style="display: none" type="text" id="code-input-<?php echo $this->vat->getId()?>" value="<?php echo $this->vat->getCode()?>">
+    </td>
+    <td>
+        <p class="value-<?php echo $this->vat->getId()?>" id="value-value-<?php echo $this->vat->getId()?>"><?php echo $this->vat->getValue()?></p>
+        <input class="input-<?php echo $this->vat->getId()?> form-control value" style="display: none" type="text" id="value-input-<?php echo $this->vat->getId()?>" value="<?php echo $this->vat->getValue()?>">
+    </td>
+    <td>
+        <p class="value-<?php echo $this->vat->getId()?>" id="status-value-<?php echo $this->vat->getId()?>"><?php echo $this->statuses[$this->vat->getStatus()]?></p>
+        <select class="input-<?php echo $this->vat->getId()?> form-control status" style="display: none" id="status-input-<?php echo $this->vat->getId()?>">
+            <?php foreach($vatService->getVatStatusSelect() as $k => $v):?>
+                <option value="<?php echo $k?>" <?php if($k == $this->vat->getStatus()):?>selected<?php endif;?>><?php echo $this->statuses[$k]?></option>
+            <?php endforeach;?>
+        </select>
+    </td>
+    <td>
+        <?php if ($this->isAllowed(ArticleController::AUTHORIZE_CLASS . 'edit-vat')):?>
+            <button style="display: none" data-value="<?php echo $this->vat->getId()?>" class="btn btn-xs btn-success saveVat" rel="tooltip"><i class="fa fa-save"></i> <?php echo $this->translate('Article.vat.row.action.saveButton')?></button>
+            <button data-value ="<?php echo $this->vat->getId()?>" class="btn btn-xs btn-default editVat" rel="tooltip"><i class="fa fa-pencil"></i> <?php echo $this->translate('Article.vat.row.action.changeButton')?></button>
+        <?php endif;?>
+    </td>
+</tr>

@@ -87,12 +87,6 @@ class InvoiceSettingForm extends DocumentSettingForm {
 
     }
 
-    public function disableFields(){
-        foreach($this->getElements() as $element){
-            $element->setAttribute('disabled', 'disabled');
-        }
-    }
-
     public function getInputFilter(){
         $this->filter = parent::getInputFilter();
 
@@ -127,4 +121,5 @@ class InvoiceSettingForm extends DocumentSettingForm {
         $this->get('delayPercent')->setValue($invoiceSetting->getDelayPercent());
         $this->get('deadlineDays')->setValue($invoiceSetting->getDeadlineDays());
     }
-} 
+
+}

@@ -35,6 +35,14 @@ class UnitService extends AbstractService {
         return $this->entityManager->getRepository(Unit::getClass())->findBy(array('company' => $company, 'status' => Unit::STATUS_ACTIVE));
     }
 
+    public function getCompanyActiveUnitSelect(Company $company){
+        $result = array();
+        foreach($this->getActiveCompanyUnits($company) as $unit){
+            $result[$unit->getId()] = $unit->getCode();
+        }
+        return $result;
+    }
+
     /**
      * @param $id
      * @return null|Unit

@@ -19,6 +19,7 @@ use Zend\Form\Element\Text;
 use Zend\Form\Form;
 use Zend\InputFilter\Input;
 use Zend\InputFilter\InputFilter;
+use Zend\Mvc\I18n\Translator;
 
 class DocumentRowForm extends Form {
 
@@ -40,6 +41,16 @@ class DocumentRowForm extends Form {
      * @var UnitService
      */
     protected $unitService;
+
+    /**
+     * @var Translator
+     */
+    protected $translator;
+
+    public function setTranslator(Translator $t)
+    {
+        $this->translator = $t;
+    }
 
     /**
      * @param UnitService $unitService
@@ -98,6 +109,7 @@ class DocumentRowForm extends Form {
             'class' => 'form-control vat'
         ));
         $vat->setValueOptions($this->vatService->getCompanyActiveVatSelect($this->company));
+        $vat->setEmptyOption($this->translator->translate('DocumentRowForm.form.vat.emptyOption'));
         $this->add($vat);
 
         $unit = new Select('units[]');
@@ -105,6 +117,7 @@ class DocumentRowForm extends Form {
             'class' => 'form-control unit'
         ));
         $unit->setValueOptions($this->getUnitSelect());
+        $unit->setEmptyOption($this->translator->translate('DocumentRowForm.form.unit.emptyOption'));
         $this->add($unit);
 
         $name = new Text('names[]');

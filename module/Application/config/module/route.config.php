@@ -233,6 +233,50 @@ return array(
                 ),
             ),
         ),
+        'vat' => array(
+            'type' => 'Segment',
+            'options' => array(
+                'route' => '[/:language]/vat[/:page]',
+                'defaults' => array(
+                    'controller' => 'Application\Controller\Article',
+                    'action'     => 'vat',
+                    'language' => 'us'
+                ),
+            ),
+        ),
+        'add-vat' => array(
+            'type' => 'Segment',
+            'options' => array(
+                'route' => '[/:language]/add-vat[/:page]',
+                'defaults' => array(
+                    'controller' => 'Application\Controller\Article',
+                    'action'     => 'add-vat',
+                    'language' => 'us'
+                ),
+            ),
+        ),
+        'article-setting' => array(
+            'type' => 'Segment',
+            'options' => array(
+                'route' => '[/:language]/article-setting[/:page]',
+                'defaults' => array(
+                    'controller' => 'Application\Controller\Article',
+                    'action'     => 'article-setting',
+                    'language' => 'us'
+                ),
+            ),
+        ),
+        'edit-article-setting' => array(
+            'type' => 'Segment',
+            'options' => array(
+                'route' => '[/:language]/edit-article-setting[/:id]',
+                'defaults' => array(
+                    'controller' => 'Application\Controller\Article',
+                    'action'     => 'edit-article-setting',
+                    'language' => 'us'
+                ),
+            ),
+        ),
         'company-user' => array(
             'type' => 'Segment',
             'options' => array(

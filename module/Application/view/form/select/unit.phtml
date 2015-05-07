@@ -1,0 +1,4 @@
+<option><?php echo $this->emptyOption ?></option>
+<?php foreach($this->units as $unit): /* @var $unit \Application\Entity\Unit */?>
+    <option value="<?php echo $unit->getId()?>" <?php if($unit === $this->unit):?>selected<?php endif;?>><?php echo $unit->getCode() ?></option>
+<?php endforeach;?>

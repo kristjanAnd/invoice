@@ -13,6 +13,7 @@ $controllerGuard = array(
     ['controller' => 'Application\Controller\Index', 'action' => 'email-exists', 'roles' => ['guest']],
     ['controller' => 'Application\Controller\Index', 'action' => 'isPasswordValid', 'roles' => ['guest']],
     ['controller' => 'Application\Controller\Index', 'action' => 'forgotPassword', 'roles' => ['guest']],
+    ['controller' => 'Application\Controller\Index', 'action' => 'get-unit-add-form', 'roles' => ['guest']],
 );
 
 $adminControllerGuard = include 'controllers/admin.config.php';

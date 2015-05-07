@@ -85,4 +85,8 @@ class UnitForm extends Form {
 
         return $this->filter;
     }
+
+    public function removeInputValidation($inputName){
+        $this->getInputFilter()->get($inputName)->setRequired(false)->setAllowEmpty(true);
+    }
 } 

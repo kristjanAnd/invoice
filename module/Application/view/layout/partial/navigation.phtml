@@ -15,7 +15,9 @@ $articleNavKeys = array(
     ArticleController::NAV_KEY_BRAND,
     ArticleController::NAV_KEY_CATEGORY,
     ArticleController::NAV_KEY_UNIT,
-    ArticleController::NAV_KEY_SERVICE
+    ArticleController::NAV_KEY_VAT,
+    ArticleController::NAV_KEY_SERVICE,
+    ArticleController::NAV_KEY_ARTICLE_SETTING
 );
 
 $invoiceNavKeys = array(
@@ -46,6 +48,13 @@ $invoiceNavKeys = array(
             <li <?php if(in_array($this->navKey, $articleNavKeys)):?>class="active"<?php endif;?>>
                 <a href="#"><i class="fa fa-shopping-cart fa-fw"></i> <?php echo $this->translate('Navigation.articles')?><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
+                    <?php if($this->isAllowed(ArticleController::AUTHORIZE_CLASS . 'article-setting')):?>
+                        <li>
+                            <a href="<?php echo $this->url('article-setting', [], true)?>" <?php if($this->navKey == ArticleController::NAV_KEY_ARTICLE_SETTING):?>class="active"<?php endif;?>>
+                                <?php echo $this->translate('Navigation.articles.article-setting')?>
+                            </a>
+                        </li>
+                    <?php endif;?>
                     <?php if($this->isAllowed(ArticleController::AUTHORIZE_CLASS . 'item')):?>
                         <li>
                             <a href="<?php echo $this->url('item', [], true)?>" <?php if($this->navKey == ArticleController::NAV_KEY_ITEM):?>class="active"<?php endif;?>>
@@ -78,6 +87,13 @@ $invoiceNavKeys = array(
                         <li>
                             <a href="<?php echo $this->url('brand', [], true)?>" <?php if($this->navKey == ArticleController::NAV_KEY_BRAND):?>class="active"<?php endif;?>>
                                 <?php echo $this->translate('Navigation.articles.brands')?>
+                            </a>
+                        </li>
+                    <?php endif;?>
+                    <?php if($this->isAllowed(ArticleController::AUTHORIZE_CLASS . 'vat')):?>
+                        <li>
+                            <a href="<?php echo $this->url('vat', [], true)?>" <?php if($this->navKey == ArticleController::NAV_KEY_VAT):?>class="active"<?php endif;?>>
+                                <?php echo $this->translate('Navigation.articles.vats')?>
                             </a>
                         </li>
                     <?php endif;?>

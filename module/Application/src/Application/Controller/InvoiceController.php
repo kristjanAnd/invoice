@@ -12,6 +12,8 @@ namespace Application\Controller;
 use Application\Service\ArticleService;
 use Application\Service\InvoiceService;
 use Application\Service\LanguageService;
+use Application\Service\UnitService;
+use Application\Service\VatService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Paginator\Adapter\ArrayAdapter;
 use Zend\Paginator\Paginator;
@@ -32,6 +34,30 @@ class InvoiceController extends AbstractActionController {
      * @var ArticleService
      */
     protected $articleService;
+    /**
+     * @var UnitService
+     */
+    protected $unitService;
+    /**
+     * @var VatService
+     */
+    protected $vatService;
+
+    /**
+     * @param VatService $vatService
+     */
+    public function setVatService(VatService $vatService)
+    {
+        $this->vatService = $vatService;
+    }
+
+    /**
+     * @param UnitService $unitService
+     */
+    public function setUnitService(UnitService $unitService)
+    {
+        $this->unitService = $unitService;
+    }
 
     /**
      * @param ArticleService $articleService
@@ -147,13 +173,17 @@ class InvoiceController extends AbstractActionController {
             $invoice = $this->invoiceService->getInvoiceById($this->request->getQuery()->invoiceId);
             $article = $this->articleService->getArticleById($this->request->getQuery()->articleId);
             $rowDto = $this->invoiceService->createInvoiceRowDto($invoice, $article);
-            $rowForm = $this->getServiceLocator()->get('Application\Form\DocumentRow\InvoiceRow')->setCompany($userData->company)->init();
-            $rowForm->setFormValues($rowDto);
+            $units = $this->unitService->getActiveCompanyUnits($userData->company);
+            $vats = $this->vatService->getCompanyActiveVats($userData->company);
 
             $view = new ViewModel();
-            $view->setTemplate('application/invoice/partial/row');
+            $view->setTemplate('application/invoice/partial/dynamic-row');
             $view->setTerminal(true);
-            $view->form = $rowForm;
+            $view->dto = $rowDto;
+            $view->vats = $vats;
+            $view->units = $units;
+            $view->vatEmptyOption = $this->getTranslator($this->request->getQuery()->locale)->translate('DocumentRowForm.form.vat.emptyOption');
+            $view->unitEmptyOption = $this->getTranslator($this->request->getQuery()->locale)->translate('DocumentRowForm.form.unit.emptyOption');
 
             return $view;
 
@@ -181,8 +211,12 @@ class InvoiceController extends AbstractActionController {
         return $paginated;
     }
 
-    private function getTranslator(){
-        return $this->serviceLocator->get('MvcTranslator');
+    private function getTranslator($locale = null){
+        $translator =  $this->serviceLocator->get('MvcTranslator');
+        if($locale){
+            $translator->setLocale($locale);
+        }
+        return $translator;
     }
 
 } 

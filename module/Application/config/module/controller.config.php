@@ -37,6 +37,7 @@ return array(
             $controller = new ArticleController();
             $controller->setArticleService($serviceManager->get('Application\Service\Article'));
             $controller->setUnitService($serviceManager->get('Application\Service\Unit'));
+            $controller->setVatService($serviceManager->get('Application\Service\Vat'));
             return $controller;
         },
         'Application\Controller\Client'  => function(ControllerManager $cm) {
@@ -73,6 +74,8 @@ return array(
             $controller = new InvoiceController();
             $controller->setInvoiceService($serviceManager->get('Application\Service\Invoice'));
             $controller->setArticleService($serviceManager->get('Application\Service\Article'));
+            $controller->setVatService($serviceManager->get('Application\Service\Vat'));
+            $controller->setUnitService($serviceManager->get('Application\Service\Unit'));
             return $controller;
         },
     ],
