@@ -1,0 +1,6 @@
+<select name="client" id="client" class="form-control input-sm">
+    <option value=""><?php echo $this->emptyOption ?></option>
+    <?php foreach($this->clients as $client): /* @var $client \Application\Entity\Subject\Client */?>
+        <option value="<?php echo $client->getId()?>" <?php if($client === $this->client):?>selected<?php endif;?>><?php echo $client->getName() ?></option>
+    <?php endforeach;?>
+</select>

@@ -83,43 +83,43 @@ class DocumentSettingForm extends Form
         $prefix = new Text('prefix');
         $prefix->setAttributes(array(
             'id' => 'prefix',
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
         ));
-        $prefix->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+        $prefix->setLabelAttributes(array('class' => 'col-sm-2 control-label input-sm'));
         $this->add($prefix);
 
         $suffix = new Text('suffix');
         $suffix->setAttributes(array(
             'id' => 'suffix',
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
         ));
-        $suffix->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+        $suffix->setLabelAttributes(array('class' => 'col-sm-2 control-label input-sm'));
         $this->add($suffix);
 
         $dateFormat = new Select('dateFormat');
         $dateFormat->setAttributes(array(
             'id' => 'dateFormat',
-            'class' => 'form-control'
+            'class' => 'form-control input-sm'
         ));
         $dateFormat->setValueOptions($this->documentService->getDateFormatSelect());
-        $dateFormat->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+        $dateFormat->setLabelAttributes(array('class' => 'col-sm-2 control-label input-sm'));
         $this->add($dateFormat);
 
         $languageCode = new Select('languageCode');
         $languageCode->setAttributes(array(
             'id' => 'languageCode',
-            'class' => 'form-control'
+            'class' => 'form-control input-sm'
         ));
         $languageCode->setValueOptions($this->languageService->getLanguageSelect());
-        $languageCode->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+        $languageCode->setLabelAttributes(array('class' => 'col-sm-2 control-label input-sm'));
         $this->add($languageCode);
 
         $nextNumber = new Text('nextNumber');
         $nextNumber->setAttributes(array(
             'id' => 'nextNumber',
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
         ));
-        $nextNumber->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+        $nextNumber->setLabelAttributes(array('class' => 'col-sm-2 control-label input-sm'));
         $this->add($nextNumber);
 
         return $this;

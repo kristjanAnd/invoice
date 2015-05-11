@@ -47,21 +47,21 @@ class BrandForm extends Form {
         $name = new Text('name');
         $name->setAttributes(array(
             'id' => 'name',
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
             'placeholder' => $this->translator->translate('Brand.form.name.placeholder')
         ));
         $name->setLabel($this->translator->translate('Brand.form.name.label'));
-        $name->setLabelAttributes(array('class' => 'col-sm-3 control-label'));
+        $name->setLabelAttributes(array('class' => 'col-sm-3 control-label input-sm'));
         $this->add($name);
 
         $status = new Select('status');
         $status->setAttributes(array(
             'id' => 'status',
-            'class' => 'form-control'
+            'class' => 'form-control input-sm'
         ));
         $status->setValueOptions($this->articleService->getArticleBrandStatusSelect());
         $status->setLabel($this->translator->translate('Brand.form.status.label'));
-        $status->setLabelAttributes(array('class' => 'col-sm-3 control-label'));
+        $status->setLabelAttributes(array('class' => 'col-sm-3 control-label input-sm'));
         $this->add($status);
 
         return $this;

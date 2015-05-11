@@ -111,6 +111,7 @@ class Invoice extends Document {
     public function __construct(Parameters $data = null){
         parent::__construct($data);
         $this->paymentStatus = self::PAYMENT_STATUS_UNPAID;
+        $this->status = self::STATUS_PENDING;
     }
 
     /**

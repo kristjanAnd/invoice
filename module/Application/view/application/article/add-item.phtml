@@ -1,4 +1,6 @@
 <?php
+use Application\Controller\ArticleController;
+
 $company = $this->company; /* @var $company \Application\Entity\Subject\Company */
 $form = $this->form;
 ?>
@@ -9,13 +11,14 @@ $form = $this->form;
             <h1 class="page-header"><?php echo $this->translate('Article.item.add.heading')?></h1>
         </div>
         <!-- /.col-lg-12 -->
-        <div class="col-lg-6">
+        <div class="col-lg-12">
             <?php echo $this->successMessages($this->messages); ?>
             <?php echo $this->formErrors($form); ?>
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <i class="fa fa-bar-chart-o fa-fw"></i> <?php echo $this->translate('Article.item.add.heading')?>
@@ -26,56 +29,102 @@ $form = $this->form;
                         <div class="form-group">
                             <?php echo $this->formLabel($form->get('name'))?>
                             <div class="col-sm-4">
-                                <?php echo $this->formText($form->get('name'))?>
+                                <div class="col-sm-11">
+                                    <?php echo $this->formText($form->get('name'))?>
+                                </div>
                             </div>
                             <?php echo $this->formLabel($form->get('unit'))?>
                             <div class="col-sm-4">
-                                <?php echo $this->formSelect($form->get('unit'))?>
+                                <div class="col-sm-10">
+                                    <?php echo $this->formSelect($form->get('unit'))?>
+                                </div>
+                                <?php if ($this->isAllowed(ArticleController::AUTHORIZE_CLASS . 'add-unit')):?>
+                                    <div class="col-sm-2">
+                                        <a class="btn btn-default btn-xs add-modal-unit" data-toggle="tooltip" data-placement="top" title="<?php echo $this->translate('tooltip.add-unit')?>"  href="javascript:void(0)" ><i class="fa fa-plus fa-fws"></i> </a>
+                                    </div>
+                                <?php endif;?>
                             </div>
                         </div>
                         <div class="form-group">
                             <?php echo $this->formLabel($form->get('code'))?>
                             <div class="col-sm-4">
-                                <?php echo $this->formText($form->get('code'))?>
+                                <div class="col-sm-11">
+                                    <?php echo $this->formText($form->get('code'))?>
+                                </div>
                             </div>
                             <?php echo $this->formLabel($form->get('category'))?>
                             <div class="col-sm-4">
-                                <?php echo $this->formSelect($form->get('category'))?>
+                                <div class="col-sm-10">
+                                    <?php echo $this->formSelect($form->get('category'))?>
+                                </div>
+                                <?php if ($this->isAllowed(ArticleController::AUTHORIZE_CLASS . 'add-category')):?>
+                                    <div class="col-sm-2">
+                                        <a class="btn btn-default btn-xs add-modal-category" data-toggle="tooltip" data-placement="top" title="<?php echo $this->translate('tooltip.add-category')?>"  href="javascript:void(0)" ><i class="fa fa-plus fa-fws"></i> </a>
+                                    </div>
+                                <?php endif;?>
                             </div>
                         </div>
                         <div class="form-group">
                             <?php echo $this->formLabel($form->get('quantity'))?>
                             <div class="col-sm-4">
-                                <?php echo $this->formText($form->get('quantity'))?>
+                                <div class="col-sm-11">
+                                    <?php echo $this->formText($form->get('quantity'))?>
+                                </div>
                             </div>
                             <?php echo $this->formLabel($form->get('brand'))?>
                             <div class="col-sm-4">
-                                <?php echo $this->formSelect($form->get('brand'))?>
+                                <div class="col-sm-10">
+                                    <?php echo $this->formSelect($form->get('brand'))?>
+                                </div>
+                                <?php if ($this->isAllowed(ArticleController::AUTHORIZE_CLASS . 'add-brand')):?>
+                                    <div class="col-sm-2">
+                                        <a class="btn btn-default btn-xs add-modal-brand" data-toggle="tooltip" data-placement="top" title="<?php echo $this->translate('tooltip.add-brand')?>"  href="javascript:void(0)" ><i class="fa fa-plus fa-fws"></i> </a>
+                                    </div>
+                                <?php endif;?>
                             </div>
                         </div>
                         <div class="form-group">
                             <?php echo $this->formLabel($form->get('salePrice'))?>
                             <div class="col-sm-4">
-                                <?php echo $this->formText($form->get('salePrice'))?>
+                                <div class="col-sm-11">
+                                    <?php echo $this->formText($form->get('salePrice'))?>
+                                </div>
                             </div>
                             <?php echo $this->formLabel($form->get('status'))?>
                             <div class="col-sm-4">
-                                <?php echo $this->formSelect($form->get('status'))?>
+                                <div class="col-sm-11">
+                                    <?php echo $this->formSelect($form->get('status'))?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <?php echo $this->formLabel($form->get('vat'))?>
+                            <div class="col-sm-4">
+                                <div class="col-sm-10">
+                                    <?php echo $this->formSelect($form->get('vat'))?>
+                                </div>
+                                <?php if ($this->isAllowed(ArticleController::AUTHORIZE_CLASS . 'add-vat')):?>
+                                    <div class="col-sm-2">
+                                        <a class="btn btn-default btn-xs add-modal-vat" data-toggle="tooltip" data-placement="top" title="<?php echo $this->translate('tooltip.add-vat')?>"  href="javascript:void(0)" ><i class="fa fa-plus fa-fws"></i> </a>
+                                    </div>
+                                <?php endif;?>
                             </div>
                         </div>
                         <div class="form-group">
                             <?php echo $this->formLabel($form->get('description'))?>
                             <div class="col-sm-10">
-                                <?php echo $this->formTextArea($form->get('description'))?>
+                                <div class="col-sm-12">
+                                    <?php echo $this->formTextArea($form->get('description'))?>
+                                </div>
                             </div>
                         </div>
                         <div class="form-actions pull-right">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <a href="<?php echo $this->url('item', [], true)?>" class="btn btn-default">
+                                    <a href="<?php echo $this->url('item', [], true)?>" class="btn btn-default btn-sm">
                                         <?php echo $this->translate('Article.item.add.cancelButton')?>
                                     </a>
-                                    <button class="btn btn-primary" id="submit"  type="submit">
+                                    <button class="btn btn-primary btn-sm" id="submit"  type="submit">
                                         <i class="fa fa-save"></i>
                                         <?php echo $this->translate('Article.item.add.saveButton')?>
                                     </button>
@@ -87,6 +136,7 @@ $form = $this->form;
                 <!-- /.panel-body -->
             </div>
         </div>
+        <div class="col-lg-2"></div>
         <!-- /.col-lg-8 -->
     </div>
     <!-- /.row -->

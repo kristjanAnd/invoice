@@ -26,6 +26,12 @@ Translator::noop('Controller.article.action.edit-item');
 Translator::noop('Controller.article.action.service');
 Translator::noop('Controller.article.action.add-service');
 Translator::noop('Controller.article.action.edit-service');
+Translator::noop('Controller.article.action.vat');
+Translator::noop('Controller.article.action.add-vat');
+Translator::noop('Controller.article.action.edit-vat');
+Translator::noop('Controller.article.action.article-setting');
+Translator::noop('Controller.article.action.edit-article-setting');
+
 
 Translator::noop('Controller.company');
 Translator::noop('Controller.company.action.index');

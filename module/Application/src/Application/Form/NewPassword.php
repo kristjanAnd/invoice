@@ -33,21 +33,21 @@ class NewPassword extends Form
         $password = new Password('password');
         $password->setAttributes(array(
             'id' => 'password',
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
             'placeholder' => $this->translator->translate('newPassword.new.placeholder')
         ));
         $password->setLabel($this->translator->translate('newPassword.new.label'));
-        $password->setLabelAttributes(array('class' => 'col-sm-3 control-label'));
+        $password->setLabelAttributes(array('class' => 'col-sm-3 control-label input-sm'));
         $this->add($password);
 
         $passwordRepeat = new Password('passwordRepeat');
         $passwordRepeat->setAttributes(array(
             'id' => 'passwordRepeat',
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
             'placeholder' => $this->translator->translate('newPassword.repeat.placeholder')
         ));
         $passwordRepeat->setLabel($this->translator->translate('newPassword.repeat.label'));
-        $passwordRepeat->setLabelAttributes(array('class' => 'col-sm-3 control-label'));
+        $passwordRepeat->setLabelAttributes(array('class' => 'col-sm-3 control-label input-sm'));
         $this->add($passwordRepeat);
         
         $submit = new Submit('submit');

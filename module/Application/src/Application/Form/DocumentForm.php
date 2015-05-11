@@ -139,126 +139,127 @@ class DocumentForm extends Form
         $documentDate = new Text('documentDate');
         $documentDate->setAttributes(array(
             'id' => 'documentDate',
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
+            'readonly' => 'readonly',
             'placeholder' => $this->translator->translate('Document.form.documentDate.placeholder')
         ));
         $documentDate->setLabel($this->translator->translate('Document.form.documentDate.label'));
-        $documentDate->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
+        $documentDate->setLabelAttributes(array('class' => 'col-sm-5 control-label input-sm'));
         $this->add($documentDate);
 
         $user = new Select('user');
         $user->setAttributes(array(
             'id' => 'user',
-            'class' => 'form-control'
+            'class' => 'form-control input-sm'
         ));
         $user->setValueOptions($this->getCompanyUsersSelect());
         $user->setLabel($this->translator->translate('Document.form.user.label'));
-        $user->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
+        $user->setLabelAttributes(array('class' => 'col-sm-5 control-label input-sm'));
         $this->add($user);
 
         $dateFormat = new Select('dateFormat');
         $dateFormat->setAttributes(array(
             'id' => 'dateFormat',
-            'class' => 'form-control'
+            'class' => 'form-control input-sm'
         ));
         $dateFormat->setValueOptions($this->documentService->getDateFormatSelect());
         $dateFormat->setLabel($this->translator->translate('Document.form.dateFormat.label'));
-        $dateFormat->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
+        $dateFormat->setLabelAttributes(array('class' => 'col-sm-5 control-label input-sm'));
         $this->add($dateFormat);
 
         $language = new Select('language');
         $language->setAttributes(array(
             'id' => 'language',
-            'class' => 'form-control'
+            'class' => 'form-control input-sm'
         ));
         $language->setValueOptions($this->languageService->getLanguageSelect());
         $language->setLabel($this->translator->translate('Document.form.language.label'));
-        $language->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
+        $language->setLabelAttributes(array('class' => 'col-sm-5 control-label input-sm'));
         $this->add($language);
 
         $documentNumber = new Text('documentNumber');
         $documentNumber->setAttributes(array(
             'id' => 'documentNumber',
             'readonly' => 'readonly',
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
             'placeholder' => $this->translator->translate('Document.form.documentNumber.placeholder')
         ));
         $documentNumber->setLabel($this->translator->translate('Document.form.documentNumber.label'));
-        $documentNumber->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
+        $documentNumber->setLabelAttributes(array('class' => 'col-sm-5 control-label input-sm'));
         $this->add($documentNumber);
 
         $amount = new Text('amount');
         $amount->setAttributes(array(
             'id' => 'amount',
             'readonly' => 'readonly',
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
             'placeholder' => $this->translator->translate('Document.form.amount.placeholder')
         ));
         $amount->setLabel($this->translator->translate('Document.form.amount.label'));
-        $amount->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
+        $amount->setLabelAttributes(array('class' => 'col-sm-5 control-label input-sm'));
         $this->add($amount);
 
         $vatAmount = new Text('vatAmount');
         $vatAmount->setAttributes(array(
             'id' => 'vatAmount',
             'readonly' => 'readonly',
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
             'placeholder' => $this->translator->translate('Document.form.vatAmount.placeholder')
         ));
         $vatAmount->setLabel($this->translator->translate('Document.form.vatAmount.label'));
-        $vatAmount->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
+        $vatAmount->setLabelAttributes(array('class' => 'col-sm-5 control-label input-sm'));
         $this->add($vatAmount);
 
         $amountVat = new Text('amountVat');
         $amountVat->setAttributes(array(
             'id' => 'amountVat',
             'readonly' => 'readonly',
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
             'placeholder' => $this->translator->translate('Document.form.amountVat.placeholder')
         ));
         $amountVat->setLabel($this->translator->translate('Document.form.amountVat.label'));
-        $amountVat->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
+        $amountVat->setLabelAttributes(array('class' => 'col-sm-5 control-label input-sm'));
         $this->add($amountVat);
 
         $subjectName = new Text('subjectName');
         $subjectName->setAttributes(array(
             'id' => 'subjectName',
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
         ));
-        $subjectName->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
+        $subjectName->setLabelAttributes(array('class' => 'col-sm-5 control-label input-sm'));
         $this->add($subjectName);
 
         $subjectEmail = new Text('subjectEmail');
         $subjectEmail->setAttributes(array(
             'id' => 'subjectEmail',
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
         ));
-        $subjectEmail->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
+        $subjectEmail->setLabelAttributes(array('class' => 'col-sm-5 control-label input-sm'));
         $this->add($subjectEmail);
 
         $subjectAddress = new Textarea('subjectAddress');
         $subjectAddress->setAttributes(array(
             'id' => 'subjectAddress',
             'rows' => 3,
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
         ));
-        $subjectAddress->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
+        $subjectAddress->setLabelAttributes(array('class' => 'col-sm-5 control-label input-sm'));
         $this->add($subjectAddress);
 
         $subjectRegNo = new Text('subjectRegNo');
         $subjectRegNo->setAttributes(array(
             'id' => 'subjectRegNo',
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
         ));
-        $subjectRegNo->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
+        $subjectRegNo->setLabelAttributes(array('class' => 'col-sm-5 control-label input-sm'));
         $this->add($subjectRegNo);
 
         $subjectVatNo = new Text('subjectVatNo');
         $subjectVatNo->setAttributes(array(
             'id' => 'subjectVatNo',
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
         ));
-        $subjectVatNo->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
+        $subjectVatNo->setLabelAttributes(array('class' => 'col-sm-5 control-label input-sm'));
         $this->add($subjectVatNo);
 
 
@@ -278,6 +279,9 @@ class DocumentForm extends Form
         $this->get('dateFormat')->setValue($datePdfFormat);
         $this->get('language')->setValue($pdfLanguageCode);
         $this->get('documentDate')->setValue($date->format($this->getDateFormat()));
+        $this->get('amount')->setValue('0.000');
+        $this->get('vatAmount')->setValue('0.000');
+        $this->get('amountVat')->setValue('0.000');
     }
 
     public function getInputFilter()
@@ -290,6 +294,7 @@ class DocumentForm extends Form
             $notEmpty3 = new NotEmpty();
             $notEmpty4 = new NotEmpty();
             $notEmpty5 = new NotEmpty();
+            $notEmpty6 = new NotEmpty();
 
             $documentDate = new Input('documentDate');
             $documentDate->getValidatorChain()->attach($notEmpty->setMessage(sprintf($this->translator->translate('Validator.message.notEmpty'), $this->translator->translate('DocumentForm.message.documentDateInput')), NotEmpty::IS_EMPTY));

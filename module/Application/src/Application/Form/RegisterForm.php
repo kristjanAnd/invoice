@@ -138,11 +138,11 @@ class RegisterForm extends Form  implements ObjectManagerAwareInterface{
             $firstName = new Text('firstName');
             $firstName->setAttributes(array(
                 'id' => 'firstName',
-                'class' => 'form-control',
+                'class' => 'form-control input-sm',
                 'placeholder' => $this->translator->translate('register.firstName.placeholder')
             ));
             $firstName->setLabel($this->translator->translate('register.firstName.label'));
-            $firstName->setLabelAttributes(array('class' => 'col-sm-3 control-label'));
+            $firstName->setLabelAttributes(array('class' => 'col-sm-3 control-label input-sm'));
             $this->add($firstName);
         }
 
@@ -150,11 +150,11 @@ class RegisterForm extends Form  implements ObjectManagerAwareInterface{
             $lastName = new Text('lastName');
             $lastName->setAttributes(array(
                 'id' => 'lastName',
-                'class' => 'form-control',
+                'class' => 'form-control input-sm',
                 'placeholder' => $this->translator->translate('register.lastName.placeholder')
             ));
             $lastName->setLabel($this->translator->translate('register.lastName.label'));
-            $lastName->setLabelAttributes(array('class' => 'col-sm-3 control-label'));
+            $lastName->setLabelAttributes(array('class' => 'col-sm-3 control-label input-sm'));
             $this->add($lastName);
         }
 
@@ -162,11 +162,11 @@ class RegisterForm extends Form  implements ObjectManagerAwareInterface{
             $phone = new Text('phone');
             $phone->setAttributes(array(
                 'id' => 'phone',
-                'class' => 'form-control',
+                'class' => 'form-control input-sm',
                 'placeholder' => $this->translator->translate('register.phone.placeholder')
             ));
             $phone->setLabel($this->translator->translate('register.phone.label'));
-            $phone->setLabelAttributes(array('class' => 'col-sm-3 control-label'));
+            $phone->setLabelAttributes(array('class' => 'col-sm-3 control-label input-sm'));
             $this->add($phone);
         }
 
@@ -174,32 +174,32 @@ class RegisterForm extends Form  implements ObjectManagerAwareInterface{
             $personalCode = new Text('personalCode');
             $personalCode->setAttributes(array(
                 'id' => 'personalCode',
-                'class' => 'form-control',
+                'class' => 'form-control input-sm',
                 'placeholder' => $this->translator->translate('register.personalCode.placeholder')
             ));
             $personalCode->setLabel($this->translator->translate('register.personalCode.label'));
-            $personalCode->setLabelAttributes(array('class' => 'col-sm-3 control-label'));
+            $personalCode->setLabelAttributes(array('class' => 'col-sm-3 control-label input-sm'));
             $this->add($personalCode);
         }
 
         $email = new Text('email');
         $email->setAttributes(array(
             'id' => 'email',
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
             'placeholder' => $this->translator->translate('register.email.placeholder')
         ));
         $email->setLabel($this->translator->translate('register.email.label'));
-        $email->setLabelAttributes(array('class' => 'col-sm-3 control-label'));
+        $email->setLabelAttributes(array('class' => 'col-sm-3 control-label input-sm'));
         $this->add($email);
 
         $language = new Select('language');
         $language->setAttributes(array(
             'id' => 'language',
-            'class' => 'form-control'
+            'class' => 'form-control input-sm'
         ));
         $language->setValueOptions($this->languageService->getLanguageSelect());
         $language->setLabel($this->translator->translate('register.language.label'));
-        $language->setLabelAttributes(array('class' => 'col-sm-3 control-label'));
+        $language->setLabelAttributes(array('class' => 'col-sm-3 control-label input-sm'));
         $this->add($language);
 
 
@@ -207,11 +207,11 @@ class RegisterForm extends Form  implements ObjectManagerAwareInterface{
             $role = new Select('role');
             $role->setAttributes(array(
                 'id' => 'role',
-                'class' => 'form-control'
+                'class' => 'form-control input-sm'
             ));
             $role->setValueOptions($this->adminService->getRoleSelectForCompany($this->company));
             $role->setLabel($this->translator->translate('register.role.label'));
-            $role->setLabelAttributes(array('class' => 'col-sm-3 control-label'));
+            $role->setLabelAttributes(array('class' => 'col-sm-3 control-label input-sm'));
             $this->add($role);
         }
 
@@ -219,29 +219,29 @@ class RegisterForm extends Form  implements ObjectManagerAwareInterface{
             $status = new Select('status');
             $status->setAttributes(array(
                 'id' => 'status',
-                'class' => 'form-control'
+                'class' => 'form-control input-sm'
             ));
             $status->setValueOptions($this->adminService->getUserStatusSelect());
             $status->setLabel($this->translator->translate('register.status.label'));
-            $status->setLabelAttributes(array('class' => 'col-sm-3 control-label'));
+            $status->setLabelAttributes(array('class' => 'col-sm-3 control-label input-sm'));
             $this->add($status);
         }
 
         $password = new Password('password');
         $password->setAttribute('id', 'password');
         $password->setAttribute('placeholder', $this->translator->translate('register.password.placeholder'));
-        $password->setAttribute('class', 'form-control');
+        $password->setAttribute('class', 'form-control input-sm');
         $password->setLabel($this->translator->translate('register.password.label'));
-        $password->setLabelAttributes(array('class' => 'col-sm-3 control-label'));
+        $password->setLabelAttributes(array('class' => 'col-sm-3 control-label input-sm'));
         $this->add($password);
 
 
         $passwordRepeat = new Password('passwordRepeat');
         $passwordRepeat->setAttribute('id', 'passwordRepeat');
         $passwordRepeat->setAttribute('placeholder', $this->translator->translate('register.passwordRepeat.placeholder'));
-        $passwordRepeat->setAttribute('class', 'form-control');
+        $passwordRepeat->setAttribute('class', 'form-control input-sm');
         $passwordRepeat->setLabel($this->translator->translate('register.passwordRepeat.label'));
-        $passwordRepeat->setLabelAttributes(array('class' => 'col-sm-3 control-label'));
+        $passwordRepeat->setLabelAttributes(array('class' => 'col-sm-3 control-label input-sm'));
         $this->add($passwordRepeat);
 
         $submit = new Submit('submit');

@@ -1,7 +1,4 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: kristjan
- * Date: 6.05.15
- * Time: 7:26
- */ 
+<option><?php echo $this->emptyOption ?></option>
+<?php foreach($this->brands as $brand): /* @var $brand \Application\Entity\Article\Brand */?>
+    <option value="<?php echo $brand->getId()?>" <?php if($brand === $this->brand):?>selected<?php endif;?>><?php echo $brand->getName() ?></option>
+<?php endforeach;?>

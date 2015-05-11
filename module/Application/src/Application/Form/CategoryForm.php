@@ -48,42 +48,42 @@ class CategoryForm extends Form {
         $name = new Text('name');
         $name->setAttributes(array(
             'id' => 'name',
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
             'placeholder' => $this->translator->translate('Category.form.name.placeholder')
         ));
         $name->setLabel($this->translator->translate('Category.form.name.label'));
-        $name->setLabelAttributes(array('class' => 'col-sm-3 control-label'));
+        $name->setLabelAttributes(array('class' => 'col-sm-3 control-label input-sm'));
         $this->add($name);
 
         $code = new Text('code');
         $code->setAttributes(array(
             'id' => 'code',
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
             'placeholder' => $this->translator->translate('Category.form.code.placeholder')
         ));
         $code->setLabel($this->translator->translate('Category.form.code.label'));
-        $code->setLabelAttributes(array('class' => 'col-sm-3 control-label'));
+        $code->setLabelAttributes(array('class' => 'col-sm-3 control-label input-sm'));
         $this->add($code);
 
         $description = new Textarea('description');
         $description->setAttributes(array(
             'id' => 'description',
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
             'rows' => 3,
             'placeholder' => $this->translator->translate('Category.form.description.placeholder')
         ));
         $description->setLabel($this->translator->translate('Category.form.description.label'));
-        $description->setLabelAttributes(array('class' => 'col-sm-3 control-label'));
+        $description->setLabelAttributes(array('class' => 'col-sm-3 control-label input-sm'));
         $this->add($description);
 
         $status = new Select('status');
         $status->setAttributes(array(
             'id' => 'unit',
-            'class' => 'form-control'
+            'class' => 'form-control input-sm'
         ));
         $status->setValueOptions($this->articleService->getArticleCategoryStatusSelect());
         $status->setLabel($this->translator->translate('Category.form.status.label'));
-        $status->setLabelAttributes(array('class' => 'col-sm-3 control-label'));
+        $status->setLabelAttributes(array('class' => 'col-sm-3 control-label input-sm'));
         $this->add($status);
 
         return $this;

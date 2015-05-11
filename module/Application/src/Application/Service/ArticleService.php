@@ -160,6 +160,12 @@ class ArticleService extends AbstractService {
                 $article->setUnit($unit);
             }
         }
+        if(isset($data->vat)){
+            $vat = $this->entityManager->getRepository(Vat::getClass())->findOneBy(array('id' => $data->vat));
+            if($vat){
+                $article->setVat($vat);
+            }
+        }
         if(isset($data->category)){
             $category = $this->getCategoryById($data->category);
             if($category){
@@ -255,9 +261,9 @@ class ArticleService extends AbstractService {
         return $this->entityManager->getRepository(ArticleSetting::getClass())->findOneBy(array('id' => $id));
     }
 
-    public function getItemSettingByCompany(Company $company, User $user){
+    public function getItemSettingByCompany(Company $company, User $user = null){
         $itemSetting = $this->entityManager->getRepository(ItemSetting::getClass())->findOneBy(array('company' => $company));
-        if(!$itemSetting){
+        if(!$itemSetting && $user){
             $itemSetting = $this->createItemSetting($company, $user);
         }
         return $itemSetting;
@@ -305,9 +311,9 @@ class ArticleService extends AbstractService {
         return $this->saveArticleSetting($serviceSetting, $data);
     }
 
-    public function getServiceSettingByCompany(Company $company, User $user){
+    public function getServiceSettingByCompany(Company $company, User $user = null){
         $serviceSetting = $this->entityManager->getRepository(ServiceSetting::getClass())->findOneBy(array('company' => $company));
-        if(!$serviceSetting){
+        if(!$serviceSetting && $user){
             $serviceSetting = $this->createServiceSetting($company, $user);
         }
         return $serviceSetting;

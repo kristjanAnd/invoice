@@ -15,7 +15,7 @@ if(!$this->isAllowed(ArticleController::AUTHORIZE_CLASS . 'edit-article-setting'
             <h1 class="page-header"><?php echo $this->translate('ArticleSetting.edit.heading')?></h1>
         </div>
         <!-- /.col-lg-12 -->
-        <div class="col-lg-6">
+        <div class="col-lg-12">
             <?php echo $this->successMessages($this->messages); ?>
             <?php echo $this->errorMessages($this->errorMessages); ?>
         </div>
@@ -42,22 +42,26 @@ if(!$this->isAllowed(ArticleController::AUTHORIZE_CLASS . 'edit-article-setting'
                                     <div class="col-sm-7">
                                         <?php echo $this->formSelect($itemSettingForm->get('vat'))?>
                                     </div>
-                                    <div class="col-sm-1">
-                                        <div class="row text-center">
-                                            <a class="btn btn-default btn-xs add-modal-vat item" data-toggle="tooltip" data-placement="top" title="<?php echo $this->translate('tooltip.add-vat')?>"  href="javascript:void(0)" ><i class="fa fa-plus fa-fws"></i> </a>
+                                    <?php if ($this->isAllowed(ArticleController::AUTHORIZE_CLASS . 'add-vat')):?>
+                                        <div class="col-sm-1">
+                                            <div class="row text-center">
+                                                <a class="btn btn-default btn-xs add-modal-vat item" data-toggle="tooltip" data-placement="top" title="<?php echo $this->translate('tooltip.add-vat')?>"  href="javascript:void(0)" ><i class="fa fa-plus fa-fws"></i> </a>
+                                            </div>
                                         </div>
-                                    </div>
+                                    <?php endif;?>
                                 </div>
                                 <div class="form-group">
                                     <?php echo $this->formLabel($itemSettingForm->get('unit'))?>
                                     <div class="col-sm-7">
                                         <?php echo $this->formSelect($itemSettingForm->get('unit'))?>
                                     </div>
-                                    <div class="col-sm-1">
-                                        <div class="row text-center">
-                                            <a class="btn btn-default btn-xs add-modal-unit item" data-toggle="tooltip" data-placement="top" title="<?php echo $this->translate('tooltip.add-unit')?>"  href="javascript:void(0)" ><i class="fa fa-plus fa-fws"></i> </a>
+                                    <?php if ($this->isAllowed(ArticleController::AUTHORIZE_CLASS . 'add-unit')):?>
+                                        <div class="col-sm-1">
+                                            <div class="row text-center">
+                                                <a class="btn btn-default btn-xs add-modal-unit item" data-toggle="tooltip" data-placement="top" title="<?php echo $this->translate('tooltip.add-unit')?>"  href="javascript:void(0)" ><i class="fa fa-plus fa-fws"></i> </a>
+                                            </div>
                                         </div>
-                                    </div>
+                                    <?php endif;?>
                                 </div>
                                 <div class="form-group">
                                     <?php echo $this->formLabel($itemSettingForm->get('quantity'))?>
@@ -68,11 +72,11 @@ if(!$this->isAllowed(ArticleController::AUTHORIZE_CLASS . 'edit-article-setting'
                                 <div class="form-actions pull-right">
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <a href="<?php echo $this->url('home', [], true)?>" class="btn btn-default">
+                                            <a href="<?php echo $this->url('home', [], true)?>" class="btn btn-default btn-sm">
                                                 <?php echo $this->translate('ArticleSetting.edit.cancelButton')?>
                                             </a>
                                             <?php if ($this->isAllowed(ArticleController::AUTHORIZE_CLASS . 'edit-article-setting')):?>
-                                                <button class="btn btn-primary" id="submit"  type="submit">
+                                                <button class="btn btn-primary btn-sm" id="submit"  type="submit">
                                                     <i class="fa fa-save"></i>
                                                     <?php echo $this->translate('ArticleSetting.edit.saveButton')?>
                                                 </button>
@@ -89,22 +93,26 @@ if(!$this->isAllowed(ArticleController::AUTHORIZE_CLASS . 'edit-article-setting'
                                     <div class="col-sm-7">
                                         <?php echo $this->formSelect($serviceSettingForm->get('vat'))?>
                                     </div>
-                                    <div class="col-sm-1">
-                                        <div class="row text-center">
-                                            <a class="btn btn-default btn-xs add-modal-vat service" data-toggle="tooltip" data-placement="top" title="<?php echo $this->translate('tooltip.add-vat')?>"  href="javascript:void(0)" ><i class="fa fa-plus fa-fws"></i> </a>
+                                    <?php if ($this->isAllowed(ArticleController::AUTHORIZE_CLASS . 'add-vat')):?>
+                                        <div class="col-sm-1">
+                                            <div class="row text-center">
+                                                <a class="btn btn-default btn-xs add-modal-vat service" data-toggle="tooltip" data-placement="top" title="<?php echo $this->translate('tooltip.add-vat')?>"  href="javascript:void(0)" ><i class="fa fa-plus fa-fws"></i> </a>
+                                            </div>
                                         </div>
-                                    </div>
+                                    <?php endif;?>
                                 </div>
                                 <div class="form-group">
                                     <?php echo $this->formLabel($serviceSettingForm->get('unit'))?>
                                     <div class="col-sm-7">
                                         <?php echo $this->formSelect($serviceSettingForm->get('unit'))?>
                                     </div>
-                                    <div class="col-sm-1">
-                                        <div class="row text-center">
-                                            <a class="btn btn-default btn-xs add-modal-unit service" data-toggle="tooltip" data-placement="top" title="<?php echo $this->translate('tooltip.add-unit')?>" href="javascript:void(0)" ><i class="fa fa-plus fa-fws"></i> </a>
+                                    <?php if ($this->isAllowed(ArticleController::AUTHORIZE_CLASS . 'add-unit')):?>
+                                        <div class="col-sm-1">
+                                            <div class="row text-center">
+                                                <a class="btn btn-default btn-xs add-modal-unit service" data-toggle="tooltip" data-placement="top" title="<?php echo $this->translate('tooltip.add-unit')?>" href="javascript:void(0)" ><i class="fa fa-plus fa-fws"></i> </a>
+                                            </div>
                                         </div>
-                                    </div>
+                                    <?php endif;?>
                                 </div>
                                 <div class="form-group">
                                     <?php echo $this->formLabel($serviceSettingForm->get('quantity'))?>
@@ -115,11 +123,11 @@ if(!$this->isAllowed(ArticleController::AUTHORIZE_CLASS . 'edit-article-setting'
                                 <div class="form-actions pull-right">
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <a href="<?php echo $this->url('home', [], true)?>" class="btn btn-default">
+                                            <a href="<?php echo $this->url('home', [], true)?>" class="btn btn-default btn-sm">
                                                 <?php echo $this->translate('ArticleSetting.edit.cancelButton')?>
                                             </a>
                                             <?php if ($this->isAllowed(ArticleController::AUTHORIZE_CLASS . 'edit-article-setting')):?>
-                                                <button class="btn btn-primary" id="submit"  type="submit">
+                                                <button class="btn btn-primary btn-sm" id="submit"  type="submit">
                                                     <i class="fa fa-save"></i>
                                                     <?php echo $this->translate('ArticleSetting.edit.saveButton')?>
                                                 </button>

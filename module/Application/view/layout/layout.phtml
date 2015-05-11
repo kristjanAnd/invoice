@@ -13,6 +13,7 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/lib/select2/dist/css/select2.min.css" type="text/css" rel="stylesheet" />
 
     <!-- MetisMenu CSS -->
     <link href="/lib/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
@@ -49,6 +50,9 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 
+    <script type="text/javascript" src="/lib/select2/dist/js/select2.full.js"></script>
+    <script type="text/javascript" src="/lib/select2/dist/js/i18n/<?php echo $this->select2code ?>.js"></script>
+
     <!-- Metis Menu Plugin JavaScript -->
     <script src="/lib/metisMenu/dist/metisMenu.min.js"></script>
 
@@ -64,6 +68,28 @@
 
     <script src="/js/_scripts.js"></script>
 
+    <?php
+        $availableLanguages = $this->config['languages']['available'];
+        $user = $this->currentUser;
+        $userId = $user ? $user->getId() : null;
+        $companyId = $user && $user->getCompany() ? $user->getCompany()->getId() : null
+    ?>
+    <?php if(strlen($this->language) > 0 && array_key_exists($this->language, $availableLanguages)):?>
+        <script type="text/javascript">
+            $('[data-toggle="tooltip"]').tooltip();
+            Common.setNoRowsMessage('<?php echo $this->translate('Common.no-rows-message')?>');
+            Common.setLanguage('<?php echo $this->language?>');
+            Common.setLocale('<?php echo $this->locale?>');
+            Common.setCompanyId(<?php echo $companyId ?>);
+            Common.setUserId(<?php echo $userId ?>);
+            <?php if($userId):?>
+            Common.userId = <?php echo $userId?>;
+            <?php endif;?>
+            <?php if($companyId):?>
+            Common.companyId = <?php echo $companyId?>;
+            <?php endif;?>
+        </script>
+    <?php endif;?>
 </head>
     <body>
         <div id="wrapper">
@@ -91,22 +117,6 @@
     <!-- /#wrapper -->
         <?php echo $this->inlineScript() ?>
         <!-- jQuery -->
-        <?php
-            $availableLanguages = $this->config['languages']['available'];
-        ?>
-        <?php if(strlen($this->language) > 0 && array_key_exists($this->language, $availableLanguages)):?>
-            <script type="text/javascript">
-                $('[data-toggle="tooltip"]').tooltip();
-                Common.setLanguage('<?php echo $this->language?>');
-                Common.setLocale('<?php echo $this->locale?>');
-                <?php if($userId):?>
-                    Common.userId = <?php echo $userId?>;
-                <?php endif;?>
-                <?php if($companyId):?>
-                    Common.companyId = <?php echo $companyId?>;
-                <?php endif;?>
-            </script>
-        <?php endif;?>
         <script type="text/javascript">
             Password.forgotPasswordSuccessMessage = '<?php echo $this->translate('layout.password.forgotPasswordSuccessMessage')?>';
             Password.forgotPasswordErrorMessage = '<?php echo $this->translate('layout.password.forgotPasswordErrorMessage')?>';

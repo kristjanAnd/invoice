@@ -48,7 +48,7 @@ $filterForm = $this->filterForm;
             </div>
         </div>
         <!-- /.col-lg-12 -->
-        <div class="col-lg-6">
+        <div class="col-lg-12">
             <?php echo $this->successMessages($this->messages); ?>
             <?php echo $this->errorMessages($this->errorMessages); ?>
         </div>
@@ -126,10 +126,10 @@ $filterForm = $this->filterForm;
                                 <div class="form-actions pull-right">
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">
                                                 <?php echo $this->translate('Article.unit.list.add.modal.cancelButton')?>
                                             </button>
-                                            <button class="btn btn-primary" id="submit"  type="submit">
+                                            <button class="btn btn-primary btn-sm" id="submit"  type="submit">
                                                 <i class="fa fa-save"></i>
                                                 <?php echo $this->translate('Article.unit.list.add.modal.saveButton')?>
                                             </button>

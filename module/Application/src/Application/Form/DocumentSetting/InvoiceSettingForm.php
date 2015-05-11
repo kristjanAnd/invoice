@@ -55,32 +55,32 @@ class InvoiceSettingForm extends DocumentSettingForm {
         $delayPercent = new Text('delayPercent');
         $delayPercent->setAttributes(array(
             'id' => 'delayPercent',
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
             'placeholder' => $this->translator->translate('InvoiceSetting.form.delayPercent.placeholder')
         ));
         $delayPercent->setLabel($this->translator->translate('InvoiceSetting.form.delayPercent.label'));
-        $delayPercent->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+        $delayPercent->setLabelAttributes(array('class' => 'col-sm-2 control-label input-sm'));
         $this->add($delayPercent);
 
         $deadlineDays = new Text('deadlineDays');
         $deadlineDays->setAttributes(array(
             'id' => 'deadlineDays',
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
             'placeholder' => $this->translator->translate('InvoiceSetting.form.deadlineDays.placeholder')
         ));
         $deadlineDays->setLabel($this->translator->translate('InvoiceSetting.form.deadlineDays.label'));
-        $deadlineDays->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+        $deadlineDays->setLabelAttributes(array('class' => 'col-sm-2 control-label input-sm'));
         $this->add($deadlineDays);
 
         $vat = new Select('vat');
         $vat->setAttributes(array(
             'id' => 'vat',
-            'class' => 'form-control'
+            'class' => 'form-control input-sm'
         ));
         $vat->setValueOptions($this->vatService->getCompanyActiveVatSelect($this->company));
         $vat->setEmptyOption($this->translator->translate('InvoiceSetting.form.vat.emptyOption'));
         $vat->setLabel($this->translator->translate('InvoiceSetting.form.vat.label'));
-        $vat->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+        $vat->setLabelAttributes(array('class' => 'col-sm-2 control-label input-sm'));
         $this->add($vat);
 
         return $this;

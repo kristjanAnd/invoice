@@ -1,190 +1,237 @@
 <?php
+use Application\Controller\ArticleController;
+use Application\Controller\ClientController;
+
+echo $this->partial('layout/partial/datepicker-head.phtml');
+
 $form = $this->form;
 $articleForm = $this->addArticleFrom;
 $rowForm = $this->rowForm;
 ?>
 <?php echo $this->partial('layout/partial/navigation'); ?>
+<form id="invoiceForm" class="form-horizontal" method="post" action="<?php echo $this->url('add-invoice', [], true)?>" >
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header"><?php echo $this->translate('Invoice.add.heading')?></h1>
         </div>
         <!-- /.col-lg-12 -->
-        <div class="col-lg-6">
+        <div class="col-lg-12">
             <?php echo $this->successMessages($this->messages); ?>
             <?php echo $this->formErrors($form); ?>
         </div>
-    </div>
-    <div class="row">
-        <form id="invoiceForm" class="form-horizontal" method="post" action="<?php echo $this->url('add-invoice', [], true)?>" >
-            <div class="col-lg-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <i class="fa fa-bar-chart-o fa-fw"></i> <?php echo $this->translate('Invoice.add.panel1.label')?>
-                    </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel-body">
-                        <div class="form-group">
-                            <?php echo $this->formLabel($form->get('documentNumber'))?>
-                            <div class="col-sm-7">
-                                <?php echo $this->formText($form->get('documentNumber'))?>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <?php echo $this->formLabel($form->get('documentDate'))?>
-                            <div class="col-sm-7">
-                                <?php echo $this->formText($form->get('documentDate'))?>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <?php echo $this->formLabel($form->get('delayPercent'))?>
-                            <div class="col-sm-7">
-                                <?php echo $this->formText($form->get('delayPercent'))?>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <?php echo $this->formLabel($form->get('deadlineDays'))?>
-                            <div class="col-sm-7">
-                                <?php echo $this->formText($form->get('deadlineDays'))?>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <?php echo $this->formLabel($form->get('deadlineDate'))?>
-                            <div class="col-sm-7">
-                                <?php echo $this->formText($form->get('deadlineDate'))?>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.panel-body -->
+
+        <div class="col-lg-12">
+            <div class="form-group col-lg-3">
+                <?php echo $this->formLabel($form->get('user'))?>
+                <div class="col-sm-7">
+                    <?php echo $this->formSelect($form->get('user'))?>
                 </div>
             </div>
-            <div class="col-lg-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <i class="fa fa-bar-chart-o fa-fw"></i> <?php echo $this->translate('Invoice.add.panel2.label')?>
+            <div class="form-group col-lg-3">
+                <?php echo $this->formLabel($form->get('language'))?>
+                <div class="col-sm-7">
+                    <?php echo $this->formSelect($form->get('language'))?>
+                </div>
+            </div>
+            <div class="form-group col-lg-3">
+                <?php echo $this->formLabel($form->get('dateFormat'))?>
+                <div class="col-sm-7">
+                    <?php echo $this->formSelect($form->get('dateFormat'))?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-bar-chart-o fa-fw"></i> <?php echo $this->translate('Invoice.add.panel1.label')?>
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="form-group">
+                        <?php echo $this->formLabel($form->get('documentNumber'))?>
+                        <div class="col-sm-7">
+                            <?php echo $this->formText($form->get('documentNumber'))?>
+                        </div>
                     </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel-body">
-                        <div class="form-group">
-                            <?php echo $this->formLabel($form->get('client'))?>
-                            <div class="col-sm-7">
+                    <div class="form-group">
+                        <?php echo $this->formLabel($form->get('documentDate'))?>
+                        <div class="col-sm-7">
+                            <?php echo $this->formText($form->get('documentDate'))?>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <?php echo $this->formLabel($form->get('delayPercent'))?>
+                        <div class="col-sm-7">
+                            <?php echo $this->formText($form->get('delayPercent'))?>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <?php echo $this->formLabel($form->get('deadlineDays'))?>
+                        <div class="col-sm-7">
+                            <?php echo $this->formText($form->get('deadlineDays'))?>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <?php echo $this->formLabel($form->get('deadlineDate'))?>
+                        <div class="col-sm-7">
+                            <?php echo $this->formText($form->get('deadlineDate'))?>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-bar-chart-o fa-fw"></i> <?php echo $this->translate('Invoice.add.panel2.label')?>
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="form-group">
+                        <?php echo $this->formLabel($form->get('client'))?>
+                        <div class="col-sm-6">
+                            <div id="client-select">
                                 <?php echo $this->formSelect($form->get('client'))?>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <?php echo $this->formLabel($form->get('subjectName'))?>
-                            <div class="col-sm-7">
-                                <?php echo $this->formText($form->get('subjectName'))?>
+                        <?php if ($this->isAllowed(ClientController::AUTHORIZE_CLASS . 'add-client')):?>
+                            <div class="col-sm-1">
+                                <div class="row text-center">
+                                    <a class="btn btn-default btn-xs add-modal-client" data-toggle="tooltip" data-placement="top" title="<?php echo $this->translate('tooltip.add-client')?>"  href="javascript:void(0)" ><i class="fa fa-plus fa-fws"></i> </a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <?php echo $this->formLabel($form->get('subjectEmail'))?>
-                            <div class="col-sm-7">
-                                <?php echo $this->formText($form->get('subjectEmail'))?>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <?php echo $this->formLabel($form->get('subjectRegNo'))?>
-                            <div class="col-sm-7">
-                                <?php echo $this->formText($form->get('subjectRegNo'))?>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <?php echo $this->formLabel($form->get('subjectVatNo'))?>
-                            <div class="col-sm-7">
-                                <?php echo $this->formText($form->get('subjectVatNo'))?>
-                            </div>
+                        <?php endif;?>
+                    </div>
+                    <div class="form-group">
+                        <?php echo $this->formLabel($form->get('subjectName'))?>
+                        <div class="col-sm-7">
+                            <?php echo $this->formText($form->get('subjectName'))?>
                         </div>
                     </div>
-                    <!-- /.panel-body -->
+                    <div class="form-group">
+                        <?php echo $this->formLabel($form->get('subjectEmail'))?>
+                        <div class="col-sm-7">
+                            <?php echo $this->formText($form->get('subjectEmail'))?>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <?php echo $this->formLabel($form->get('subjectRegNo'))?>
+                        <div class="col-sm-7">
+                            <?php echo $this->formText($form->get('subjectRegNo'))?>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <?php echo $this->formLabel($form->get('subjectVatNo'))?>
+                        <div class="col-sm-7">
+                            <?php echo $this->formText($form->get('subjectVatNo'))?>
+                        </div>
+                    </div>
                 </div>
+                <!-- /.panel-body -->
             </div>
-            <div class="col-lg-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <i class="fa fa-bar-chart-o fa-fw"></i> <?php echo $this->translate('Invoice.add.panel3.label')?>
-                    </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel-body">
-                        <div class="form-group">
-                            <?php echo $this->formLabel($form->get('referenceNumber'))?>
-                            <div class="col-sm-7">
-                                <?php echo $this->formText($form->get('referenceNumber'))?>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <?php echo $this->formLabel($form->get('vat'))?>
-                            <div class="col-sm-7">
-                                <?php echo $this->formSelect($form->get('vat'))?>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <?php echo $this->formLabel($form->get('amount'))?>
-                            <div class="col-sm-7">
-                                <?php echo $this->formText($form->get('amount'))?>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <?php echo $this->formLabel($form->get('vatAmount'))?>
-                            <div class="col-sm-7">
-                                <?php echo $this->formText($form->get('vatAmount'))?>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <?php echo $this->formLabel($form->get('amountVat'))?>
-                            <div class="col-sm-7">
-                                <?php echo $this->formText($form->get('amountVat'))?>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.panel-body -->
+        </div>
+        <input type="hidden" id="row-count" name="row-count" value="1">
+        <div class="col-lg-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-bar-chart-o fa-fw"></i> <?php echo $this->translate('Invoice.add.panel3.label')?>
                 </div>
-            </div>
-            <div class="col-lg-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <i class="fa fa-bar-chart-o fa-fw"></i> <?php echo $this->translate('Invoice.add.articleSelect')?>
-                    </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel-body">
-                        <div class="col-sm-2">
-                            <?php echo $this->formSelect($articleForm->get('articleType'))?>
-                        </div>
-                        <div class="col-sm-2">
-                            <?php echo $this->formSelect($articleForm->get('category'))?>
-                        </div>
-                        <div class="col-sm-2">
-                            <?php echo $this->formSelect($articleForm->get('brand'))?>
-                        </div>
-                        <div class="col-sm-2">
-                            <?php echo $this->formSelect($articleForm->get('article'))?>
-                        </div>
-                        <div class="col-sm-1">
-                            <a class="btn btn-default btn-xs" id="add-article-row" href="javascript:void(0)"><i class="fa fa-plus fa-fws"></i>  <?php echo $this->translate('Invoice.add.addArticleRow')?></a>
-                        </div>
-                        <div class="col-sm-3 pull-right">
-                            <a class="btn btn-default btn-xs" id="add-empty-row" href="javascript:void(0)" ><i class="fa fa-plus fa-fws"></i>  <?php echo $this->translate('Invoice.add.addEmptyRow')?></a>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="form-group">
+                        <?php echo $this->formLabel($form->get('referenceNumber'))?>
+                        <div class="col-sm-7">
+                            <?php echo $this->formText($form->get('referenceNumber'))?>
                         </div>
                     </div>
-                    <!-- /.panel-body -->
+                    <div class="form-group">
+                        <?php echo $this->formLabel($form->get('vat'))?>
+                        <div class="col-sm-6">
+                            <?php echo $this->formSelect($form->get('vat'))?>
+                        </div>
+                        <?php if ($this->isAllowed(ArticleController::AUTHORIZE_CLASS . 'add-vat')):?>
+                            <div class="col-sm-1">
+                                <div class="row text-center">
+                                    <a class="btn btn-default btn-xs add-modal-vat item" data-toggle="tooltip" data-placement="top" title="<?php echo $this->translate('tooltip.add-vat')?>"  href="javascript:void(0)" ><i class="fa fa-plus fa-fws"></i> </a>
+                                </div>
+                            </div>
+                        <?php endif;?>
+                    </div>
+                    <div class="form-group">
+                        <?php echo $this->formLabel($form->get('amount'))?>
+                        <div class="col-sm-7">
+                            <?php echo $this->formText($form->get('amount'))?>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <?php echo $this->formLabel($form->get('vatAmount'))?>
+                        <div class="col-sm-7">
+                            <?php echo $this->formText($form->get('vatAmount'))?>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <?php echo $this->formLabel($form->get('amountVat'))?>
+                        <div class="col-sm-7">
+                            <?php echo $this->formText($form->get('amountVat'))?>
+                        </div>
+                    </div>
                 </div>
+                <!-- /.panel-body -->
             </div>
-            <div class="col-lg-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <i class="fa fa-bar-chart-o fa-fw"></i> <?php echo $this->translate('Invoice.add.rows')?>
+        </div>
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-bar-chart-o fa-fw"></i> <?php echo $this->translate('Invoice.add.articleSelect')?>
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="col-sm-2">
+                        <?php echo $this->formSelect($articleForm->get('articleType'))?>
                     </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel-body">
-                        <table class="table table-striped table-bordered table-hover" >
+                    <div class="col-sm-2">
+                        <?php echo $this->formSelect($articleForm->get('category'))?>
+                    </div>
+                    <div class="col-sm-2">
+                        <?php echo $this->formSelect($articleForm->get('brand'))?>
+                    </div>
+                    <div class="col-sm-2">
+                        <?php echo $this->formSelect($articleForm->get('article'))?>
+                    </div>
+                    <div class="col-sm-1">
+                        <a class="btn btn-default btn-xs" id="add-article-row" href="javascript:void(0)"><i class="fa fa-plus fa-fws"></i>  <?php echo $this->translate('Invoice.add.addArticleRow')?></a>
+                    </div>
+                    <div class="col-sm-1">
+                        <a class="btn btn-default btn-xs" id="add-empty-row" href="javascript:void(0)" ><i class="fa fa-plus fa-fws"></i>  <?php echo $this->translate('Invoice.add.addEmptyRow')?></a>
+                    </div>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+        </div>
+        <div class="col-lg-12" id="no-rows-div"></div>
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-bar-chart-o fa-fw"></i> <?php echo $this->translate('Invoice.add.rows')?>
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-condensed" >
                             <thead>
                             <tr>
                                 <th><?php echo $this->translate('Invoice.rows.tableTh.article')?></th>
                                 <th><?php echo $this->translate('Invoice.rows.tableTh.name')?></th>
                                 <th><?php echo $this->translate('Invoice.rows.tableTh.quantity')?></th>
                                 <th><?php echo $this->translate('Invoice.rows.tableTh.unit')?></th>
-                                <th><?php echo $this->translate('Invoice.rows.tableTh.amount')?></th>
+                                <th><?php echo $this->translate('Invoice.rows.tableTh.price')?></th>
                                 <th><?php echo $this->translate('Invoice.rows.tableTh.vat')?></th>
+                                <th><?php echo $this->translate('Invoice.rows.tableTh.vatAmount')?></th>
+                                <th><?php echo $this->translate('Invoice.rows.tableTh.amount')?></th>
                                 <th><?php echo $this->translate('Invoice.rows.tableTh.amountVat')?></th>
                                 <th></th>
                             </tr>
@@ -196,19 +243,32 @@ $rowForm = $this->rowForm;
                                 <?php endforeach;?>
                             </tbody>
                             <tfoot>
+                                <td colspan="10">
+                                    <div class="pull-right">
+                                        <a href="<?php echo $this->url('invoice', [], true)?>" class="btn btn-default btn-sm">
+                                            <?php echo $this->translate('Invoice.add.cancelButton')?>
+                                        </a>
+                                        <button class="btn btn-primary btn-sm" id="submit"  type="submit">
+                                            <i class="fa fa-save"></i>
+                                            <?php echo $this->translate('Invoice.add.saveButton')?>
+                                        </button>
+                                    </div>
+                                </td>
                             </tfoot>
                         </table>
                     </div>
-                    <!-- /.panel-body -->
                 </div>
+                <!-- /.panel-body -->
             </div>
-        </form>
+        </div>
     </div>
     <!-- /.row -->
 </div>
+</form>
 <!-- /#page-wrapper -->
 <script type="text/javascript">
-    Validator.initClientForm();
+    Validator.initInvoiceForm();
     AddArticle.init();
     Invoice.init();
+    Common.initObjectAddition();
 </script>

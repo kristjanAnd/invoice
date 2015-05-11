@@ -20,7 +20,7 @@ class InvoiceRowForm extends DocumentRowForm {
         parent::init();
         $invoiceId = new Text('invoiceIds[]');
         $invoiceId->setAttributes(array(
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
         ));
         $this->add($invoiceId);
 

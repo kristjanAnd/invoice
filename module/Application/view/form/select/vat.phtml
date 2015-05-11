@@ -1,0 +1,4 @@
+<option><?php echo $this->emptyOption ?></option>
+<?php foreach($this->vats as $vat): /* @var $vat \Application\Entity\Vat */?>
+    <option value="<?php echo $vat->getId()?>" <?php if($vat === $this->vat):?>selected<?php endif;?>><?php echo $vat->getCode() ?></option>
+<?php endforeach;?>

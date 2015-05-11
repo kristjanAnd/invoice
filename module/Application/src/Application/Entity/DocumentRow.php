@@ -70,6 +70,12 @@ abstract class DocumentRow extends AbstractEntity {
     protected $amount;
 
     /**
+     * @var float
+     * @ORM\Column(name="price", type="decimal")
+     */
+    protected $price;
+
+    /**
      * @var \Application\Entity\Vat
      *
      * @ORM\ManyToOne(targetEntity="Application\Entity\Vat")
@@ -226,6 +232,22 @@ abstract class DocumentRow extends AbstractEntity {
     public function setVatAmount($vatAmount)
     {
         $this->vatAmount = $vatAmount;
+    }
+
+    /**
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * @param float $price
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
     }
 
 

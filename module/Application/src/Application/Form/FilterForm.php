@@ -208,28 +208,28 @@ class FilterForm extends Form implements ServiceLocatorAwareInterface{
         $name = new Text('name');
         $name->setAttributes(array(
             'placeholder' => $this->translator->translate('Filter.form.name.placeholder'),
-            'class' => 'form-control'
+            'class' => 'form-control input-sm'
         ));
         $this->add($name);
 
         $clientName = new Text('clientName');
         $clientName->setAttributes(array(
             'placeholder' => $this->translator->translate('Filter.form.clientName.placeholder'),
-            'class' => 'form-control'
+            'class' => 'form-control input-sm'
         ));
         $this->add($clientName);
 
         $id = new Text('entityId');
         $id->setAttributes(array(
             'placeholder' => $this->translator->translate('Filter.form.entityId.placeholder'),
-            'class' => 'form-control'
+            'class' => 'form-control input-sm'
         ));
         $this->add($id);
 
         $number = new Text('entityNumber');
         $number->setAttributes(array(
             'placeholder' => $this->translator->translate('Filter.form.entityNumber.placeholder'),
-            'class' => 'form-control'
+            'class' => 'form-control input-sm'
         ));
         $this->add($number);
 
@@ -237,7 +237,7 @@ class FilterForm extends Form implements ServiceLocatorAwareInterface{
         $fromDate->setAttributes(array(
             'id' => 'fromDate',
             'placeholder' => $this->translator->translate('Filter.form.fromDate.placeholder'),
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
             'readonly' => 'readonly'
         ));
         $this->add($fromDate);
@@ -246,7 +246,7 @@ class FilterForm extends Form implements ServiceLocatorAwareInterface{
         $toDate->setAttributes(array(
             'id' => 'toDate',
             'placeholder' => $this->translator->translate('Filter.form.toDate.placeholder'),
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
             'readonly' => 'readonly'
         ));
         $this->add($toDate);
@@ -261,34 +261,34 @@ class FilterForm extends Form implements ServiceLocatorAwareInterface{
         $address = new Text('address');
         $address->setAttributes(array(
             'placeholder' => $this->translator->translate('Filter.form.address.placeholder'),
-            'class' => 'form-control'
+            'class' => 'form-control input-sm'
         ));
         $this->add($address);
 
         $regNo = new Text('regNo');
         $regNo->setAttributes(array(
             'placeholder' => $this->translator->translate('Filter.form.regNo.placeholder'),
-            'class' => 'form-control'
+            'class' => 'form-control input-sm'
         ));
         $this->add($regNo);
 
         $vatNo = new Text('vatNo');
         $vatNo->setAttributes(array(
             'placeholder' => $this->translator->translate('Filter.form.vatNo.placeholder'),
-            'class' => 'form-control'
+            'class' => 'form-control input-sm'
         ));
         $this->add($vatNo);
 
         $code = new Text('code');
         $code->setAttributes(array(
             'placeholder' => $this->translator->translate('Filter.form.code.placeholder'),
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
         ));
         $this->add($code);
 
         $clientUser = new Select('clientUser');
         $clientUser->setAttributes(array(
-            'class' => 'form-control'
+            'class' => 'form-control input-sm'
         ));
         $clientUser->setEmptyOption($this->translator->translate('FilterForm.clientUser.emptyOption'));
         $clientUser->setValueOptions($this->getCompanyUsersSelect());
@@ -296,7 +296,7 @@ class FilterForm extends Form implements ServiceLocatorAwareInterface{
 
         $invoiceUser = new Select('invoiceUser');
         $invoiceUser->setAttributes(array(
-            'class' => 'form-control'
+            'class' => 'form-control input-sm'
         ));
         $invoiceUser->setEmptyOption($this->translator->translate('FilterForm.invoiceUser.emptyOption'));
         $invoiceUser->setValueOptions($this->getCompanyUsersSelect());
@@ -304,7 +304,7 @@ class FilterForm extends Form implements ServiceLocatorAwareInterface{
 
         $articleCategory = new Select('articleCategory');
         $articleCategory->setAttributes(array(
-            'class' => 'form-control'
+            'class' => 'form-control input-sm'
         ));
         $articleCategory->setEmptyOption($this->translator->translate('FilterForm.articleCategory.emptyOption'));
         $articleCategory->setValueOptions($this->getArticleCategorySelect());
@@ -312,7 +312,7 @@ class FilterForm extends Form implements ServiceLocatorAwareInterface{
 
         $articleBrand = new Select('articleBrand');
         $articleBrand->setAttributes(array(
-            'class' => 'form-control'
+            'class' => 'form-control input-sm'
         ));
         $articleBrand->setEmptyOption($this->translator->translate('FilterForm.articleBrand.emptyOption'));
         $articleBrand->setValueOptions($this->getArticleBrandSelect());

@@ -14,7 +14,9 @@ use Application\Entity\Article;
 use Application\Entity\Document\Invoice;
 use Application\Entity\DocumentSetting\InvoiceSetting;
 use Application\Entity\Role;
+use Application\Entity\Subject\Client;
 use Application\Entity\Subject\Company;
+use Application\Entity\Unit;
 use Application\Entity\User;
 use Application\Entity\Vat;
 use Application\Form\FilterForm;
@@ -126,6 +128,11 @@ class InvoiceService extends DocumentService
         );
     }
 
+    /**
+     * @param Company $company
+     * @param User $user
+     * @return InvoiceSetting|null|object
+     */
     public function getInvoiceSettingByCompany(Company $company, User $user){
         $invoiceSetting = $this->entityManager->getRepository(InvoiceSetting::getClass())->findOneBy(array('company' => $company));
         if(!$invoiceSetting){
@@ -179,13 +186,47 @@ class InvoiceService extends DocumentService
         return $invoiceSetting;
     }
 
+    public function saveInvoice(Invoice $invoice, Parameters $data, $dateFormat){
+        var_dump($data); die();
+        if(isset($data->vat)){
+            $vat = $this->entityManager->getRepository(Vat::getClass())->findOneBy(array('id' => $data->vat));
+            if($vat && $vat->getCompany() == $invoice->getCompany()){
+                $invoice->setVat($data->subjectName);
+            }
+        }
+        if(isset($data->client)){
+            $client = $this->entityManager->getRepository(Client::getClass())->findOneBy(array('id' => $data->client));
+            if($client && $client->getCompany() == $invoice->getCompany()){
+                $invoice->setClient($client);
+            }
+        }
+        if(isset($data->deadlineDate)) {
+            $deadlineDate = \DateTime::createFromFormat($dateFormat, $data->deadlineDate);
+            if ($deadlineDate) {
+                $invoice->setDeadlineDate($deadlineDate);
+            }
+        }
+        if(isset($data->delayPercent)){
+            $invoice->setDelayPercent($data->delayPercent);
+        }
+        if(isset($data->deadlineDays)){
+            $invoice->setDeadlineDays($data->deadlineDays);
+        }
+        if(isset($data->referenceNumber)){
+            $invoice->setReferenceNumber($data->referenceNumber);
+        }
+
+        return $this->saveDocument($invoice, $data, $dateFormat);
+    }
+
     /**
      * @param Invoice $invoice
      * @param Article $article
      * @return InvoiceRowDto
      */
-    public function createInvoiceRowDto(Invoice $invoice = null, Article $article = null, $vatPercent = 0){
-        $vatPercent = $article && $article->getVat() ? $article->getVat()->getValue()/100 : $vatPercent;
+    public function createInvoiceRowDto(Invoice $invoice = null, Article $article = null, Vat $defaultVat = null){
+        $defaultVatPercent = $defaultVat ? $defaultVat->getValue()/100 : 0;
+        $vatPercent = $article && $article->getVat() ? $article->getVat()->getValue()/100 : $defaultVatPercent;
         $dto = new InvoiceRowDto();
         $dto->setInvoice($invoice);
         $dto->setArticle($article);
@@ -195,12 +236,11 @@ class InvoiceService extends DocumentService
         if($article && $article->getUnit()){
             $dto->setUnit($article->getUnit());
         }
-        if($article && $article->getVat()){
-            $dto->setVat($article->getVat());
-        }
+        $dto->setVat($article && $article->getVat() ? $article->getVat() : $defaultVat);
 
         $dto->setQuantity($article ? $article->getQuantity() : 1);
-        $dto->setAmount($article ? $article->getSalePrice() : 0);
+        $dto->setPrice($article ? $article->getSalePrice() : 0);
+        $dto->setAmount($dto->getPrice()*$dto->getQuantity());
         $dto->setVatAmount($dto->getAmount()*$vatPercent);
         $dto->setAmountVat($dto->getAmount() + $dto->getVatAmount());
 

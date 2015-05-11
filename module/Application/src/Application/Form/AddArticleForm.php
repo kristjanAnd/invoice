@@ -76,45 +76,45 @@ class AddArticleForm extends Form {
         $articleType = new Select('articleType');
         $articleType->setAttributes(array(
             'id' => 'articleType',
-            'class' => 'form-control'
+            'class' => 'form-control input-sm'
         ));
         $articleType->setValueOptions($this->articleService->getArticleTypeSelect());
         $articleType->setLabel($this->translator->translate('ArticleAdd.form.articleType.label'));
-        $articleType->setLabelAttributes(array('class' => 'col-sm-1 control-label'));
+        $articleType->setLabelAttributes(array('class' => 'col-sm-1 control-label input-sm'));
         $this->add($articleType);
 
 
         $brand = new Select('brand');
         $brand->setAttributes(array(
             'id' => 'add-brand',
-            'class' => 'form-control'
+            'class' => 'form-control input-sm'
         ));
         $brand->setEmptyOption($this->translator->translate('ArticleAdd.form.brand.emptyOption'));
         $brand->setValueOptions($this->getArticleBrandSelect());
         $brand->setLabel($this->translator->translate('ArticleAdd.form.brand.label'));
-        $brand->setLabelAttributes(array('class' => 'col-sm-1 control-label'));
+        $brand->setLabelAttributes(array('class' => 'col-sm-1 control-label input-sm'));
         $this->add($brand);
 
         $category = new Select('category');
         $category->setAttributes(array(
             'id' => 'add-category',
-            'class' => 'form-control'
+            'class' => 'form-control input-sm'
         ));
         $category->setEmptyOption($this->translator->translate('ArticleAdd.form.category.emptyOption'));
         $category->setValueOptions($this->getArticleCategorySelect());
         $category->setLabel($this->translator->translate('ArticleAdd.form.category.label'));
-        $category->setLabelAttributes(array('class' => 'col-sm-1 control-label'));
+        $category->setLabelAttributes(array('class' => 'col-sm-1 control-label input-sm'));
         $this->add($category);
 
         $article = new Select('article');
         $article->setAttributes(array(
             'id' => 'add-article',
-            'class' => 'form-control'
+            'class' => 'form-control input-sm'
         ));
         $article->setEmptyOption($this->translator->translate('ArticleAdd.form.article.emptyOption'));
         $article->setValueOptions($this->articleService->getItemSelect($this->company));
         $article->setLabel($this->translator->translate('ArticleAdd.form.article.label'));
-        $article->setLabelAttributes(array('class' => 'col-sm-1 control-label'));
+        $article->setLabelAttributes(array('class' => 'col-sm-1 control-label input-sm'));
         $this->add($article);
 
         return $this;

@@ -42,6 +42,11 @@ class DocumentRowDto {
     /**
      * @var float
      */
+    protected $price;
+
+    /**
+     * @var float
+     */
     protected $amount;
 
     /**
@@ -201,6 +206,22 @@ class DocumentRowDto {
     public function setVatAmount($vatAmount)
     {
         $this->vatAmount = $vatAmount;
+    }
+
+    /**
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * @param float $price
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
     }
 
 

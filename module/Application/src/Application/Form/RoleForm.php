@@ -107,21 +107,21 @@ class RoleForm extends Form  implements ObjectManagerAwareInterface{
         $name = new Text('name');
         $name->setAttributes(array(
             'id' => 'name',
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
             'placeholder' => $this->translator->translate('role.form.name.placeholder')
         ));
         $name->setLabel($this->translator->translate('role.form.name.label'));
-        $name->setLabelAttributes(array('class' => 'col-sm-1 control-label'));
+        $name->setLabelAttributes(array('class' => 'col-sm-1 control-label input-sm'));
         $this->add($name);
 
         $redirectRoute = new Select('redirectRoute');
         $redirectRoute->setAttributes(array(
             'id' => 'redirectRoute',
-            'class' => 'form-control'
+            'class' => 'form-control input-sm'
         ));
         $redirectRoute->setValueOptions($this->adminService->getRedirectRouteSelectForRole());
         $redirectRoute->setLabel($this->translator->translate('role.form.redirectRoute.label'));
-        $redirectRoute->setLabelAttributes(array('class' => 'col-sm-1 control-label'));
+        $redirectRoute->setLabelAttributes(array('class' => 'col-sm-1 control-label input-sm'));
         $this->add($redirectRoute);
 
         return $this;

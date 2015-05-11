@@ -1,5 +1,7 @@
 <?php
 use Application\Form\AddArticleForm;
+use Application\Form\Article\ItemForm;
+use Application\Form\Article\ServiceForm;
 use Application\Form\ArticleForm;
 use Application\Form\ArticleSetting\ItemSettingForm;
 use Application\Form\ArticleSetting\ServiceSettingForm;
@@ -17,6 +19,8 @@ use Application\Form\ForgotPassword;
 use Application\Form\NewPassword;
 use Application\Form\RegisterForm;
 use Application\Form\RoleForm;
+use Application\Form\Subject\ClientForm;
+use Application\Form\Subject\CompanyForm;
 use Application\Form\SubjectForm;
 use Application\Form\UnitForm;
 use Application\Form\VatForm;
@@ -82,9 +86,22 @@ return array(
         },
         'Application\Form\Article' => function (ServiceManager $sm) {
             $form = new ArticleForm();
+            return $form;
+        },
+        'Application\Form\Article\Item' => function (ServiceManager $sm) {
+            $form = new ItemForm();
             $form->setTranslator($sm->get('Translator'));
             $form->setUnitService($sm->get('Application\Service\Unit'));
             $form->setArticleService($sm->get('Application\Service\Article'));
+            $form->setVatService($sm->get('Application\Service\Vat'));
+            return $form;
+        },
+        'Application\Form\Article\Service' => function (ServiceManager $sm) {
+            $form = new ServiceForm();
+            $form->setTranslator($sm->get('Translator'));
+            $form->setUnitService($sm->get('Application\Service\Unit'));
+            $form->setArticleService($sm->get('Application\Service\Article'));
+            $form->setVatService($sm->get('Application\Service\Vat'));
             return $form;
         },
         'Application\Form\ArticleSetting' => function (ServiceManager $sm) {
@@ -195,6 +212,15 @@ return array(
         },
         'Application\Form\Subject' => function (ServiceManager $sm) {
             $form = new SubjectForm();
+            return $form;
+        },
+        'Application\Form\Subject\Company' => function (ServiceManager $sm) {
+            $form = new CompanyForm();
+            $form->setTranslator($sm->get('Translator'));
+            return $form;
+        },
+        'Application\Form\Subject\Client' => function (ServiceManager $sm) {
+            $form = new ClientForm();
             $form->setTranslator($sm->get('Translator'));
             $form->setClientService($sm->get('Application\Service\Client'));
             return $form;

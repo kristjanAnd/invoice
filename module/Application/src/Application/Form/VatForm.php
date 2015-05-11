@@ -47,31 +47,31 @@ class VatForm  extends Form {
         $code = new Text('code');
         $code->setAttributes(array(
             'id' => 'code',
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
             'placeholder' => $this->translator->translate('Vat.form.code.placeholder')
         ));
         $code->setLabel($this->translator->translate('Vat.form.code.label'));
-        $code->setLabelAttributes(array('class' => 'col-sm-4 control-label'));
+        $code->setLabelAttributes(array('class' => 'col-sm-4 control-label input-sm'));
         $this->add($code);
 
         $value = new Text('value');
         $value->setAttributes(array(
             'id' => 'value',
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
             'placeholder' => $this->translator->translate('Vat.form.value.placeholder')
         ));
         $value->setLabel($this->translator->translate('Vat.form.value.label'));
-        $value->setLabelAttributes(array('class' => 'col-sm-4 control-label'));
+        $value->setLabelAttributes(array('class' => 'col-sm-4 control-label input-sm'));
         $this->add($value);
 
         $status = new Select('status');
         $status->setAttributes(array(
             'id' => 'status',
-            'class' => 'form-control'
+            'class' => 'form-control input-sm'
         ));
         $status->setValueOptions($this->vatService->getVatStatusSelect());
         $status->setLabel($this->translator->translate('Vat.form.status.label'));
-        $status->setLabelAttributes(array('class' => 'col-sm-4 control-label'));
+        $status->setLabelAttributes(array('class' => 'col-sm-4 control-label input-sm'));
         $this->add($status);
 
         return $this;

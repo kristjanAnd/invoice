@@ -11,6 +11,7 @@ namespace Application\Controller;
 
 use Application\Service\UserService;
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Stdlib\Parameters;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 
@@ -95,7 +96,6 @@ class IndexController extends AbstractActionController
     public function getUnitAddFormAction(){
         if ($this->request->isGet() && $this->request->isXmlHttpRequest()) {
             $form = $this->getServiceLocator()->get('Application\Form\Unit')->init();
-            $form->removeInputValidation('status');
             $this->getTranslator($this->request->getQuery()->locale);
             $view = new ViewModel();
             $view->setTemplate('form/add/unit-form');
@@ -108,6 +108,62 @@ class IndexController extends AbstractActionController
         return $this->response;
     }
 
+    public function getVatAddFormAction(){
+        if ($this->request->isGet() && $this->request->isXmlHttpRequest()) {
+            $form = $this->getServiceLocator()->get('Application\Form\Vat')->init();
+            $this->getTranslator($this->request->getQuery()->locale);
+            $view = new ViewModel();
+            $view->setTemplate('form/add/vat-form');
+            $view->setTerminal(true);
+            $view->form = $form;
+
+            return $view;
+        }
+
+        return $this->response;
+    }
+
+    public function getBrandAddFormAction(){
+        if ($this->request->isGet() && $this->request->isXmlHttpRequest()) {
+            $form = $this->getServiceLocator()->get('Application\Form\Brand')->init();
+            $this->getTranslator($this->request->getQuery()->locale);
+            $view = new ViewModel();
+            $view->setTemplate('form/add/brand-form');
+            $view->setTerminal(true);
+            $view->form = $form;
+
+            return $view;
+        }
+
+        return $this->response;
+    }
+
+    public function getCategoryAddFormAction(){
+        if ($this->request->isGet() && $this->request->isXmlHttpRequest()) {
+            $form = $this->getServiceLocator()->get('Application\Form\Category')->init();
+            $this->getTranslator($this->request->getQuery()->locale);
+            $view = new ViewModel();
+            $view->setTemplate('form/add/category-form');
+            $view->setTerminal(true);
+            $view->form = $form;
+
+            return $view;
+        }
+
+        return $this->response;
+    }
+
+    public function getClientDataAction(){
+        if ($this->request->isGet() && $this->request->isXmlHttpRequest()) {
+            $clientService = $this->getServiceLocator()->get('Application\Service\Client');
+            $clientData = $clientService->getClientDataForAjax($this->request->getQuery()->id);
+
+            return new JsonModel($clientData);
+        }
+
+        return $this->response;
+    }
+
     private function getTranslator($locale = null){
         $translator =  $this->serviceLocator->get('MvcTranslator');
         if($locale){
@@ -115,4 +171,32 @@ class IndexController extends AbstractActionController
         }
         return $translator;
     }
+
+    public function getClientAddFormAction(){
+        if ($this->request->isGet() && $this->request->isXmlHttpRequest()) {
+            $userData = $this->getUserData();
+            $form = $this->getServiceLocator()->get('Application\Form\Subject\Client')->setCompany($userData->company)->init();
+            $form->setDefaultClientUser($userData->user);
+            $this->getTranslator($this->request->getQuery()->locale);
+            $view = new ViewModel();
+            $view->setTemplate('form/add/client-form');
+            $view->setTerminal(true);
+            $view->form = $form;
+
+            return $view;
+        }
+
+        return $this->response;
+    }
+
+    private function getUserData(){
+        $data = new Parameters();
+        $user = $this->currentdata()->getCurrentUser();
+        $company = $user->getCompany();
+        $data->company = $company;
+        $data->user = $user;
+        return $data;
+    }
+
+
 }

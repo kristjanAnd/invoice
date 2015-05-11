@@ -15,6 +15,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Paginator\Adapter\ArrayAdapter;
 use Zend\Paginator\Paginator;
 use Zend\Stdlib\Parameters;
+use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 
 class ClientController extends AbstractActionController {
@@ -58,20 +59,42 @@ class ClientController extends AbstractActionController {
     public function addClientAction(){
         $userData = $this->getUserData();
         $view = new ViewModel();
-        $form = $this->getServiceLocator()->get('Application\Form\Subject')->setCompany($userData->company)->setIsClient(true)->init();
+        $form = $this->getServiceLocator()->get('Application\Form\Subject\Client')->setCompany($userData->company)->init();
         $form->setDefaultClientUser($userData->user);
         if ($this->request->isPost()) {
             $form->setData($this->request->getPost());
             $translator = $this->getTranslator();
             if($form->isValid()){
-                $client = $this->clientService->saveClient(new Client($userData), new Parameters($form->getData()));
+                $params = $this->request->getPost();
+                $client = $this->clientService->saveClient(new Client($userData), $params);
+                if($this->checkIfModalRequest()){
+                    return $this->getClientSelectView($client, $params);
+                }
                 $this->flashMessenger()->addMessage($translator->translate('Client.add.successMessage'));
                 return $this->redirect()->toRoute('client', [], true);
+            }
+            if($this->checkIfModalRequest()){
+                return new JsonModel(array('error' => 1));
             }
         }
         $view->form = $form;
         $view->navKey = self::NAV_KEY_CLIENT;
         return $view;
+    }
+
+    private function getClientSelectView(Client $client, Parameters $data){
+        $userData = $this->getUserData();
+        $clients = $this->clientService->getCompanyActiveClients($userData->company);
+        $view = new ViewModel();
+        $view->setTemplate('form/select/client');
+        $view->setTerminal(true);
+        $view->clients = $clients;
+        $view->client = $client;
+        $view->emptyOption = $this->getTranslator(isset($data->locale) ? $data->locale : null)->translate('Invoice.form.client.emptyOption');
+        $viewRender = $this->getServiceLocator()->get('ViewRenderer');
+        $result = $this->clientService->getClientDataForAjax($client->getId(), $client);
+        $result['html'] = $viewRender->render($view);
+        return new JsonModel($result);
     }
 
     public function editClientAction(){
@@ -81,7 +104,7 @@ class ClientController extends AbstractActionController {
             return $this->notFoundAction();
         }
         $view = new ViewModel();
-        $form = $this->getServiceLocator()->get('Application\Form\Subject')->setCompany($userData->company)->setClient($client)->init();
+        $form = $this->getServiceLocator()->get('Application\Form\Subject\Client')->setCompany($userData->company)->setClient($client)->init();
         $form->setFormValues($client);
         if ($this->request->isPost()) {
             $form->setData($this->request->getPost());
@@ -116,7 +139,15 @@ class ClientController extends AbstractActionController {
         return $paginated;
     }
 
-    private function getTranslator(){
-        return $this->serviceLocator->get('MvcTranslator');
+    private function getTranslator($locale = null){
+        $translator =  $this->serviceLocator->get('MvcTranslator');
+        if($locale){
+            $translator->setLocale($locale);
+        }
+        return $translator;
+    }
+
+    private function checkIfModalRequest(){
+        return (isset($_GET['modal']) && $_GET['modal'] == 1) ? true : false;
     }
 } 

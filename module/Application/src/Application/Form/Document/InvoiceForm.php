@@ -20,6 +20,7 @@ use Zend\Form\Element\Text;
 use Zend\Form\Element\Textarea;
 use Zend\InputFilter\Input;
 use Zend\Validator\Digits;
+use Zend\Validator\NotEmpty;
 
 class InvoiceForm extends DocumentForm {
     /**
@@ -53,23 +54,23 @@ class InvoiceForm extends DocumentForm {
         $client = new Select('client');
         $client->setAttributes(array(
             'id' => 'client',
-            'class' => 'form-control'
+            'class' => 'form-control input-sm'
         ));
         $client->setValueOptions($this->clientService->getCompanyActiveClientSelect($this->company));
         $client->setEmptyOption($this->translator->translate('Invoice.form.client.emptyOption'));
         $client->setLabel($this->translator->translate('Invoice.form.client.label'));
-        $client->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
+        $client->setLabelAttributes(array('class' => 'col-sm-5 control-label input-sm'));
         $this->add($client);
 
         $vat = new Select('vat');
         $vat->setAttributes(array(
             'id' => 'vat',
-            'class' => 'form-control'
+            'class' => 'form-control input-sm'
         ));
         $vat->setValueOptions($this->vatService->getCompanyActiveVatSelect($this->company));
         $vat->setEmptyOption($this->translator->translate('Invoice.form.vat.emptyOption'));
         $vat->setLabel($this->translator->translate('Invoice.form.vat.label'));
-        $vat->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
+        $vat->setLabelAttributes(array('class' => 'col-sm-5 control-label input-sm'));
         $this->add($vat);
 
         $this->get('subjectName')->setAttributes(array('placeholder' => $this->translator->translate('Invoice.form.clientName.placeholder')));
@@ -90,41 +91,42 @@ class InvoiceForm extends DocumentForm {
         $delayPercent = new Text('delayPercent');
         $delayPercent->setAttributes(array(
             'id' => 'delayPercent',
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
             'placeholder' => $this->translator->translate('Invoice.form.delayPercent.placeholder')
         ));
         $delayPercent->setLabel($this->translator->translate('Invoice.form.delayPercent.label'));
-        $delayPercent->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
+        $delayPercent->setLabelAttributes(array('class' => 'col-sm-5 control-label input-sm'));
         $this->add($delayPercent);
 
         $deadlineDays = new Text('deadlineDays');
         $deadlineDays->setAttributes(array(
             'id' => 'deadlineDays',
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
             'placeholder' => $this->translator->translate('Invoice.form.deadlineDays.placeholder')
         ));
         $deadlineDays->setLabel($this->translator->translate('Invoice.form.deadlineDays.label'));
-        $deadlineDays->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
+        $deadlineDays->setLabelAttributes(array('class' => 'col-sm-5 control-label input-sm'));
         $this->add($deadlineDays);
 
         $referenceNumber = new Text('referenceNumber');
         $referenceNumber->setAttributes(array(
             'id' => 'referenceNumber',
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
             'placeholder' => $this->translator->translate('Invoice.form.referenceNumber.placeholder')
         ));
         $referenceNumber->setLabel($this->translator->translate('Invoice.form.referenceNumber.label'));
-        $referenceNumber->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
+        $referenceNumber->setLabelAttributes(array('class' => 'col-sm-5 control-label input-sm'));
         $this->add($referenceNumber);
 
         $deadlineDate = new Text('deadlineDate');
         $deadlineDate->setAttributes(array(
             'id' => 'deadlineDate',
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
+            'readonly' => 'readonly',
             'placeholder' => $this->translator->translate('Invoice.form.deadlineDate.placeholder')
         ));
         $deadlineDate->setLabel($this->translator->translate('Invoice.form.deadlineDate.label'));
-        $deadlineDate->setLabelAttributes(array('class' => 'col-sm-5 control-label'));
+        $deadlineDate->setLabelAttributes(array('class' => 'col-sm-5 control-label input-sm'));
         $this->add($deadlineDate);
 
         return $this;
@@ -134,13 +136,18 @@ class InvoiceForm extends DocumentForm {
     public function getInputFilter(){
         $this->filter = parent::getInputFilter();
 
+        $notEmpty = new NotEmpty();
+        $notEmpty2 = new NotEmpty();
+
         $client = new Input('client');
         $client->setRequired(false)->setAllowEmpty(true);
         $this->filter->add($client);
 
         $vat = new Input('vat');
-        $vat->setRequired(false)->setAllowEmpty(true);
+        $vat->getValidatorChain()->attach($notEmpty->setMessage(sprintf($this->translator->translate('Validator.message.notEmpty'), $this->translator->translate('InvoiceForm.message.vatInput')), NotEmpty::IS_EMPTY));
         $this->filter->add($vat);
+
+        $this->filter->get('subjectName')->getValidatorChain()->attach($notEmpty2->setMessage(sprintf($this->translator->translate('Validator.message.notEmpty'), $this->translator->translate('InvoiceForm.message.subjectNameInput')), NotEmpty::IS_EMPTY));
 
         $floatValidator = new MoneyValidator();
         $floatValidator->setMessage($this->translator->translate('Invoice.form.delayPercent.notDigits'), MoneyValidator::NOT_FLOAT);

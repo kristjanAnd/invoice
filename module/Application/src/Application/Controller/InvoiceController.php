@@ -9,6 +9,7 @@
 namespace Application\Controller;
 
 
+use Application\Entity\Document\Invoice;
 use Application\Service\ArticleService;
 use Application\Service\InvoiceService;
 use Application\Service\LanguageService;
@@ -18,6 +19,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Paginator\Adapter\ArrayAdapter;
 use Zend\Paginator\Paginator;
 use Zend\Stdlib\Parameters;
+use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 
 class InvoiceController extends AbstractActionController {
@@ -118,9 +120,10 @@ class InvoiceController extends AbstractActionController {
             $form->setData($this->request->getPost());
             $translator = $this->getTranslator();
             if($form->isValid()){
-//                $client = $this->clientService->saveClient(new Client($userData), new Parameters($form->getData()));
-//                $this->flashMessenger()->addMessage($translator->translate('Client.add.successMessage'));
-//                return $this->redirect()->toRoute('client', [], true);
+                $params = $this->request->getPost();
+                $invoice = $this->invoiceService->saveInvoice(new Invoice($userData), $params, $form->getDateFormat());
+                $this->flashMessenger()->addMessage($translator->translate('Client.add.successMessage'));
+                return $this->redirect()->toRoute('client', [], true);
             }
         }
         $view->form = $form;
@@ -169,10 +172,11 @@ class InvoiceController extends AbstractActionController {
     public function addArticleAction(){
         if ($this->request->isGet() && $this->request->isXmlHttpRequest()) {
             $userData = $this->getUserData();
+            $companyInvoiceSetting = $this->invoiceService->getInvoiceSettingByCompany($userData->company, $userData->user);
             $type = $this->request->getQuery()->type;
             $invoice = $this->invoiceService->getInvoiceById($this->request->getQuery()->invoiceId);
             $article = $this->articleService->getArticleById($this->request->getQuery()->articleId);
-            $rowDto = $this->invoiceService->createInvoiceRowDto($invoice, $article);
+            $rowDto = $this->invoiceService->createInvoiceRowDto($invoice, $article, $companyInvoiceSetting->getVat());
             $units = $this->unitService->getActiveCompanyUnits($userData->company);
             $vats = $this->vatService->getCompanyActiveVats($userData->company);
 

@@ -106,7 +106,7 @@ class DocumentRowForm extends Form {
     {
         $vat = new Select('vats[]');
         $vat->setAttributes(array(
-            'class' => 'form-control vat'
+            'class' => 'form-control vat input-sm'
         ));
         $vat->setValueOptions($this->vatService->getCompanyActiveVatSelect($this->company));
         $vat->setEmptyOption($this->translator->translate('DocumentRowForm.form.vat.emptyOption'));
@@ -114,7 +114,7 @@ class DocumentRowForm extends Form {
 
         $unit = new Select('units[]');
         $unit->setAttributes(array(
-            'class' => 'form-control unit'
+            'class' => 'form-control unit input-sm'
         ));
         $unit->setValueOptions($this->getUnitSelect());
         $unit->setEmptyOption($this->translator->translate('DocumentRowForm.form.unit.emptyOption'));
@@ -122,31 +122,37 @@ class DocumentRowForm extends Form {
 
         $name = new Text('names[]');
         $name->setAttributes(array(
-            'class' => 'form-control name'
+            'class' => 'form-control name input-sm'
         ));
         $this->add($name);
 
         $quantity = new Text('quantities[]');
         $quantity->setAttributes(array(
-            'class' => 'form-control quantity'
+            'class' => 'form-control quantity input-sm'
         ));
         $this->add($quantity);
 
+        $price = new Text('prices[]');
+        $price->setAttributes(array(
+            'class' => 'form-control price input-sm'
+        ));
+        $this->add($price);
+
         $amount = new Text('amounts[]');
         $amount->setAttributes(array(
-            'class' => 'form-control amount'
+            'class' => 'form-control amount input-sm'
         ));
         $this->add($amount);
 
         $vatAmount = new Text('vatAmounts[]');
         $vatAmount->setAttributes(array(
-            'class' => 'form-control vatAmount'
+            'class' => 'form-control vatAmount input-sm'
         ));
         $this->add($vatAmount);
 
         $amountVat = new Text('amountVats[]');
         $amountVat->setAttributes(array(
-            'class' => 'form-control amountVat'
+            'class' => 'form-control amountVat input-sm'
         ));
         $this->add($amountVat);
     }
@@ -171,6 +177,10 @@ class DocumentRowForm extends Form {
             $quantity = new Input('quantities[]');
             $quantity->setRequired(false)->setAllowEmpty(true);
             $filter->add($quantity);
+
+            $price = new Input('prices[]');
+            $price->setRequired(false)->setAllowEmpty(true);
+            $filter->add($price);
 
             $amount = new Input('amounts[]');
             $amount->setRequired(false)->setAllowEmpty(true);

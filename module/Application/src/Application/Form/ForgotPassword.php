@@ -43,10 +43,10 @@ class ForgotPassword extends Form implements ObjectManagerAwareInterface
         $email = new Text('email');
         $email->setAttribute('id', 'forgotEmail');
         $email->setAttribute('required', 'required')
-                ->setAttribute('class', 'form-control')
+                ->setAttribute('class', 'form-control input-sm')
 		        ->setAttribute('placeholder', $this->translator->translate('forgotPassword.email.placeholder'));
         $email->setLabel($this->translator->translate('register.email.label'));
-        $email->setLabelAttributes(array('class' => 'col-sm-3 control-label'));
+        $email->setLabelAttributes(array('class' => 'col-sm-3 control-label input-sm'));
 		$this->add($email);
 		
 		$submit = new Submit('submit');

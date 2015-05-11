@@ -22,6 +22,7 @@ function log(input){
 }
 
 var Common = {
+    NO_ROWS_MESSAGE: '',
     companyId: null,
     userId: null,
     language: 'us',
@@ -31,6 +32,14 @@ var Common = {
         'us': 'en-GB',
         'ru': 'ru',
         'et': 'et'
+    },
+    select2LanguageMapper: {
+        'us': 'en',
+        'ru': 'ru',
+        'et': 'et'
+    },
+    setNoRowsMessage: function(msg){
+      Common.NO_ROWS_MESSAGE = msg;
     },
     setLanguage: function(language){
         if(language == undefined){
@@ -48,9 +57,117 @@ var Common = {
         var val = element.val().replace(",", ".");
         element.val(val);
     },
+    replaceNonNumbersWithZero: function(elements){
+        $.each(elements, function(){
+            this.val(0);
+        })
+    },
     initDatepickerRegion: function(locale){
         $.getScript(Common.datepickerBaseSrc + locale + '.js', function () {
             $.datepicker.setDefaults($.datepicker.regional[locale]);
+        });
+
+    },
+    setCompanyId: function(id){
+        Common.companyId = id;
+    },
+    setUserId: function(id){
+        Common.userId = id;
+    },
+    calculateAmount:function(price, qty){
+        return parseFloat(price*qty);
+    },
+    calculateVatAmount: function(vatPercent, amount){
+        return parseFloat(vatPercent/100*amount);
+    },
+    calculateAmountVat: function(vatPercent, amount){
+        var vatAmount = vatPercent/100*amount;
+        return parseFloat(amount+vatAmount);
+    },
+    calculateTotalAmount: function(){
+        var sum = 0;
+        $('.amount').each(function(){
+            sum+= parseFloat($(this).val());
+        });
+        return sum;
+    },
+    calculateTotalVatAmount: function(){
+        var sum = 0;
+        $('.vatAmount').each(function(){
+            sum+= parseFloat($(this).val());
+        });
+        return sum;
+    },
+    calculateTotalAmountVat: function(){
+        var sum = 0;
+        $('.amountVat').each(function(){
+            sum+= parseFloat($(this).val());
+        });
+        return sum;
+    },
+    checkRowCount: function() {
+        var invoiceRow = $('.invoice-row');
+        if (invoiceRow.length){
+            return true;
+        }
+        $('#no-rows-div').html(Common.getNoRowsMessage());
+        return false;
+    },
+    getNoRowsMessage: function(){
+        return "<div class='alert alert-danger alert-dismissable'> <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>"
+        + Common.NO_ROWS_MESSAGE +
+        "</div>";
+    },
+    initObjectAddition: function(){
+        $(document).on('click', '#add-vat-submit', function(e){
+            e.preventDefault();
+            var form = $('#vatForm');
+            if(form.valid()){
+                var formValues = form.serializeArray();
+                var localeObject = {name: 'locale', value: Common.locale};
+                formValues.push(localeObject);
+                var url = '/application/article/add-vat?modal=1';
+                $.post(url, formValues).done(function (data) {
+                    $('#vat').html(data);
+                    $('#add-modal').modal('hide');
+                });
+            } else {
+                return false;
+            }
+        });
+        $(document).on('click', '.add-modal-vat', function(){
+            var addModal = $('#add-modal');
+            $.get('/application/index/get-vat-add-form', {locale: Common.locale}, function (data) {
+                $('#add-modal-content').html(data);
+                addModal.modal('show');
+            });
+        });
+        $(document).on('click', '#add-client-submit', function(e){
+            e.preventDefault();
+            var form = $('#clientForm');
+            if(form.valid()){
+                var formValues = form.serializeArray();
+                var localeObject = {name: 'locale', value: Common.locale};
+                formValues.push(localeObject);
+                var url = '/application/client/add-client?modal=1';
+                $.post(url, formValues).done(function (data) {
+                    $('#client-select').html(data.html);
+                    $("#client").select2({
+                        language: Common.select2LanguageMapper[Common.language]
+                    });
+                    Invoice.setClientFieldValues(data);
+                    $('#add-modal').modal('hide');
+                });
+            } else {
+                return false;
+            }
+        });
+        $(document).on('click', '.add-modal-client', function(){
+            var addModal = $('#add-modal');
+            $.get('/application/index/get-client-add-form', {locale: Common.locale}, function (data) {
+                $('#add-modal-content').html(data);
+                addModal.modal('show');
+            });
         });
     }
 };
@@ -408,9 +525,30 @@ var Validator = {
             e.preventDefault();
             var form = $('#unitForm');
             if(form.valid()){
+                var formValues = form.serializeArray();
+                var localeObject = {name: 'locale', value: Common.locale};
+                formValues.push(localeObject);
                 var url = '/application/article/add-unit?modal=1';
-                $.post(url, form.serializeArray()).done(function (data) {
+                $.post(url, formValues).done(function (data) {
                     $('#item-unit').html(data);
+                    $('#service-unit').html(data);
+                    $('#add-modal').modal('hide');
+                });
+            } else {
+                return false;
+            }
+        });
+        $(document).on('click', '#add-vat-submit', function(e){
+            e.preventDefault();
+            var form = $('#vatForm');
+            if(form.valid()){
+                var formValues = form.serializeArray();
+                var localeObject = {name: 'locale', value: Common.locale};
+                formValues.push(localeObject);
+                var url = '/application/article/add-vat?modal=1';
+                $.post(url, formValues).done(function (data) {
+                    $('#item-vat').html(data);
+                    $('#service-vat').html(data);
                     $('#add-modal').modal('hide');
                 });
             } else {
@@ -424,6 +562,14 @@ var Validator = {
             var addModal = $('#add-modal');
 
             $.get('/application/index/get-unit-add-form', {locale: Common.locale}, function (data) {
+                $('#add-modal-content').html(data);
+                addModal.modal('show');
+            });
+        });
+        $(document).on('click', '.add-modal-vat', function(){
+            var addModal = $('#add-modal');
+
+            $.get('/application/index/get-vat-add-form', {locale: Common.locale}, function (data) {
                 $('#add-modal-content').html(data);
                 addModal.modal('show');
             });
@@ -507,16 +653,201 @@ var Validator = {
         });
     },
 
+    initInvoiceForm: function () {
+        $(document).on('change', '#delayPercent', function(){
+            Common.replaceCommas($(this));
+        });
+
+        $.validator.addMethod('rowCount', function (value, element) {
+            return this.optional(element) || Common.checkRowCount();
+        });
+        $('#invoiceForm').validate({
+            ignore: "not:hidden",
+            rules: {
+                "row-count": {
+                    rowCount: true
+                },
+                "user": {
+                    required: true
+                },
+                "language": {
+                    required: true
+                },
+                "dateFormat": {
+                    required: true
+                },
+                "documentDate": {
+                    required: true
+                },
+                "deadlineDate": {
+                    required: true
+                },
+                "subjectName": {
+                    required: true
+                },
+                "vat": {
+                    required: true
+                },
+                "names[]": {
+                    required: true
+                },
+                "quantities[]": {
+                    required: true
+                },
+                "units[]": {
+                    required: true
+                },
+                "prices[]": {
+                    required: true
+                },
+                "vats[]": {
+                    required: true
+                },
+                "vatAmounts[]": {
+                    required: true
+                },
+                "amounts[]": {
+                    required: true
+                },
+                "amountVats[]": {
+                    required: true
+                }
+
+
+            },
+            errorPlacement: function (error, element) {
+
+            },
+            highlight: function (element, errorClass, validClass) {
+                if(element.id !== 'row-count'){
+                    $(element).parent().addClass('has-error');
+                    $(element).parent().find('.help-block').show();
+                }
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                if(element.id !== 'row-count'){
+                    $(element).parent().removeClass('has-error');
+                    $(element).parent().find('.help-block').hide();
+                }
+            }
+        });
+    },
+
     initArticleForm: function () {
         $(document).on('change', '#salePrice', function(){
             Common.replaceCommas($(this));
         });
+        $(document).on('change', '.quantity', function(){
+            Common.replaceCommas($(this));
+        });
+
+        $(document).on('click', '.add-modal-unit', function(){
+            var addModal = $('#add-modal');
+
+            $.get('/application/index/get-unit-add-form', {locale: Common.locale}, function (data) {
+                $('#add-modal-content').html(data);
+                addModal.modal('show');
+            });
+        });
+        $(document).on('click', '.add-modal-vat', function(){
+            var addModal = $('#add-modal');
+
+            $.get('/application/index/get-vat-add-form', {locale: Common.locale}, function (data) {
+                $('#add-modal-content').html(data);
+                addModal.modal('show');
+            });
+        });
+        $(document).on('click', '.add-modal-category', function(){
+            var addModal = $('#add-modal');
+
+            $.get('/application/index/get-category-add-form', {locale: Common.locale}, function (data) {
+                $('#add-modal-content').html(data);
+                addModal.modal('show');
+            });
+        });
+        $(document).on('click', '.add-modal-brand', function(){
+            var addModal = $('#add-modal');
+            $.get('/application/index/get-brand-add-form', {locale: Common.locale}, function (data) {
+                $('#add-modal-content').html(data);
+                addModal.modal('show');
+            });
+        });
+
+
+        $(document).on('click', '#add-unit-submit', function(e){
+            e.preventDefault();
+            var form = $('#unitForm');
+            if(form.valid()){
+                var formValues = form.serializeArray();
+                var localeObject = {name: 'locale', value: Common.locale};
+                formValues.push(localeObject);
+                var url = '/application/article/add-unit?modal=1';
+                $.post(url, formValues).done(function (data) {
+                    $('#unit').html(data);
+                    $('#add-modal').modal('hide');
+                });
+            } else {
+                return false;
+            }
+        });
+        $(document).on('click', '#add-vat-submit', function(e){
+            e.preventDefault();
+            var form = $('#vatForm');
+            if(form.valid()){
+                var formValues = form.serializeArray();
+                var localeObject = {name: 'locale', value: Common.locale};
+                formValues.push(localeObject);
+                var url = '/application/article/add-vat?modal=1';
+                $.post(url, formValues).done(function (data) {
+                    $('#vat').html(data);
+                    $('#add-modal').modal('hide');
+                });
+            } else {
+                return false;
+            }
+        });
+        $(document).on('click', '#add-category-submit', function(e){
+            e.preventDefault();
+            var form = $('#categoryForm');
+            if(form.valid()){
+                var formValues = form.serializeArray();
+                var localeObject = {name: 'locale', value: Common.locale};
+                formValues.push(localeObject);
+                var url = '/application/article/add-category?modal=1';
+                $.post(url, formValues).done(function (data) {
+                    $('#category').html(data);
+                    $('#add-modal').modal('hide');
+                });
+            } else {
+                return false;
+            }
+        });
+        $(document).on('click', '#add-brand-submit', function(e){
+            e.preventDefault();
+            var form = $('#brandForm');
+            if(form.valid()){
+                var formValues = form.serializeArray();
+                var localeObject = {name: 'locale', value: Common.locale};
+                formValues.push(localeObject);
+                var url = '/application/article/add-brand?modal=1';
+                $.post(url, formValues).done(function (data) {
+                    $('#brand').html(data);
+                    $('#add-modal').modal('hide');
+                });
+            } else {
+                return false;
+            }
+        });
+
         $('#articleForm').validate({
             rules: {
                 "name": {
                     required: true
                 },
                 "unit": {
+                    required: true
+                },
+                "vat": {
                     required: true
                 },
                 "salePrice": {
@@ -1436,8 +1767,8 @@ var AddArticle = {
     init: function(){
         $(document).on('change', '#articleType, #add-category, #add-brand', function () {
             if($(this).prop('id') == 'articleType'){
-                $('#add-category').val('');
-                $('#add-brand').val('');
+                $('#add-category').select2('val', '');
+                $('#add-brand').select2('val', '');
             }
             AddArticle.populateArticleSelect();
         });
@@ -1456,8 +1787,12 @@ var AddArticle = {
 
 var Invoice = {
     invoiceId: null,
+    index: 1,
     init: function(invoiceId){
+
         Invoice.invoiceId = invoiceId;
+        Invoice.initSelect2();
+        Invoice.initDates();
 
         $(document).on('click', '#add-article-row', function(){
             Invoice.addArticle();
@@ -1465,13 +1800,97 @@ var Invoice = {
         $(document).on('click', '#add-empty-row', function(){
             Invoice.addEmptyRow();
         });
+        $(document).on('click', '.delete-row', function(){
+            var rowId = $(this).data('id');
+            if(rowId > 0){
+                log('must delete');
+            }
+            $(this).closest('tr').remove();
+            Invoice.setInvoiceTotalAmounts();
+        });
+        $(document).on('change', '#client', function(){
+            Invoice.setClientData($(this).val());
+        });
+        $(document).on('change', '#deadlineDays', function(){
+            Invoice.setDeadlineDate($(this).val());
+        });
+        $(document).on('change', '.vat, .price, .quantity', function(){
+            var nonNumberElements = [];
+            var row = $(this).closest('tr');
+            var qtyElement = row.find('.quantity');
+            var priceElement = row.find('.price');
+            var vatElement = row.find('.vat');
+            var amountElement = row.find('.amount');
+            var vatAmountElement = row.find('.vatAmount');
+            var amountVatElement = row.find('.amountVat');
+
+            Common.replaceCommas(priceElement);
+            Common.replaceCommas(qtyElement);
+            if(!$.isNumeric(qtyElement.val())){
+                nonNumberElements.push(qtyElement);
+            }
+            if(!$.isNumeric(priceElement.val())){
+                nonNumberElements.push(priceElement);
+            }
+            Common.replaceNonNumbersWithZero(nonNumberElements);
+            var qty = $.isNumeric(qtyElement.val()) ? parseFloat(qtyElement.val()).toFixed(2) : 0;
+            var price = $.isNumeric(priceElement.val()) ? parseFloat(priceElement.val()).toFixed(2) : 0;
+            var vat = $.isNumeric(vatElement.val()) ? parseFloat(row.find('.vat').val()).toFixed(2) : 0;
+
+            var amount = Common.calculateAmount(price, qty);
+            var vatAmount = Common.calculateVatAmount(vat, amount);
+            var amountVat = Common.calculateAmountVat(vat, amount);
+
+            amountElement.val(amount.toFixed(3));
+            vatAmountElement.val(vatAmount.toFixed(3));
+            amountVatElement.val(amountVat.toFixed(3));
+
+            Invoice.setInvoiceTotalAmounts();
+
+        });
+        $(document).on('focusin', '.amount, .quantity, .amountVat', function(){
+            $(this).select();
+        });
     },
 
+    setDeadlineDate: function(days){
+        var deadlineDate = $('#deadlineDate');
+        var date = $('#documentDate').datepicker('getDate');
+        date.setDate(date.getDate() + parseInt(days));
+        deadlineDate.datepicker('setDate', date);
+        $('#ui-datepicker-div').remove();
+    },
+
+    setInvoiceTotalAmounts: function(){
+        $('#amount').val(Common.calculateTotalAmount().toFixed(3));
+        $('#vatAmount').val(Common.calculateTotalVatAmount().toFixed(3));
+        $('#amountVat').val(Common.calculateTotalAmountVat().toFixed(3));
+    },
+
+    setClientData: function(id){
+        $.get('/application/index/get-client-data', {id: id}, function (data) {
+            Invoice.setClientFieldValues(data);
+        });
+    },
+    setClientFieldValues: function(data){
+        $('#subjectName').val(data && data.name ? data.name : '');
+        $('#subjectEmail').val(data && data.email ? data.email : '');
+        $('#subjectRegNo').val(data && data.regNo ? data.regNo : '');
+        $('#subjectVatNo').val(data && data.vatNo ? data.vatNo : '');
+        $('#referenceNumber').val(data && data.refNo ? data.refNo : '');
+        if(data && data.delayPercent){
+            $('#delayPercent').val(data.delayPercent);
+        }
+        if(data && data.deadlineDays){
+            $('#deadlineDays').val(data.deadlineDays).trigger('change');
+        }
+    },
     addArticle: function(){
         var articleId = $('#add-article').val();
         if(articleId > 0){
             $.get('/application/invoice/add-article', {invoiceId: Invoice.invoiceId, articleId: articleId, locale: Common.locale}, function (data) {
                 $('#invoice-rows').append(data);
+                Invoice.setInvoiceTotalAmounts();
             });
         }
     },
@@ -1479,6 +1898,34 @@ var Invoice = {
     addEmptyRow: function(){
         $.get('/application/invoice/add-article', {invoiceId: Invoice.invoiceId, articleId: null, locale: Common.locale}, function (data) {
             $('#invoice-rows').append(data);
+            Invoice.setInvoiceTotalAmounts();
+        });
+    },
+
+    initDates: function(){
+        var fromDate = $('#documentDate');
+        var toDate = $('#deadlineDate');
+        var datepickerParams = {
+            inline: true,
+            //nextText: '&rarr;',
+            //prevText: '&larr;',
+            showOtherMonths: true
+            //dateFormat: 'dd MM yy',
+            //showOn: "button",
+            //buttonImage: "img/calendar-blue.png",
+            //buttonImageOnly: true,
+        };
+        if(fromDate.length){
+            fromDate.datepicker(datepickerParams);
+        }
+        if(toDate.length){
+            toDate.datepicker(datepickerParams);
+        }
+    },
+
+    initSelect2: function(){
+        $("#client, #articleType, #add-category, #add-brand, #add-article").select2({
+            language: Common.select2LanguageMapper[Common.language]
         });
     }
 }

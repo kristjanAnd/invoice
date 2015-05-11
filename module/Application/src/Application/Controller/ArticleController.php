@@ -27,6 +27,7 @@ use Zend\Paginator\Paginator;
 use Zend\Stdlib\Parameters;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
+use Zend\Mvc\I18n\Translator;
 
 class ArticleController extends AbstractActionController {
 
@@ -100,7 +101,8 @@ class ArticleController extends AbstractActionController {
     public function addItemAction(){
         $userData = $this->getUserData();
         $view = new ViewModel();
-        $form = $this->getServiceLocator()->get('Application\Form\Article')->setCompany($userData->company)->init();
+        $form = $this->getServiceLocator()->get('Application\Form\Article\Item')->setCompany($userData->company)->init();
+        $form->setDefaults($this->articleService->getItemSettingByCompany($userData->company, $userData->user));
         if ($this->request->isPost()) {
             $form->setData($this->request->getPost());
             $translator = $this->getTranslator();
@@ -122,7 +124,7 @@ class ArticleController extends AbstractActionController {
             return $this->notFoundAction();
         }
         $view = new ViewModel();
-        $form = $this->getServiceLocator()->get('Application\Form\Article')->setCompany($userData->company)->init();
+        $form = $this->getServiceLocator()->get('Application\Form\Article\Item')->setCompany($userData->company)->init();
         $form->setFormValues($item);
         if ($this->request->isPost()) {
             $form->setData($this->request->getPost());
@@ -172,9 +174,13 @@ class ArticleController extends AbstractActionController {
             $translator = $this->getTranslator();
             if($form->isValid()){
                 $userData = $this->getUserData();
-                $unit = $this->unitService->saveUnit(new Unit($userData), new Parameters($form->getData()));
+                $params = $this->request->getPost();
+                $unit = $this->unitService->saveUnit(new Unit($userData), $params);
+                if($this->checkIfModalRequest()){
+                    return $this->getUnitSelectView($unit, $params);
+                }
                 $this->flashMessenger()->addMessage($translator->translate('Article.unit.add.successMessage'));
-                return $this->checkIfModalRequest() ? $this->getUnitSelectView($unit) : $this->redirect()->toRoute('unit', [], true);
+                return $this->redirect()->toRoute('unit', [], true);
             }
             $this->flashMessenger()->addErrorMessage($translator->translate('Article.unit.add.errorMessage'));
             return $this->checkIfModalRequest() ? new JsonModel(array('error' => 1)) : $this->redirect()->toRoute('unit', [], true);
@@ -182,7 +188,7 @@ class ArticleController extends AbstractActionController {
         return $this->notFoundAction();
     }
 
-    private function getUnitSelectView(Unit $unit){
+    private function getUnitSelectView(Unit $unit, Parameters $data){
         $userData = $this->getUserData();
         $units = $this->unitService->getActiveCompanyUnits($userData->company);
         $view = new ViewModel();
@@ -191,7 +197,8 @@ class ArticleController extends AbstractActionController {
         $view->form = $this->getServiceLocator()->get('Application\Form\Unit')->init();
         $view->units = $units;
         $view->unit = $unit;
-        return  $view;
+        $view->emptyOption = $this->getTranslator(isset($data->locale) ? $data->locale : null)->translate('Article.form.unit.emptyOption');
+        return $view;
     }
 
     public function editUnitAction(){
@@ -234,14 +241,30 @@ class ArticleController extends AbstractActionController {
             $translator = $this->getTranslator();
             if($form->isValid()){
                 $userData = $this->getUserData();
-                $vat = $this->vatService->saveVat(new Vat($userData), new Parameters($form->getData()));
+                $params = $this->request->getPost();
+                $vat = $this->vatService->saveVat(new Vat($userData), $params);
+                if($this->checkIfModalRequest()){
+                    return $this->getVatSelectView($vat, $params);
+                }
                 $this->flashMessenger()->addMessage($translator->translate('Article.vat.add.successMessage'));
-                return $this->redirect()->toRoute('unit', [], true);
+                return $this->redirect()->toRoute('vat', [], true);
             }
             $this->flashMessenger()->addErrorMessage($translator->translate('Article.vat.add.errorMessage'));
-            return $this->redirect()->toRoute('vat', [], true);
+            return $this->checkIfModalRequest() ? new JsonModel(array('error' => 1)) : $this->redirect()->toRoute('vat', [], true);
         }
         return $this->notFoundAction();
+    }
+
+    private function getVatSelectView(Vat $vat, Parameters $data){
+        $userData = $this->getUserData();
+        $vats = $this->vatService->getActiveCompanyVats($userData->company);
+        $view = new ViewModel();
+        $view->setTemplate('form/select/vat');
+        $view->setTerminal(true);
+        $view->vats = $vats;
+        $view->vat = $vat;
+        $view->emptyOption = $this->getTranslator(isset($data->locale) ? $data->locale : null)->translate('Article.form.vat.emptyOption');
+        return $view;
     }
 
     public function editVatAction(){
@@ -278,7 +301,8 @@ class ArticleController extends AbstractActionController {
     public function addServiceAction(){
         $userData = $this->getUserData();
         $view = new ViewModel();
-        $form = $this->getServiceLocator()->get('Application\Form\Article')->setCompany($userData->company)->init();
+        $form = $this->getServiceLocator()->get('Application\Form\Article\Service')->setCompany($userData->company)->init();
+        $form->setDefaults($this->articleService->getServiceSettingByCompany($userData->company, $userData->user));
         if ($this->request->isPost()) {
             $form->setData($this->request->getPost());
             $translator = $this->getTranslator();
@@ -300,7 +324,7 @@ class ArticleController extends AbstractActionController {
             return $this->notFoundAction();
         }
         $view = new ViewModel();
-        $form = $this->getServiceLocator()->get('Application\Form\Article')->setCompany($userData->company)->init();
+        $form = $this->getServiceLocator()->get('Application\Form\Article\Service')->setCompany($userData->company)->init();
         $form->setFormValues($service);
         if ($this->request->isPost()) {
             $form->setData($this->request->getPost());
@@ -350,14 +374,30 @@ class ArticleController extends AbstractActionController {
             $translator = $this->getTranslator();
             if($form->isValid()){
                 $userData = $this->getUserData();
-                $category = $this->articleService->saveCategory(new Category($userData), new Parameters($form->getData()));
+                $params = $this->request->getPost();
+                $category = $this->articleService->saveCategory(new Category($userData), $params);
+                if($this->checkIfModalRequest()){
+                    return $this->getCategorySelectView($category, $params);
+                }
                 $this->flashMessenger()->addMessage($translator->translate('Article.category.add.successMessage'));
                 return $this->redirect()->toRoute('category', [], true);
             }
             $this->flashMessenger()->addErrorMessage($translator->translate('Article.category.add.errorMessage'));
-            return $this->redirect()->toRoute('category', [], true);
+            return $this->checkIfModalRequest() ? new JsonModel(array('error' => 1)) : $this->redirect()->toRoute('category', [], true);
         }
         return $this->notFoundAction();
+    }
+
+    private function getCategorySelectView(Category $category, Parameters $data){
+        $userData = $this->getUserData();
+        $categories = $this->articleService->getActiveCompanyArticleCategories($userData->company);
+        $view = new ViewModel();
+        $view->setTemplate('form/select/category');
+        $view->setTerminal(true);
+        $view->categories = $categories;
+        $view->category = $category;
+        $view->emptyOption = $this->getTranslator(isset($data->locale) ? $data->locale : null)->translate('Article.form.category.emptyOption');
+        return $view;
     }
 
     public function editCategoryAction(){
@@ -405,14 +445,31 @@ class ArticleController extends AbstractActionController {
             $translator = $this->getTranslator();
             if($form->isValid()){
                 $userData = $this->getUserData();
-                $brand = $this->articleService->saveBrand(new Brand($userData), new Parameters($form->getData()));
+                $params = $this->request->getPost();
+                $brand = $this->articleService->saveBrand(new Brand($userData), $params);
+                if($this->checkIfModalRequest()){
+                    return $this->getBrandSelectView($brand, $params);
+                }
                 $this->flashMessenger()->addMessage($translator->translate('Article.brand.add.successMessage'));
                 return $this->redirect()->toRoute('brand', [], true);
             }
             $this->flashMessenger()->addErrorMessage($translator->translate('Article.brand.add.errorMessage'));
-            return $this->redirect()->toRoute('brand', [], true);
+            return $this->checkIfModalRequest() ? new JsonModel(array('error' => 1)) : $this->redirect()->toRoute('brand', [], true);
         }
         return $this->notFoundAction();
+    }
+
+    private function getBrandSelectView(Brand $brand, Parameters $data){
+        $userData = $this->getUserData();
+        $brands = $this->articleService->getActiveCompanyArticleBrands($userData->company);
+        $view = new ViewModel();
+        $view->setTemplate('form/select/brand');
+        $view->setTerminal(true);
+        $view->brands = $brands;
+        $view->brand = $brand;
+        $view->emptyOption = $this->getTranslator($data->locale)->translate('Article.form.brand.emptyOption');
+        $view->locale = serialize($data);
+        return $view;
     }
 
     public function editBrandAction(){
@@ -525,6 +582,10 @@ class ArticleController extends AbstractActionController {
         return $paginated;
     }
 
+    /**
+     * @param null $locale
+     * @return Translator
+     */
     private function getTranslator($locale = null){
         $translator =  $this->serviceLocator->get('MvcTranslator');
         if($locale){

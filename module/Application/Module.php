@@ -117,6 +117,7 @@ class Module
         $viewRenderer->layout()->language = $sessionStorage->offsetGet('language');
         $viewRenderer->layout()->locale = $sessionStorage->offsetGet('locale');
         $viewRenderer->layout()->currentUser = $userService->getCurrentUser();
+        $viewRenderer->layout()->select2code = $this->getSelect2LanguageCode($sessionStorage->offsetGet('language'));
         if($id > 0){
             $viewRenderer->layout()->id = $id;
         }
@@ -129,5 +130,15 @@ class Module
         if(strlen($provider) > 0){
             $viewRenderer->layout()->provider = $provider;
         }
+    }
+
+    private function getSelect2LanguageCode($languageCode){
+        $select2CodeMapper = array(
+            'et' => 'et',
+            'ru' => 'ru',
+            'us' => 'en'
+        );
+        return array_key_exists($languageCode, $select2CodeMapper) ? $select2CodeMapper[$languageCode] : 'en';
+
     }
 }

@@ -14,6 +14,11 @@ $controllerGuard = array(
     ['controller' => 'Application\Controller\Index', 'action' => 'isPasswordValid', 'roles' => ['guest']],
     ['controller' => 'Application\Controller\Index', 'action' => 'forgotPassword', 'roles' => ['guest']],
     ['controller' => 'Application\Controller\Index', 'action' => 'get-unit-add-form', 'roles' => ['guest']],
+    ['controller' => 'Application\Controller\Index', 'action' => 'get-vat-add-form', 'roles' => ['guest']],
+    ['controller' => 'Application\Controller\Index', 'action' => 'get-brand-add-form', 'roles' => ['guest']],
+    ['controller' => 'Application\Controller\Index', 'action' => 'get-category-add-form', 'roles' => ['guest']],
+    ['controller' => 'Application\Controller\Index', 'action' => 'get-client-data', 'roles' => ['guest']],
+    ['controller' => 'Application\Controller\Index', 'action' => 'get-client-add-form', 'roles' => ['guest']],
 );
 
 $adminControllerGuard = include 'controllers/admin.config.php';

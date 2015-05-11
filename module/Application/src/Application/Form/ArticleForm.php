@@ -10,9 +10,11 @@ namespace Application\Form;
 
 
 use Application\Entity\Article;
+use Application\Entity\ArticleSetting;
 use Application\Entity\Subject\Company;
 use Application\Service\ArticleService;
 use Application\Service\UnitService;
+use Application\Service\VatService;
 use Zend\Form\Element\Select;
 use Zend\Form\Element\Text;
 use Zend\Form\Element\Textarea;
@@ -34,6 +36,11 @@ class ArticleForm extends Form {
      * @var UnitService
      */
     protected $unitService;
+
+    /**
+     * @var VatService
+     */
+    protected $vatService;
     /**
      * @var ArticleService
      */
@@ -45,6 +52,14 @@ class ArticleForm extends Form {
     public function setUnitService(UnitService $unitService)
     {
         $this->unitService = $unitService;
+    }
+
+    /**
+     * @param VatService $vatService
+     */
+    public function setVatService(VatService $vatService)
+    {
+        $this->vatService = $vatService;
     }
 
     /**
@@ -99,99 +114,113 @@ class ArticleForm extends Form {
         $name = new Text('name');
         $name->setAttributes(array(
             'id' => 'name',
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
             'placeholder' => $this->translator->translate('Article.form.name.placeholder')
         ));
         $name->setLabel($this->translator->translate('Article.form.name.label'));
-        $name->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+        $name->setLabelAttributes(array('class' => 'col-sm-2 control-label input-sm'));
         $this->add($name);
 
         $code = new Text('code');
         $code->setAttributes(array(
             'id' => 'code',
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
             'placeholder' => $this->translator->translate('Article.form.code.placeholder')
         ));
         $code->setLabel($this->translator->translate('Article.form.code.label'));
-        $code->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+        $code->setLabelAttributes(array('class' => 'col-sm-2 control-label input-sm'));
         $this->add($code);
 
         $salePrice = new Text('salePrice');
         $salePrice->setAttributes(array(
             'id' => 'salePrice',
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
             'placeholder' => $this->translator->translate('Article.form.salePrice.placeholder')
         ));
         $salePrice->setLabel($this->translator->translate('Article.form.salePrice.label'));
-        $salePrice->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+        $salePrice->setLabelAttributes(array('class' => 'col-sm-2 control-label input-sm'));
         $this->add($salePrice);
 
         $unit = new Select('unit');
         $unit->setAttributes(array(
             'id' => 'unit',
-            'class' => 'form-control'
+            'class' => 'form-control input-sm'
         ));
         $unit->setEmptyOption($this->translator->translate('Article.form.unit.emptyOption'));
         $unit->setValueOptions($this->getUnitSelect());
         $unit->setLabel($this->translator->translate('Article.form.unit.label'));
-        $unit->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+        $unit->setLabelAttributes(array('class' => 'col-sm-2 control-label input-sm'));
         $this->add($unit);
+
+        $vat = new Select('vat');
+        $vat->setAttributes(array(
+            'id' => 'vat',
+            'class' => 'form-control input-sm'
+        ));
+        $vat->setValueOptions($this->vatService->getCompanyActiveVatSelect($this->company));
+        $vat->setEmptyOption($this->translator->translate('Article.form.vat.emptyOption'));
+        $vat->setLabel($this->translator->translate('Article.form.vat.label'));
+        $vat->setLabelAttributes(array('class' => 'col-sm-2 control-label input-sm'));
+        $this->add($vat);
 
         $brand = new Select('brand');
         $brand->setAttributes(array(
             'id' => 'brand',
-            'class' => 'form-control'
+            'class' => 'form-control input-sm'
         ));
         $brand->setEmptyOption($this->translator->translate('Article.form.brand.emptyOption'));
         $brand->setValueOptions($this->getArticleBrandSelect());
         $brand->setLabel($this->translator->translate('Article.form.brand.label'));
-        $brand->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+        $brand->setLabelAttributes(array('class' => 'col-sm-2 control-label input-sm'));
         $this->add($brand);
 
         $category = new Select('category');
         $category->setAttributes(array(
             'id' => 'category',
-            'class' => 'form-control'
+            'class' => 'form-control input-sm'
         ));
         $category->setEmptyOption($this->translator->translate('Article.form.category.emptyOption'));
         $category->setValueOptions($this->getArticleCategorySelect());
         $category->setLabel($this->translator->translate('Article.form.category.label'));
-        $category->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+        $category->setLabelAttributes(array('class' => 'col-sm-2 control-label input-sm'));
         $this->add($category);
 
         $quantity = new Text('quantity');
         $quantity->setAttributes(array(
             'id' => 'quantity',
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
             'placeholder' => $this->translator->translate('Article.form.quantity.placeholder')
         ));
         $quantity->setLabel($this->translator->translate('Article.form.quantity.label'));
-        $quantity->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+        $quantity->setLabelAttributes(array('class' => 'col-sm-2 control-label input-sm'));
         $this->add($quantity);
 
         $status = new Select('status');
         $status->setAttributes(array(
             'id' => 'status',
-            'class' => 'form-control'
+            'class' => 'form-control input-sm'
         ));
         $status->setValueOptions($this->articleService->getArticleStatusSelect());
         $status->setLabel($this->translator->translate('Article.form.status.label'));
-        $status->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+        $status->setLabelAttributes(array('class' => 'col-sm-2 control-label input-sm'));
         $this->add($status);
 
         $description = new Textarea('description');
         $description->setAttributes(array(
             'id' => 'description',
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
             'rows' => 3,
             'placeholder' => $this->translator->translate('Article.form.description.placeholder')
         ));
         $description->setLabel($this->translator->translate('Article.form.description.label'));
-        $description->setLabelAttributes(array('class' => 'col-sm-2 control-label'));
+        $description->setLabelAttributes(array('class' => 'col-sm-2 control-label input-sm'));
         $this->add($description);
+
+        $this->setDefaults();
 
         return $this;
     }
+
 
     public function getInputFilter() {
         if ($this->filter == null) {
@@ -199,6 +228,7 @@ class ArticleForm extends Form {
             $notEmpty = new NotEmpty();
             $notEmpty1 = new NotEmpty();
             $notEmpty2 = new NotEmpty();
+            $notEmpty3 = new NotEmpty();
 
             $name = new Input('name');
             $name->getValidatorChain()->attach($notEmpty->setMessage(sprintf($this->translator->translate('Validator.message.notEmpty'), $this->translator->translate('ArticleForm.message.nameInput')), NotEmpty::IS_EMPTY));
@@ -211,6 +241,10 @@ class ArticleForm extends Form {
             $unit = new Input('unit');
             $unit->getValidatorChain()->attach($notEmpty1->setMessage(sprintf($this->translator->translate('Validator.message.notEmpty'), $this->translator->translate('ArticleForm.message.unitInput')), NotEmpty::IS_EMPTY));
             $filter->add($unit);
+
+            $vat = new Input('vat');
+            $vat->getValidatorChain()->attach($notEmpty1->setMessage(sprintf($this->translator->translate('Validator.message.notEmpty'), $this->translator->translate('ArticleForm.message.vatInput')), NotEmpty::IS_EMPTY));
+            $filter->add($vat);
 
             $brand = new Input('brand');
             $brand->setRequired(false)->setAllowEmpty(true);
@@ -250,6 +284,9 @@ class ArticleForm extends Form {
             if($article->getUnit()){
                 $this->get('unit')->setValue($article->getUnit()->getId());
             }
+            if($article->getVat()){
+                $this->get('vat')->setValue($article->getVat()->getId());
+            }
             if($article->getBrand()){
                 $this->get('brand')->setValue($article->getBrand()->getId());
             }
@@ -258,6 +295,18 @@ class ArticleForm extends Form {
             }
             $this->get('quantity')->setValue($article->getQuantity());
             $this->get('status')->setValue($article->getStatus());
+        }
+    }
+
+    public function setDefaults(ArticleSetting $articleSetting = null){
+        if($articleSetting && $articleSetting->getVat()){
+            $this->get('vat')->setValue($articleSetting->getVat()->getId());
+        }
+        if($articleSetting && $articleSetting->getUnit()){
+            $this->get('unit')->setValue($articleSetting->getUnit()->getId());
+        }
+        if($articleSetting && $articleSetting->getQuantity()){
+            $this->get('quantity')->setValue($articleSetting->getQuantity());
         }
     }
 

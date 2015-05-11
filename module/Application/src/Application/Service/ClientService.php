@@ -135,4 +135,27 @@ class ClientService extends AbstractService {
 
         return $client;
     }
+
+    public function getClientDataForAjax($id, Client $client){
+        $result = array();
+        $client = !$client ? $this->getClientById($id) : $client;
+        if($client){
+            $result = array(
+                'name' => $client->getName(),
+                'email' => $client->getEmail(),
+                'regNo' => $client->getRegistrationNumber(),
+                'vatNo' => $client->getVatNumber(),
+                'refNo' => $client->getReferenceNumber(),
+            );
+            if($client->getDeadlineDays()){
+                $result['deadlineDays'] = $client->getDeadlineDays();
+            }
+            if($client->getDelayPercent()){
+                $result['delayPercent'] = $client->getDelayPercent();
+            }
+        } else {
+            $result = array(null);
+        }
+        return $result;
+    }
 }

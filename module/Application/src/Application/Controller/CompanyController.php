@@ -38,7 +38,7 @@ class CompanyController extends AbstractActionController {
         if(!$company || !$user || $user->getCompany() !== $company){
             return $this->notFoundAction();
         }
-        $form = $this->serviceLocator->get('Application\Form\Subject')->init();
+        $form = $this->serviceLocator->get('Application\Form\Subject\Company')->init();
         if($this->request->isPost()){
             $form->setData($this->request->getPost());
             if($form->isValid()){

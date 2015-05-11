@@ -47,21 +47,21 @@ class UnitForm extends Form {
         $code = new Text('code');
         $code->setAttributes(array(
             'id' => 'code',
-            'class' => 'form-control',
+            'class' => 'form-control input-sm',
             'placeholder' => $this->translator->translate('Unit.form.code.placeholder')
         ));
         $code->setLabel($this->translator->translate('Unit.form.code.label'));
-        $code->setLabelAttributes(array('class' => 'col-sm-4 control-label'));
+        $code->setLabelAttributes(array('class' => 'col-sm-4 control-label input-sm'));
         $this->add($code);
 
         $status = new Select('status');
         $status->setAttributes(array(
             'id' => 'unit',
-            'class' => 'form-control'
+            'class' => 'form-control input-sm'
         ));
         $status->setValueOptions($this->unitService->getUnitStatusSelect());
         $status->setLabel($this->translator->translate('Unit.form.status.label'));
-        $status->setLabelAttributes(array('class' => 'col-sm-4 control-label'));
+        $status->setLabelAttributes(array('class' => 'col-sm-4 control-label input-sm'));
         $this->add($status);
 
         return $this;

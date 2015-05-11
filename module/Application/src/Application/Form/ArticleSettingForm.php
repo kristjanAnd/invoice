@@ -83,34 +83,34 @@ class ArticleSettingForm extends Form {
         $unit = new Select('unit');
         $unit->setAttributes(array(
             'id' => 'unit',
-            'class' => 'form-control'
+            'class' => 'form-control input-sm'
         ));
         $unit->setEmptyOption($this->translator->translate('ArticleSetting.form.unit.emptyOption'));
         $unit->setValueOptions($this->unitService->getCompanyActiveUnitSelect($this->company));
         $unit->setLabel($this->translator->translate('ArticleSetting.form.unit.label'));
-        $unit->setLabelAttributes(array('class' => 'col-sm-4 control-label'));
+        $unit->setLabelAttributes(array('class' => 'col-sm-4 control-label input-sm'));
         $this->add($unit);
 
         $vat = new Select('vat');
         $vat->setAttributes(array(
             'id' => 'vat',
-            'class' => 'form-control'
+            'class' => 'form-control input-sm'
         ));
         $vat->setValueOptions($this->vatService->getCompanyActiveVatSelect($this->company));
         $vat->setEmptyOption($this->translator->translate('ArticleSetting.form.vat.emptyOption'));
         $vat->setLabel($this->translator->translate('ArticleSetting.form.vat.label'));
-        $vat->setLabelAttributes(array('class' => 'col-sm-4 control-label'));
+        $vat->setLabelAttributes(array('class' => 'col-sm-4 control-label input-sm'));
         $this->add($vat);
 
 
         $quantity = new Text('quantity');
         $quantity->setAttributes(array(
             'id' => 'quantity',
-            'class' => 'form-control quantity',
+            'class' => 'form-control quantity input-sm',
             'placeholder' => $this->translator->translate('ArticleSetting.form.quantity.placeholder')
         ));
         $quantity->setLabel($this->translator->translate('ArticleSetting.form.quantity.label'));
-        $quantity->setLabelAttributes(array('class' => 'col-sm-4 control-label'));
+        $quantity->setLabelAttributes(array('class' => 'col-sm-4 control-label input-sm'));
         $this->add($quantity);
 
         return $this;
